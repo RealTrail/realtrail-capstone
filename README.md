@@ -61,7 +61,7 @@ This application leverages:
 * JavaScript
 * Java
 * Spring Boot 
-*
+
 
 ## Real Trail Table
 ![Secreenshot](planning%20notes/Screen%20Shot%202021-06-21%20at%2011.37.19%20AM.png)
