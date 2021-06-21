@@ -1,6 +1,7 @@
 package com.codeup.realtrail.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -8,29 +9,31 @@ import java.util.List;
 public class Trail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
-    private int id;
+    private long id;
 
     @Column(length = 100)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private float difficultyLevel;
 
-    @Column
-    private int rating;
+    @Column(nullable = false)
+    private float rating;
 
-    @Column
+    @Column(nullable = false)
     private float length;
 
     @Column
     private float elevation;
 
-    @Column
+    @Column(nullable = false)
     private String type;
 
     @Column(columnDefinition="TEXT")
     private String trailDetails;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
     private List<PictureURL> trailImages;
@@ -42,7 +45,7 @@ public class Trail {
     public Trail() {
     }
 
-    public Trail(String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails, List<PictureURL> trailImages) {
+    public Trail(String name, float difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.rating = rating;
@@ -50,10 +53,12 @@ public class Trail {
         this.elevation = elevation;
         this.type = type;
         this.trailDetails = trailDetails;
+        this.events = events;
         this.trailImages = trailImages;
+        this.trailComments = trailComments;
     }
 
-    public Trail(int id, String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails, List<PictureURL> trailImages) {
+    public Trail(long id, String name, float difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -62,15 +67,17 @@ public class Trail {
         this.elevation = elevation;
         this.type = type;
         this.trailDetails = trailDetails;
+        this.events = events;
         this.trailImages = trailImages;
+        this.trailComments = trailComments;
     }
 
     // getters and setters
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -88,10 +95,10 @@ public class Trail {
         this.difficultyLevel = difficultyLevel;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -123,10 +130,24 @@ public class Trail {
         this.trailDetails = trailDetails;
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     public List<PictureURL> getTrailImages() {
         return trailImages;
     }
     public void setTrailImages(List<PictureURL> trailImages) {
         this.trailImages = trailImages;
+    }
+
+    public List<TrailComment> getTrailComments() {
+        return trailComments;
+    }
+    public void setTrailComments(List<TrailComment> trailComments) {
+        this.trailComments = trailComments;
     }
 }
