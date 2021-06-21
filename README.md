@@ -2,7 +2,7 @@
 
 
 ## Deployed
-[Access the deployed web application here.]
+[Access the deployed web application here.]()
 
 ## Description
 This application is about hiking trails in different parks and users can customize their hiking trail plan and post the info for other people to join. The application will have a login/register page, a main page where visitors/users can see the parks/trails info, each user has a profile page where they can edit their info, an events page where users can see the events listed in a descending order divided by “past events” and “future events”, each trail has its own page. Probably need to use map API, trail API, weather API (if needed)
