@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
+body {
+    margin: 0;
+}
+
+:root {
+    font-family: "Nunito", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+small {
+    font-size: 0.9em;
+    line-height: 2.5em;
+    display: block;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 23px;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    line-height: 1em;
+    background: #ff4757;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+.btn.btn-light {
+    color: #ff4757;
+    background: white;
+    border: 2px solid #ff4757;
+}
+
+/*FORM SIZE*/
+
+.form {
+    position: relative;
+    width: 80vw;
+    max-width: 80%;
+    background: white;
+    margin: 0 auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+.form__wrapper {
+    width: 100%;
+    height: 100vh;
+    padding: 10vh 20px;
+    background: #3a1986;
+}
+.form__options {
+    padding: 160px 0;
+    display: flex;
+    height: 700px;
+}
+.form__options > div {
+    width: 50%;
+    text-align: center;
+}
+.form.slide .form__background {
+    left: 50%;
+    right: -20px;
+}
+.form__background {
+    position: absolute;
+    background: #2f3542;
+    top: -20px;
+    left: -20px;
+    right: 50%;
+    bottom: -20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    border-radius: 20px;
+}
+.form__body {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    right: -20px;
+    bottom: 0;
+    padding: 20px 0;
+    transition: 0.5s;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+
+}
+.form__body form {
+    pointer-events: all;
+    margin: 20px 0;
+    transition: opacity 0.3s;
+}
+.form__body form h2 {
+    margin-top: 0;
+    color: white;
+    font-size: 3em;
+}
+.form__body form .input-field {
+    margin-bottom: 10px;
+}
+.form__body form label {
+    display: block;
+    color: white;
+    line-height: 2em;
+    font-weight: 300;
+}
+.form__body form input[type=text], .form__body form input[type=password], .form__body form input[type=email] {
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+}
+.form form:first-child {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.4s;
+}
+.form.slide form:first-child {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s;
+}
+.form form:last-child {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s;
+}
+.form.slide form:last-child {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.4s;
+}
+
+
+/*PASSWORD CHECK CSS*/
+
+span {
+    width: 100%;
+    display: flex;
+    margin: 20px 0px 0px 0px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center
+}
+
+.fa, .fas {
+    margin-right: 15px
+}
