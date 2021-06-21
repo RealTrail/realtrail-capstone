@@ -55,7 +55,7 @@ public class User {
     )
     private List<Interest> interests;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "participants")
     private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
