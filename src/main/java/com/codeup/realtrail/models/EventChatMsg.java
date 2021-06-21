@@ -12,17 +12,13 @@ public class EventChatMsg {
     @Column
     private int id;
     @OneToOne
-    @Column(updatable = false, name = "FK eventId")
     private Event event;
     @Column
     private LocalTime time;
     @Column
     private String msgContent;
     @OneToOne
-    @Column(updatable = false, name = "FK userId")
     User senderId;
-
-
 
     // constructors
     public EventChatMsg() {

@@ -16,24 +16,30 @@ public class PictureURL {
     private String description;
 
     @ManyToOne
-    @JoinColumn (name = "trail_id")
+    @JoinColumn (name = "trail")
     private Trail trail;
+
+    @ManyToOne
+    @JoinColumn (name = "event")
+    private Event event;
 
     // constructors
     public PictureURL() {
     }
 
-    public PictureURL(String pictureUrl, String description, Trail trail) {
+    public PictureURL(String pictureUrl, String description, Trail trail, Event event) {
         this.pictureUrl = pictureUrl;
         this.description = description;
         this.trail = trail;
+        this.event = event;
     }
 
-    public PictureURL(int id, String pictureUrl, String description, Trail trail) {
+    public PictureURL(int id, String pictureUrl, String description, Trail trail, Event event) {
         this.id = id;
         this.pictureUrl = pictureUrl;
         this.description = description;
         this.trail = trail;
+        this.event = event;
     }
 
     // getters and setters
@@ -64,6 +70,13 @@ public class PictureURL {
     }
     public void setTrail(Trail trail) {
         this.trail = trail;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }
 
