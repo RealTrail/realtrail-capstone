@@ -16,11 +16,11 @@ public class PictureURL {
     private String description;
 
     @ManyToOne
-    @JoinColumn (name = "trail_id")
+    @JoinColumn (name = "trail")
     private Trail trail;
 
     @ManyToOne
-    @JoinColumn (name = "event_id")
+    @JoinColumn (name = "event")
     private Event event;
 
     // constructors

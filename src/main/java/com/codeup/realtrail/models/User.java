@@ -1,7 +1,7 @@
 package com.codeup.realtrail.models;
 
 
-import com.codeup.realtrail.util.Password;
+//import com.codeup.realtrail.util.Password;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
@@ -144,9 +144,9 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
-        this.password = Password.hash(password);
-    }
+//    public void setPassword(String password) {
+//        this.password = Password.hash(password);
+//    }
 
     public String getPhoneNumber() {
         return phoneNumber;
