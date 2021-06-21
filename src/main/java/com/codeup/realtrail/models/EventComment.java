@@ -5,18 +5,18 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "event_comments")
+@Table(name = "eventComments")
 public class EventComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @OneToOne
-    @Column(updatable = false, name = "FK event_id")
-    private Event event_id;
+    @Column(updatable = false, name = "FK eventId")
+    private Event eventId;
     @OneToOne
-    @Column(updatable = false, name = ("FK user_id"))
-    private User user_id;
+    @Column(updatable = false, name = ("FK userId"))
+    private User userId;
     @Column
     private LocalDateTime date;
     @Column(length = 500)
@@ -27,17 +27,17 @@ public class EventComment {
     public EventComment() {
     }
 
-    public EventComment(int id, Event event_id, User user_id, LocalDateTime date, String content) {
+    public EventComment(int id, Event eventId, User userId, LocalDateTime date, String content) {
         this.id = id;
-        this.event_id = event_id;
-        this.user_id = user_id;
+        this.eventId = eventId;
+        this.userId = userId;
         this.date = date;
         this.content = content;
     }
 
-    public EventComment(Event event_id, User user_id, LocalDateTime date, String content) {
-        this.event_id = event_id;
-        this.user_id = user_id;
+    public EventComment(Event eventId, User userId, LocalDateTime date, String content) {
+        this.eventId = eventId;
+        this.userId = userId;
         this.date = date;
         this.content = content;
     }
@@ -51,18 +51,18 @@ public class EventComment {
         this.id = id;
     }
 
-    public Event getEvent_id() {
-        return event_id;
+    public Event getEventId() {
+        return eventId;
     }
-    public void setEvent_id(Event event_id) {
-        this.event_id = event_id;
+    public void setEventId(Event eventId) {
+        this.eventId = eventId;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUserId() {
+        return userId;
     }
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public LocalDateTime getDate() {

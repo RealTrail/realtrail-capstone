@@ -12,7 +12,7 @@ public class Trail {
     @Column(length = 60)
     private String name;
     @Column
-    private String difficulty_level;
+    private float difficultyLevel;
     @Column
     private int rating;
     @Column
@@ -22,31 +22,31 @@ public class Trail {
     @Column
     private String type;
     @Column
-    private String trail_details;
+    private String trailDetails;
 
     // constructors
     public Trail() {
     }
 
-    public Trail(int id, String name, String difficulty_level, int rating, float length, float elevation, String type, String trail_details) {
+    public Trail(int id, String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails) {
         this.id = id;
         this.name = name;
-        this.difficulty_level = difficulty_level;
+        this.difficultyLevel = difficultyLevel;
         this.rating = rating;
         this.length = length;
         this.elevation = elevation;
         this.type = type;
-        this.trail_details = trail_details;
+        this.trailDetails = trailDetails;
     }
 
-    public Trail(String name, String difficulty_level, int rating, float length, float elevation, String type, String trail_details) {
+    public Trail(String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails) {
         this.name = name;
-        this.difficulty_level = difficulty_level;
+        this.difficultyLevel = difficultyLevel;
         this.rating = rating;
         this.length = length;
         this.elevation = elevation;
         this.type = type;
-        this.trail_details = trail_details;
+        this.trailDetails = trailDetails;
     }
 
 
@@ -65,11 +65,11 @@ public class Trail {
         this.name = name;
     }
 
-    public String getDifficulty_level() {
-        return difficulty_level;
+    public float getDifficultyLevel() {
+        return difficultyLevel;
     }
-    public void setDifficulty_level(String difficulty_level) {
-        this.difficulty_level = difficulty_level;
+    public void setDifficultyLevel(float difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
     }
 
     public int getRating() {
@@ -100,10 +100,10 @@ public class Trail {
         this.type = type;
     }
 
-    public String getTrail_details() {
-        return trail_details;
+    public String getTrailDetails() {
+        return trailDetails;
     }
-    public void setTrail_details(String trail_details) {
-        this.trail_details = trail_details;
+    public void setTrailDetails(String trailDetails) {
+        this.trailDetails = trailDetails;
     }
 }

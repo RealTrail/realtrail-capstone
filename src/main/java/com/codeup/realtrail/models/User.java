@@ -13,9 +13,9 @@ public class User {
     @Column
     private int id;
     @Column(nullable = false, length = 50)
-    private String first_name;
+    private String firstName;
     @Column(nullable = false, length = 50)
-    private String last_name;
+    private String lastName;
     @Column(nullable = false, unique = true, length = 50)
     private String username;
     @Column(nullable = false, unique = true, length = 100)
@@ -23,41 +23,46 @@ public class User {
     @Column(nullable = false, length = 50)
     private String password;
     @Column(length = 10)
-    private String phone_number;
+    private String phoneNumber;
     @Column(length = 30)
     private String city;
     @Column(length = 2)
     private String state;
     @Column(updatable = false)
-    private boolean is_admin;
+    private String gender;
+    @Column(updatable = false)
+    private boolean isAdmin;
+
 
     // Constructors
     public User() {
     }
 
-    public User(int id, String first_name, String last_name, String username, String email, String password, String phone_number, String city, String state, boolean is_admin) {
+    public User(int id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, boolean isAdmin) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.city = city;
         this.state = state;
-        this.is_admin = is_admin;
+        this.gender = gender;
+        this.isAdmin = isAdmin;
     }
 
-    public User(String first_name, String last_name, String username, String email, String password, String phone_number, String city, String state, boolean is_admin) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, boolean isAdmin) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.city = city;
         this.state = state;
-        this.is_admin = is_admin;
+        this.gender = gender;
+        this.isAdmin = isAdmin;
     }
 
 
@@ -70,17 +75,17 @@ public class User {
     }
 
     public String getFirst_name() {
-        return first_name;
+        return firstName;
     }
     public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+        this.firstName = first_name;
     }
 
     public String getLast_name() {
-        return last_name;
+        return lastName;
     }
     public void setLast_name(String last_name) {
-        this.last_name = last_name;
+        this.lastName = last_name;
     }
 
     public String getUsername() {
@@ -105,10 +110,10 @@ public class User {
     }
 
     public String getPhone_number() {
-        return phone_number;
+        return phoneNumber;
     }
     public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
     public String getCity() {
@@ -125,10 +130,17 @@ public class User {
         this.state = state;
     }
 
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public boolean isIs_admin() {
-        return is_admin;
+        return isAdmin;
     }
     public void setIs_admin(boolean is_admin) {
-        this.is_admin = is_admin;
+        this.isAdmin = is_admin;
     }
 }

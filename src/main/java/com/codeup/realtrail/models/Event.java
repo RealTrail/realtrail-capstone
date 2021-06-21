@@ -12,7 +12,7 @@ public class Event {
     @Column(name = "Event#",updatable = false)
     private int id;
     @OneToOne
-    @Column(name = "FK user_id")
+    @Column(name = "FK userId")
     private User manager;
     @Column(length = 100)
     private String name;
@@ -23,21 +23,21 @@ public class Event {
     @Column(length = 100)
     private String location;
     @OneToOne
-    @Column(updatable = false, name = "FK trail_id")
+    @Column(updatable = false, name = "FK trailId")
     private Trail trail;
     @Column(length = 150)
-    private String meet_location;
+    private String meetLocation;
     @Column(length = 12)
-    private LocalTime meet_time;
+    private LocalTime meetTime;
     @Column(length = 500)
-    private String event_details;
+    private String eventDetails;
 
 
     // constructors
     public Event() {
     }
 
-    public Event(int id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meet_location, LocalTime meet_time, String event_details) {
+    public Event(int id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meet_location, LocalTime meetTime, String eventDetails) {
         this.id = id;
         this.manager = manager;
         this.name = name;
@@ -45,21 +45,21 @@ public class Event {
         this.time = time;
         this.location = location;
         this.trail = trail;
-        this.meet_location = meet_location;
-        this.meet_time = meet_time;
-        this.event_details = event_details;
+        this.meetLocation = meetLocation;
+        this.meetTime = meetTime;
+        this.eventDetails = eventDetails;
     }
 
-    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meet_location, LocalTime meet_time, String event_details) {
+    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
         this.manager = manager;
         this.name = name;
         this.date = date;
         this.time = time;
         this.location = location;
         this.trail = trail;
-        this.meet_location = meet_location;
-        this.meet_time = meet_time;
-        this.event_details = event_details;
+        this.meetLocation = meetLocation;
+        this.meetTime = meetTime;
+        this.eventDetails = eventDetails;
     }
 
     // getters and setters
@@ -113,24 +113,24 @@ public class Event {
         this.trail = trail;
     }
 
-    public String getMeet_location() {
-        return meet_location;
+    public String getMeetLocation() {
+        return meetLocation;
     }
-    public void setMeet_location(String meet_location) {
-        this.meet_location = meet_location;
-    }
-
-    public LocalTime getMeet_time() {
-        return meet_time;
-    }
-    public void setMeet_time(LocalTime meet_time) {
-        this.meet_time = meet_time;
+    public void setMeetLocation(String meetLocation) {
+        this.meetLocation = meetLocation;
     }
 
-    public String getEvent_details() {
-        return event_details;
+    public LocalTime getMeetTime() {
+        return meetTime;
     }
-    public void setEvent_details(String event_details) {
-        this.event_details = event_details;
+    public void setMeetTime(LocalTime meetTime) {
+        this.meetTime = meetTime;
+    }
+
+    public String getEventDetails() {
+        return eventDetails;
+    }
+    public void setEventDetails(String eventDetails) {
+        this.eventDetails = eventDetails;
     }
 }

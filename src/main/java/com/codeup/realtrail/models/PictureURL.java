@@ -3,7 +3,7 @@ package com.codeup.realtrail.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "picture_urls")
+@Table(name = "pictureUrls")
 public class PictureURL {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class PictureURL {
     @Column
     private String description;
     @OneToOne
-    @Column(updatable = false, name = "FK trail_id")
+    @Column(updatable = false, name = "FK trailId")
     private Trail trail;
 
 

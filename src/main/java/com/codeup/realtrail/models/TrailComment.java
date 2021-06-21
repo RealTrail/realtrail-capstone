@@ -5,18 +5,18 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "trail_comments")
+@Table(name = "trailComments")
 public class TrailComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @OneToOne
-    @Column(updatable = false, name = ("FK user_id"))
-    private User user_id;
+    @Column(updatable = false, name = ("FK userId"))
+    private User userId;
     @OneToOne
-    @Column(updatable = false, name = "FK trail_id")
-    private Trail trail_id;
+    @Column(updatable = false, name = "FK trailId")
+    private Trail trailId;
     @Column
     private LocalDateTime date;
     @Column(length = 500)
@@ -27,17 +27,17 @@ public class TrailComment {
     public TrailComment() {
     }
 
-    public TrailComment(int id, User user_id, Trail trail_id, LocalDateTime date, String content) {
+    public TrailComment(int id, User userId, Trail trailId, LocalDateTime date, String content) {
         this.id = id;
-        this.user_id = user_id;
-        this.trail_id = trail_id;
+        this.userId = userId;
+        this.trailId = trailId;
         this.date = date;
         this.content = content;
     }
 
-    public TrailComment(User user_id, Trail trail_id, LocalDateTime date, String content) {
-        this.user_id = user_id;
-        this.trail_id = trail_id;
+    public TrailComment(User userId, Trail trailId, LocalDateTime date, String content) {
+        this.userId = userId;
+        this.trailId = trailId;
         this.date = date;
         this.content = content;
     }
@@ -51,18 +51,18 @@ public class TrailComment {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUserId() {
+        return userId;
     }
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
-    public Trail getTrail_id() {
-        return trail_id;
+    public Trail getTrailId() {
+        return trailId;
     }
-    public void setTrail_id(Trail trail_id) {
-        this.trail_id = trail_id;
+    public void setTrailId(Trail trailId) {
+        this.trailId = trailId;
     }
 
     public LocalDateTime getDate() {

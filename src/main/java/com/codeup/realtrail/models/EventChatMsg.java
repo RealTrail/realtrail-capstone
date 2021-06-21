@@ -5,42 +5,42 @@ import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "messages")
-public class Message {
+@Table(name = "eventChat")
+public class EventChatMsg {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @OneToOne
-    @Column(updatable = false, name = "FK event_id")
+    @Column(updatable = false, name = "FK eventId")
     private Event event;
     @Column
     private LocalTime time;
     @Column
-    private String msg_content;
+    private String msgContent;
     @OneToOne
-    @Column(updatable = false, name = "FK user_id")
-    User sender;
+    @Column(updatable = false, name = "FK userId")
+    User senderId;
 
 
 
     // constructors
-    public Message() {
+    public EventChatMsg() {
     }
 
-    public Message(int id, Event event, LocalTime time, String msg_content, User sender) {
+    public EventChatMsg(int id, Event event, LocalTime time, String msgContent, User senderId) {
         this.id = id;
         this.event = event;
         this.time = time;
-        this.msg_content = msg_content;
-        this.sender = sender;
+        this.msgContent = msgContent;
+        this.senderId = senderId;
     }
 
-    public Message(Event event, LocalTime time, String msg_content, User sender) {
+    public EventChatMsg(Event event, LocalTime time, String msgContent, User senderId) {
         this.event = event;
         this.time = time;
-        this.msg_content = msg_content;
-        this.sender = sender;
+        this.msgContent = msgContent;
+        this.senderId = senderId;
     }
 
 
@@ -67,17 +67,17 @@ public class Message {
         this.time = time;
     }
 
-    public String getMsg_content() {
-        return msg_content;
+    public String getMsgContent() {
+        return msgContent;
     }
-    public void setMsg_content(String msg_content) {
-        this.msg_content = msg_content;
+    public void setMsgContent(String msgContent) {
+        this.msgContent = msgContent;
     }
 
-    public User getSender() {
-        return sender;
+    public User getSenderId() {
+        return senderId;
     }
-    public void setSender(User sender) {
-        this.sender = sender;
+    public void setSenderId(User senderId) {
+        this.senderId = senderId;
     }
 }
