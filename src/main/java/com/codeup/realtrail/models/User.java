@@ -2,7 +2,6 @@ package com.codeup.realtrail.models;
 
 
 //import com.codeup.realtrail.util.Password;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.List;
@@ -53,9 +52,9 @@ public class User {
             joinColumns = {@JoinColumn(name="user_id")},
             inverseJoinColumns = {@JoinColumn(name="interest_id")}
     )
-    private List<Interest> interests;
+    private List<UserInterest> interests;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "participants")
     private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
@@ -74,7 +73,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<Interest> interests) {
+    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -89,7 +88,7 @@ public class User {
         this.interests = interests;
     }
 
-    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<Interest> interests) {
+    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -190,10 +189,10 @@ public class User {
         isAdmin = admin;
     }
 
-    public List<Interest> getInterests() {
+    public List<UserInterest> getInterests() {
         return interests;
     }
-    public void setInterests(List<Interest> interests) {
+    public void setInterests(List<UserInterest> interests) {
         this.interests = interests;
     }
 }

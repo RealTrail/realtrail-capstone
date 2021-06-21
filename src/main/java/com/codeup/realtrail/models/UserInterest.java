@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "interests")
-public class Interest {
+public class UserInterest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,15 +18,15 @@ public class Interest {
     private List<User> users;
 
     // constructors
-    public Interest() {
+    public UserInterest() {
     }
 
-    public Interest(String interest, List<User> users) {
+    public UserInterest(String interest, List<User> users) {
         this.interest = interest;
         this.users = users;
     }
 
-    public Interest(long id, String interest, List<User> users) {
+    public UserInterest(long id, String interest, List<User> users) {
         this.id = id;
         this.interest = interest;
         this.users = users;
