@@ -3,40 +3,41 @@ package com.codeup.realtrail.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pictureUrls")
+@Table(name = "picture_urls")
 public class PictureURL {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
-    @Column(length = 150)
-    private String url;
+
+    @Column
+    private String pictureUrl;
+
     @Column
     private String description;
-    @OneToOne
-    @Column(updatable = false, name = "FK trailId")
-    private Trail trail;
 
+    @ManyToOne
+    @JoinColumn (name = "trail_id")
+    private Trail trail;
 
     // constructors
     public PictureURL() {
     }
 
-    public PictureURL(int id, String url, String description, Trail trail) {
+    public PictureURL(String pictureUrl, String description, Trail trail) {
+        this.pictureUrl = pictureUrl;
+        this.description = description;
+        this.trail = trail;
+    }
+
+    public PictureURL(int id, String pictureUrl, String description, Trail trail) {
         this.id = id;
-        this.url = url;
+        this.pictureUrl = pictureUrl;
         this.description = description;
         this.trail = trail;
     }
-
-    public PictureURL(String url, String description, Trail trail) {
-        this.url = url;
-        this.description = description;
-        this.trail = trail;
-    }
-
 
     // getters and setters
+
     public int getId() {
         return id;
     }
@@ -44,11 +45,11 @@ public class PictureURL {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public String getDescription() {

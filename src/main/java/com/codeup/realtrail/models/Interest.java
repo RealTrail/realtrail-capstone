@@ -2,25 +2,35 @@ package com.codeup.realtrail.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "interests")
 public class Interest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
-    @Column()
+
+    @Column(nullable = false, length = 100)
     private String interest;
+
+    @ManyToMany(mappedBy = "interests")
+    private List<User> users;
 
     // constructors
     public Interest() {
     }
-    public Interest(int id, String interest) {
-        this.id = id;
+
+    public Interest(String interest, List<User> users) {
         this.interest = interest;
+        this.users = users;
     }
 
+    public Interest(int id, String interest, List<User> users) {
+        this.id = id;
+        this.interest = interest;
+        this.users = users;
+    }
 
     // getters and setters
     public int getId() {
@@ -35,5 +45,13 @@ public class Interest {
     }
     public void setInterest(String interest) {
         this.interest = interest;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

@@ -4,42 +4,43 @@ package com.codeup.realtrail.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "mapPoints")
+@Table(name = "map_points")
 public class MapPoints {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
+
     @Column
     private float longitude;
+
     @Column
     private float latitude;
+
     @Column
     private String mapDetails;
+
     @OneToOne
-    @Column(updatable = false, name = "FK trailId")
-    private Trail trailId;
+    private Trail trail;
 
     //constructors
 
     public MapPoints() {
     }
 
-    public MapPoints(int id, float longitude, float latitude, String mapDetails, Trail trailId) {
+    public MapPoints(float longitude, float latitude, String mapDetails, Trail trail) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.mapDetails = mapDetails;
+        this.trail = trail;
+    }
+
+    public MapPoints(int id, float longitude, float latitude, String mapDetails, Trail trail) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
         this.mapDetails = mapDetails;
-        this.trailId = trailId;
+        this.trail = trail;
     }
-
-    public MapPoints(float longitude, float latitude, String mapDetails, Trail trailId) {
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.mapDetails = mapDetails;
-        this.trailId = trailId;
-    }
-
 
     // getters and setters
 
@@ -71,10 +72,10 @@ public class MapPoints {
         this.mapDetails = mapDetails;
     }
 
-    public Trail getTrailId() {
-        return trailId;
+    public Trail getTrail() {
+        return trail;
     }
-    public void setTrailId(Trail trailId) {
-        this.trailId = trailId;
+    public void setTrail(Trail trail) {
+        this.trail = trail;
     }
 }

@@ -1,6 +1,7 @@
 package com.codeup.realtrail.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "trails")
@@ -9,26 +10,50 @@ public class Trail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private int id;
-    @Column(length = 60)
+
+    @Column(length = 100)
     private String name;
+
     @Column
     private float difficultyLevel;
+
     @Column
     private int rating;
+
     @Column
     private float length;
+
     @Column
     private float elevation;
+
     @Column
     private String type;
-    @Column
+
+    @Column(columnDefinition="TEXT")
     private String trailDetails;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    private List<PictureURL> trailImages;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    private List<TrailComment> trailComments;
 
     // constructors
     public Trail() {
     }
 
-    public Trail(int id, String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails) {
+    public Trail(String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails, List<PictureURL> trailImages) {
+        this.name = name;
+        this.difficultyLevel = difficultyLevel;
+        this.rating = rating;
+        this.length = length;
+        this.elevation = elevation;
+        this.type = type;
+        this.trailDetails = trailDetails;
+        this.trailImages = trailImages;
+    }
+
+    public Trail(int id, String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails, List<PictureURL> trailImages) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -37,20 +62,11 @@ public class Trail {
         this.elevation = elevation;
         this.type = type;
         this.trailDetails = trailDetails;
+        this.trailImages = trailImages;
     }
-
-    public Trail(String name, float difficultyLevel, int rating, float length, float elevation, String type, String trailDetails) {
-        this.name = name;
-        this.difficultyLevel = difficultyLevel;
-        this.rating = rating;
-        this.length = length;
-        this.elevation = elevation;
-        this.type = type;
-        this.trailDetails = trailDetails;
-    }
-
 
     // getters and setters
+
     public int getId() {
         return id;
     }
@@ -105,5 +121,12 @@ public class Trail {
     }
     public void setTrailDetails(String trailDetails) {
         this.trailDetails = trailDetails;
+    }
+
+    public List<PictureURL> getTrailImages() {
+        return trailImages;
+    }
+    public void setTrailImages(List<PictureURL> trailImages) {
+        this.trailImages = trailImages;
     }
 }
