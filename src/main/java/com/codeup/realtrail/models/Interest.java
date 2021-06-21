@@ -9,7 +9,7 @@ import java.util.List;
 public class Interest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false, length = 100)
     private String interest;
@@ -26,17 +26,17 @@ public class Interest {
         this.users = users;
     }
 
-    public Interest(int id, String interest, List<User> users) {
+    public Interest(long id, String interest, List<User> users) {
         this.id = id;
         this.interest = interest;
         this.users = users;
     }
 
     // getters and setters
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

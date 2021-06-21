@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class PictureURL {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column
     private String pictureUrl;
@@ -34,7 +34,7 @@ public class PictureURL {
         this.event = event;
     }
 
-    public PictureURL(int id, String pictureUrl, String description, Trail trail, Event event) {
+    public PictureURL(long id, String pictureUrl, String description, Trail trail, Event event) {
         this.id = id;
         this.pictureUrl = pictureUrl;
         this.description = description;
@@ -44,10 +44,10 @@ public class PictureURL {
 
     // getters and setters
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

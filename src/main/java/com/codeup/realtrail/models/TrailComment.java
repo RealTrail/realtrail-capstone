@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "trailComments")
+@Table(name = "trail_comments")
 public class TrailComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
