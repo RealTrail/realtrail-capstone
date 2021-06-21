@@ -11,25 +11,34 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Event#",updatable = false)
     private int id;
+    
     @OneToOne
-    @Column(name = "FK userId")
+    @Column(nullable = false, name = "FK userId")
     private User manager;
-    @Column(length = 100)
+    
+    @Column(nullable = false, length = 100)
     private String name;
-    @Column(length = 12)
+    
+    @Column(nullable = false, length = 12)
     private LocalDate date;
-    @Column(length = 6)
+    
+    @Column(nullable = false, length = 6)
     private LocalTime time;
-    @Column(length = 100)
+    
+    @Column(nullable = false, length = 100)
     private String location;
+    
     @OneToOne
     @Column(updatable = false, name = "FK trailId")
     private Trail trail;
-    @Column(length = 150)
+    
+    @Column(nullable = false, length = 150)
     private String meetLocation;
-    @Column(length = 12)
+    
+    @Column(nullable = false, length = 12)
     private LocalTime meetTime;
-    @Column(length = 500)
+    
+    @Column(columnDefinition="TEXT")
     private String eventDetails;
 
 
@@ -37,8 +46,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(int id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meet_location, LocalTime meetTime, String eventDetails) {
-        this.id = id;
+    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
         this.manager = manager;
         this.name = name;
         this.date = date;
@@ -49,8 +57,9 @@ public class Event {
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
     }
-
-    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
+    
+    public Event(int id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meet_location, LocalTime meetTime, String eventDetails) {
+        this.id = id;
         this.manager = manager;
         this.name = name;
         this.date = date;
