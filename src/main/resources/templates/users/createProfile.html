@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="main-block">
-    <form action="/createProfile" method="POST">
+    <form action="/profile/create" method="POST">
         <h1>Create a free account</h1>
         <fieldset>
             <legend>
@@ -29,7 +29,27 @@
                             <input type="radio" id="female" name="gender" required/>
                             <label for="female" class="radio">Female</label>
                         </div>
-                    </div>
+                        <label>Interests</label>
+                        <div>
+                            <input type="checkbox" name="interests">
+                            <label>Hiking</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="interests">
+                            <label>Biking</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="interests">
+                            <label>Mountain Hiking</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="interests">
+                            <label>Mountain Biking</label>
+                        </div>
+                        <div>
+                            <label class="header">Profile Image:</label>
+                            <input id="image" type="file" name="profile_image" placeholder="Photo" required="" capture>
+                        </div>
                 </div>
             </div>
         </fieldset>
