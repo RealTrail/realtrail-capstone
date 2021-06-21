@@ -5,43 +5,45 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "eventComments")
+@Table(name = "event_comments")
 public class EventComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-    @OneToOne
-    @Column(updatable = false, name = "FK eventId")
-    private Event eventId;
-    @OneToOne
-    @Column(updatable = false, name = ("FK userId"))
-    private User userId;
+
     @Column
     private LocalDateTime date;
-    @Column(length = 500)
+
+    @Column(columnDefinition="TEXT")
     private String content;
 
+    @ManyToOne
+    @JoinColumn (name = "event_id")
+    private Event event;
+
+    @ManyToOne
+    @JoinColumn (name = "owner_id")
+    private User owner;
 
     // constructors
     public EventComment() {
     }
 
-    public EventComment(int id, Event eventId, User userId, LocalDateTime date, String content) {
+    public EventComment(LocalDateTime date, String content, Event event, User owner) {
+        this.date = date;
+        this.content = content;
+        this.event = event;
+        this.owner = owner;
+    }
+
+    public EventComment(int id, LocalDateTime date, String content, Event event, User owner) {
         this.id = id;
-        this.eventId = eventId;
-        this.userId = userId;
         this.date = date;
         this.content = content;
+        this.event = event;
+        this.owner = owner;
     }
-
-    public EventComment(Event eventId, User userId, LocalDateTime date, String content) {
-        this.eventId = eventId;
-        this.userId = userId;
-        this.date = date;
-        this.content = content;
-    }
-
 
     // getters and setters
     public int getId() {
@@ -49,20 +51,6 @@ public class EventComment {
     }
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Event getEventId() {
-        return eventId;
-    }
-    public void setEventId(Event eventId) {
-        this.eventId = eventId;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-    public void setUserId(User userId) {
-        this.userId = userId;
     }
 
     public LocalDateTime getDate() {
@@ -77,5 +65,19 @@ public class EventComment {
     }
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

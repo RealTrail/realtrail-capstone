@@ -9,60 +9,50 @@ import java.time.LocalDateTime;
 public class TrailComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int id;
-    @OneToOne
-    @Column(updatable = false, name = ("FK userId"))
-    private User userId;
-    @OneToOne
-    @Column(updatable = false, name = "FK trailId")
-    private Trail trailId;
+    private long id;
+
     @Column
     private LocalDateTime date;
-    @Column(length = 500)
+
+    @Column(nullable = false, columnDefinition="TEXT")
     private String content;
+
+
+    @ManyToOne
+    @JoinColumn (name = "owner_id")
+    private User owner;
+
+    @ManyToOne
+    @JoinColumn (name = "trail_id")
+    private Trail trail;
 
     // constructors
 
     public TrailComment() {
     }
 
-    public TrailComment(int id, User userId, Trail trailId, LocalDateTime date, String content) {
-        this.id = id;
-        this.userId = userId;
-        this.trailId = trailId;
+    public TrailComment(LocalDateTime date, String content, User owner, Trail trail) {
         this.date = date;
         this.content = content;
+        this.owner = owner;
+        this.trail = trail;
     }
 
-    public TrailComment(User userId, Trail trailId, LocalDateTime date, String content) {
-        this.userId = userId;
-        this.trailId = trailId;
+    public TrailComment(long id, LocalDateTime date, String content, User owner, Trail trail) {
+        this.id = id;
         this.date = date;
         this.content = content;
+        this.owner = owner;
+        this.trail = trail;
     }
 
     // getters and setters
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public Trail getTrailId() {
-        return trailId;
-    }
-    public void setTrailId(Trail trailId) {
-        this.trailId = trailId;
     }
 
     public LocalDateTime getDate() {
@@ -77,5 +67,19 @@ public class TrailComment {
     }
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Trail getTrail() {
+        return trail;
+    }
+    public void setTrail(Trail trail) {
+        this.trail = trail;
     }
 }
