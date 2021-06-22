@@ -34,15 +34,10 @@
                     <input type="password" id="password" name="password" onkeyup='check()'>
                     <label for="password">Password</label>
                 </div>
-                <div class="input-field">
-                    <input type="password" id="checkPassword" name="checkPassword" onkeyup='check()'>
-                    <label for="checkPassword">Confirm Password</label>
-                    <p id="alertPassword"></p>
-                </div>
                 <input type="submit" class="btn" value="Login" name="login">
             </form>
 
-            <form action="/login" method="POST" class="sign-up">
+            <form action="/signup" method="POST" class="sign-up">
                 <h2>Sign Up!</h2>
                 <div class="input-field">
                     <input type="email" id="create_email" name="create_email">
@@ -53,25 +48,14 @@
                     <label for="create_username">Username</label>
                 </div>
                 <div class="input-field">
-                    <input type="password" id="createPassword" name="createPassword" onkeyup='checkSign()'>
+                    <input type="password" id="createPassword" name="createPassword" onkeyup='check()'>
                     <label for="createPassword">Password</label>
                 </div>
                 <div class="input-field">
-                    <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='checkSign()'>
+                    <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>
                     <label for="confirmCreatePassword">Confirm Password</label>
                     <p id="alertPasswordSign"></p>
                 </div>
-
-                <div class="input-field">
-                    <input type="text" id="firstName" name="firstName">
-                    <label for="firstName">First Name</label>
-                </div>
-
-                <div class="input-field">
-                    <input type="text" id="lastName" name="lastName">
-                    <label for="lastName">Last Name</label>
-                </div>
-
 
                 <input type="submit" class="btn btn-light toggle-slide" value="Create Account" name="signup">
             </form>
