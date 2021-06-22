@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/head :: head">
     <title>Create Profile</title>
 </head>
 <body>
-<div>
+<nav th:replace="/fragments/navbar :: navbar"></nav>
+<main>
     <form th:action="@{/profile/create}" th:method="POST" th:object="${user}">
         <h1>Create Your Account</h1>
         <fieldset>
@@ -55,7 +56,9 @@
         </fieldset>
         <button type="submit" id="createProfile">Submit</button>
     </form>
-    <footer th: th:fragment="footer"></footer>
-</div>
+
+</main>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>
