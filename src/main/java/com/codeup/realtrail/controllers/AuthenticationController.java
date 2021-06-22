@@ -25,6 +25,7 @@ public class AuthenticationController {
             @RequestParam(name = "password") String password,
             Model model) {
         User user = usersDao.findByUsername(username);
+
         if (user.getPassword().equals(password)) {
             return "users/createProfile";
         } else {

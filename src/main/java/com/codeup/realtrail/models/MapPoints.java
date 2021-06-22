@@ -23,7 +23,6 @@ public class MapPoints {
     private Trail trail;
 
     //constructors
-
     public MapPoints() {
     }
 

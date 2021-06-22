@@ -31,8 +31,9 @@ public class UserController {
 
     @PostMapping("/signup")
     public String saveUser(@ModelAttribute User user) {
-        usersDao.save(user);
-        return "redirect:/login";
+        user = usersDao.save(user);
+        System.out.println("user.getUsername() = " + user.getUsername());
+        return "users/createProfile";
     }
 
     @GetMapping("/profile/create")

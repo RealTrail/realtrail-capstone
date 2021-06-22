@@ -105,6 +105,7 @@ public class User {
     }
 
     // getter and setters
+
     public long getId() {
         return id;
     }
@@ -144,7 +145,7 @@ public class User {
         return password;
     }
 //    public void setPassword(String password) {
-//        this.password = Password.hash(password);
+//        this.password = password;
 //    }
 
     public String getPhoneNumber() {
@@ -194,5 +195,26 @@ public class User {
     }
     public void setInterests(List<UserInterest> interests) {
         this.interests = interests;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<TrailComment> getTrailComments() {
+        return trailComments;
+    }
+    public void setTrailComments(List<TrailComment> trailComments) {
+        this.trailComments = trailComments;
+    }
+
+    public List<EventComment> getEventComments() {
+        return eventComments;
+    }
+    public void setEventComments(List<EventComment> eventComments) {
+        this.eventComments = eventComments;
     }
 }
