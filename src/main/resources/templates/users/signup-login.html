@@ -24,17 +24,24 @@
         <div class="form__background"></div>
 
         <div class="form__body">
+            <div th:if="${param.error}">
+                Invalid Username and Password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+
             <form th:action="@{/login}" method="POST" class="login">
                 <h2>Login!</h2>
                 <div class="input-field">
-                    <input type="text" id="log_username" name="log_username">
-                    <label for="log_username">Username</label>
+                    <input type="text" id="log_username" name="username" placeholder="username/email">
+                    <label for="log_username">Username or Email</label>
                 </div>
                 <div class="input-field">
                     <input type="password" id="password" name="password">
                     <label for="password">Password</label>
                 </div>
-                <input type="submit" class="btn" value="Login" name="login">
+                <input type="submit" class="btn btn-light" value="Login" name="login">
             </form>
 
             <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}">
@@ -57,7 +64,7 @@
                     <p id="alertPasswordSign"></p>
                 </div>
 
-                <input type="submit" class="btn" value="Create Account" name="signup">
+                <input type="submit" class="btn btn-light" value="Create Account" name="signup">
             </form>
         </div>
 

@@ -73,6 +73,13 @@ public class User {
         this.password = password;
     }
 
+    public User(User copy) {
+        this.id = copy.id;
+        this.username = copy.username;
+        this.email = copy.email;
+        this.password = copy.password;
+    }
+
     public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
         this.firstName = firstName;
         this.lastName = lastName;
