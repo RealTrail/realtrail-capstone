@@ -23,18 +23,18 @@ public class AuthenticationController {
         return "users/signup-login";
     }
 
-    @PostMapping("/login")
-    public String loginSite(
-            @RequestParam(name = "log_username") String username,
-            @RequestParam(name = "password") String password,
-            Model model) {
-        User user = usersDao.findByUsername(username);
-
-        if (user.getPassword().equals(password)) {
-            return "redirect:/profile/create";
-        } else {
-            return "redirect:/signup";
-        }
-    }
+//    @PostMapping("/login")
+//    public String loginSite(
+//            @RequestParam(name = "log_username") String username,
+//            @RequestParam(name = "password") String password,
+//            Model model) {
+//        User user = usersDao.findByUsername(username);
+//
+//        if (user.getPassword().equals(password)) {
+//            return "redirect:/profile/create";
+//        } else {
+//            return "redirect:/signup";
+//        }
+//    }
 
 }
