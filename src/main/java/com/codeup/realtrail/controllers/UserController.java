@@ -34,12 +34,14 @@ public class UserController {
         return "users/signup-login";
     }
 
+
     @PostMapping("/signup")
     public String saveUser(@ModelAttribute User user) {
         usersDao.save(user);
         System.out.println("user.getUsername() = " + user.getUsername());
         return "redirect:/login";
     }
+
 
 
 
