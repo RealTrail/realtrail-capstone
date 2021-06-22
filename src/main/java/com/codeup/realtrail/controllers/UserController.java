@@ -29,6 +29,7 @@ public class UserController {
         return "users/signup-login";
     }
 
+
     @PostMapping("/signup")
     public String saveUser(@ModelAttribute User user) {
         user = usersDao.save(user);
@@ -66,6 +67,7 @@ public class UserController {
 //        return "redirect:/users/profile" + user.getId();
         return "users/showProfile";
     }
+
 
 
 }
