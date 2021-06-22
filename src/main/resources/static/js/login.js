@@ -1,9 +1,12 @@
-document.querySelectorAll('.toggle-slide').forEach(e => e.addEventListener('click', toggle));
+"use strict";
 
-// document.querySelectorAll('form').forEach(f => f.addEventListener('submit', (e) => e.preventDefault()) )
+let path = window.location.href;
 
-function toggle(e) {
-    e.preventDefault();
+if (path.substring(path.lastIndexOf("/")) === "/signup") {
+    toggle();
+}
+
+function toggle() {
     document.querySelector('.form').classList.toggle('slide');
 }
 
