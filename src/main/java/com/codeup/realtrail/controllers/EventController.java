@@ -4,7 +4,7 @@ package com.codeup.realtrail.controllers;
 import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.*;
-import org.springframework.security.core.parameters.P;
+//import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
