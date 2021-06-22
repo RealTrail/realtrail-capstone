@@ -44,7 +44,6 @@ public class UserController {
 
 
 
-
     @GetMapping("/profile/edit")
     public String showEditProfileForm(Model model) {
         model.addAttribute("user", new User());
