@@ -160,3 +160,172 @@ span {
 .fa, .fas {
     margin-right: 15px
 }
+
+
+/******************************************** FOOTER CSS ************************************************/
+html {
+    scroll-behavior: smooth;
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+h1 {
+    text-align: center;
+    font-family: roboto;
+    font-weight: 400;
+    font-size: 35px;
+    color: #656565;
+}
+
+footer {
+    background-color: #3c3b3b;
+    padding: 3em 4em 2em;
+}
+footer .logo {
+    color:#fff;
+    font-size: 28px;
+    font-family: roboto;
+}
+footer .row {
+    margin: 2em 0;
+    font-family: lato;
+    color: #fff;
+    position: relative;
+    border-bottom: 1px solid #cecece;
+}
+
+.social-links {
+    bottom: 60px;
+    position: relative;
+    float: right;
+}
+.social-links a {
+    color: #fff;
+    font-size: 20px;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 6px;
+    -webkit-transition:all .2s ease-in;
+    transition:all .2s ease-in;
+}
+.social-links a:not(:last-child) {
+    margin-right: 10px;
+}
+.social-links a:hover, .social-links a:focus {
+    background-color: #212121;
+}
+.social-links a i {
+    width: 25px;
+    height: 25px;
+    text-align:center;
+
+}
+#copyright {
+    text-align: center;
+    color:#fff;
+    font-family: lato;
+}
+/* iPads to Smartphone for Common Elements ----------- */
+@media only screen and (max-width : 1024px) {
+
+    footer .footer-cat {
+        margin-left: 25px;
+    }
+
+    .footer-cat-links {
+        margin: 0 0em 0px 1.6em;
+    }
+
+    .footer-cat-links a {
+        pointer-events: none;
+    }
+
+    .footer-cat-links li {
+        line-height: 0;
+        opacity: 0;
+    }
+
+    .footer-cat-links.active > li {
+        line-height: 2;
+        opacity: 1;
+    }
+}
+/* iPads (portrait)----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
+    .logo{
+        display: none;
+    }
+    footer {
+        padding-right:3em;
+        padding-left:3em;
+    }
+}
+
+/* Mini Tablet ----------- */
+@media only screen and (max-width : 600px) {
+    .logo{
+        display: none;
+    }
+    .col-6 {
+        width: 100%;
+        display: block;
+    }
+    footer {
+        padding: 3em 2em 2em;
+    }
+}
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width : 480px) {
+    .col-6 {
+        width: 100%;
+        display: block;
+    }
+    footer {
+        padding-right: 1em;
+        padding-left: 1em;
+    }
+}
+/******************************************** FOOTER CSS ************************************************/
+/* Navbar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar a:not(:first-child) {display: none;}
+    .navbar a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar.responsive {
+        position: relative;
+    }
+
+    .navbar.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .navbar.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+

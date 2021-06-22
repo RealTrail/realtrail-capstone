@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Event</title>
+</head>
+<body>
+<nav></nav>
+
+<h2>Your event search results:</h2>
+<div>
+    <div><label>Event coordinator</label><h4 th:text="${event.manager}"></h4></div>
+    <div><label>Event name</label><h4 th:text="${event.name}"></h4></div>
+    <div><label>Event details:</label><p th:text="${event.eventDetails}"></p></div>
+    <div><label>date:</label><h4 th:text="${event.date}"></h4></div>
+    <div><label>time:</label><h4 th:text="${event.time}"></h4></div>
+    <div><label>location:</label><h4 th:text="${event.location}"></h4></div>
+    <div><label>trail:</label><h4 th:text="${event.trail}"></h4></div>
+    <div><label>meet location:</label><h4 th:text="${event.meetLocation}"></h4></div>
+    <div><label>meet time:</label><h4 th:text="${event.meetTime}"></h4></div>
+    <div><label>trail comments:</label><h4 th:text="${event.trailComments}"></h4></div>
+    <div><label>participants:</label><h4 th:text="${event.participants}"></h4></div>
+    <div><label>images:</label><h4 th:text="${event.images}"></h4></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+</head>
+<body>
+<form th:action="@{/profile/edit}" th:method="POST" th:object="${user}">
+    <h1>Edit Your Account</h1>
+    <fieldset>
+        <legend>
+            <h3>Personal Details</h3>
+        </legend>
+        <div>
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName" th:field="*{firstName}"  required />
+        </div>
+        <div>
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName" th:filed="*{lastName}" required />
+        </div>
+        <div>
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Edit phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:filed="*{phoneNumber}" required />
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div>
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" placeholder="San Antonio" th:filed="*{city}" />
+        </div>
+        <div>
+            <label for="state">State</label>
+            <input type="text" name="state" id="state" placeholder="TX" th:filed="*{state}" />
+        </div>
+
+        <label>Gender</label>
+        <div class="gender">
+            <input type="radio" id="male" name="gender" value="M" th:filed="*{gender}" />
+            <label for="male" class="radio">Male</label>
+            <input type="radio" id="female" name="gender" value="F" th:filed="*{gender}" />
+            <label for="female" class="radio">Female</label>
+        </div>
+
+        <label>Interests</label>
+        <div th:each="interest : ${interests}">
+            <label th:class="${'interest' + interest.id}">
+                <input type="checkbox" name="categories" th:field="*{interests}" th:value="${interest.id}" th:text="${interest.interest}">
+            </label>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" id="images">Upload images</button>
+            <input type="hidden" name="images" id="hidden">
+            <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+        </div>
+
+    </fieldset>
+    <button type="submit" id="editProfile">Submit</button>
+</form>
+</form>
+</body>
+</html>

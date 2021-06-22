@@ -58,6 +58,18 @@ public class Event {
     public Event() {
     }
 
+    public Event(String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails , List<PictureURL> images) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.trail = trail;
+        this.meetLocation = meetLocation;
+        this.meetTime = meetTime;
+        this.eventDetails = eventDetails;
+        this.images = images;
+    }
+
     public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
         this.manager = manager;
         this.name = name;
@@ -183,5 +195,13 @@ public class Event {
 
     public void setParticipants(List<User> participants) {
         this.participants = participants;
+    }
+
+    public User getUser() {
+        return manager;
+    }
+
+    public void setUser(User user) {
+        this.manager = user;
     }
 }
