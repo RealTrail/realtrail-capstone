@@ -1,57 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
     <title>Create Profile</title>
 </head>
 <body>
-<div class="main-block">
-    <form action="/profile/create" method="POST">
-        <h1>Create a free account</h1>
+<div>
+    <form th:action="@{/profile/create}" th:method="POST" th:object="${user}">
+        <h1>Create Your Account</h1>
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>
             </legend>
-            <div  class="container">
-                <div>
-                    <div><label>First Name</label><input type="text" name="firstName" required /></div>
-                    <div><label>Last Name</label><input type="text" name="lastName" required /></div>
-                    <div><label>Phone</label><input type="text" name="phoneNumber" required /></div>
-                    <div><label>City</label><input type="text" name="city" /></div>
-                    <div><label>State</label><input type="text" name="state" /></div>
-                </div>
-                <div>
-                    <div>
-                        <label>Gender</label>
-                        <div class="gender">
-                            <input type="radio" id="male" name="gender" required/>
-                            <label for="male" class="radio">Male</label>
-                            <input type="radio" id="female" name="gender" required/>
-                            <label for="female" class="radio">Female</label>
-                        </div>
-                        <label>Interests</label>
-                        <div>
-                            <input type="checkbox" name="interests">
-                            <label>Hiking</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" name="interests">
-                            <label>Cycling</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" name="interests">
-                            <label>Walking/Jogging</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" name="interests">
-                            <label>Mountain Biking</label>
-                        </div>
-                        <div>
-                            <label class="header">Profile Image:</label>
-                            <input id="image" type="file" name="profile_image" placeholder="Photo" required="" capture>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName" th:field="*{firstName}"  required />
+            </div>
+            <div>
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName" th:filed="*{lastName}" required />
+            </div>
+            <div>
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:filed="*{phoneNumber}" required />
+                <small>Format: 123-456-7890</small>
+            </div>
+            <div>
+                <label for="city">City</label>
+                <input type="text" name="city" id="city" placeholder="San Antonio" th:filed="*{city}" />
+            </div>
+            <div>
+                <label for="state">State</label>
+                <input type="text" name="state" id="state" placeholder="TX" th:filed="*{state}" />
+            </div>
+
+            <label>Gender</label>
+            <div class="gender">
+                <input type="radio" id="male" name="gender" value="M" th:filed="*{gender}" />
+                <label for="male" class="radio">Male</label>
+                <input type="radio" id="female" name="gender" value="F" th:filed="*{gender}" />
+                <label for="female" class="radio">Female</label>
+            </div>
+
+            <label>Interests</label>
+            <div th:each="interest : ${interests}">
+                <label th:class="${'interest' + interest.id}">
+                    <input type="checkbox" name="categories" th:field="*{interests}" th:value="${interest.id}" th:text="${interest.interest}">
+                </label>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" id="images">Upload images</button>
+                <input type="hidden" name="images" id="hidden">
+                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
             </div>
         </fieldset>
         <button type="submit" id="createProfile">Submit</button>

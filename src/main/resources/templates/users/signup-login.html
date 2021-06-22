@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+    <title>Login or Signup</title>
+</head>
+<body>
+
+<div class="form__wrapper">
+    <div class="form">
+        <div class="form__options">
+            <div class="form__options__login">
+                <div class="options__body">
+                    <p>Already have an account?</p>
+                    <a href="#" class="btn btn-light toggle-slide">Login!</a>
+                </div>
+            </div>
+            <div class="form__options__signup">
+                <p>Don't have an account yet?</p>
+                <a href="#" class="btn btn-light toggle-slide">Sign Up!</a>
+                <small>It's free!</small>
+            </div>
+        </div>
+
+        <div class="form__background"></div>
+
+        <div class="form__body">
+            <form th:action="@{/login}" method="POST" class="login">
+                <h2>Login!</h2>
+                <div class="input-field">
+                    <input type="text" id="log_username" name="log_username">
+                    <label for="log_username">Username</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="password" name="password">
+                    <label for="password">Password</label>
+                </div>
+                <input type="submit" class="btn" value="Login" name="login">
+            </form>
+
+            <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}">
+                <h2>Sign Up!</h2>
+                <div class="input-field">
+                    <input type="text" id="create_username" name="create_username" th:field="*{username}">
+                    <label for="create_username">Username</label>
+                </div>
+                <div class="input-field">
+                    <input type="email" id="create_email" name="create_email" th:field="*{email}">
+                    <label for="create_email">Email Address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="createPassword" name="createPassword" th:field="*{password}">
+                    <label for="createPassword">Password</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>
+                    <label for="confirmCreatePassword">Confirm Password</label>
+                    <p id="alertPasswordSign"></p>
+                </div>
+
+                <input type="submit" class="btn" value="Create Account" name="signup">
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="/js/login.js"></script>
+
+</body>
+</html>
