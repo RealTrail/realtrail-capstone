@@ -24,31 +24,31 @@
         <div class="form__background"></div>
 
         <div class="form__body">
-            <form action="/login" method="POST" class="login">
+            <form th:action="@{/login}" method="POST" class="login">
                 <h2>Login!</h2>
                 <div class="input-field">
-                    <input type="text" id="log_username" name="log_username" th:field="*{username}">
+                    <input type="text" id="log_username" name="log_username">
                     <label for="log_username">Username</label>
                 </div>
                 <div class="input-field">
-                    <input type="password" id="password" name="password" onkeyup='check()'>
+                    <input type="password" id="password" name="password">
                     <label for="password">Password</label>
                 </div>
                 <input type="submit" class="btn" value="Login" name="login">
             </form>
 
-            <form action="/signup" method="POST" class="sign-up">
+            <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}">
                 <h2>Sign Up!</h2>
                 <div class="input-field">
-                    <input type="email" id="create_email" name="create_email">
-                    <label for="create_email">Email Address</label>
-                </div>
-                <div class="input-field">
-                    <input type="text" id="create_username" name="create_username">
+                    <input type="text" id="create_username" name="create_username" th:field="*{username}">
                     <label for="create_username">Username</label>
                 </div>
                 <div class="input-field">
-                    <input type="password" id="createPassword" name="createPassword" onkeyup='check()'>
+                    <input type="email" id="create_email" name="create_email" th:field="*{email}">
+                    <label for="create_email">Email Address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="createPassword" name="createPassword" th:field="*{password}">
                     <label for="createPassword">Password</label>
                 </div>
                 <div class="input-field">

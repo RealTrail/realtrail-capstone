@@ -16,11 +16,16 @@ import java.util.List;
 @Controller
 public class UserController {
     private UsersRepository usersDao;
-    private UserInterestRepository userInterestDao;
+    private UserInterestRepository userInterestsDao;
 
-    public UserController(UsersRepository usersDao, UserInterestRepository userInterestDao) {
+    public UserController(UsersRepository usersDao, UserInterestRepository userInterestsDao) {
         this.usersDao = usersDao;
-        this.userInterestDao = userInterestDao;
+        this.userInterestsDao = userInterestsDao;
+    }
+
+    @GetMapping("/")
+    public String showHomePage() {
+        return "home";
     }
 
     @GetMapping("/signup")
@@ -31,41 +36,13 @@ public class UserController {
 
     @PostMapping("/signup")
     public String saveUser(@ModelAttribute User user) {
-        user = usersDao.save(user);
-        System.out.println("user.getUsername() = " + user.getUsername());
-        return "users/createProfile";
-    }
-
-    @GetMapping("/profile/create")
-    public String showCreateProfileForm(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("interests", userInterestDao.findAll());
-        return "users/createProfile";
-    }
-
-    @PostMapping("/profile/create")
-    public String saveProfile(
-            User user,
-            @RequestParam(name = "firstName") String firstName,
-            @RequestParam(name = "lastName") String lastName,
-            @RequestParam(name = "phoneNumber") String phoneNumber,
-            @RequestParam(name = "city") String city,
-            @RequestParam(name = "state") String state,
-            @RequestParam(name = "gender") String gender,
-            @RequestParam(name = "interests") List<UserInterest> interests,
-            Model model) {
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhoneNumber(phoneNumber);
-        user.setCity(city);
-        user.setState(state);
-        user.setGender(gender);
-        user.setInterests(interests);
         usersDao.save(user);
-
-//        return "redirect:/users/profile" + user.getId();
-        return "users/showProfile";
+        System.out.println("user.getUsername() = " + user.getUsername());
+        return "redirect:/login";
     }
+
+
+
 
 
 }

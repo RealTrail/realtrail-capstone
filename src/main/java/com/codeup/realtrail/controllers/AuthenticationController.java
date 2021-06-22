@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthenticationController {
     private UsersRepository usersDao;
 
+    public AuthenticationController(UsersRepository usersDao) {
+        this.usersDao = usersDao;
+    }
+
     @GetMapping("/login")
     public String showLoginForm(Model model) {
         model.addAttribute("user", new User());
@@ -27,7 +31,7 @@ public class AuthenticationController {
         User user = usersDao.findByUsername(username);
 
         if (user.getPassword().equals(password)) {
-            return "users/createProfile";
+            return "redirect:/profile/create";
         } else {
             return "redirect:/signup";
         }
