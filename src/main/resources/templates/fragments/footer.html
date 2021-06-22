@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--    <link rel="stylesheet" href="style.css">-->
+    <head th:replace="/fragments/head :: head">
+    <link href="https://fonts.googleapis.com/css?family=Lato%7CNanum+Gothic:700%7CRaleway&display=swap" rel="stylesheet">
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">-->
+    <title>Responsive Footer</title>
+</head>
+<body>
+<footer>
+    <div>
+        <span class="logo">Real Trail</span>
+    </div>
+    <div class="row">
+        <div class="social-links social-1 col-6">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-pinterest"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div id="copyright">
+        &copy; All Rights Reserved 2019-2020
+    </div>
+</footer>
+</body>
+</html>
