@@ -4,6 +4,7 @@ import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.models.UserInterest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,12 @@ import java.util.List;
 public class UserController {
     private UsersRepository usersDao;
     private UserInterestRepository userInterestsDao;
+    private PasswordEncoder passwordEncoder;
 
-    public UserController(UsersRepository usersDao, UserInterestRepository userInterestsDao) {
+    public UserController(UsersRepository usersDao, UserInterestRepository userInterestsDao, PasswordEncoder passwordEncoder) {
         this.usersDao = usersDao;
         this.userInterestsDao = userInterestsDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -36,8 +39,9 @@ public class UserController {
 
     @PostMapping("/signup")
     public String saveUser(@ModelAttribute User user) {
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         usersDao.save(user);
-        System.out.println("user.getUsername() = " + user.getUsername());
         return "redirect:/login";
     }
 

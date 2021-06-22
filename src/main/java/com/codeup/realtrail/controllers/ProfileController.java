@@ -4,12 +4,16 @@ import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.models.UserInterest;
+import org.springframework.beans.factory.support.SecurityContextProvider;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+import java.security.Security;
 import java.util.List;
 
 @Controller
@@ -23,7 +27,12 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/create")
-    public String getCreateProfileForm(Model model) {
+    public String getCreateProfileForm(Model model, Principal principal) {
+        if (principal != null) {
+//            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+
+
         model.addAttribute("user", new User());
         model.addAttribute("interests", userInterestsDao.findAll());
         return "users/createProfile";
