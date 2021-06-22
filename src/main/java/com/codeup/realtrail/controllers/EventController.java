@@ -20,14 +20,14 @@ public class EventController {
     private EventsRepository eventsDao;
     private UsersRepository usersDao;
 
-    public EventController(EventsRepository eventsRepository, UsersRepository usersRepository){
-        eventsDao = eventsRepository;
-        usersDao = usersRepository;
+    public EventController(EventsRepository eventsDao, UsersRepository usersDao) {
+        this.eventsDao = eventsDao;
+        this.usersDao = usersDao;
     }
 
     // showAllEvents.html page
     @GetMapping("/events")
-    public String eventsIndex(Model model){
+    public String eventsPage(Model model){
         List<Event> eventsList = eventsDao.findAll();
         model.addAttribute("noEventsFound", eventsList.size() == 0);
         model.addAttribute("events", eventsList);
@@ -36,24 +36,36 @@ public class EventController {
 
     // showEvent.html page
     @GetMapping("/events/{id}")
-    public String id(@PathVariable Long id, Model model){
+    public String individualEventPage(@PathVariable Long id, Model model){
         Event event= eventsDao.getById(id);
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         return "/events/showEvent";
     }
 
-    @GetMapping("events/edit/{id}")
+    @GetMapping("events/{id}/edit")
     public String editEvent(@PathVariable Long id, Model model){
         model.addAttribute("editedEvent",eventsDao.getById(id));
         return "events/edit";
     }
 
-    @PostMapping("events/edit/{id}")
-    public String editEvent(@PathVariable Long id, @RequestParam String name, @RequestParam LocalDate date, @RequestParam LocalTime time, @RequestParam String location, @RequestParam Trail trail, @RequestParam String meetLocation, @RequestParam LocalTime meetTime, @RequestParam String eventDetails, @RequestParam List<PictureURL> images){
-        Event event1 = new Event(name, date, time, location, trail, meetLocation, meetTime, eventDetails, images);
-        eventsDao.save(event1);
-        return "redirect:/events/showEvent" + id;
+    @PostMapping("events/{id}/edit")
+    public String editEvent(
+            @PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam LocalDate date,
+            @RequestParam LocalTime time,
+            @RequestParam String location,
+            @RequestParam Trail trail,
+            @RequestParam String meetLocation,
+            @RequestParam LocalTime meetTime,
+            @RequestParam String eventDetails,
+            @RequestParam List<PictureURL> images
+    ){
+        Event eventEdited = new Event(name, date, time, location, trail, meetLocation, meetTime, eventDetails, images);
+        eventEdited.setId(id);
+        eventsDao.save(eventEdited);
+        return "redirect:/events/" + id;
     }
 
 }
