@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class MapPoints {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column
     private float longitude;
@@ -23,7 +23,6 @@ public class MapPoints {
     private Trail trail;
 
     //constructors
-
     public MapPoints() {
     }
 
@@ -34,7 +33,7 @@ public class MapPoints {
         this.trail = trail;
     }
 
-    public MapPoints(int id, float longitude, float latitude, String mapDetails, Trail trail) {
+    public MapPoints(long id, float longitude, float latitude, String mapDetails, Trail trail) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -44,10 +43,10 @@ public class MapPoints {
 
     // getters and setters
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

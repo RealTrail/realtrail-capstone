@@ -1,30 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
     <title>Show Profile</title>
 </head>
 <body>
 <div class="main-block">
-  <form action="/profile/show" method="POST">
     <h1>Show Profile</h1>
     <fieldset>
-      <legend>
-        <h3>Personal Details</h3>
-      </legend>
-      <table>
-        <tr>
-          <td>Username</td>
-          <td>Email</td>
-          <td>Name</td>
-          <td>Phone Number</td>
-          <td>City</td>
-          <td>State</td>
-        </tr>
-      </table>
+        <legend>
+            <h3>Personal Details</h3>
+        </legend>
+        <table>
+            <tr>
+                <th><img th:src="${user.profileImageUrl}" alt="profile-image"></th>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td th:text="${user.username}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td th:text="${user.phoneNumber}"></td>
+            </tr>
+            <tr>
+                <th>City, State</th>
+                <td th:text="${user.city + ', ' + user.state}"></td>
+            </tr>
+
+            <tr>
+                <th>Interests</th>
+                <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
+            </tr>
+        </table>
     </fieldset>
-    <button type="submit">Edit</button>
-  </form>
+    <a href="/users/edit">Edit</a>
 </div>
 </body>
 </html>

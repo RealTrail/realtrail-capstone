@@ -9,8 +9,7 @@ import java.time.LocalDateTime;
 public class EventComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int id;
+    private long id;
 
     @Column
     private LocalDateTime date;
@@ -37,7 +36,7 @@ public class EventComment {
         this.owner = owner;
     }
 
-    public EventComment(int id, LocalDateTime date, String content, Event event, User owner) {
+    public EventComment(long id, LocalDateTime date, String content, Event event, User owner) {
         this.id = id;
         this.date = date;
         this.content = content;
@@ -46,10 +45,10 @@ public class EventComment {
     }
 
     // getters and setters
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

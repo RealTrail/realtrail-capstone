@@ -10,7 +10,7 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     
     @OneToOne
     private User manager;
@@ -27,7 +27,8 @@ public class Event {
     @Column(nullable = false, length = 100)
     private String location;
     
-    @OneToOne
+    @ManyToOne
+    @JoinColumn (name = "trail_id")
     private Trail trail;
     
     @Column(nullable = false, length = 150)
@@ -45,11 +46,19 @@ public class Event {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<PictureURL> images;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="events_participants",
+            joinColumns = {@JoinColumn(name="event_id")},
+            inverseJoinColumns = {@JoinColumn(name="participant_id")}
+    )
+    private List<User> participants;
+
     // constructors
     public Event() {
     }
 
-    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images) {
+    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
         this.manager = manager;
         this.name = name;
         this.date = date;
@@ -61,9 +70,10 @@ public class Event {
         this.eventDetails = eventDetails;
         this.trailComments = trailComments;
         this.images = images;
+        this.participants = participants;
     }
 
-    public Event(int id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images) {
+    public Event(long id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
         this.id = id;
         this.manager = manager;
         this.name = name;
@@ -76,14 +86,15 @@ public class Event {
         this.eventDetails = eventDetails;
         this.trailComments = trailComments;
         this.images = images;
+        this.participants = participants;
     }
 
     // getters and setters
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -164,5 +175,13 @@ public class Event {
 
     public void setImages(List<PictureURL> images) {
         this.images = images;
+    }
+
+    public List<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
     }
 }

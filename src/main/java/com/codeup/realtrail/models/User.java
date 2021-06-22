@@ -1,8 +1,7 @@
 package com.codeup.realtrail.models;
 
 
-import com.codeup.realtrail.util.Password;
-import org.springframework.beans.factory.annotation.Value;
+//import com.codeup.realtrail.util.Password;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(length = 50)
     private String firstName;
@@ -53,7 +52,10 @@ public class User {
             joinColumns = {@JoinColumn(name="user_id")},
             inverseJoinColumns = {@JoinColumn(name="interest_id")}
     )
-    private List<Interest> interests;
+    private List<UserInterest> interests;
+
+    @ManyToMany(mappedBy = "participants")
+    private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<TrailComment> trailComments;
@@ -71,7 +73,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<Interest> interests) {
+    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -86,7 +88,7 @@ public class User {
         this.interests = interests;
     }
 
-    public User(int id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<Interest> interests) {
+    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -103,10 +105,11 @@ public class User {
     }
 
     // getter and setters
-    public int getId() {
+
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -141,9 +144,9 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
-        this.password = Password.hash(password);
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -187,10 +190,31 @@ public class User {
         isAdmin = admin;
     }
 
-    public List<Interest> getInterests() {
+    public List<UserInterest> getInterests() {
         return interests;
     }
-    public void setInterests(List<Interest> interests) {
+    public void setInterests(List<UserInterest> interests) {
         this.interests = interests;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<TrailComment> getTrailComments() {
+        return trailComments;
+    }
+    public void setTrailComments(List<TrailComment> trailComments) {
+        this.trailComments = trailComments;
+    }
+
+    public List<EventComment> getEventComments() {
+        return eventComments;
+    }
+    public void setEventComments(List<EventComment> eventComments) {
+        this.eventComments = eventComments;
     }
 }
