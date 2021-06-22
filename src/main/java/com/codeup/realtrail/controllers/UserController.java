@@ -45,6 +45,11 @@ public class UserController {
 
 
 
-
+    @GetMapping("/profile/edit")
+    public String showEditProfileForm(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("interests", userInterestDao.findAll());
+        return "users/editProfile";
+    }
 
 }
