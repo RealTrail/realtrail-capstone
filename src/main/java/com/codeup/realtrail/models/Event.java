@@ -184,4 +184,12 @@ public class Event {
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
