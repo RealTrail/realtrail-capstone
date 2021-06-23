@@ -4,13 +4,10 @@ package com.codeup.realtrail.controllers;
 import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.*;
-<<<<<<< HEAD
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.StringService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
-=======
->>>>>>> 7857d5429d4360953fd9fb08e711eb8dfe28e9cd
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,17 +25,11 @@ public class EventController {
     private final StringService stringService;
     private final EmailService emailService;
 
-<<<<<<< HEAD
     public EventController(EventsRepository eventsDao, UsersRepository usersDao, StringService stringService, EmailService emailService){
         this.eventsDao = eventsDao;
         this.usersDao = usersDao;
         this.stringService = stringService;
         this.emailService = emailService;
-=======
-    public EventController(EventsRepository eventsDao, UsersRepository usersDao) {
-        this.eventsDao = eventsDao;
-        this.usersDao = usersDao;
->>>>>>> 7857d5429d4360953fd9fb08e711eb8dfe28e9cd
     }
 
     // showAllEvents.html page
@@ -57,11 +48,8 @@ public class EventController {
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         return "events/showEvent";
-<<<<<<< HEAD
-=======
     }
 
-<<<<<<< HEAD
     // Create Event
     @GetMapping("/events/create")
     public String publishEvent(@Valid Event event, Errors validation, Model model) {
@@ -73,7 +61,6 @@ public class EventController {
         }
         model.addAttribute("event", new Event());
         return "events/showEvent";
->>>>>>> 6674eae79396be55f00e4e43029d1a3d7247f1b1
     }
 
     @PostMapping("/events/create")
@@ -100,10 +87,6 @@ public class EventController {
         return "events/showEvent";
     }
 
-
-
-=======
->>>>>>> 7857d5429d4360953fd9fb08e711eb8dfe28e9cd
     @GetMapping("events/{id}/edit")
     public String editEvent(@PathVariable Long id, Model model){
         model.addAttribute("editedEvent",eventsDao.getById(id));
