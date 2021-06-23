@@ -7,6 +7,32 @@
 <nav th:replace="/fragments/navbar :: navbar"></nav>
 
 <main>
+<<<<<<< HEAD
+    <form th:action="@{|/events/${editedEvent.id}/edit|}" method="POST" th:method="POST" th:object="${editedEvent}">
+        <h1>Edit your event</h1>
+        <h3>Event Details</h3>
+<!--            <div sec:authorize="isAuthenticated()">-->
+                <div>
+                    <label for="eventName">name</label>
+                    <input type="text" name="name" id="eventName" th:field="*{name}"/>
+                </div>
+
+    <!--        change the bottom inputs like the above one-->
+                <div><label>date</label><input type="text" name="date" /></div>
+                <div><label>time</label><input type="text" name="time" /></div>
+                <div><label>trail </label><input type="text" name="trail " /></div>
+                <div><label>meet location</label><input type="text" name="meetLocation" /></div>
+                <div><label>meet time</label><input type="text" name="meetTime" /></div>
+                <div><label>event details</label><input type="text" name="eventDetails" /></div>
+                <div><label>images</label><input type="text" name="images" /></div>
+                <div>
+                    <button type="button" class="btn btn-primary" id="images">Upload images</button>
+                    <input type="hidden" name="images" id="hidden">
+                    <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+                </div>
+<!--            </div>-->
+        <button type="submit" id="edit">Complete</button>
+=======
     <form th:action="@{/events/${editedEvent.id}/edit}" th:method="POST" th:object="${editedEvent}">
         not sure if I should take out the | in the action above
         <h1>Edit your event</h1>
@@ -26,6 +52,7 @@
             <div><label>images</label><input type="text" name="images" /></div>
 
         <button type="submit" id="save">Complete</button>
+>>>>>>> 7857d5429d4360953fd9fb08e711eb8dfe28e9cd
     </form>
 </main>
 
