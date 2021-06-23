@@ -20,16 +20,16 @@ import java.util.List;
 
 @Controller
 public class EventController {
-    private final StringService stringService;
-    private final EmailService emailService;
     private EventsRepository eventsDao;
     private UsersRepository usersDao;
+    private final StringService stringService;
+    private final EmailService emailService;
 
-    public EventController(StringService stringService, EmailService emailService, EventsRepository eventsRepository, UsersRepository usersRepository){
+    public EventController(EventsRepository eventsDao, UsersRepository usersDao, StringService stringService, EmailService emailService){
+        this.eventsDao = eventsDao;
+        this.usersDao = usersDao;
         this.stringService = stringService;
         this.emailService = emailService;
-        eventsDao = eventsRepository;
-        usersDao = usersRepository;
     }
 
     // showAllEvents.html page
@@ -47,11 +47,11 @@ public class EventController {
         Event event= eventsDao.getById(id);
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
-        return "/events/showEvent";
+        return "events/showEvent";
     }
 
     // Create Event
-    @GetMapping("/event/create")
+    @GetMapping("/events/create")
     public String publishEvent(@Valid Event event, Errors validation, Model model) {
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (validation.hasErrors()) {
@@ -89,26 +89,29 @@ public class EventController {
 
 
 
-    @GetMapping("events/edit/{id}")
+    @GetMapping("events/{id}/edit")
     public String editEvent(@PathVariable Long id, Model model){
         model.addAttribute("editedEvent",eventsDao.getById(id));
-        return "events/editEvent";
+        return "events/edit";
     }
 
-    @PostMapping("events/edit/{id}")
-    public String editEvent(@PathVariable Long id,
-                            @RequestParam String name,
-                            @RequestParam LocalDate date,
-                            @RequestParam LocalTime time,
-                            @RequestParam String location,
-                            @RequestParam Trail trail,
-                            @RequestParam String meetLocation,
-                            @RequestParam LocalTime meetTime,
-                            @RequestParam String eventDetails,
-                            @RequestParam List<PictureURL> images){
-        Event event1 = new Event(name, date, time, location, trail, meetLocation, meetTime, eventDetails, images);
-        eventsDao.save(event1);
-        return "redirect:/events/showEvent" + id;
+    @PostMapping("events/{id}/edit")
+    public String editEvent(
+            @PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam LocalDate date,
+            @RequestParam LocalTime time,
+            @RequestParam String location,
+            @RequestParam Trail trail,
+            @RequestParam String meetLocation,
+            @RequestParam LocalTime meetTime,
+            @RequestParam String eventDetails,
+            @RequestParam List<PictureURL> images
+    ){
+        Event eventEdited = new Event(name, date, time, location, trail, meetLocation, meetTime, eventDetails, images);
+        eventEdited.setId(id);
+        eventsDao.save(eventEdited);
+        return "redirect:/events/" + id;
     }
 
 }
