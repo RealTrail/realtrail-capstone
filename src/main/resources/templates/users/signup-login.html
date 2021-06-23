@@ -25,13 +25,6 @@
         <div class="form__background"></div>
 
         <div class="form__body">
-            <div th:if="${param.error}">
-                Invalid Username and Password.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
-            </div>
-
             <form th:action="@{/login}" method="POST" class="login">
                 <h2>Login!</h2>
                 <div class="input-field">
@@ -42,6 +35,14 @@
                     <input type="password" id="password" name="password">
                     <label for="password">Password</label>
                 </div>
+
+                <div th:if="${param.error}">
+                    Invalid Username and Password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+
                 <input type="submit" class="btn btn-light" value="Login" name="login">
             </form>
 
