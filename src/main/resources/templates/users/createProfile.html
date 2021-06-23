@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/head :: head">
     <title>Create Profile</title>
 </head>
 <body>
-<div>
-    <form th:action="@{/users/createProfile}" th:method="POST" th:object="${user}">
+<nav th:replace="/fragments/navbar :: navbar"></nav>
+<main>
+    <form th:action="@{/profile/create}" th:method="POST" th:object="${user}">
         <h1>Create Your Account</h1>
         <fieldset>
             <legend>
@@ -17,27 +18,27 @@
             </div>
             <div>
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" th:field="*{lastName}" required />
+                <input type="text" name="lastName" id="lastName" th:filed="*{lastName}" required />
             </div>
             <div>
                 <label for="phoneNumber">Phone Number</label>
-                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:field="*{phoneNumber}" required />
+                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:filed="*{phoneNumber}" required />
                 <small>Format: 123-456-7890</small>
             </div>
             <div>
                 <label for="city">City</label>
-                <input type="text" name="city" id="city" placeholder="San Antonio" th:field="*{city}" />
+                <input type="text" name="city" id="city" placeholder="San Antonio" th:filed="*{city}" />
             </div>
             <div>
                 <label for="state">State</label>
-                <input type="text" name="state" id="state" placeholder="TX" th:field="*{state}" />
+                <input type="text" name="state" id="state" placeholder="TX" th:filed="*{state}" />
             </div>
 
             <label>Gender</label>
             <div class="gender">
-                <input type="radio" id="male" name="gender" value="M" th:field="*{gender}" />
+                <input type="radio" id="male" name="gender" value="M" th:filed="*{gender}" />
                 <label for="male" class="radio">Male</label>
-                <input type="radio" id="female" name="gender" value="F" th:field="*{gender}" />
+                <input type="radio" id="female" name="gender" value="F" th:filed="*{gender}" />
                 <label for="female" class="radio">Female</label>
             </div>
 
@@ -55,7 +56,9 @@
         </fieldset>
         <button type="submit" id="createProfile">Submit</button>
     </form>
-    <footer th: th:fragment="footer"></footer>
-</div>
+
+</main>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>
