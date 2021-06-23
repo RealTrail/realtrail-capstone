@@ -40,7 +40,7 @@ public class EventController {
         Event event= eventsDao.getById(id);
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
-        return "/events/showEvent";
+        return "events/showEvent";
     }
 
     @GetMapping("events/{id}/edit")
