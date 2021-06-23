@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head :: head">
-
 </head>
 <body>
 
 <nav class="navbar" id="navbar" th:fragment="navbar">
-  <a href="#home" class="active">Home</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-  <a href="#signup">Sign Up</a>
-  <a href="#login">Login</a>
-  <form th:action="@{/logout}" th:method="POST">
-    <button id="logout" class="btn-link btn" style="margin-top: 8px">Logout</button>
-  </form>
-  <a href="javascript:void(0);" class="icon" onclick="collapseNav()">
-    <i class="fa fa-bars"></i>
-  </a>
+    <a href="/" class="active">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Login</a>
+    <form th:action="@{/logout}" th:method="POST">
+      <button id="logout" style="margin-top: 8px">Logout</button>
+    </form>
+    <a href="javascript:void(0);" class="icon" onclick="collapseNav()">
+      <i class="fa fa-bars"></i>
+    </a>
 </nav>
 
 <script>
