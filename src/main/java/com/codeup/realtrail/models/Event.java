@@ -1,5 +1,8 @@
 package com.codeup.realtrail.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,15 +19,20 @@ public class Event {
     private User manager;
     
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "Events must have a name")
+    @Size(min = 6, message = "A name must be at least 6 characters.")
     private String name;
     
     @Column(nullable = false, length = 12)
+    @NotBlank(message = "Events must have a date")
     private LocalDate date;
     
     @Column(nullable = false, length = 6)
+    @NotBlank(message = "Events must have a time")
     private LocalTime time;
     
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "Events must have a location")
     private String location;
     
     @ManyToOne
@@ -32,9 +40,11 @@ public class Event {
     private Trail trail;
     
     @Column(nullable = false, length = 150)
+    @NotBlank(message = "Events must have a meet location")
     private String meetLocation;
     
     @Column(nullable = false, length = 12)
+    @NotBlank(message = "Events must have a meet time")
     private LocalTime meetTime;
     
     @Column(columnDefinition="TEXT")
