@@ -30,11 +30,7 @@ public class ProfileController {
         if (principal != null) {
             User user = userService.getLoggedInUser();
 
-            System.out.println("user.getFirstName() = " + user.getFirstName());
-            System.out.println("user.getLastName() = " + user.getLastName());
-            System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
-
-            // pass the user to create profile form
+            // pass the user to create profile form to show prepopulated data in the form
             model.addAttribute("user", user);
             model.addAttribute("interests", userInterestsDao.findAll());
             return "users/profileSettings";
@@ -48,7 +44,7 @@ public class ProfileController {
         // get the logged in user
         User loggedInUser = userService.getLoggedInUser();
 
-        // set the logged in user info onto user with user profile info
+        // set the loggedInUser info onto user(combine the loggedInUser with profile)
         user.setId(loggedInUser.getId());
         user.setEmail(loggedInUser.getEmail());
         user.setUsername(loggedInUser.getUsername());

@@ -1,14 +1,11 @@
 package com.codeup.realtrail;
 
-import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
