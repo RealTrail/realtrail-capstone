@@ -55,14 +55,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/events/create", // only authenticated users can create events
-                        "/events/{id}/edit" // only authenticated users can edit events
+                        "/events/showAllEvents",  // only authenticated users can see all events
+                        "/events/showEvent",  // only authenticated users can see an event
+                        "/events/createEvent", // only authenticated users can create an event
+                        "/events/edit/{id}" // only authenticated users can edit events
                 )
                 .authenticated()
-
-
-
-
         ;
     }
 }

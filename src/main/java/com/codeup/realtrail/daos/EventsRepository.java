@@ -9,7 +9,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface EventsRepository extends JpaRepository <Event, Long>{
-    Event findByName(String name);
+
+    Event findEventById(long id);
     Event findEventByLocation(String location);
     Event deleteEventByName(String name);
 

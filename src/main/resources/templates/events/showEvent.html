@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Show Event</title>
@@ -8,7 +8,7 @@
 <nav></nav>
 
 <h2>Your event search results:</h2>
-<div>
+<div sec:authorize="isAuthorized()">
     <div><label>Event coordinator</label><h4 th:text="${event.manager}"></h4></div>
     <div><label>Event name</label><h4 th:text="${event.name}"></h4></div>
     <div><label>Event details:</label><p th:text="${event.eventDetails}"></p></div>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+  <title>Create Event</title>
+</head>
+<body>
+<div>
+  <form th:action="@{/events/createEvent}" th:method="POST" th:object="${event}">
+    <h1>Create an Event</h1>
+    <fieldset>
+      <legend>
+        <h3>Enter Event Details</h3>
+      </legend>
+      <div>
+        <label for="name">Event Name</label>
+        <input th:field="*{name}" name="name" id="name" required />
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+      </div>
+      <div>
+        <label for="date">Date</label>
+        <input type="text" name="date" id="date" th:field="*{date}" required />
+        <p th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></p>
+      </div>
+      <div>
+        <label for="time">Time</label>
+        <input type="tel" name="time" id="time" th:field="*{time}" required />
+        <p th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></p>
+      </div>
+      <div>
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" th:field="*{location}" />
+        <p th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></p>
+      </div>
+      <div>
+        <label for="trail">Trailhead</label>
+        <input type="text" name="trail" id="trail" th:field="*{trail}" />
+        <p th:if="${#fields.hasErrors('trail')}" th:errors="*{trail}"></p>
+      </div>
+      <div>
+        <label for="meetLocation">Meet Location</label>
+        <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" />
+        <p th:if="${#fields.hasErrors('meetLocation')}" th:errors="*{meetLocation}"></p>
+      </div>
+      <div>
+        <label for="meetTime">Meet Time</label>
+        <input type="text" name="meetTime" id="meetTime" th:field="*{meetTime}" />
+        <p th:if="${#fields.hasErrors('meetTime')}" th:errors="*{meetTime}"></p>
+      </div>
+      <div>
+        <label for="eventDetails">Event Details</label>
+        <input type="text" name="eventDetails" id="eventDetails" th:field="*{eventDetails}" />
+        <p th:if="${#fields.hasErrors('eventDetails')}" th:errors="*{eventDetails}"></p>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" id="images">Upload images</button>
+        <input type="hidden" name="images" id="hidden" th:field="*{images}" />
+        <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+      </div>
+    </fieldset>
+    <button type="submit" id="createEvent">Submit</button>
+  </form>
+  <footer th: th:fragment="footer"></footer>
+</div>
+</body>
+</html>
+

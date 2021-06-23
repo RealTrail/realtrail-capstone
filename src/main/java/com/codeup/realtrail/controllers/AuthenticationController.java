@@ -1,5 +1,6 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthenticationController {
     private UsersRepository usersDao;
+    private EventsRepository eventsDao;
 
     public AuthenticationController(UsersRepository usersDao) {
         this.usersDao = usersDao;
     }
+
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
