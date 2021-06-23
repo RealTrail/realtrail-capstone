@@ -57,6 +57,8 @@ public class EventController {
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         return "events/showEvent";
+<<<<<<< HEAD
+=======
     }
 
 <<<<<<< HEAD
@@ -71,6 +73,7 @@ public class EventController {
         }
         model.addAttribute("event", new Event());
         return "events/showEvent";
+>>>>>>> 6674eae79396be55f00e4e43029d1a3d7247f1b1
     }
 
     @PostMapping("/events/create")
