@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/fragments/head :: head">
+    <title>All Users</title>
+</head>
+<body>
+<nav th:replace="/fragments/navbar :: navbar"></nav>
+<main>
+    <h1>All Users</h1>
+    <fieldset>
+        <legend>
+            <h3>Personal Details</h3>
+        </legend>
+        <table>
+            <tr>
+                <th><img th:src="${user.profileImageUrl}" alt="profile-image"></th>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td th:text="${user.username}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+</main>
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>
