@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -28,7 +29,10 @@ public class ProfileController {
     public String getCreateProfileForm(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
-            System.out.println("user.getId() = " + user.getId());
+
+            System.out.println("user.getFirstName() = " + user.getFirstName());
+            System.out.println("user.getLastName() = " + user.getLastName());
+            System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
 
             // pass the user to create profile form
             model.addAttribute("user", user);
@@ -41,9 +45,6 @@ public class ProfileController {
 
     @PostMapping("/profile/settings")
     public String saveProfile(@ModelAttribute User user, Model model) {
-        System.out.println("user.getId() = " + user.getId());
-        System.out.println("user.getEmail() = " + user.getEmail());
-
         // get the logged in user
         User loggedInUser = userService.getLoggedInUser();
 
@@ -53,11 +54,19 @@ public class ProfileController {
         user.setUsername(loggedInUser.getUsername());
         user.setPassword(loggedInUser.getPassword());
 
+        System.out.println("user.getEmail() = " + user.getEmail());
+        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
+
         usersDao.save(user);
         model.addAttribute("user", user);
 
         return "users/showProfile";
     }
+
+//    @PostMapping("/profile/image")
+//    public String uploadImage() {
+//
+//    }
 
     @GetMapping("/profile")
     public String getProfilePage(Model model, Principal principal) {
@@ -69,6 +78,19 @@ public class ProfileController {
             return "users/showProfile";
         } else {
             return "redirect:/login";
+        }
+    }
+
+    @GetMapping("/profile/{id}")
+    public String goToIndividualProfile(@PathVariable long id, Model model) {
+        User loggedInUser = userService.getLoggedInUser();
+        if (loggedInUser.isAdmin()) {
+            // get the searched user
+            User searchedUser = usersDao.getById(id);
+            model.addAttribute("user", searchedUser);
+            return "users/showProfile";
+        } else {
+            return "error";
         }
     }
 }

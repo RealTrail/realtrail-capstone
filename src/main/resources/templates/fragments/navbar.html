@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head :: head">
+    <title>Navbar</title>
 </head>
 <body>
 
@@ -11,16 +12,14 @@
     <a href="/signup">Sign Up</a>
     <a href="/login">Login</a>
     <form th:action="@{/logout}" th:method="POST">
-      <button id="logout" style="margin-top: 8px">Logout</button>
+        <button id="logout" style="margin-top: 8px">Logout</button>
     </form>
-    <a href="javascript:void(0);" class="icon" onclick="collapseNav()">
-      <i class="fa fa-bars"></i>
-    </a>
+<!--    <a href="javascript:void(0);" class="icon" onclick="collapseNav()">-->
+<!--      <i class="fa fa-bars"></i>-->
+<!--    </a>-->
 </nav>
 
-<script>
-  src="/js/navbar.js"
-</script>
+<script src="/js/navbar.js"></script>
 
 </body>
 </html>

@@ -6,56 +6,66 @@
 <body>
 <nav th:replace="/fragments/navbar :: navbar"></nav>
 <main>
-    <form th:action="@{/profile/create}" th:method="POST" th:object="${user}">
-        <h1>Create Your Account</h1>
+    <div th:if="${user == null}">
+        Please log in first.
+    </div>
+
+    <h1>Public Profile</h1>
+    <form th:action="@{/profile/image}" th:method="POST" th:object="${user}">
+        <div>
+            <img th:src="${user.profileImageUrl}" alt="profile-image">
+            <input type="hidden" name="profileImageUrl">
+            <button type="submit" class="btn" id="upload">Upload profile image</button>
+        </div>
+    </form>
+
+    <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>
             </legend>
             <div>
                 <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" th:field="*{firstName}"  required />
+                <input type="text" name="firstName" id="firstName" th:field="*{firstName}" required/>
             </div>
             <div>
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" th:filed="*{lastName}" required />
+                <input type="text" name="lastName" id="lastName" th:field="*{lastName}" required/>
             </div>
             <div>
                 <label for="phoneNumber">Phone Number</label>
-                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:filed="*{phoneNumber}" required />
-                <small>Format: 123-456-7890</small>
+                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="123-456-7890"
+                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:field="*{phoneNumber}" required/>
             </div>
             <div>
                 <label for="city">City</label>
-                <input type="text" name="city" id="city" placeholder="San Antonio" th:filed="*{city}" />
+                <input type="text" name="city" id="city" placeholder="San Antonio" th:field="*{city}"/>
             </div>
             <div>
                 <label for="state">State</label>
-                <input type="text" name="state" id="state" placeholder="TX" th:filed="*{state}" />
+                <input type="text" name="state" id="state" placeholder="TX" th:field="*{state}"/>
             </div>
 
             <label>Gender</label>
             <div class="gender">
-                <input type="radio" id="male" name="gender" value="M" th:filed="*{gender}" />
+                <input type="radio" id="male" name="gender" value="M" th:field="*{gender}"/>
                 <label for="male" class="radio">Male</label>
-                <input type="radio" id="female" name="gender" value="F" th:filed="*{gender}" />
+                <input type="radio" id="female" name="gender" value="F" th:field="*{gender}"/>
                 <label for="female" class="radio">Female</label>
             </div>
 
             <label>Interests</label>
             <div th:each="interest : ${interests}">
                 <label th:class="${'interest' + interest.id}">
-                    <input type="checkbox" name="categories" th:field="*{interests}" th:value="${interest.id}" th:text="${interest.interest}">
+                    <input type="checkbox" name="categories" th:field="*{interests}" th:value="${interest.id}"
+                           th:text="${interest.interest}">
                 </label>
             </div>
-            <div>
-                <button type="button" class="btn btn-primary" id="images">Upload images</button>
-                <input type="hidden" name="images" id="hidden">
-                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
-            </div>
         </fieldset>
-        <button type="submit" id="createProfile">Submit</button>
+        <button type="submit" class="btn" id="createProfile">Complete</button>
     </form>
+    <a href="/profile">Close</a>
+
 
 </main>
 
