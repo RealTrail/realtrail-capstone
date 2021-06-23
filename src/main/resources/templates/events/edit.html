@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<head th:replace="/fragments/head :: head">
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="/fragments/head :: head">
     <title>Edit Event</title>
 </head>
 <body>
@@ -12,7 +10,7 @@
     <form th:action="@{|/events/${editedEvent.id}/edit|}" method="POST" th:method="POST" th:object="${editedEvent}">
         <h1>Edit your event</h1>
         <h3>Event Details</h3>
-            <div sec:authorize="isAuthenticated()">
+<!--            <div sec:authorize="isAuthenticated()">-->
                 <div>
                     <label for="eventName">name</label>
                     <input type="text" name="name" id="eventName" th:field="*{name}"/>
@@ -31,7 +29,7 @@
                     <input type="hidden" name="images" id="hidden">
                     <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
                 </div>
-            </div>
+<!--            </div>-->
         <button type="submit" id="edit">Complete</button>
     </form>
 </main>
