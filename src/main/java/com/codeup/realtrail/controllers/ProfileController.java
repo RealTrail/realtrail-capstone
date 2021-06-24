@@ -3,67 +3,71 @@ package com.codeup.realtrail.controllers;
 import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
-import com.codeup.realtrail.models.UserInterest;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.codeup.realtrail.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class ProfileController {
     private UsersRepository usersDao;
     private UserInterestRepository userInterestsDao;
+    private UserService userService;
 
-    public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao) {
+    public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao, UserService userService) {
         this.usersDao = usersDao;
         this.userInterestsDao = userInterestsDao;
+        this.userService = userService;
     }
 
-    @GetMapping("/profile/create")
+    @GetMapping("/profile/settings")
     public String getCreateProfileForm(Model model, Principal principal) {
         if (principal != null) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            // pass the user to create profile form
+            User user = userService.getLoggedInUser();
+
+            // pass the user to create profile form to show prepopulated data in the form
             model.addAttribute("user", user);
             model.addAttribute("interests", userInterestsDao.findAll());
-            return "users/createProfile";
+            return "users/profileSettings";
         } else {
             return "redirect:/login";
         }
     }
 
-    @PostMapping("/profile/create")
-    public String saveProfile(User user,
-            @RequestParam(name = "firstName") String firstName,
-            @RequestParam(name = "lastName") String lastName,
-            @RequestParam(name = "phoneNumber") String phoneNumber,
-            @RequestParam(name = "city") String city,
-            @RequestParam(name = "state") String state,
-            @RequestParam(name = "gender") String gender,
-            @RequestParam(name = "interests") List<UserInterest> interests,
-            Model model) {
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhoneNumber(phoneNumber);
-        user.setCity(city);
-        user.setState(state);
-        user.setGender(gender);
-        user.setInterests(interests);
+    @PostMapping("/profile/settings")
+    public String saveProfile(@ModelAttribute User user, Model model) {
+        // get the logged in user
+        User loggedInUser = userService.getLoggedInUser();
+
+        // set the loggedInUser info onto user(combine the loggedInUser with profile)
+        user.setId(loggedInUser.getId());
+        user.setEmail(loggedInUser.getEmail());
+        user.setUsername(loggedInUser.getUsername());
+        user.setPassword(loggedInUser.getPassword());
+
+        System.out.println("user.getEmail() = " + user.getEmail());
+        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
+
         usersDao.save(user);
         model.addAttribute("user", user);
 
         return "users/showProfile";
     }
 
+//    @PostMapping("/profile/image")
+//    public String uploadImage() {
+//
+//    }
+
     @GetMapping("/profile")
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = userService.getLoggedInUser();
 
             // pass the user to view/showProfile.html
             model.addAttribute("user", user);
@@ -73,39 +77,16 @@ public class ProfileController {
         }
     }
 
-    @GetMapping("/profile/edit")
-    public String getEditProfileForm(Model model, Principal principal) {
-        if (principal != null) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            // pass the user to view/editProfile.html
-            model.addAttribute("user", user);
-            return "users/editProfile";
+    @GetMapping("/profile/{id}")
+    public String goToIndividualProfile(@PathVariable long id, Model model) {
+        User loggedInUser = userService.getLoggedInUser();
+        if (loggedInUser.isAdmin()) {
+            // get the searched user
+            User searchedUser = usersDao.getById(id);
+            model.addAttribute("user", searchedUser);
+            return "users/showProfile";
         } else {
-            return "redirect:/login";
+            return "error";
         }
-    }
-
-    @PostMapping("/profile/edit")
-    public String updateProfile(User user,
-            @RequestParam(name = "firstName") String firstName,
-            @RequestParam(name = "lastName") String lastName,
-            @RequestParam(name = "phoneNumber") String phoneNumber,
-            @RequestParam(name = "city") String city,
-            @RequestParam(name = "state") String state,
-            @RequestParam(name = "gender") String gender,
-            @RequestParam(name = "interests") List<UserInterest> interests,
-            Model model) {
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhoneNumber(phoneNumber);
-        user.setCity(city);
-        user.setState(state);
-        user.setGender(gender);
-        user.setInterests(interests);
-        usersDao.save(user);
-        model.addAttribute("user", user);
-
-        return "redirect:/profile";
     }
 }

@@ -5,19 +5,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
     private UserDetailsLoader usersLoader;
+    private LoginSuccessHandler loginSuccessHandler;
 
-    public SecurityConfiguration(UserDetailsLoader usersLoader) {
+    public SecurityConfiguration(UserDetailsLoader usersLoader, LoginSuccessHandler loginSuccessHandler) {
         this.usersLoader = usersLoader;
+        this.loginSuccessHandler = loginSuccessHandler;
     }
 
     @Bean
@@ -41,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("username")
                 .defaultSuccessUrl("/") // user's home page, it can be any URL
+                .successHandler(loginSuccessHandler)
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
                 .and()
@@ -55,10 +57,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/events/showAllEvents",  // only authenticated users can see all events
-                        "/events/showEvent",  // only authenticated users can see an event
-                        "/events/createEvent", // only authenticated users can create an event
-                        "/events/edit/{id}" // only authenticated users can edit events
+                        "/events",  // only authenticated users can see all events
+                        "/events/{id}",  // only authenticated users can see an event
+                        "/events/create", // only authenticated users can create an event
+                        "/events/{id}/edit" // only authenticated users can edit events
                 )
                 .authenticated()
         ;
