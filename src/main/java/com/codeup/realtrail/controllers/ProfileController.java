@@ -4,6 +4,7 @@ import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,12 @@ public class ProfileController {
     private UserInterestRepository userInterestsDao;
     private UserService userService;
 
+    //Importing File Stack Api Key
+    @Value("${filestack.api.key}")
+    private String  filestackApi;
+
+
+
     public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao, UserService userService) {
         this.usersDao = usersDao;
         this.userInterestsDao = userInterestsDao;
@@ -33,6 +40,7 @@ public class ProfileController {
             // pass the user to create profile form to show prepopulated data in the form
             model.addAttribute("user", user);
             model.addAttribute("interests", userInterestsDao.findAll());
+            model.addAttribute("filestackapi", filestackApi);
             return "users/profileSettings";
         } else {
             return "redirect:/login";
@@ -64,6 +72,8 @@ public class ProfileController {
 //
 //    }
 
+
+
     @GetMapping("/profile")
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
@@ -71,6 +81,7 @@ public class ProfileController {
 
             // pass the user to view/showProfile.html
             model.addAttribute("user", user);
+
             return "users/showProfile";
         } else {
             return "redirect:/login";
@@ -84,6 +95,7 @@ public class ProfileController {
             // get the searched user
             User searchedUser = usersDao.getById(id);
             model.addAttribute("user", searchedUser);
+
             return "users/showProfile";
         } else {
             return "error";

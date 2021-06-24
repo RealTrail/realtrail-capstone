@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/head :: head">
+    <meta name="filestackapi" th:content="${filestackapi}">
     <title>Create Profile</title>
 </head>
 <body>
@@ -11,19 +12,16 @@
     </div>
 
     <h1>Public Profile</h1>
-    <form th:action="@{/profile/image}" th:method="POST" th:object="${user}">
-        <div>
-            <img th:src="${user.profileImageUrl}" alt="profile-image">
-            <input type="hidden" name="profileImageUrl">
-            <button type="submit" class="btn" id="upload">Upload profile image</button>
-        </div>
-    </form>
-
     <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>
             </legend>
+            <div>
+                <img th:src="${user.profileImageUrl}" alt="profile-image">
+                <input type="hidden" name="profileImageUrl" id="profileImageUrl">
+                <button type="button" class="btn" id="upload">Upload profile image</button>
+            </div>
             <div>
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" th:field="*{firstName}" required/>
@@ -70,5 +68,17 @@
 </main>
 
 <footer th:replace="/fragments/footer :: footer"></footer>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:inline="javascript">
+    "use strict";
+
+    /*<![CDATA[*/
+
+    var filestackapi = [[${filestackapi}]];
+    console.log(filestackapi);
+
+    /*]]>*/
+</script>
+<script src="/js/fileStackImgUpload.js"></script>
 </body>
 </html>
