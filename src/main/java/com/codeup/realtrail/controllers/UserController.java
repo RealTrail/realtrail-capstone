@@ -30,14 +30,23 @@ public class UserController {
         return "users/signup-login";
     }
 
-
+    // This is saving the user to the database
     @PostMapping("/signup")
-    public String saveUser(@ModelAttribute User user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        usersDao.save(user);
-        return "redirect:/login";
+    public String saveUser(@ModelAttribute User user, Model model) {
+        String message = "";
+        if(user.getUsername().length() > 50){
+            message = "Username is too long!";
+        }
+        model.addAttribute("message", message);
+        return "redirect:/signup";
+
+
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        usersDao.save(user);
+//        return "redirect:/login";
     }
+
 
 
 
