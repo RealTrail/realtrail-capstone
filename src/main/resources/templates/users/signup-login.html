@@ -51,6 +51,7 @@
                 <div class="input-field">
                     <input type="text" id="create_username" name="create_username" th:field="*{username}">
                     <label for="create_username">Username</label>
+                    <p th:text="${message}"></p>
                 </div>
                 <div class="input-field">
                     <input type="email" id="create_email" name="create_email" th:field="*{email}">
