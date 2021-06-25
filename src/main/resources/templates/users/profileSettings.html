@@ -12,9 +12,9 @@
     </div>
 
     <h1>Public Profile</h1>
-    <form th:action="@{/profile/image}" th:method="POST">
+    <form action="/profile/image" method="POST">
         <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
-        <input type="hidden" id="id" name="id" th:text="${user.id}">
+        <input type="hidden" id="profileImageUrl" name="profileImageUrl">
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 

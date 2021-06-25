@@ -5,21 +5,22 @@
      $("#upload").click((e) => {
          e.preventDefault();
          uploadProfileImage();
-     });
+         let profileImageObj = {
+             profile_image_url: $("#profileImageUrl").val()
+         }
+         fetch("/profile/image", {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify(profileImageObj)
+         }).then( response => {
+             console.log(response);
 
-     let profileImageObj = {
-         profile_image_url: $("#profileImage").attr("src")
-     }
-     fetch("/profile/image", {
-         method: 'POST',
-         headers: {
-             'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(profileImageObj)
-     }).then( response => {
-         console.log(response);
-     }).catch( error => {
-         console.log(error);
+         }).catch( error => {
+             console.log("Error: ", error);
+             alert("Oops, something went wrong, cannot change profile image for now. Please try again later");
+         });
      });
  });
 
@@ -33,6 +34,7 @@
          onUploadDone: (results) => {
              console.log(results.filesUploaded[0].url);
              $("#profileImage").attr("src", results.filesUploaded[0].url);
+             $("#profileImageUrl").val(results.filesUploaded[0].url);
          },
          onFileUploadFailed: (response) => {
              console.log(response);
