@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/fragments/head :: head">
+<head th:replace="/fragments/header :: head">
     <meta name="filestackapi" th:content="${filestackapi}">
     <title>Create Profile</title>
 </head>
@@ -12,16 +12,18 @@
     </div>
 
     <h1>Public Profile</h1>
+    <form th:action="@{/profile/image}" th:method="POST">
+        <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
+        <input type="hidden" id="id" name="id" th:text="${user.id}">
+        <button type="submit" id="upload">Upload profile image</button>
+    </form>
+
+
     <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>
             </legend>
-            <div>
-                <img th:src="${user.profileImageUrl}" alt="profile-image">
-                <input type="hidden" name="profileImageUrl" id="profileImageUrl">
-                <button type="button" class="btn" id="upload">Upload profile image</button>
-            </div>
             <div>
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" th:field="*{firstName}" required/>
@@ -68,16 +70,12 @@
 </main>
 
 <footer th:replace="/fragments/footer :: footer"></footer>
-<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
-    "use strict";
-
-    /*<![CDATA[*/
-
-    var filestackapi = [[${filestackapi}]];
-    console.log(filestackapi);
-
-    /*]]>*/
+    // assign filestackapi to a variable
+    const filestackapi = [[${filestackapi}]];
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
 </body>

@@ -1,7 +1,9 @@
-package com.codeup.realtrail.daos;
+package com.codeup.realtrail.services;
 
+import org.springframework.stereotype.Service;
 
-public class ValidationDao {
+@Service
+public class ValidationService {
 
     public boolean usernameHasError(String username) {
         boolean inputHasErrors = username.isEmpty() || (username.length() > 50)

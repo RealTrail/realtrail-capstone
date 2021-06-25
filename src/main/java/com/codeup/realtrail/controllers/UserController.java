@@ -1,7 +1,7 @@
 package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.daos.UsersRepository;
-import com.codeup.realtrail.daos.ValidationDao;
+import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
-    private ValidationDao validationDao;
+    private ValidationService validationService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationDao validationDao) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
-        this.validationDao = validationDao;
+        this.validationService = validationService;
     }
 
     @GetMapping("/")
@@ -38,35 +38,40 @@ public class UserController {
     public String saveUser(@ModelAttribute User user, Model model) {
         // error message for the username entry
         String message = "";
-        if(validationDao.usernameHasError(user.getUsername())){
-            message = "Username must be unique, less than 50 letters, can include numbers, and contain no special characters";
+        if(validationService.usernameHasError(user.getUsername())){
+            message = "Username must be less than 50 letters, can include numbers, and contain no special characters";
             model.addAttribute("message", message);
             return "redirect:/signup";
         }
 
          // error message for email entry
-        if(validationDao.emailHasError(user.getEmail())){
+        if(validationService.emailHasError(user.getEmail())){
             message = "Must enter email in the correct format";
             model.addAttribute("emailMessage", message);
             return "redirect:/signup";
         }
 
         //error message for password
-        if(validationDao.passwordHasError(user.getPassword())){
+        if(validationService.passwordHasError(user.getPassword())){
             message = "Password should be at least 8 digits long and must contain special characters";
             model.addAttribute("passwordMessage", message);
             return "redirect:/signup";
         }
 
-        if(usersDao.findByUsername(user.getUsername())== null && usersDao.findByEmail(user.getEmail())== null){
+        // check if username and email exist in db
+        if (usersDao.findByUsername(user.getUsername()) != null) {
+            message = "Username already exist, please enter another one!";
+            model.addAttribute("message", message);
+            return "redirect:/signup";
+        } else if (usersDao.findByEmail(user.getEmail()) != null) {
+            message = "Email already exist, please enter another one!";
+            model.addAttribute("emailMessage", message);
+            return "redirect:/signup";
+        } else {
             String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         usersDao.save(user);
         return "redirect:/login";
-        }else{
-            message = "Username already exist, please enter another one!";
-            model.addAttribute("message", message);
-            return "redirect:/signup";
         }
     }
 

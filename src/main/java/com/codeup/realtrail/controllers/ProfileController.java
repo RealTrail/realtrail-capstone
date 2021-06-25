@@ -4,17 +4,16 @@ import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 public class ProfileController {
     private UsersRepository usersDao;
     private UserInterestRepository userInterestsDao;
@@ -23,8 +22,6 @@ public class ProfileController {
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
     private String  filestackApi;
-
-
 
     public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao, UserService userService) {
         this.usersDao = usersDao;
@@ -67,10 +64,11 @@ public class ProfileController {
         return "users/showProfile";
     }
 
-//    @PostMapping("/profile/image")
-//    public String uploadImage() {
-//
-//    }
+    // set up ajax post request response
+    @PostMapping("/profile/image")
+    public ResponseEntity<?> uploadImageResultViaAjax(@Valid @RequestBody SearchCriteria searchCriteria, Errors errors) {
+        AjaxResponseBody result = new AjaxResponseBody();
+    }
 
 
 
