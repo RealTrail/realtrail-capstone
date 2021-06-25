@@ -56,10 +56,12 @@
                 <div class="input-field">
                     <input type="email" id="create_email" name="create_email" th:field="*{email}">
                     <label for="create_email">Email Address</label>
+                    <p th:text="${emailMessage}"></p>
                 </div>
                 <div class="input-field">
                     <input type="password" id="createPassword" name="createPassword" th:field="*{password}">
                     <label for="createPassword">Password</label>
+                    <p th:text="${passwordMessage}"></p>
                 </div>
                 <div class="input-field">
                     <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>
