@@ -65,10 +65,10 @@ public class ProfileController {
     }
 
     // set up ajax post request response
-    @PostMapping("/profile/image")
-    public ResponseEntity<?> uploadImageResultViaAjax(@Valid @RequestBody SearchCriteria searchCriteria, Errors errors) {
-        AjaxResponseBody result = new AjaxResponseBody();
-    }
+//    @PostMapping("/profile/image")
+//    public ResponseEntity<?> uploadImageResultViaAjax(@Valid @RequestBody SearchCriteria searchCriteria, Errors errors) {
+//        AjaxResponseBody result = new AjaxResponseBody();
+//    }
 
 
 
