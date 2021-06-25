@@ -2,15 +2,168 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head :: head">
     <title>Home Page</title>
+
+
 </head>
 <body>
 <nav th:replace="/fragments/navbar :: navbar"></nav>
 
 <main>
-    <h1>Welcome to RealTrail!</h1>
+    <div class="clock"></div>
+
+    <script>
+        function clock() {
+            var time = new Date(),
+
+
+                hours = time.getHours(),
+
+
+                minutes = time.getMinutes(),
+
+
+                seconds = time.getSeconds();
+
+            document.querySelectorAll('.clock')[0].innerHTML = x(hours) + ":" + x(minutes) + ":" + x(seconds);
+
+            function x(standIn) {
+                if (standIn < 10) {
+                    standIn = '0' + standIn
+                }
+                return standIn;
+            }
+        }
+        setInterval(clock, 1000);
+    </script>
+
+    <!--  LANDING PAGE PARALLAX  -->
+
+    <div id="parallax">
+
+        <div class="sky"></div>
+        <div class="parallax__layer parallax__layer__0">
+            <img src="/images/nine.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__layer parallax__layer__1">
+            <img src="/images/eight1.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__layer parallax__layer__2">
+            <img src="/images/seven1.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__layer parallax__layer__3">
+            <img src="/images/five1.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__layer parallax__layer__4">
+            <img src="/images/three1.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__layer parallax__layer__5">
+            <img src="/images/two1.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__layer parallax__layer__6">
+            <img src="/images/one1.png" height="455" width="3000"/>
+        </div>
+        <div class="parallax__cover"></div>
+
+        <div class="mainContainer" >
+            <div class="container">
+                <input type="text" id="box" placeholder="Search Trails..." class="search__box">
+                <i class="fas fa-search search__icon" id="icon" onclick="toggleShow()"></i>
+
+
+            </div>
+            <div class="boxx"></div>
+
+            <div class="slider-container">
+                <div class="slider">
+                    <div>
+                        <div class="slide-wrap">
+                            <div class="image"></div>
+                            <div class="header ">
+                                <h1>Aut esse consectetur cupiditate facilis cumque voluptatem? Consectetur?</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slide-wrap">
+                            <div class="image"></div>
+                            <p>Itaque architecto earum blanditiis corrupti nobis neque, et eligendi totam ipsa sunt molestias inventore</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slide-wrap">
+                            <div class="image"></div>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slide-wrap">
+                            <div class="image"></div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel adipisci mollitia cumque facere nihil, totam nesciunt quibusdam recusandae.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slide-wrap">
+                            <div class="image"></div>
+                            <p>Aut nisi nostrum libero eaque dicta maiores eum magni facilis ex? Impedit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
+    <script src="/js/trail.js"></script>
+    <script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
+
+    <script>
+        $("#parallax").niceScroll({
+            scrollspeed: 150, // scrolling speed
+            mousescrollstep: 150, // scrolling speed with mouse wheel (pixel)
+            emulatetouch: false, // enable cursor-drag scrolling like touch devices in desktop computer
+            hwacceleration: true, // use hardware accelerated scroll when supported
+            boxzoom: true, // enable zoom for box content
+            dblclickzoom: true, // (only when boxzoom=true) zoom activated when double click on box
+            gesturezoom: true, // (only when boxzoom=true and with touch devices) zoom activated when pinch out/in on box
+            grabcursorenabled: true, // (only when touchbehavior=true) display "grab" icon
+
+            iframeautoresize: true, // autoresize iframe on load event
+            cursorminheight: 32, // set the minimum cursor height (pixel)
+            preservenativescrolling: true, // you can scroll native scrollable areas with mouse, bubbling mouse wheel event
+            railoffset: false, // you can add offset top/left for rail position
+            bouncescroll: false, // (only hw accell) enable scroll bouncing at the end of content as mobile-like
+            spacebarenabled: true, // enable page down scrolling when space bar has pressed
+            railpadding: { top: 0, right: 0, left: 0, bottom: 0 }, // set padding for rail bar
+            disableoutline: true, // for chrome browser, disable outline (orange highlight) when selecting a div with nicescroll
+            horizrailenabled: true, // nicescroll can manage horizontal scroll
+
+
+            enabletranslate3d: true, // nicescroll can use css translate to scroll content
+            enablemousewheel: true, // nicescroll can manage mouse wheel events
+            enablekeyboard: true, // nicescroll can manage keyboard events
+            smoothscroll: true, // scroll with ease movement
+            sensitiverail: true, // click on rail make a scroll
+            enablemouselockapi: true, // can use mouse caption lock API (same issue on object dragging)
+            cursorfixedheight: false, // set fixed height for cursor in pixel
+            hidecursordelay: 400, // set the delay in microseconds to fading out scrollbars
+            directionlockdeadzone: 6, // dead zone in pixels for direction lock activation
+            nativeparentscrolling: true, // detect bottom of content and let parent to scroll, as native scroll does
+            enablescrollonselection: true, // enable auto-scrolling of content when selection text
+            cursordragspeed: 0.3, // speed of selection when dragged with cursor
+            rtlmode: "auto", // horizontal div scrolling starts at left side
+            cursordragontouch: false, // drag cursor in touch / touchbehavior mode also
+            oneaxismousemode: "auto", // it permits horizontal scrolling with mousewheel on horizontal only content, if false (vertical-only) mousewheel don't scroll horizontally, if value is auto detects two-axis mouse
+            scriptpath: "" // define custom path for boxmode icons ("" => same script path)
+
+
+        });
+
+    </script>
+
 </main>
 
-<footer th:replace="/fragments/footer :: footer"></footer>
+<!--<footer th:replace="/fragments/footer :: footer"></footer>-->
 
 </body>
 </html>

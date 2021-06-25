@@ -103,6 +103,7 @@ public class ProfileController {
 
 
 
+
     @GetMapping("/profile")
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
