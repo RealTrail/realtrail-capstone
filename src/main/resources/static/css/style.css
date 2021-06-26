@@ -658,6 +658,7 @@ span {
 .boxx { transition: all .5s ease-in-out; }
 .boxx:hover::after { transform: scale(1.1); }
 
+
 /* ****************************** SHOW PROFILE PAGE ****************************** */
 #profileImage {
     width: 5rem;

@@ -2,33 +2,31 @@
 
  $(document).ready(() => {
      let isUploaded = false;
-     // user doesn't want to change profile image
-     if (isUploaded === false) {
-         $(".profileImageUrl").val($("#originalImage").val());
-     } else {
-         // click upload profile image
-         $("#upload").click((e) => {
-             e.preventDefault();
-             uploadProfileImage();
-             isUploaded = true;
-             let profileImageObj = {
-                 profile_image_url: $("#profileImageUrl").val()
-             }
-             fetch("/profile/image", {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/json'
-                 },
-                 body: JSON.stringify(profileImageObj)
-             }).then( response => {
-                 console.log(response);
 
-             }).catch( error => {
-                 console.log("Error: ", error);
-                 alert("Oops, something went wrong, cannot change profile image for now. Please try again later");
-             });
-         });
+     if (isUploaded === false) { // user doesn't want to change profile image
+         $(".profileImageUrl").val($("#originalImage").val());
      }
+
+     // click upload profile image to change profile image
+     $("#upload").click((e) => {
+         e.preventDefault();
+         fireAjaxSubmit(isUploaded);
+
+         // fetch("/profile/image", {
+         //     method: 'POST',
+         //     headers: {
+         //         'Content-Type': 'application/json'
+         //     },
+         //     body: JSON.stringify(profileImageObj)
+         // }).then( (response) => {
+         //     console.log(response);
+         //
+         // }).catch( (error) => {
+         //     console.log("Error: ", error);
+         //     alert("Oops, something went wrong, cannot change profile image for now. Please try again later");
+         // });  // fetch is not working? why?
+     });
+
 
  });
 
@@ -39,7 +37,6 @@
          // accept: ["image/*"],
          // maxFiles: 1,
          onUploadDone: (results) => {
-             console.log(results.filesUploaded[0].url);
              $("#profileImage").attr("src", results.filesUploaded[0].url);
              $(".profileImageUrl").val(results.filesUploaded[0].url);
              console.log($(".profileImageUrl").val());
@@ -50,4 +47,27 @@
      }
 
      client.picker(options).open();
+ }
+
+ function fireAjaxSubmit(isUploaded) {
+     uploadProfileImage();
+     isUploaded = true;
+     let profileImageObj = {
+         profile_image_url: $(".profileImageUrl").val()
+     }
+
+     $.ajax({
+         url: "/profile/image",
+         type: "POST",
+         data: profileImageObj,
+         processData: false, //prevent jQuery from automatically transforming the data into a query string
+         contentType: false,
+         cache: false,
+         timeout: 600000,
+     }).done((response) => {
+         console.log(response);
+     }).catch( (error) => {
+         console.log("Error: ", error);
+         alert("Oops, something went wrong, cannot change profile image for now. Please try again later");
+     });
  }

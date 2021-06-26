@@ -25,7 +25,7 @@
                 <h3>Personal Details</h3>
             </legend>
             <div>
-                <input type="hidden" id="originalImage" th:text="${user.profileImageUrl}">
+                <input type="hidden" id="originalImage" th:value="${user.profileImageUrl}">
                 <input type="hidden" class="profileImageUrl" name="profileImageUrl" th:field="*{profileImageUrl}">
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
