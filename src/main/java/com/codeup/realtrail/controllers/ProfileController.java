@@ -75,7 +75,7 @@ public class ProfileController {
         usersDao.save(user);
         model.addAttribute("user", user);
 
-        return "users/showProfile";
+        return "redirect:/profile";
     }
 
     // set up ajax post request response
