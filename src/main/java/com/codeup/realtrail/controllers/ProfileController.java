@@ -1,8 +1,9 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.AjaxResponseBody;
+import com.codeup.realtrail.models.AjaxResponseBody;
 import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.AjaxRequestBody;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
 import jakarta.validation.Valid;
@@ -36,8 +37,6 @@ public class ProfileController {
     public String getCreateProfileForm(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
-
-            System.out.println("user.getUsername() = " + user.getUsername());
 
             // save a default image to db if the profileImageUrl == null
             if (user.getProfileImageUrl() == null) {
@@ -81,28 +80,26 @@ public class ProfileController {
     // set up ajax post request response
     @PostMapping("/profile/image")
     public @ResponseBody ResponseEntity<?> uploadImageResultViaAjax(
-            @RequestParam(name = "profileImageUrl") String profileImageUrl ,
+            @Valid @RequestBody AjaxRequestBody requestBody,
             Errors errors) {
+        String profileImageUrl = requestBody.getProfileImageUrl();
+
+        System.out.println("profileImageUrl = " + profileImageUrl);
+
         AjaxResponseBody result = new AjaxResponseBody();
 
-        //If error, just return a 400 bad request, along with the error message
-        if (errors.hasErrors()) {
-            result.setMsg(errors.getAllErrors()
-                    .stream().map(x -> x.getDefaultMessage())
-                    .collect(Collectors.joining(",")));
-
+        if (profileImageUrl != null) {
+            User user = userService.getLoggedInUser();
+            user.setProfileImageUrl(profileImageUrl);
+            usersDao.save(user);
+            System.out.println("user.getProfileImageUrl() = " + user.getProfileImageUrl());
+            result.setResult(user);
+            return ResponseEntity.ok(result);
+        } else {
+            result.setMsg("No image uploaded.");
             return ResponseEntity.badRequest().body(result);
         }
-
-        User user = userService.getLoggedInUser();
-        user.setProfileImageUrl(profileImageUrl);
-        usersDao.save(user);
-        result.setResult(user);
-        return ResponseEntity.ok(result);
     }
-
-
-
 
     @GetMapping("/profile")
     public String getProfilePage(Model model, Principal principal) {

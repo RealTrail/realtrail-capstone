@@ -37,6 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                /* Testing: Disable CSRF - kh */
+                .csrf().disable()
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")

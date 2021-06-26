@@ -21,12 +21,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         User user = userService.getLoggedInUser();
-        if (user.getPhoneNumber() == null) {
+        if (user.getProfileImageUrl() == null) {
             response.sendRedirect("/profile/settings");
         } else {
             response.sendRedirect("/");
         }
-
     }
 
 

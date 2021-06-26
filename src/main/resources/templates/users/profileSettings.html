@@ -14,7 +14,7 @@
     <h1>Public Profile</h1>
     <form action="/profile/image" method="POST">
         <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
-        <input type="hidden" class="profileImageUrl" name="profileImageUrl">
+        <input type="hidden" id="profileImageUrl" name="profileImageUrl" th:value="replaceme" >
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 
@@ -26,7 +26,7 @@
             </legend>
             <div>
                 <input type="hidden" id="originalImage" th:value="${user.profileImageUrl}">
-                <input type="hidden" class="profileImageUrl" name="profileImageUrl" th:field="*{profileImageUrl}">
+                <input type="hidden" id="profileImg" name="profileImageUrl" th:field="*{profileImageUrl}">
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
             </div>
