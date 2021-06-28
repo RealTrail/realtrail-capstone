@@ -63,6 +63,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<EventComment> eventComments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Event> createdEvents;
+
+
     // Constructors
     public User() {
     }
@@ -95,7 +99,7 @@ public class User {
         this.interests = interests;
     }
 
-    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
+    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests, List<Event> events, List<TrailComment> trailComments, List<EventComment> eventComments, List<Event> createdEvents) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -109,6 +113,10 @@ public class User {
         this.profileImageUrl = profileImageUrl;
         this.isAdmin = isAdmin;
         this.interests = interests;
+        this.events = events;
+        this.trailComments = trailComments;
+        this.eventComments = eventComments;
+        this.createdEvents = createdEvents;
     }
 
     // getter and setters
@@ -223,5 +231,12 @@ public class User {
     }
     public void setEventComments(List<EventComment> eventComments) {
         this.eventComments = eventComments;
+    }
+
+    public List<Event> getCreatedEvents() {
+        return createdEvents;
+    }
+    public void setCreatedEvents(List<Event> createdEvents) {
+        this.createdEvents = createdEvents;
     }
 }

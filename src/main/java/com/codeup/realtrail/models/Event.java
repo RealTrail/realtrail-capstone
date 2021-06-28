@@ -2,10 +2,14 @@ package com.codeup.realtrail.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.apache.tomcat.jni.Time;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,15 +18,12 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    @OneToOne
-    private User manager;
-    
-    @Column(nullable = false, length = 100)
+
+    @Column(nullable = false, length= 60)
     @NotBlank(message = "Events must have a name")
     @Size(min = 6, message = "A name must be at least 6 characters.")
     private String name;
-    
+
     @Column(nullable = false, length = 12)
     @NotBlank(message = "Events must have a date")
     private LocalDate date;
@@ -31,27 +32,31 @@ public class Event {
     @NotBlank(message = "Events must have a time")
     private LocalTime time;
     
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 30)
     @NotBlank(message = "Events must have a location")
     private String location;
     
-    @ManyToOne
-    @JoinColumn (name = "trail_id")
-    private Trail trail;
-    
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 60)
     @NotBlank(message = "Events must have a meet location")
     private String meetLocation;
     
     @Column(nullable = false, length = 12)
     @NotBlank(message = "Events must have a meet time")
     private LocalTime meetTime;
-    
-    @Column(columnDefinition="TEXT")
+
+    @Column(columnDefinition="default 'event details'")
     private String eventDetails;
 
+    @ManyToOne
+    @JoinColumn (name = "owner_id")
+    private User owner;
+
+    @ManyToOne
+    @JoinColumn (name = "trail_id")
+    private Trail trail;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<TrailComment> trailComments;
+    private List<EventComment> eventComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<PictureURL> images;
@@ -68,36 +73,21 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails , List<PictureURL> images) {
+    public Event(String name, LocalDate date, LocalTime time, String location, List<EventComment> eventComments, String meetLocation, LocalTime meetTime, String eventDetails , List<PictureURL> images) {
         this.name = name;
         this.date = date;
         this.time = time;
         this.location = location;
-        this.trail = trail;
+        this.eventComments = eventComments;
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
         this.images = images;
     }
 
-    public Event(User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
-        this.manager = manager;
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.location = location;
-        this.trail = trail;
-        this.meetLocation = meetLocation;
-        this.meetTime = meetTime;
-        this.eventDetails = eventDetails;
-        this.trailComments = trailComments;
-        this.images = images;
-        this.participants = participants;
-    }
-
-    public Event(long id, User manager, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
+    public Event(long id, User owner, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<EventComment> eventComments, List<PictureURL> images, List<User> participants) {
         this.id = id;
-        this.manager = manager;
+        this.owner = owner;
         this.name = name;
         this.date = date;
         this.time = time;
@@ -106,10 +96,12 @@ public class Event {
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
-        this.trailComments = trailComments;
+        this.eventComments = eventComments;
         this.images = images;
         this.participants = participants;
     }
+
+
 
     // getters and setters
 
@@ -120,11 +112,11 @@ public class Event {
         this.id = id;
     }
 
-    public User getManager() {
-        return manager;
+    public User getOwner() {
+        return owner;
     }
-    public void setManager(User manager) {
-        this.manager = manager;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getName() {
@@ -183,18 +175,16 @@ public class Event {
         this.eventDetails = eventDetails;
     }
 
-    public List<TrailComment> getTrailComments() {
-        return trailComments;
+    public List<EventComment> getEventComments() {
+        return eventComments;
     }
-
-    public void setTrailComments(List<TrailComment> trailComments) {
-        this.trailComments = trailComments;
+    public void setEventComments(List<EventComment> eventComments) {
+        this.eventComments = eventComments;
     }
 
     public List<PictureURL> getImages() {
         return images;
     }
-
     public void setImages(List<PictureURL> images) {
         this.images = images;
     }
@@ -202,16 +192,8 @@ public class Event {
     public List<User> getParticipants() {
         return participants;
     }
-
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
 
-    public User getUser() {
-        return manager;
-    }
-
-    public void setUser(User user) {
-        this.manager = user;
-    }
 }
