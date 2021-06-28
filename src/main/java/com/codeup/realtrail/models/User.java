@@ -3,6 +3,10 @@ package com.codeup.realtrail.models;
 
 //import com.codeup.realtrail.util.Password;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,11 +24,17 @@ public class User {
     private String lastName;
 
     @Column(nullable = false, unique = true, length = 50)
+    @NotBlank(message = "Please enter a username")
+    @Size(min = 6, max = 50, message = "Username must be at least 6 characters and no more than 50 characters long!")
     private String username;
 
+    @Email(message = "Please enter email in the right format")
+    @NotBlank(message = "Please enter an email")
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
+
+    @NotBlank
     @Column(nullable = false)
     private String password;
 
