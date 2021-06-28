@@ -33,7 +33,7 @@ Sign In:
         As a user, I should be able to reset my Username and Password by using Forgot Username and Password link. 
         
 Create Profile:
-        As a user, I should be able to add my phone number,location,upload profile image and choose role event manager or participant.
+        As a user, I should be able to add my phone number,location,upload profile image and choose role event owner or participant.
         After submitting the form I should be redirected to the home page.
         
 Sign Out:
