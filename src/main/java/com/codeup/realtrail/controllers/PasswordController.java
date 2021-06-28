@@ -14,7 +14,6 @@ public class PasswordController {
             return "message";
         }
     }
-
     private boolean showResetPasswordForm() {
         return true;
     }}
