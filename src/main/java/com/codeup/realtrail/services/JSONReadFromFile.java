@@ -7,11 +7,14 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.DataInput;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class JSONReadFromFile {
+    private static FileWriter file;
+
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         JSONParser parser = new JSONParser();
@@ -21,25 +24,40 @@ public class JSONReadFromFile {
             // A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
             JSONObject jsonObject = (JSONObject) obj;
 
-            // A JSON array. JSONObject supports java.util.List interface.
+            // get the features list
             JSONArray pathList = (JSONArray) jsonObject.get("features");
+            JSONArray trails = new JSONArray();
 
-            // An iterator over a collection. Iterator takes the place of Enumeration in the Java Collections Framework.
-            // Iterators differ from enumerations in two ways:
-            // 1. Iterators allow the caller to remove elements from the underlying collection during the iteration with well-defined semantics.
-            // 2. Method names have been improved.
+            // iterate through the pathList which is features array in the json file
             int i = 0;
-            for (JSONObject object : (Iterable<JSONObject>) pathList) {
-                System.out.println(object);
-                JSONObject properties = (JSONObject) jsonObject.get("properties");
-                Map<String,String> result =
-                        new ObjectMapper().readValue((DataInput) properties, HashMap.class);
-                if(result.get("name") != null) {
-                    i++;
-                    System.out.println(object);
+            for (JSONObject path : (Iterable<JSONObject>) pathList) {
+                JSONObject properties = (JSONObject) path.get("properties");
+                String name = (String) properties.get("name");
+                if(name != null) {
+                    if (name.contains("Trail") || name.contains("trail")) {
+                        trails.add(path);
+                        i++;
+                    }
                 }
             }
+
             System.out.println(i);
+
+            // put the filtered data in jsonObject
+            jsonObject.put("type", "FeatureCollection");
+            jsonObject.put("generator", "overpass-ide");
+            jsonObject.put("copyright", "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.");
+            jsonObject.put("timestamp", "2021-06-28T01:56:15Z");
+            jsonObject.put("features", trails);
+
+            try {
+                // write the filtered data into a new file
+                file = new FileWriter("/Users/shan/IdeaProjects/realtrail/data/SATrails.geojson");
+                file.write(jsonObject.toJSONString());
+                file.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
