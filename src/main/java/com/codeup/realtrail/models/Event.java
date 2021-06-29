@@ -14,7 +14,6 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column(nullable = false, length = 100)
     @NotBlank(message = "Events must have a name")
     @Size(min = 6, message = "A name must be at least 6 characters.")

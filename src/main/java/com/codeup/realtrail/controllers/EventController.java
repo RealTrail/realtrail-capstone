@@ -107,36 +107,6 @@ public class EventController {
         return "events/editEvent";
     }
 
-    @PostMapping("/events/{id}/edit")
-    @ResponseBody
-    public String updateEvent(@PathVariable Long id,
-                              @RequestParam(name = "name") String name,
-                              @RequestParam(name = "date") LocalDate date,
-                              @RequestParam(name = "time") LocalTime time,
-                              @RequestParam(name = "location") String location,
-                              @RequestParam(name = "trail") Trail trail,
-                              @RequestParam(name = "meetLocation") String meetLocation,
-                              @RequestParam(name = "meetTime") LocalTime meetTime,
-                              @RequestParam(name = "eventDetails") String eventDetails,
-                              @RequestParam(name = "images") List<PictureURL> images)
-    {
-        // find the event
-        Event foundEvent = eventsDao.getById(id);
-        // edit the event
-        foundEvent.setName(name);
-        foundEvent.setDate(date);
-        foundEvent.setTime(time);
-        foundEvent.setLocation(location);
-        foundEvent.setTrail(trail);
-        foundEvent.setMeetLocation(meetLocation);
-        foundEvent.setMeetTime(meetTime);
-        foundEvent.setEventDetails(eventDetails);
-        foundEvent.setImages(images);
-        // save the changes
-        eventsDao.save(foundEvent);
-        return "events/editEvent";
-    }
-
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id){
         eventsDao.deleteById(id);
