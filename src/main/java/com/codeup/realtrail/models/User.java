@@ -1,7 +1,7 @@
 package com.codeup.realtrail.models;
 
 
-//import com.codeup.realtrail.util.Password;
+//import com.codeup.realtrail.services.Password;
 
 import javax.persistence.*;
 import java.util.List;
