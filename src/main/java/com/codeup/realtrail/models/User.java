@@ -1,12 +1,5 @@
 package com.codeup.realtrail.models;
 
-
-//import com.codeup.realtrail.services.Password;
-
-
-
-
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
