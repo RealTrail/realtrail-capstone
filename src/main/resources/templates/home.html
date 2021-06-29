@@ -79,7 +79,22 @@
                         <div class="slide-wrap">
                             <div class="image"></div>
                             <div class="header ">
-                                <h1>Aut esse consectetur cupiditate facilis cumque voluptatem? Consectetur?</h1>
+                                <form th:action="@{/events}" method="get">
+                                    <button th:type="submit">View Events</button>
+                                </form>
+
+                                <form th:action="@{/search}" method="get">
+                                    <label for="search">Search Event</label>
+                                    <input id="search" th:colspan="3">
+                                </form>
+
+                                <form th:action="@{/create}" method="get">
+                                    <button th:type="submit">Create Event</button>
+                                </form>
+
+                                <form th:action="@{/events/edit}" method="get">
+                                    <button th:type="submit">Edit Event</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -111,6 +126,7 @@
             </div>
         </div>
     </div>
+
     <!-- partial -->
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
