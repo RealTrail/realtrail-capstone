@@ -1,7 +1,6 @@
 package com.codeup.realtrail.services;
 
 import com.codeup.realtrail.models.Event;
-import com.codeup.realtrail.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -13,15 +12,15 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     @Autowired
-    public JavaMailSender emailSender;
+    private JavaMailSender emailSender;
 
     @Value("${spring.mail.from}")
     private String from;
 
-    public void prepareAndSend(User user, String subject, String body) {
+    public void prepareAndSend(Event event, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
-        msg.setTo(user.getEmail());
+        msg.setTo(event.getOwner().getEmail());
         msg.setSubject(subject);
         msg.setText(body);
 

@@ -14,20 +14,19 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
     @Column(nullable = false, length = 100)
     @NotBlank(message = "Events must have a name")
     @Size(min = 6, message = "A name must be at least 6 characters.")
     private String name;
-    
+
     @Column(nullable = false, length = 12)
     @NotBlank(message = "Events must have a date")
     private LocalDate date;
-    
+
     @Column(nullable = false, length = 6)
     @NotBlank(message = "Events must have a time")
     private LocalTime time;
-    
+
     @Column(nullable = false, length = 100)
     @NotBlank(message = "Events must have a location")
     private String location;
@@ -39,15 +38,15 @@ public class Event {
     @ManyToOne
     @JoinColumn (name = "trail_id")
     private Trail trail;
-    
+
     @Column(nullable = false, length = 150)
     @NotBlank(message = "Events must have a meet location")
     private String meetLocation;
-    
+
     @Column(nullable = false, length = 12)
     @NotBlank(message = "Events must have a meet time")
     private LocalTime meetTime;
-    
+
     @Column(columnDefinition="TEXT")
     private String eventDetails;
 
@@ -187,7 +186,6 @@ public class Event {
     public List<TrailComment> getTrailComments() {
         return trailComments;
     }
-
     public void setTrailComments(List<TrailComment> trailComments) {
         this.trailComments = trailComments;
     }
@@ -195,7 +193,6 @@ public class Event {
     public List<PictureURL> getImages() {
         return images;
     }
-
     public void setImages(List<PictureURL> images) {
         this.images = images;
     }
@@ -203,7 +200,6 @@ public class Event {
     public List<User> getParticipants() {
         return participants;
     }
-
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }

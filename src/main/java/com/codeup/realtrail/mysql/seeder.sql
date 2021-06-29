@@ -17,13 +17,13 @@ INSERT INTO interests(interest) VALUES
    ('Mountain Biking');
 
 
-INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, manager_id, trail_id)
-VALUES
-    (1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
-    (2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+# INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
+# VALUES
+#     (1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
+#     (2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
 
 INSERT INTO trails(id, difficulty_level, rating, length, elevation, name, type, trail_details)
 VALUES
   (1, 6, 5, 5, 200, 'Salado Creek Greenway Trail', 'rocky', 'This trail is so cool! Said Karla!'),
-  (2, 3, 3, 10, 132, 'smooth', 'this is a great fun ride guys'),
-  (3, 4, 2, 12, 321, 'medium terrain', 'Yes, this is just nature yes');
+  (2, 3, 3, 10, 132, 'Olmos Basin Greenway Trail', 'smooth', 'this is a great fun ride guys'),
+  (3, 4, 2, 12, 321, 'Stone Oak South Trail', 'medium terrain', 'Yes, this is just nature yes');
