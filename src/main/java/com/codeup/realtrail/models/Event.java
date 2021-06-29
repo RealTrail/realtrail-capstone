@@ -1,8 +1,5 @@
 package com.codeup.realtrail.models;
 
-//import jakarta.validation.constraints.NotBlank;
-//import jakarta.validation.constraints.Size;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;

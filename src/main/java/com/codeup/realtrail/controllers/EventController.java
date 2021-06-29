@@ -8,7 +8,6 @@ import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.StringService;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -33,7 +31,11 @@ public class EventController {
 
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
-    private String  filestackApi;
+    private String filestackApi;
+
+    // importing mapbox token
+    @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
+    private String mapboxToken;
 
     public EventController(EventsRepository eventsDao, UsersRepository usersDao, StringService stringService, EmailService emailService, UserService userService) {
         this.eventsDao = eventsDao;
@@ -47,9 +49,9 @@ public class EventController {
     @GetMapping("/create")
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
-            User user = userService.getLoggedInUser();
             model.addAttribute("event", new Event());
-            model.addAttribute("filestackapi", filestackApi);
+            model.addAttribute("fileStackApi", filestackApi);
+            model.addAttribute("mapboxToken", mapboxToken);
             return "events/createEvent";
         } else {
             return "redirect:/login";
@@ -57,7 +59,11 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public String saveCreatedEvent(@ModelAttribute Event event, Model model, @RequestParam (name = "eventDate") String eventDate, @RequestParam(name = "eventMeetTime") String eventMeetTime, @RequestParam (name = "eventTime") String eventTime) throws ParseException {
+    public String saveCreatedEvent(@ModelAttribute Event event,
+                                   @RequestParam (name = "eventDate") String eventDate,
+                                   @RequestParam(name = "eventMeetTime") String eventMeetTime,
+                                   @RequestParam (name = "eventTime") String eventTime,
+                                   Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 

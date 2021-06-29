@@ -1,12 +1,5 @@
 package com.codeup.realtrail.models;
 
-
-//import com.codeup.realtrail.util.Password;
-
-
-
-
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -29,7 +22,6 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 100)
     private String email;
-
 
     @NotBlank
     @Column(nullable = false)

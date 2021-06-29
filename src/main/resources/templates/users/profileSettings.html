@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/header :: head">
-    <meta name="filestackapi" th:content="${filestackapi}">
+    <meta name="fileStackApi" th:content="${fileStackApi}">
     <title>Create Profile</title>
 </head>
 <body>
@@ -73,11 +73,10 @@
 
 <footer th:replace="/fragments/footer :: footer"></footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
-    // assign filestackapi to a variable
-    const filestackapi = [[${filestackapi}]];
+    // assign fileStackApi to a variable
+    const fileStackApi = [[${fileStackApi}]];
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
 </body>

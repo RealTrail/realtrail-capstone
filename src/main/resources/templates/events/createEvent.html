@@ -1,67 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head :: head">
-  <meta name="filestackapi" th:content="${filestackapi}">
-  <title>Create Event</title>
+    <meta name="fileStackApi" th:content="${fileStackApi}">
+    <meta name="mapboxToken" th:content="${mapboxToken}">
+    <title>Create Event</title>
+<!--    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />-->
 </head>
 <body>
 <main>
-  <nav th:replace="/fragments/navbar :: navbar"></nav>
-  <h1>Create an Event</h1>
-  <form th:action="@{/create}" th:method="POST" th:object="${event}">
-    <fieldset>
-      <div>
-        <label for="name">Event Name</label>
-        <input name="name" id="name" th:field="*{name}" />
-      </div>
-      <div>
-        <label for="eventDate">Date</label>
-        <input type="date" name="eventDate" id="eventDate" />
-      </div>
-      <div>
-        <label for="eventTime">Time</label>
-        <input type="time" name="eventTime" id="eventTime" />
-      </div>
-      <div>
-        <label for="location">Location</label>
-        <input type="text" name="location" id="location" th:field="*{location}" />
-      </div>
-      <div>
-        <label for="eventTrail">Trailhead</label>
-        <input type="text" name="eventTrail" id="eventTrail" />
-      </div>
-      <div>
-        <label for="meetLocation">Meet Location</label>
-        <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" />
-      </div>
-      <div>
-        <label for="eventMeetTime">Meet Time</label>
-        <input type="time" name="eventMeetTime" id="eventMeetTime" />
-      </div>
-      <div>
-        <label for="eventDetails">Event Details</label>
-        <input type="text" name="eventDetails" id="eventDetails" th:field="*{eventDetails}" />
-      </div>
-      <div>
-        <button type="button" class="btn btn-primary" id="images">Upload images</button>
-        <input type="image" name="images" th:field="*{images}" />
-        <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
-      </div>
-      <button type="submit" id="createEvent">Submit</button>
-    </fieldset>
-  </form>
-  <a href="/profile">Close</a>
+    <nav th:replace="/fragments/navbar :: navbar"></nav>
+    <h1>Create an Event</h1>
+    <form th:action="@{/create}" th:method="POST" th:object="${event}">
+        <fieldset>
+            <div>
+                <label for="name">Event Name</label>
+                <input name="name" id="name" th:field="*{name}" />
+            </div>
+            <div>
+                <label for="eventDate">Date</label>
+                <input type="date" name="eventDate" id="eventDate" />
+            </div>
+            <div>
+                <label for="eventTime">Time</label>
+                <input type="time" name="eventTime" id="eventTime" />
+            </div>
+            <div>
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location" th:field="*{location}" />
+            </div>
+            <div>
+                <label for="eventTrail">Trailhead</label>
+                <input type="text" name="eventTrail" id="eventTrail" />
+            </div>
+            <div>
+                <label for="meetLocation">Meet Location</label>
+                <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" />
+            </div>
+            <div>
+                <label for="eventMeetTime">Meet Time</label>
+                <input type="time" name="eventMeetTime" id="eventMeetTime" />
+            </div>
+            <div>
+                <label for="eventDetails">Event Details</label>
+                <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
+            </div>
+
+            <div>
+                <label for="mapSearch"></label>
+                <input type="text" id="mapSearch" name="mapSearch">
+                <button type="button"><i class="far fa-search"></i></button>
+            </div>
+            <div id="map" style="height: 500px; width: 600px"></div>
+            <div>
+                <button type="button" id="images">Upload images</button>
+                <input type="hidden" name="images" th:field="*{images}" />
+                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+            </div>
+            <button type="submit" id="createEvent">Submit</button>
+        </fieldset>
+    </form>
 </main>
 <footer th:replace="/fragments/footer :: footer"></footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- Mapbox JS -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+<!-- Mapbox Geocoder Util Methods -->
+<script src="/js/mapbox-geocoder-utils.js"></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
-  // assign filestackapi to a variable
-  const filestackapi = [[${filestackapi}]];
+    // assign fileStackApi to a variable
+    const fileStackApi = [[${fileStackApi}]];
+    // assign mapboxToken to a variable
+    const mapboxToken = [[${mapboxToken}]];
+    console.log(fileStackApi);
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
-
+<script src="/js/map.js"></script>
 </body>
 </html>
 
