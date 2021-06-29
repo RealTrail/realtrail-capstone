@@ -24,5 +24,5 @@ INSERT INTO interests(interest) VALUES
 INSERT INTO trails(id, difficulty_level, rating, length, elevation, name, type, trail_details)
 VALUES
   (1, 6, 5, 5, 200, 'Salado Creek Greenway Trail', 'rocky', 'This trail is so cool! Said Karla!'),
-  (2, 3, 3, 10, 132, 'smooth', 'this is a great fun ride guys'),
-  (3, 4, 2, 12, 321, 'medium terrain', 'Yes, this is just nature yes');
+  (2, 3, 3, 10, 132, 'Olmos Basin Greenway Trail', 'smooth', 'this is a great fun ride guys'),
+  (3, 4, 2, 12, 321, 'Stone Oak South Trail', 'medium terrain', 'Yes, this is just nature yes');

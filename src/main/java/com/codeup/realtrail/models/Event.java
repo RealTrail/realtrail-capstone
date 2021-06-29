@@ -2,14 +2,10 @@ package com.codeup.realtrail.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.apache.tomcat.jni.Time;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -19,7 +15,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length= 60)
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "Events must have a name")
     @Size(min = 6, message = "A name must be at least 6 characters.")
     private String name;
@@ -27,25 +23,14 @@ public class Event {
     @Column(nullable = false, length = 12)
     @NotBlank(message = "Events must have a date")
     private LocalDate date;
-    
+
     @Column(nullable = false, length = 6)
     @NotBlank(message = "Events must have a time")
     private LocalTime time;
-    
-    @Column(nullable = false, length = 30)
+
+    @Column(nullable = false, length = 100)
     @NotBlank(message = "Events must have a location")
     private String location;
-    
-    @Column(nullable = false, length = 60)
-    @NotBlank(message = "Events must have a meet location")
-    private String meetLocation;
-    
-    @Column(nullable = false, length = 12)
-    @NotBlank(message = "Events must have a meet time")
-    private LocalTime meetTime;
-
-    @Column(columnDefinition="default 'event details'")
-    private String eventDetails;
 
     @ManyToOne
     @JoinColumn (name = "owner_id")
@@ -55,8 +40,19 @@ public class Event {
     @JoinColumn (name = "trail_id")
     private Trail trail;
 
+    @Column(nullable = false, length = 150)
+    @NotBlank(message = "Events must have a meet location")
+    private String meetLocation;
+
+    @Column(nullable = false, length = 12)
+    @NotBlank(message = "Events must have a meet time")
+    private LocalTime meetTime;
+
+    @Column(columnDefinition="TEXT")
+    private String eventDetails;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<EventComment> eventComments;
+    private List<TrailComment> trailComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<PictureURL> images;
@@ -73,21 +69,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, LocalDate date, LocalTime time, String location, List<EventComment> eventComments, String meetLocation, LocalTime meetTime, String eventDetails , List<PictureURL> images) {
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.location = location;
-        this.eventComments = eventComments;
-        this.meetLocation = meetLocation;
-        this.meetTime = meetTime;
-        this.eventDetails = eventDetails;
-        this.images = images;
-    }
-
-    public Event(long id, User owner, String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<EventComment> eventComments, List<PictureURL> images, List<User> participants) {
-        this.id = id;
-        this.owner = owner;
+    public Event(String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<PictureURL> images) {
         this.name = name;
         this.date = date;
         this.time = time;
@@ -96,12 +78,39 @@ public class Event {
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
-        this.eventComments = eventComments;
+        this.images = images;
+    }
+
+    public Event(String name, LocalDate date, LocalTime time, String location, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.owner = owner;
+        this.trail = trail;
+        this.meetLocation = meetLocation;
+        this.meetTime = meetTime;
+        this.eventDetails = eventDetails;
+        this.trailComments = trailComments;
         this.images = images;
         this.participants = participants;
     }
 
-
+    public Event(long id, String name, LocalDate date, LocalTime time, String location, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<PictureURL> images, List<User> participants) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.owner = owner;
+        this.trail = trail;
+        this.meetLocation = meetLocation;
+        this.meetTime = meetTime;
+        this.eventDetails = eventDetails;
+        this.trailComments = trailComments;
+        this.images = images;
+        this.participants = participants;
+    }
 
     // getters and setters
 
@@ -175,11 +184,11 @@ public class Event {
         this.eventDetails = eventDetails;
     }
 
-    public List<EventComment> getEventComments() {
-        return eventComments;
+    public List<TrailComment> getTrailComments() {
+        return trailComments;
     }
-    public void setEventComments(List<EventComment> eventComments) {
-        this.eventComments = eventComments;
+    public void setTrailComments(List<TrailComment> trailComments) {
+        this.trailComments = trailComments;
     }
 
     public List<PictureURL> getImages() {
@@ -195,5 +204,4 @@ public class Event {
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
-
 }

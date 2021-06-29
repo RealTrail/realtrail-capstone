@@ -13,6 +13,7 @@ public class PasswordController {
             model.addAttribute("message", "Invalid password");
             return "message";
         }
+        return "redirect:/";
     }
 
     private boolean showResetPasswordForm() {

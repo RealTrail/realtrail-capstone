@@ -35,14 +35,13 @@ public class EventController {
     @Value("${filestack.api.key}")
     private String  filestackApi;
 
-    public EventController(EventsRepository eventsRepository, UsersRepository usersRepository, StringService stringService, EmailService emailService, UserService userService){
-        eventsDao = eventsRepository;
-        usersDao = usersRepository;
+    public EventController(EventsRepository eventsDao, UsersRepository usersDao, StringService stringService, EmailService emailService, UserService userService) {
+        this.eventsDao = eventsDao;
+        this.usersDao = usersDao;
         this.stringService = stringService;
         this.emailService = emailService;
         this.userService = userService;
     }
-
 
     // Create Event
     @GetMapping("/create")
