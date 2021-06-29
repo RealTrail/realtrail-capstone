@@ -17,7 +17,7 @@ public class Trail {
     @Column(nullable = false)
     private float difficultyLevel;
 
-    @Column(nullable = false)
+    @Column
     private float rating;
 
     @Column(nullable = false)
