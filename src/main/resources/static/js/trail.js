@@ -59,3 +59,21 @@ function toggleShow () {
 $("body, #mainContainer").on("scroll", function() {
     $("body, #mainContainer").scrollTop($(this).scrollTop());
 });
+
+
+// ********************************** SIDE NAV *******************************
+
+function openNav() {
+
+    document.getElementById("mySidenav").style.width = "60%";
+    document.getElementById("main").style.marginLeft = "60%";
+    document.getElementById("mySidenav").classList.add('puff-in-center');
+    // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.getElementById("mySidenav").classList.remove('puff-in-center');
+    // document.body.style.backgroundColor = "transparent";
+}
