@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 public class ValidationService {
 
     public boolean usernameHasError(String username) {
-        boolean inputHasErrors = username.isEmpty() || (username.length() > 50)
-                || username.contains("@") || username.contains("#")
+        boolean inputHasErrors = username.isEmpty() || username.length() > 50
+                || username.length() < 4 || username.contains("#")
                 || username.contains("!") || username.contains("~")
                 || username.contains("$") || username.contains("%")
                 || username.contains("^") || username.contains("&")
@@ -17,7 +17,7 @@ public class ValidationService {
                 || username.contains(":") || username.contains(".")
                 || username.contains(", ") || username.contains("<")
                 || username.contains(">") || username.contains("?")
-                || username.contains("|");
+                || username.contains("|") || username.contains("@");
         return inputHasErrors;
     }
 
@@ -27,7 +27,7 @@ public class ValidationService {
 
 
     public boolean passwordHasError(String password) {
-        boolean inputHasError = password.isEmpty() || (password.length()<8)
+        boolean inputHasError = password.isEmpty() || password.length() < 8
                 || (!(password.contains("@") || password.contains("#")
                 || password.contains("!") || password.contains("~")
                 || password.contains("$") || password.contains("%")
