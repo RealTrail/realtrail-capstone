@@ -8,7 +8,7 @@
      });
  });
 
- const client = filestack.init(filestackapi);
+ const client = filestack.init(fileStackApi);
 
  function uploadProfileImage() {
      const options = {

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
@@ -50,7 +49,7 @@ public class ProfileController {
             // pass the user to create profile form to show prepopulated data in the form
             model.addAttribute("user", user);
             model.addAttribute("interests", userInterestsDao.findAll());
-            model.addAttribute("filestackapi", filestackApi);
+            model.addAttribute("fileStackApi", filestackApi);
             return "users/profileSettings";
         } else {
             return "redirect:/login";
