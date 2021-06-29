@@ -46,22 +46,22 @@
                 <input type="submit" class="btn btn-light" value="Login" name="login">
             </form>
 
-            <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}">
+            <form action="/signup" method="POST" class="sign-up" th:object="${user}">
                 <h2>Sign Up!</h2>
                 <div class="input-field">
-                    <input type="text" id="create_username" name="create_username" th:field="*{username}">
-                    <label for="create_username">Username</label>
-                    <p th:text="${message}"></p>
+                    <input type="text" id="username" name="username" th:field="*{username}">
+                    <label for="username">Username</label>
+                    <p class="errorMessage" th:text="${message}"></p>
                 </div>
                 <div class="input-field">
                     <input type="email" id="create_email" name="create_email" th:field="*{email}">
                     <label for="create_email">Email Address</label>
-                    <p th:text="${emailMessage}"></p>
+                    <p class="errorMessage" th:text="${emailMessage}"></p>
                 </div>
                 <div class="input-field">
                     <input type="password" id="createPassword" name="createPassword" th:field="*{password}">
                     <label for="createPassword">Password</label>
-                    <p th:text="${passwordMessage}"></p>
+                    <p class="errorMessage" th:text="${passwordMessage}"></p>
                 </div>
                 <div class="input-field">
                     <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>

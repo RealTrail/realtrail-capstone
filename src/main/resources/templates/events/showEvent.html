@@ -5,23 +5,27 @@
     <title>Show Event</title>
 </head>
 <body>
-<nav></nav>
-
-<h2>Your event search results:</h2>
-<div sec:authorize="isAuthorized()">
-    <div><label>Event coordinator</label><h4 th:text="${event.manager}"></h4></div>
-    <div><label>Event name</label><h4 th:text="${event.name}"></h4></div>
-    <div><label>Event details:</label><p th:text="${event.eventDetails}"></p></div>
-    <div><label>date:</label><h4 th:text="${event.date}"></h4></div>
-    <div><label>time:</label><h4 th:text="${event.time}"></h4></div>
-    <div><label>location:</label><h4 th:text="${event.location}"></h4></div>
-    <div><label>trail:</label><h4 th:text="${event.trail}"></h4></div>
-    <div><label>meet location:</label><h4 th:text="${event.meetLocation}"></h4></div>
-    <div><label>meet time:</label><h4 th:text="${event.meetTime}"></h4></div>
-    <div><label>trail comments:</label><h4 th:text="${event.trailComments}"></h4></div>
-    <div><label>participants:</label><h4 th:text="${event.participants}"></h4></div>
-    <div><label>images:</label><h4 th:text="${event.images}"></h4></div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container">
+    <div th:if="${event == null}">
+        Event not found.
+    </div>
+    <div th:if="${event}">
+        <div th:text="${eventId}">ID</div>
+        <div th:text="${event.owner}">Event coordinator:</div>
+        <div><h3 th:text="${event.name}"></h3>Event name:</div>
+        <div><p th:text="${event.eventDetails}"></p>Event details:</div>
+        <div><h4 th:text="${event.date}"></h4>date:</div>
+        <div>time:<h4 th:text="${event.time}"></h4></div>
+        <div>location:<h4 th:text="${event.location}"></h4></div>
+        <div>trail:<h4 th:text="${event.trail}"></h4></div>
+        <div>meet location:<h4 th:text="${event.meetLocation}"></h4></div>
+        <div>meet time:<h4 th:text="${event.meetTime}"></h4></div>
+        <div>trail comments:<h4 th:text="${event.trailComments}"></h4></div>
+        <div>participants:<h4 th:text="${event.participants}"></h4></div>
+        <div>images:<h4 th:text="${event.images}"></h4></div>
+    </div>
 </div>
-
+<footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>

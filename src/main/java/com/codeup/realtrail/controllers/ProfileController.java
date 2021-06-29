@@ -1,19 +1,23 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.models.AjaxResponseBody;
 import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.AjaxRequestBody;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
+import java.util.stream.Collectors;
 
-@RestController
+@Controller
 public class ProfileController {
     private UsersRepository usersDao;
     private UserInterestRepository userInterestsDao;
@@ -33,6 +37,15 @@ public class ProfileController {
     public String getCreateProfileForm(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
+
+            // save a default image to db if the profileImageUrl == null
+            if (user.getProfileImageUrl() == null) {
+                user.setProfileImageUrl("/images/default-profile.png");
+                usersDao.save(user);
+
+                // get the user with default profile image
+                user = userService.getLoggedInUser();
+            }
 
             // pass the user to create profile form to show prepopulated data in the form
             model.addAttribute("user", user);
@@ -61,16 +74,32 @@ public class ProfileController {
         usersDao.save(user);
         model.addAttribute("user", user);
 
-        return "users/showProfile";
+        return "redirect:/profile";
     }
 
     // set up ajax post request response
     @PostMapping("/profile/image")
-    public ResponseEntity<?> uploadImageResultViaAjax(@Valid @RequestBody SearchCriteria searchCriteria, Errors errors) {
+    public @ResponseBody ResponseEntity<?> uploadImageResultViaAjax(
+            @Valid @RequestBody AjaxRequestBody requestBody,
+            Errors errors) {
+        String profileImageUrl = requestBody.getProfileImageUrl();
+
+        System.out.println("profileImageUrl = " + profileImageUrl);
+
         AjaxResponseBody result = new AjaxResponseBody();
+
+        if (profileImageUrl != null) {
+            User user = userService.getLoggedInUser();
+            user.setProfileImageUrl(profileImageUrl);
+            usersDao.save(user);
+            System.out.println("user.getProfileImageUrl() = " + user.getProfileImageUrl());
+            result.setResult(user);
+            return ResponseEntity.ok(result);
+        } else {
+            result.setMsg("No image uploaded.");
+            return ResponseEntity.badRequest().body(result);
+        }
     }
-
-
 
     @GetMapping("/profile")
     public String getProfilePage(Model model, Principal principal) {

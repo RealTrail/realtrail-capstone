@@ -12,9 +12,9 @@
     </div>
 
     <h1>Public Profile</h1>
-    <form th:action="@{/profile/image}" th:method="POST">
+    <form action="/profile/image" method="POST">
         <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
-        <input type="hidden" id="id" name="id" th:text="${user.id}">
+        <input type="hidden" id="profileImageUrl" name="profileImageUrl" th:value="replaceme" >
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 
@@ -25,17 +25,19 @@
                 <h3>Personal Details</h3>
             </legend>
             <div>
+                <input type="hidden" id="originalImage" th:value="${user.profileImageUrl}">
+                <input type="hidden" id="profileImg" name="profileImageUrl" th:field="*{profileImageUrl}">
                 <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" th:field="*{firstName}" required/>
+                <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
             </div>
             <div>
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" th:field="*{lastName}" required/>
+                <input type="text" name="lastName" id="lastName" th:field="*{lastName}">
             </div>
             <div>
                 <label for="phoneNumber">Phone Number</label>
                 <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="123-456-7890"
-                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:field="*{phoneNumber}" required/>
+                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:field="*{phoneNumber}">
             </div>
             <div>
                 <label for="city">City</label>

@@ -13,10 +13,7 @@ public class PasswordController {
     private UserService userService;
     private PasswordService passwordService;
 
-    public PasswordController(UserService userService, PasswordService passwordService) {
-        this.userService = userService;
-        this.passwordService = passwordService;
-    }
+
 
     //    @GetMapping("/password/reset")
 //    public String showResetPasswordForm() {

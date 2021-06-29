@@ -14,30 +14,45 @@
         </legend>
         <table>
             <tr>
-                <th><img th:src="${user.profileImageUrl}" alt="profile-image"></th>
+                <th><img th:src="${user.profileImageUrl}" id="profileImage" alt="profile-image"></th>
             </tr>
             <tr>
                 <th>Username</th>
                 <td th:text="${user.username}"></td>
             </tr>
-            <tr>
-                <th>Email</th>
-                <td th:text="${user.email}"></td>
-            </tr>
-            <tr>
+            <tr th:if="${user.firstName == null || user.lastName == null}">
+            <th>Name</th>
+            <td th:text="No name available"></td>
+        </tr>
+            <tr th:if="${user.firstName != null && user.lastName != null}">
                 <th>Name</th>
                 <td th:text="${user.firstName + ' ' + user.lastName}"></td>
             </tr>
             <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr th:if="${user.phoneNumber == null}">
+                <th>Phone Number</th>
+                <td>No phone number available</td>
+            </tr>
+            <tr th:if="${user.phoneNumber != null}">
                 <th>Phone Number</th>
                 <td th:text="${user.phoneNumber}"></td>
             </tr>
-            <tr>
+            <tr th:if="${user.city == null || user.state == null}">
+                <th>City, State</th>
+                <td>No city and state available</td>
+            </tr>
+            <tr th:if="${user.city != null && user.state != null}">
                 <th>City, State</th>
                 <td th:text="${user.city + ', ' + user.state}"></td>
             </tr>
-
-            <tr>
+            <tr th:if="user.interests == null">
+                <th>Interests</th>
+                <td>No interests selected</td>
+            </tr>
+            <tr th:if="user.interests != null">
                 <th>Interests</th>
                 <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
             </tr>
