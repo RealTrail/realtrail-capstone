@@ -3,7 +3,6 @@ package com.codeup.realtrail.controllers;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
-import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

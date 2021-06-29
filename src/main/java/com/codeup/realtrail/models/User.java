@@ -3,11 +3,12 @@ package com.codeup.realtrail.models;
 
 //import com.codeup.realtrail.util.Password;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
+
+
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity

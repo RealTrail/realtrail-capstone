@@ -1,6 +1,7 @@
 package com.codeup.realtrail.models;
 
-import jakarta.validation.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
 
 public class AjaxRequestBody {
 
