@@ -66,7 +66,7 @@ public class EventController {
     @PostMapping("/events/create")
     public String saveEvent(
             Event event,
-            @RequestParam(name = "manager") User manager,
+            @RequestParam(name = "manager") User owner,
             @RequestParam(name = "name") String name,
             @RequestParam(name = "date") LocalDate date,
             @RequestParam(name = "time") LocalTime time,
@@ -76,7 +76,7 @@ public class EventController {
             @RequestParam(name = "meet_time") LocalTime meetTime,
             @RequestParam(name = "event-details") List<PictureURL> images,
             Model model) {
-        event.setManager(manager);
+        event.setOwner(owner);
         event.setName(name);
         event.setDate(date);
         event.setTime(time);
