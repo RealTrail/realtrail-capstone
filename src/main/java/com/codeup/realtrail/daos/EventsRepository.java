@@ -16,7 +16,6 @@ public interface EventsRepository extends JpaRepository <Event, Long>{
     Event deleteEventByName(String name);
 
     List<Event> searchByName(String name);
-    List<Event> findByUser(User user);
 
 //    Event saveEvent(Event event);
 //    @Modifying
