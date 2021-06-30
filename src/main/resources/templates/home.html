@@ -14,20 +14,19 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
     <!-- ********** calendar goes in here ******************** -->
+
+        <!--        getting all hidden value for event-->
+        <div class="displayed-event" th:each="event: ${events}">
+            <input type="hidden" th:value="${event.id}">
+            <input type="hidden" th:value="${event.name}">
+            <input type="hidden" th:value="${event.location}">
+            <input type="hidden" th:value="${event.time}">
+            <input type="hidden" th:value="${event.meetTime}">
+            <input type="hidden" th:value="${event.date}">
+        </div>
         <div id='calendar' style="width:650px "></div>
-
+        <input type="hidden" id="Event" th:value="${events}">
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-
-            });
-            calendar.render();
-        });
-    </script>
-
 
     <div id="main">
 
@@ -160,6 +159,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
     <script src="/js/trail.js"></script>
     <script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
+    <script src="/js/calendar.js"></script>
 
     <script>
         $("#parallax").niceScroll({
