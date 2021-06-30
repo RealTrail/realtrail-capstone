@@ -1,8 +1,12 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.Event;
+import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,21 +15,36 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.beans.EventSetDescriptor;
+import java.security.Principal;
+import java.util.List;
+
 @Controller
 public class UserController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
     private ValidationService validationService;
+    private EventsRepository eventsDao;
+    private UserService userService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService, EventsRepository eventsDao, UserService userService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
         this.validationService = validationService;
+        this.eventsDao = eventsDao;
+        this.userService = userService;
     }
 
     @GetMapping("/")
-    public String showHomePage() {
-        return "home";
+    public String showHomePage(Model model, Principal principal) {
+        if(principal != null) {
+            User user = userService.getLoggedInUser();
+            List<Event> eventsList = eventsDao.findAll();
+            model.addAttribute("events", eventsList);
+            return "home";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     @GetMapping("/signup")
@@ -75,5 +94,6 @@ public class UserController {
             return "redirect:/login";
         }
     }
+
 
 }
