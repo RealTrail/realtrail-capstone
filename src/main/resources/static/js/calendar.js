@@ -2,10 +2,11 @@
 
     // Display the calendar
     document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = $('#calendar');
-    var calendarEvent = $("#Event").value;
+    var calendarEl = document.getElementById('calendar');
+    var calendarEvent = $("#Event").val();
     var displayDiv = $(".displayed-event");
-    var displayBucket = [];
+        console.log(displayDiv);
+        var displayBucket = [];
 
     displayDiv.each(function (index){
         var ID = ($(this).children().eq(0));
@@ -25,14 +26,20 @@
         };
         displayBucket.push(eventDisplay);
     })
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+        console.log(displayBucket);
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: 'prevYear,prev,next,nextYear today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek,dayGridDay'
+            },
+            timeZone: "UTC",
         initialView: 'dayGridMonth',
         events: displayBucket
-
 });
-    calendar.render();
-    // calendar.updateSize();
+        console.log(calendar);
+        calendar.render();
+
 });
 
 //display the title of the event, the time
