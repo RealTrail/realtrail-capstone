@@ -17,35 +17,29 @@ INSERT INTO interests(interest) VALUES
    ('Road Biking');
 
 
-# INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
-# VALUES
-#     (1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
-#     (2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
+VALUES
+    (1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
+    (2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
 
 INSERT INTO trails(id, name, difficulty_level, rating, length, elevation, type, trail_details)
 VALUES
-  (1, 'Joe Johnston Route Trail',
-   'Moderate',
-   4.4,
-   9.3,
-   652,
-   'Loop',
-   'Government Canyon State Natural Area charges an entrance fee per adult, while children 12 and under are free. Reservations can be made at https://tpwd.texas.gov/state-parks/government-canyon
+       (1, 'Joe Johnston Route Trail',
+       'Moderate',
+       4.4,
+       9.3,
+       652,
+       'Loop',
+       'Government Canyon State Natural Area charges an entrance fee per adult, while children 12 and under are free. Reservations can be made at https://tpwd.texas.gov/state-parks/government-canyon. Trails may close due to poor conditions or weather. Check out their Facebook accounts (https://www.facebook.com/TPWDGCSNA/) for the latest trail reports, or call the park. Nice Point to Point trail. Dinosaur footprints recently found has added to the traffic. Rocky, mild elevations pretty canyon where the footprints were discovered.'),
+        (2, 'Crownridge Canyon Bear Grass Trail',
+        'Moderate',
+        4.0,
+        1.8,
+        150,
+        'Loop',
+        'Nice little trail. Narrow in some areas. Clearly marked though.
 
-   Trails may close due to poor conditions or weather. Check out their Facebook accounts (https://www.facebook.com/TPWDGCSNA/) for the latest trail reports, or call the park.
-
-   Nice Point to Point trail. Dinosaur footprints recently found has added to the traffic.
-
-   Rocky, mild elevations pretty canyon where the footprints were discovered.'),
-(2, 'Crownridge Canyon Bear Grass Trail',
-    'Moderate',
-    4.0,
-    1.8,
-    150,
-    'Loop',
-    'Nice little trail. Narrow in some areas. Clearly marked though.
-
-    You''ll see the marker for Bear Grass at the top of the Red Oak trail. It goes off the pavement into natural terrain. Steep in areas and muddy after rain.'),
+        You''ll see the marker for Bear Grass at the top of the Red Oak trail. It goes off the pavement into natural terrain. Steep in areas and muddy after rain.'),
        (3, 'Apache Creek Greenway',
 'Moderate',
         3.5,
@@ -99,7 +93,7 @@ VALUES
         -stay on designated trails
         -pedestrians only please; roller blades, skateboards, scooters, bicycles, etc., are not allowed
         -to protect the endangered species, pets, including dogs, are not allowed'),
-       (8, 'Salado Greenway Trail North from Hardberger Park',
+       (8, 'Salado Greenway Trail',
         'Moderate',
         4.3,
         10.8,
@@ -213,4 +207,4 @@ When you visit the missions, be careful. These are historic structures and the m
         1.4,
         16,
         'Loop',
-        'Woodlawn Lake Loop is a 1.4 mile moderately trafficked loop trail located near San Antonio, Texas that features a lake and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips and is accessible year-round. Dogs are also able to use this trail.')
+        'Woodlawn Lake Loop is a 1.4 mile moderately trafficked loop trail located near San Antonio, Texas that features a lake and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips and is accessible year-round. Dogs are also able to use this trail.');

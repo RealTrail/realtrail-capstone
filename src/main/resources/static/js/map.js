@@ -4,9 +4,7 @@ $(document).ready(() => {
 
     $("form .trailOption").on('change', () => {
 
-        let isExisted = $("input[name='trailOption']:checked").val() === "existing trail";
-
-        if (isExisted) { // user chooses to pick an existing trail
+        if ($("input[name='trailOption']:checked").val() === "existing trail") { // user chooses to pick an existing trail
             $("div.trailOptions").show();
             $("div.trailOptions").on('change', () => {
                 let selectedTrail = $("#trailOptions").find(":selected").text();

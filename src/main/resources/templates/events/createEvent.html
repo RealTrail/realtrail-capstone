@@ -50,15 +50,7 @@
 
             <div class="trailOptions">
                 <select id="trailOptions">
-                    <option>-- Select An Existing Trail --</option>
-                    <option>Woodlawn Lake Loop</option>
-                    <option>Tom Slick Community</option>
-                    <option>Leon Creek Greenway</option>
-                    <option>San Antonio River Walk Mission Reach Trail</option>
-                    <option>Wilderness and Wildlife Trails</option>
-                    <option>McGimsey Scout Trail</option>
-                    <option>Bluff Trail and Old Tower Climb Trail</option>
-                    <option>Walker Ranch Loop Trail</option>
+                    <option th:each="trail : ${trails}" th:value="${trail.name}" th:text="${trail.name}"></option>
                 </select>
             </div>
             <div>
