@@ -15,7 +15,7 @@ public class Trail {
     private String name;
 
     @Column(nullable = false)
-    private float difficultyLevel;
+    private String difficultyLevel;
 
     @Column
     private float rating;
@@ -45,7 +45,7 @@ public class Trail {
     public Trail() {
     }
 
-    public Trail(String name, float difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.rating = rating;
@@ -58,7 +58,7 @@ public class Trail {
         this.trailComments = trailComments;
     }
 
-    public Trail(long id, String name, float difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -88,10 +88,10 @@ public class Trail {
         this.name = name;
     }
 
-    public float getDifficultyLevel() {
+    public String getDifficultyLevel() {
         return difficultyLevel;
     }
-    public void setDifficultyLevel(float difficultyLevel) {
+    public void setDifficultyLevel(String difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
 
