@@ -49,6 +49,9 @@ public class EventController {
     @GetMapping("/create")
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
+            // get all the trail names in the db
+
+
             model.addAttribute("event", new Event());
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);

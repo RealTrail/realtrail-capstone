@@ -44,11 +44,33 @@
                 <label for="eventDetails">Event Details</label>
                 <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
             </div>
-
             <div>
-                <label for="mapSearch"></label>
-                <input type="text" id="mapSearch" name="mapSearch">
-                <button type="button"><i class="far fa-search"></i></button>
+                Choose your trail
+                <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
+                <label for="trailOption1">Choose an existing trail</label>
+                <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="Customize trail">
+                <label for="trailOption2">Customize your own trail</label>
+            </div>
+            <!--                dropdown menu-->
+            <div>
+                <button type="button">
+                    Existing Trails
+                </button>
+                <div>
+                    <div>Woodlawn Lake Loop</div>
+                    <div>Tom Slick Community</div>
+                    <div>Leon Creek Greenway</div>
+                    <div>San Antonio River Walk Mission Reach Trail</div>
+                    <div>Wilderness and Wildlife Trails</div>
+                    <div>McGimsey Scout Trail</div>
+                    <div>Bluff Trail and Old Tower Climb Trail</div>
+                    <div>Walker Ranch Loop Trail</div>
+                </div>
+            </div>
+            <div>
+                <label for="searchedName"></label>
+                <input type="text" id="searchedName" name="mapSearch">
+                <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
             </div>
             <div id="map" style="height: 500px; width: 600px"></div>
             <div>
