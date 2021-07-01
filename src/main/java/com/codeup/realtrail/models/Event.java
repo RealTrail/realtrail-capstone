@@ -36,11 +36,11 @@ public class Event {
     @JoinColumn (name = "trail_id")
     private Trail trail;
 
-    @Column(nullable = false, length = 150)
+    @Column(length = 150)
 //    @NotBlank(message = "Events must have a meet location")
     private String meetLocation;
 
-    @Column(nullable = false, length = 12)
+    @Column(length = 12)
 //    @NotBlank(message = "Events must have a meet time")
     private LocalTime meetTime;
 
