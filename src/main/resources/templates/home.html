@@ -17,7 +17,7 @@
 
         <!--        getting all hidden value for event-->
         <div class="displayed-event" th:each="event: ${events}">
-<!--            <input type="hidden" th:value="${event.id}">-->
+            <input type="hidden" th:value="${event.id}">
             <input type="hidden" th:value="${event.name}">
 <!--            <input type="hidden" th:value="${event.location}">-->
             <input type="hidden" th:value="${event.time}">
