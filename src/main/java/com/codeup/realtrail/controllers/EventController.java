@@ -1,5 +1,7 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.daos.MapPointsRepository;
+import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
@@ -8,7 +10,6 @@ import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.StringService;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +20,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class EventController {
     private EventsRepository eventsDao;
-    private UsersRepository usersDao;
-    private final StringService stringService;
+    private TrailsRepository trailsDao;
+    private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
 
@@ -38,10 +40,10 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, UsersRepository usersDao, StringService stringService, EmailService emailService, UserService userService) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService) {
         this.eventsDao = eventsDao;
-        this.usersDao = usersDao;
-        this.stringService = stringService;
+        this.trailsDao = trailsDao;
+        this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
     }
@@ -50,10 +52,12 @@ public class EventController {
     @GetMapping("/create")
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
-            // get all the trail names in the db
-
-
+            // get all the trails and mapPoints
+            List<Trail> trailList = trailsDao.findAll();
+            List<MapPoints> mapPointsList = mapPointsDao.findAll();
             model.addAttribute("event", new Event());
+            model.addAttribute("trails", trailList);
+            model.addAttribute("mapPoints", mapPointsList);
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);
             return "events/createEvent";

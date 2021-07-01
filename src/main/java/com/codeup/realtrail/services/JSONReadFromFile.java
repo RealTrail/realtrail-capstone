@@ -1,25 +1,19 @@
 package com.codeup.realtrail.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.DataInput;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class JSONReadFromFile {
     private static FileWriter file;
 
-    @SuppressWarnings("unchecked")
-    public static void main(String[] args) {
+    public static void filterData(String fileName, String newFileName, String searchedTrail) {
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("/Users/shan/IdeaProjects/realtrail/data/SA-path.geojson"));
+            Object obj = parser.parse(new FileReader(fileName));
 
             // A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
             JSONObject jsonObject = (JSONObject) obj;
@@ -34,7 +28,7 @@ public class JSONReadFromFile {
                 JSONObject properties = (JSONObject) path.get("properties");
                 String name = (String) properties.get("name");
                 if(name != null) {
-                    if (name.contains("Trail") || name.contains("trail")) {
+                    if (name.contains(searchedTrail)) {
                         trails.add(path);
                         i++;
                     }
@@ -52,7 +46,7 @@ public class JSONReadFromFile {
 
             try {
                 // write the filtered data into a new file
-                file = new FileWriter("/Users/shan/IdeaProjects/realtrail/data/SATrails.geojson");
+                file = new FileWriter(newFileName);
                 file.write(jsonObject.toJSONString());
                 file.close();
             } catch (Exception e) {
@@ -61,5 +55,13 @@ public class JSONReadFromFile {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void main(String[] args) {
+//        filterData("/Users/shan/IdeaProjects/realtrail/data/SA-path.geojson", "/Users/shan/IdeaProjects/realtrail/data/SATrails.geojson", "Trail");
+//        filterData("/Users/shan/IdeaProjects/realtrail/data/SA-path.geojson", "/Users/shan/IdeaProjects/realtrail/data/salado-creek-greenway-trail.geojson", "Salado Creek Greenway Trail");
+//        filterData("/Users/shan/IdeaProjects/realtrail/data/export.geojson", "/Users/shan/IdeaProjects/realtrail/data/SATrails2.geojson", "Trail");
+
     }
 }

@@ -11,10 +11,10 @@ public class MapPoints {
     private long id;
 
     @Column
-    private float longitude;
+    private double longitude;
 
     @Column
-    private float latitude;
+    private double latitude;
 
     @Column
     private String mapDetails;
@@ -24,6 +24,17 @@ public class MapPoints {
 
     //constructors
     public MapPoints() {
+    }
+
+    public MapPoints(double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    public MapPoints(double longitude, double latitude, Trail trail) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.trail = trail;
     }
 
     public MapPoints(float longitude, float latitude, String mapDetails, Trail trail) {
@@ -50,17 +61,17 @@ public class MapPoints {
         this.id = id;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
