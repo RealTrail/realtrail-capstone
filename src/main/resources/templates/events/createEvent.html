@@ -10,6 +10,13 @@
 
 <main style="margin: 5rem">
     <h1>Create an Event</h1>
+    <div id="trails" th:each="trail : ${trails}">
+        <input type="hidden" class="name" th:value="${trail.name}">
+    </div>
+    <div class="mapPoints" th:each="mapPoints : ${mapPoints}">
+        <input type="hidden" class="lng" th:name="${mapPoints.trail.id}" th:value="${mapPoints.longitude}">
+        <input type="hidden" class="lat" th:name="${mapPoints.trail.id}" th:value="${mapPoints.latitude}">
+    </div>
     <form th:action="@{/create}" th:method="POST" th:object="${event}">
         <fieldset>
             <div>
@@ -24,10 +31,6 @@
                 <label for="eventTime">Time</label>
                 <input type="time" name="eventTime" id="eventTime" />
             </div>
-<!--            <div>-->
-<!--                <label for="location">Location/Trail Name</label>-->
-<!--                <input type="text" name="location" id="location" th:field="*{location}" />-->
-<!--            </div>-->
             <div>
                 <label for="meetLocation">Meet Location</label>
                 <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
@@ -50,7 +53,7 @@
 
             <div class="trailOptions">
                 <select id="trailOptions">
-                    <option th:each="trail : ${trails}" th:value="${trail.name}" th:text="${trail.name}"></option>
+                    <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
                 </select>
             </div>
             <div>

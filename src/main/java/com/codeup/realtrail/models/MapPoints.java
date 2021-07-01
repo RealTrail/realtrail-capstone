@@ -26,6 +26,11 @@ public class MapPoints {
     public MapPoints() {
     }
 
+    public MapPoints(double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
     public MapPoints(double longitude, double latitude, Trail trail) {
         this.longitude = longitude;
         this.latitude = latitude;

@@ -1,5 +1,6 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.daos.EventsRepository;
@@ -19,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,7 @@ import java.util.List;
 public class EventController {
     private EventsRepository eventsDao;
     private TrailsRepository trailsDao;
+    private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
 
@@ -37,9 +40,10 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, EmailService emailService, UserService userService) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
+        this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
     }
@@ -48,10 +52,12 @@ public class EventController {
     @GetMapping("/create")
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
-            // get all the trails
+            // get all the trails and mapPoints
             List<Trail> trailList = trailsDao.findAll();
+            List<MapPoints> mapPointsList = mapPointsDao.findAll();
             model.addAttribute("event", new Event());
             model.addAttribute("trails", trailList);
+            model.addAttribute("mapPoints", mapPointsList);
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);
             return "events/createEvent";
