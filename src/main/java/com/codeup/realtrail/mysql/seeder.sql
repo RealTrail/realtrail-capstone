@@ -16,12 +16,6 @@ INSERT INTO interests(interest) VALUES
    ('Mountain Biking'),
    ('Road Biking');
 
-
-INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
-VALUES
-    (1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
-    (2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
-
 INSERT INTO trails(id, name, difficulty_level, rating, length, elevation, type, trail_details)
 VALUES
        (1, 'Joe Johnston Route Trail',
@@ -208,3 +202,8 @@ When you visit the missions, be careful. These are historic structures and the m
         16,
         'Loop',
         'Woodlawn Lake Loop is a 1.4 mile moderately trafficked loop trail located near San Antonio, Texas that features a lake and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips and is accessible year-round. Dogs are also able to use this trail.');
+
+INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
+VALUES
+(1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
+(2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
