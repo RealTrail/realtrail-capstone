@@ -24,7 +24,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if (user.getProfileImageUrl() == null) {
             response.sendRedirect("/profile/settings");
         } else {
-            response.sendRedirect("/profile");
+            response.sendRedirect("/");
         }
     }
 }
