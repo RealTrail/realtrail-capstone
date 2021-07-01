@@ -11,25 +11,25 @@ public class Trail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false)
     private String difficultyLevel;
 
-    @Column
+    @Column(nullable = false)
     private float rating;
 
     @Column(nullable = false)
     private float length;
 
-    @Column
+    @Column(nullable = false)
     private float elevation;
 
     @Column(nullable = false)
     private String type;
 
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT", nullable = false)
     private String trailDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
@@ -43,19 +43,6 @@ public class Trail {
 
     // constructors
     public Trail() {
-    }
-
-    public Trail(String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
-        this.name = name;
-        this.difficultyLevel = difficultyLevel;
-        this.rating = rating;
-        this.length = length;
-        this.elevation = elevation;
-        this.type = type;
-        this.trailDetails = trailDetails;
-        this.events = events;
-        this.trailImages = trailImages;
-        this.trailComments = trailComments;
     }
 
     public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
@@ -72,7 +59,19 @@ public class Trail {
         this.trailComments = trailComments;
     }
 
-    // getters and setters
+    public Trail(String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+        this.name = name;
+        this.difficultyLevel = difficultyLevel;
+        this.rating = rating;
+        this.length = length;
+        this.elevation = elevation;
+        this.type = type;
+        this.trailDetails = trailDetails;
+        this.events = events;
+        this.trailImages = trailImages;
+        this.trailComments = trailComments;
+    }
+// getters and setters
 
     public long getId() {
         return id;

@@ -28,7 +28,12 @@ public class TrailController{
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-
+    public TrailController(TrailsRepository trailsDao, EventsRepository eventsDao) {
+        this.trailsDao = trailsDao;
+        this.eventsDao = eventsDao;
+//        this.filestackApi = filestackApi;
+//        this.mapboxToken = mapboxToken;
+    }
 
     // showTrail.html- shows individual trail with all trail details
     @GetMapping("/trails/{id}")

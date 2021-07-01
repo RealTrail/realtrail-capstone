@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface TrailsRepository extends JpaRepository<Trail, Long> {
     Trail findTrailByName(String name);
+    Trail findTrailById(Long id);
 
     List<Trail> findAllByDifficultyLevel(String difficultyLevel);
 

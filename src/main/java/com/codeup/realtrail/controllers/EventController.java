@@ -51,7 +51,7 @@ public class EventController {
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
             // get all the trail names in the db
-
+            User user = userService.getLoggedInUser(); //was on previous event controller
 
             model.addAttribute("event", new Event());
             model.addAttribute("fileStackApi", filestackApi);
@@ -63,11 +63,11 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public String saveCreatedEvent(@ModelAttribute Event event,
+    public String saveCreatedEvent(@ModelAttribute Event event, Model model,
                                    @RequestParam (name = "eventDate") String eventDate,
                                    @RequestParam(name = "eventMeetTime") String eventMeetTime,
-                                   @RequestParam (name = "eventTime") String eventTime,
-                                   Model model) throws ParseException {
+                                   @RequestParam (name = "eventTime") String eventTime
+                                   ) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
@@ -77,6 +77,7 @@ public class EventController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);
         LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
 
         event.setTime(LocalTime.parse(eventTime));
         event.setMeetTime(LocalTime.parse(eventMeetTime));

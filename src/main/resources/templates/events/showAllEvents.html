@@ -6,9 +6,9 @@
 <body>
     <nav th:replace="/fragments/navbar :: navbar"></nav>
 
-    <main>
+    <main class="m-5">
         <div th:if="${noEventsFound}">
-            <p>No events were found.</p>
+            <h1>No events were found.</h1>
         </div>
         <h2>Review the list for trail events happening near you!</h2>
         <h4>Click the event for more details</h4>
