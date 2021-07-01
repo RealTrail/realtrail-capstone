@@ -51,7 +51,7 @@ public class EventController {
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
             // get all the trail names in the db
-            User user = userService.getLoggedInUser(); //was on previous event controller
+//            User user = userService.getLoggedInUser(); //was on previous event controller
 
             model.addAttribute("event", new Event());
             model.addAttribute("fileStackApi", filestackApi);
@@ -70,6 +70,11 @@ public class EventController {
                                    ) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
+
+//        String sDate1= eventDate;
+//
+//        Date date1=new SimpleDateFormat("MM/dd/yyyy").parse(sDate1);
+//        System.out.println(sDate1+"\t"+date1);
 
         event.setOwner(loggedInUser);
         System.out.println(eventDate);

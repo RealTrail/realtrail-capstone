@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head :: head">
+<!--<head>-->
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <meta name="mapboxToken" th:content="${mapboxToken}">
     <title>Create Event</title>
 </head>
 <body>
-<nav th:replace="/fragments/navbar :: navb  ar"></nav>
+<nav th:replace="/fragments/navbar :: navbar"></nav>
+
 
 <main style="margin: 5rem">
     <h1>Create an Event</h1>
@@ -18,16 +20,16 @@
             </div>
             <div>
                 <label for="eventDate">Date</label>
-                <input type="date" name="eventDate" id="eventDate" />
+                <input type="date" name="eventDate" id="eventDate"/>
             </div>
             <div>
                 <label for="eventTime">Time</label>
                 <input type="time" name="eventTime" id="eventTime" />
             </div>
-<!--            <div>-->
-<!--                <label for="location">Location/Trail Name</label>-->
-<!--                <input type="text" name="location" id="location" th:field="*{location}" />-->
-<!--            </div>-->
+            <div>
+                <label for="location">Location/Trail Name</label>
+                <input type="text" name="location" id="location" th:field="*{location}" />
+            </div>
             <div>
                 <label for="meetLocation">Meet Location</label>
                 <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
@@ -67,11 +69,11 @@
                 <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
             </div>
             <div id="map" style="height: 500px"></div>
-            <div>
-                <button type="button" id="images">Upload images</button>
-                <input type="hidden" name="images" th:field="*{images}" />
-                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
-            </div>
+<!--            <div>-->
+<!--                <button type="button" id="images">Upload images</button>-->
+<!--                <input type="hidden" name="images" th:field="*{images}" />-->
+<!--                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>-->
+<!--            </div>-->
             <button type="submit" id="createEvent">Submit</button>
         </fieldset>
     </form>

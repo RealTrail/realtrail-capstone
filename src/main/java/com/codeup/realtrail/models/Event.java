@@ -1,6 +1,8 @@
 package com.codeup.realtrail.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -11,16 +13,16 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, length = 100)
-//    @NotBlank(message = "Events must have a name")
-//    @Size(min = 6, message = "A name must be at least 6 characters.")
+    @Column(length = 100)
+    @NotBlank(message = "Events must have a name")
+    @Size(min = 6, message = "A name must be at least 6 characters.")
     private String name;
 
-    @Column(nullable = false, length = 12)
+    @Column(length = 12)
 //    @NotBlank(message = "Events must have a date")
     private LocalDate date;
 
-    @Column(nullable = false, length = 6)
+    @Column(length = 6)
 //    @NotBlank(message = "Events must have a time")
     private LocalTime time;
 
