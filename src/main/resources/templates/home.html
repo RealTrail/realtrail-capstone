@@ -128,7 +128,26 @@
                     <div>
                         <div class="slide-wrap">
                             <div class="image"></div>
-                            <p>Itaque architecto earum blanditiis corrupti nobis neque, et eligendi totam ipsa sunt molestias inventore</p>
+                            <form th:action="@{/trails}" method="GET">
+                                <button th:type="submit">Trails In Your Area</button>
+                            </form>
+
+                            <form th:action="@{/search}" method="GET">
+                                <label>View realTrails by category</label>
+                                <div class="trailCategories">
+                                    <label for="trailCategories">Trail Categories</label>
+                                    <select id="trailCategories">
+                                        <option>-- Select A Category --</option>
+                                        <option>Rating</option>
+                                        <option>Difficulty Level</option>
+                                        <option>Length in Miles</option>
+                                        <option>Route Type</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <form th:action="@{/trails}" method="GET">
+                                <button th:type="submit">Map View All Trails</button>
+                            </form>
                         </div>
                     </div>
                     <div>
