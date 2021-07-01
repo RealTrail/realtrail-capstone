@@ -4,11 +4,11 @@
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <meta name="mapboxToken" th:content="${mapboxToken}">
     <title>Create Event</title>
-<!--    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />-->
 </head>
 <body>
-<main>
-    <nav th:replace="/fragments/navbar :: navbar"></nav>
+<nav th:replace="/fragments/navbar :: navbar"></nav>
+
+<main style="margin: 5rem">
     <h1>Create an Event</h1>
     <form th:action="@{/create}" th:method="POST" th:object="${event}">
         <fieldset>
@@ -24,17 +24,13 @@
                 <label for="eventTime">Time</label>
                 <input type="time" name="eventTime" id="eventTime" />
             </div>
-            <div>
-                <label for="location">Location</label>
-                <input type="text" name="location" id="location" th:field="*{location}" />
-            </div>
-            <div>
-                <label for="eventTrail">Trailhead</label>
-                <input type="text" name="eventTrail" id="eventTrail" />
-            </div>
+<!--            <div>-->
+<!--                <label for="location">Location/Trail Name</label>-->
+<!--                <input type="text" name="location" id="location" th:field="*{location}" />-->
+<!--            </div>-->
             <div>
                 <label for="meetLocation">Meet Location</label>
-                <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" />
+                <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
             </div>
             <div>
                 <label for="eventMeetTime">Meet Time</label>
@@ -48,31 +44,29 @@
                 Choose your trail
                 <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
                 <label for="trailOption1">Choose an existing trail</label>
-                <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="Customize trail">
+                <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
                 <label for="trailOption2">Customize your own trail</label>
             </div>
-            <!--                dropdown menu-->
-            <div>
-                <button type="button">
-                    Existing Trails
-                </button>
-                <div>
-                    <div>Woodlawn Lake Loop</div>
-                    <div>Tom Slick Community</div>
-                    <div>Leon Creek Greenway</div>
-                    <div>San Antonio River Walk Mission Reach Trail</div>
-                    <div>Wilderness and Wildlife Trails</div>
-                    <div>McGimsey Scout Trail</div>
-                    <div>Bluff Trail and Old Tower Climb Trail</div>
-                    <div>Walker Ranch Loop Trail</div>
-                </div>
+
+            <div class="trailOptions">
+                <select id="trailOptions">
+                    <option>-- Select An Existing Trail --</option>
+                    <option>Woodlawn Lake Loop</option>
+                    <option>Tom Slick Community</option>
+                    <option>Leon Creek Greenway</option>
+                    <option>San Antonio River Walk Mission Reach Trail</option>
+                    <option>Wilderness and Wildlife Trails</option>
+                    <option>McGimsey Scout Trail</option>
+                    <option>Bluff Trail and Old Tower Climb Trail</option>
+                    <option>Walker Ranch Loop Trail</option>
+                </select>
             </div>
             <div>
                 <label for="searchedName"></label>
                 <input type="text" id="searchedName" name="mapSearch">
                 <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
             </div>
-            <div id="map" style="height: 500px; width: 600px"></div>
+            <div id="map" style="height: 500px"></div>
             <div>
                 <button type="button" id="images">Upload images</button>
                 <input type="hidden" name="images" th:field="*{images}" />

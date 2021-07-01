@@ -1,30 +1,37 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.Event;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class UserController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
     private ValidationService validationService;
+    private EventsRepository eventsDao;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService, EventsRepository eventsDao) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
         this.validationService = validationService;
+        this.eventsDao = eventsDao;
     }
 
     @GetMapping("/")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        List<Event> eventsList = eventsDao.findAll();
+        model.addAttribute("events", eventsList);
         return "home";
     }
 
@@ -75,5 +82,6 @@ public class UserController {
             return "redirect:/login";
         }
     }
+
 
 }
