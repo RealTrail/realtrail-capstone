@@ -9,19 +9,19 @@
         var displayBucket = [];
 
     displayDiv.each(function (index){
-        var ID = ($(this).children().eq(0));
-        var name = ($(this).children().eq(1));
-        var location = ($(this).children().eq(2));
-        var time = ($(this).children().eq(3));
-        var meetTime = ($(this).children().eq(4));
-        var date = ($(this).children().eq(5));
+        // var ID = ($(this).children().eq(0));
+        var name = ($(this).children().eq(0));
+        var location = ($(this).children().eq(1));
+        var time = ($(this).children().eq(2));
+        // var meetTime = ($(this).children().eq(4));
+        var date = ($(this).children().eq(3));
 
         var eventDisplay = {
-            "id": ID.val(),
-            "name": name.val(),
-            "location": location.val(),
-            "time": time.val(),
-            "meetTime": meetTime.val(),
+            // "id": ID.val(),
+            "title": name.val(),
+            // "description": location.val(),
+            "start": time.val(),
+            // "meetTime": meetTime.val(),
             "date": date.val(),
         };
         displayBucket.push(eventDisplay);
@@ -33,8 +33,15 @@
                 center: 'title',
                 right: 'dayGridMonth,dayGridWeek,dayGridDay'
             },
-            timeZone: "UTC",
         initialView: 'dayGridMonth',
+        navLinks: true,
+        dayMaxEventRows: true,
+        views:{
+                timeGrid:{
+                    dayMaxEventRows: 6
+                }
+        },
+        textColor: 'black',
         events: displayBucket
 });
         console.log(calendar);
