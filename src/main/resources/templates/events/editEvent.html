@@ -12,6 +12,7 @@
 
     <fieldset>
         <form th:action="@{/events/{id}/edit(id=${event.getId()})}" th:object="${event}" method="POST">
+            <div th:value="${event.id}"><p>Event Id</p></div>
             <div>
                 <label for="name">name</label>
                 <input type="text" name="name" id="name" th:value="${event.name}"/>
@@ -47,9 +48,9 @@
             </div>
             <button>Submit Edits</button>
         </form>
-        <form th:action="@{/events/{id}/delete(id=${event.getId()})}" th:method="POST">
-            <button class="btn btn-danger">Delete Event</button>
-        </form>
+            <a href="/events/{id}/delete(id=${event.getId()})}">
+                <button class="btn btn-danger">Delete Event</button>
+            </a>
     </fieldset>
 </main>
 <footer th:replace="/fragments/footer :: footer"></footer>

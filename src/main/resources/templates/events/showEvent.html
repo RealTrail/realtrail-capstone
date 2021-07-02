@@ -25,6 +25,15 @@
         <div>participants:<h4 th:text="${event.participants}"></h4></div>
         <div>images:<h4 th:text="${event.images}"></h4></div>
     </div>
+
+    <div>
+        <h2>Click the update link to edit your event</h2>
+        <a href="/events/{id}/edit">Update</a>
+    </div>
+    <form th:action="@{/events/{id}/delete}" method="POST">
+        <h2>Click the update button to edit your event</h2>
+        <button th:type="submit">update</button>
+    </form>
 </div>
 <footer th:replace="/fragments/footer :: footer"></footer>
 </body>

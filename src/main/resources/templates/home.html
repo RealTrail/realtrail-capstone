@@ -119,9 +119,8 @@
                                     <button th:type="submit">Create Event</button>
                                 </form>
 
-                                <form th:action="@{/events/edit}" method="get">
-                                    <button th:type="submit">Edit Event</button>
-                                </form>
+
+
                             </div>
                         </div>
                     </div>
@@ -145,8 +144,12 @@
                                     </select>
                                 </div>
                             </form>
+                            <div th:action="@{/events/{id}/edit}">
+                                <h2>Click button to view your events</h2>
+                                <button th:type="submit">update</button>
+                            </div>
                             <form th:action="@{/trails}" method="GET">
-                                <button th:type="submit">Map View All Trails</button>
+                                <button th:type="submit">View All Your Events</button>
                             </form>
                         </div>
                     </div>

@@ -71,10 +71,7 @@ public class EventController {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
-//        String sDate1= eventDate;
-//
-//        Date date1=new SimpleDateFormat("MM/dd/yyyy").parse(sDate1);
-//        System.out.println(sDate1+"\t"+date1);
+
 
         event.setOwner(loggedInUser);
         System.out.println(eventDate);
@@ -91,7 +88,7 @@ public class EventController {
         System.out.println(newDate);
 
         Event saveEvent = eventsDao.save(event);
-        emailService.prepareAndSend(event,"new event created", event.getName());
+//        emailService.prepareAndSend(event,"new event created", event.getName());
         model.addAttribute("event", event);
 
         return "redirect:/events/" + saveEvent.getId();
@@ -117,11 +114,29 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}/edit")
-    public String showEditEvent(Model model, @PathVariable Long id){
-        Event eventToEdit = eventsDao.getById(id);
+    public String showEditEvent(Model model) {
+        Event event = userService.getLoggedInOwner();
+        Event eventToEdit = eventsDao.getById(event.getId());
+        eventsDao.save(event);
         model.addAttribute("event", eventToEdit);
         return "events/editEvent";
     }
+
+    @PostMapping("/events/{id}edit")
+    public String saveEditedEvent(@ModelAttribute Event event, Model model
+    ){
+        // connect user to new event being created
+        User loggedInUser = userService.getLoggedInUser();
+        event.setOwner(loggedInUser);
+        System.out.println(loggedInUser.getUsername());
+
+        eventsDao.save(event);
+        List<Event> ownersEvents = eventsDao.findByOwner(loggedInUser);
+//        model.addAttribute("noEventsFound", ownersEvents.size() == 0);
+        model.addAttribute("events", ownersEvents);
+        return "events/showEvent";
+    }
+
 
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id){
@@ -129,11 +144,11 @@ public class EventController {
         return "redirect:/events/showAllEvents";
     }
 
-    @GetMapping("/search")
-    public String searchByName(Model model, @RequestParam(name = "term") String term){
-        List<Event> events = eventsDao.searchByName(term);
-        model.addAttribute("events", events);
-        return "events/showAllEvents";
-    }
+//    @GetMapping("/search")
+//    public String searchByName(Model model, @RequestParam(name = "term") String term){
+//        List<Event> events = eventsDao.searchByName(term);
+//        model.addAttribute("events", events);
+//        return "events/showAllEvents";
+//    }
 
 }
