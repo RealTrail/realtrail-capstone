@@ -7,6 +7,8 @@
 //     }
 // }
 
+
+
 // ******************************************** NAV *************************************
 
 
@@ -255,33 +257,38 @@ Strut.isRetina = window.devicePixelRatio > 1.3, Strut.mobileViewportWidth = 670,
 }, Strut.supports.pointerEvents || Strut.load.css("v3/shared/navigation_ie10.css"), Strut.ready(function () {
     new globalNavDropdowns(".globalNav"), new globalNavPopup(".globalNav .navSection.mobile"), new globalNavPopup(".globalFooterNav .select.country"), new globalNavPopup(".globalFooterNav .select.language")
 });
-window.addEventListener('DOMContentLoaded', (event) => {
-    var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-    btn.onclick = function () {
-        modal.style.display = "block";
+// ******************** MODAL JS *******************
 
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+// Click function for show the Modal
+
+$("#myBtn").on("click", function(){
+    $(".mask").addClass("active");
+});
+
+// Function for close the Modal
+
+function closeModal(){
+    $(".mask").removeClass("active");
+}
+
+// Call the closeModal function on the clicks/keyboard
+
+$(".close, .mask").on("click", function(){
+    closeModal();
+});
+
+$(document).keyup(function(e) {
+    if (e.keyCode === 27) {
+        closeModal();
     }
 });
 
 
-// When the user clicks on <span> (x), close the modal
+// ******************** MODAL JS *******************
 
 
-// When the user clicks anywhere outside of the modal, close it
+
 
