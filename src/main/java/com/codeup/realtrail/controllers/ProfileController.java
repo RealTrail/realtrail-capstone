@@ -79,11 +79,8 @@ public class ProfileController {
     // set up ajax post request response
     @PostMapping("/profile/image")
     public @ResponseBody ResponseEntity<?> uploadImageResultViaAjax(
-            @Valid @RequestBody AjaxRequestBody requestBody,
-            Errors errors) {
+            @Valid @RequestBody AjaxRequestBody requestBody) {
         String profileImageUrl = requestBody.getProfileImageUrl();
-
-        System.out.println("profileImageUrl = " + profileImageUrl);
 
         AjaxResponseBody result = new AjaxResponseBody();
 
@@ -91,8 +88,7 @@ public class ProfileController {
             User user = userService.getLoggedInUser();
             user.setProfileImageUrl(profileImageUrl);
             usersDao.save(user);
-            System.out.println("user.getProfileImageUrl() = " + user.getProfileImageUrl());
-            result.setResult(user);
+            result.setUser(user);
             return ResponseEntity.ok(result);
         } else {
             result.setMsg("No image uploaded.");

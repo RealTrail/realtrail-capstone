@@ -4,39 +4,49 @@ import com.codeup.realtrail.models.User;
 
 public class AjaxResponseBody {
     String msg;
-    User result;
-    Event results;
+    User user;
+    Event event;
+    String mapPointsJson;
 
     public AjaxResponseBody() {
     }
 
-    public AjaxResponseBody(String msg, User result, Event results) {
+    public AjaxResponseBody(String msg, String mapPointsJson) {
         this.msg = msg;
-        this.result = result;
-        this.results = results;
+        this.mapPointsJson = mapPointsJson;
+    }
+
+    public AjaxResponseBody(String msg, User user, Event event) {
+        this.msg = msg;
+        this.user = user;
+        this.event = event;
     }
 
     public String getMsg() {
         return msg;
     }
-
     public void setMsg(String msg) {
         this.msg = msg;
     }
 
-    public User getResult() {
-        return result;
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setResult(User result) {
-        this.result = result;
+    public Event getEvent() {
+        return event;
+    }
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public Event getResults() {
-        return results;
+    public String getMapPointsJson() {
+        return mapPointsJson;
     }
-
-    public void setResults(Event results) {
-        this.results = results;
+    public void setMapPointsJson(String mapPointsJson) {
+        this.mapPointsJson = mapPointsJson;
     }
 }

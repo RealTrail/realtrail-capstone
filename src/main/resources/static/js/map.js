@@ -35,23 +35,18 @@ $(document).ready(() => {
                 console.log(location);
 
                 $.ajax({
-                    url: "/trails/" + selectedTrailId,
+                    url: "/map/" + selectedTrailId,
                     type: "GET",
                     dataType: 'json',
                     success: (response) => {
                         console.log(response);
                         // here you handle the response from server.
-                        // you can access the data returned doing something like:
-                        var id = response.id;
-                        var name = response.name;
+
                     },
                     error: (error) => {
                         console.log(error);
                     }
                 })
-
-                // get the selected trail coordinates
-                let coordinates = getSelectedTrailCoordinates(selectedTrailId, longitudeArr, latitudeArr);
 
                 // show the map around the location
                 geocode(location, mapboxToken).then((results) => {
