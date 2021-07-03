@@ -194,7 +194,7 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         47,
         'Point to point',
         'McAllister Park Red trail is connected to Blue trail and you can go to some other trails form here. Just be aware of mountain bikers.'),
-       (18, 'Olmos Basin Trail',
+       (18, 'Olmos Basin Loop Trail',
         'Easy',
         4.0,
         2.4,
@@ -224,41 +224,22 @@ When you visit the missions, be careful. These are historic structures and the m
         'Loop',
         'History, River, Plaza, Cathedral, Tower, Alamo, parks, Rivercenter, King William
 
-        This is a 15 mile long series of walkways that run along the San Antonio river, with shopping, dining and other attractions along the route. Walk on sidewalks at river-level & on west side of the River. The Walk ends at a wide stairs going up to old town square, Bexar County Courthouse, & San Fernando Cathedral. South on Soledad St. to Nueva St. & re-enter River Walk at the dam. Go to end & cross Guenther St. bridge. Pass thru King William homes & re-enter River Walk on east bank. Go to La Villita River Theatre. Through La Villita, Hemisfair Plaza, to Inst. of Texan Cultures & Tower. North to Commerce St., north on Alamo St. to The Alamo. Cross Alamo St. into River Center. Re-enter River Walk & north to footbridge. Right & back to bridge at dam. Right & north along east bank of river. Leave River Walk at Travis St. & follow to Travis Park. Diagonally across Park & follow Jefferson St. by war memorials & auditorium to Lexington. Left back to Sheraton');
-#        (17, 'Leon Creek Greenway: Ingram to Military Dr.',
-#         'Easy',
-#         4.3,
-#         4.0,
-#         78,
-#         'Out and back',
-#         'This is a clean and gentle paved trail, wide enough for bikers to pass each other, with nice forest scenery.’
-#
-#         Accessibility: There are 4 designated accessible spaces in the paved parking lot off of North Western at the north end of the trail. All of them are van-accessible with striped access aisles. There is 1 designated accessible space in the paved parking lot off of West Military Drive at the south end of the trail. It is van-accessible with striped access aisles.
-#
-#         The trail surface is paved concrete and smooth. It is typically at least 6 feet wide. The majority of the trail is estimated to be in the gentle (3% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users.'),
-#        (18, 'Leon Creek Greenway: Ingram to Cathedral Rock',
-#         'Moderate',
-#         4.5,
-#         4.9,
-#         190,
-#         'Out and back',
-#         'This is a concrete paved, well maintained out and back trail along the Leon Creek in San Antonio. There is ample free parking at both the Ingram Transit, and the Cathedral Rock trailheads.'),
-#        (19, 'Tom Slick Community',
-#         'Easy',
-#         4.1,
-#         1.2,
-#         19,
-#         'Loop',
-#         'It''s a good little park, one run around is half a mile, theres a beautiful pond right in the middle, its pretty and relaxing. There''s a little dog playground which is really cute, great for taking your dogs too to relieve them from some stay at home stress :), there''s also a kids playground.'''),
-#        (20, 'Woodlawn Lake Loop',
-#            'Easy',
-#         4.4,
-#         1.4,
-#         16,
-#         'Loop',
-#         'Woodlawn Lake Loop is a 1.4 mile moderately trafficked loop trail located near San Antonio, Texas that features a lake and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips and is accessible year-round. Dogs are also able to use this trail.');
+        This is a 15 mile long series of walkways that run along the San Antonio river, with shopping, dining and other attractions along the route. Walk on sidewalks at river-level & on west side of the River. The Walk ends at a wide stairs going up to old town square, Bexar County Courthouse, & San Fernando Cathedral. South on Soledad St. to Nueva St. & re-enter River Walk at the dam. Go to end & cross Guenther St. bridge. Pass thru King William homes & re-enter River Walk on east bank. Go to La Villita River Theatre. Through La Villita, Hemisfair Plaza, to Inst. of Texan Cultures & Tower. North to Commerce St., north on Alamo St. to The Alamo. Cross Alamo St. into River Center. Re-enter River Walk & north to footbridge. Right & back to bridge at dam. Right & north along east bank of river. Leave River Walk at Travis St. & follow to Travis Park. Diagonally across Park & follow Jefferson St. by war memorials & auditorium to Lexington. Left back to Sheraton'),
+       (21, 'Leon Creek Greenway Trail',
+        'Easy',
+        4.4,
+        12.3,
+        196,
+        'Point to point',
+        'Leon Creek Greenway Trail is a 12.3 mile heavily trafficked point-to-point trail located near Shavano Park, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for walking, running, and road biking and is accessible year-round. Dogs are also able to use this trail but must be kept on leash.
 
-# INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
-# VALUES
-# (1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
-# (2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+        The route shown on this page is the flat paved path along the creek. There are numerous dirt mountain biking and hiking trails off of this paved trail. Electric motor vehicles are reportedly not allowed on this trail, and you may get ticketed if you use them.
+
+Accessibility: There are 2 designated accessible spaces in the paved parking lot off of North Loop 1604 West at the north end of the trail. Both of them are van-accessible with striped access aisles. There are 4 designated accessible spaces in the paved parking lot off of North Western at the south end of the trail. All of them are van-accessible with striped access aisles.
+
+The trail surface is paved concrete and smooth. It is typically at least 8 feet wide. The majority of the trail is estimated to be in the mostly gentle (5% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users. ');
+
+INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
+VALUES
+(1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
+(2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);

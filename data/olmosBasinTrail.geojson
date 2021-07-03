@@ -36,7 +36,7 @@
         "bicycle": "designated",
         "foot": "designated",
         "highway": "path",
-        "name": "Olmos Basin Greenway Trail",
+        "name": "Olmos Basin Loop Trail",
         "surface": "concrete"
       },
       "geometry": {
@@ -647,7 +647,7 @@
         "bicycle": "designated",
         "foot": "designated",
         "highway": "path",
-        "name": "Olmos Basin Greenway Trail",
+        "name": "Olmos Basin Loop Trail",
         "surface": "concrete"
       },
       "geometry": {
@@ -718,7 +718,7 @@
         "foot": "designated",
         "highway": "path",
         "layer": "1",
-        "name": "Olmos Basin Greenway Trail",
+        "name": "Olmos Basin Loop Trail",
         "surface": "concrete"
       },
       "geometry": {
@@ -743,7 +743,7 @@
         "bicycle": "designated",
         "foot": "designated",
         "highway": "path",
-        "name": "Olmos Basin Greenway Trail",
+        "name": "Olmos Basin Loop Trail",
         "surface": "concrete"
       },
       "geometry": {
@@ -858,7 +858,7 @@
         "foot": "designated",
         "highway": "path",
         "layer": "1",
-        "name": "Olmos Basin Greenway Trail",
+        "name": "Olmos Basin Loop Trail",
         "surface": "concrete"
       },
       "geometry": {
@@ -883,7 +883,7 @@
         "bicycle": "designated",
         "foot": "designated",
         "highway": "path",
-        "name": "Olmos Basin Greenway Trail",
+        "name": "Olmos Basin Loop Trail",
         "surface": "concrete"
       },
       "geometry": {

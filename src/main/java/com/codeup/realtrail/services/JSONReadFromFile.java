@@ -57,11 +57,9 @@ public class JSONReadFromFile {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    // only need to run it once
     public static void main(String[] args) {
-//        filterData("/Users/shan/IdeaProjects/realtrail/data/SA-path.geojson", "/Users/shan/IdeaProjects/realtrail/data/SATrails.geojson", "Trail");
-//        filterData("/Users/shan/IdeaProjects/realtrail/data/SA-path.geojson", "/Users/shan/IdeaProjects/realtrail/data/salado-creek-greenway-trail.geojson", "Salado Creek Greenway Trail");
-//        filterData("/Users/shan/IdeaProjects/realtrail/data/export.geojson", "/Users/shan/IdeaProjects/realtrail/data/SATrails2.geojson", "Trail");
+//        filterData("/Users/shan/IdeaProjects/realtrail/data/SATrails2.geojson", "/Users/shan/IdeaProjects/realtrail/data/Leon-Creek-Greenway-Trail.geojson", "Leon Creek Greenway Trail");
 
     }
 }
