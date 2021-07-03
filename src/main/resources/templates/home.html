@@ -19,9 +19,9 @@
         <div class="displayed-event" th:each="event: ${events}">
             <input type="hidden" th:value="${event.id}">
             <input type="hidden" th:value="${event.name}">
-            <input type="hidden" th:value="${event.location}">
+<!--            <input type="hidden" th:value="${event.location}">-->
             <input type="hidden" th:value="${event.time}">
-            <input type="hidden" th:value="${event.meetTime}">
+<!--            <input type="hidden" th:value="${event.meetTime}">-->
             <input type="hidden" th:value="${event.date}">
         </div>
         <div id='calendar' style="width:650px "></div>

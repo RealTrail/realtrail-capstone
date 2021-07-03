@@ -127,4 +127,36 @@ public class ProfileController {
             return "error";
         }
     }
-}
+
+    @GetMapping("/profile/settings/{id}")
+    public String getAdminEditProfileForm(@PathVariable long id, Model model) {
+        User user = usersDao.getById(id);
+            // pass the user to create profile form to show prepopulated data in the form
+            model.addAttribute("user", user);
+            model.addAttribute("interests", userInterestsDao.findAll());
+            model.addAttribute("fileStackApi", filestackApi);
+            return "users/AdminProfile";
+
+    }
+
+    @PostMapping("/profile/settings/{id}")
+    public String postAdminEditProfileForm(@PathVariable long id,@ModelAttribute User user, Model model) {
+        User Newuser = usersDao.getById(id);
+        System.out.println("user.getEmail() = " + user.getEmail());
+        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
+        Newuser.setFirstName(user.getFirstName());
+        Newuser.setLastName(user.getLastName());
+        Newuser.setGender(user.getGender());
+        Newuser.setCity(user.getCity());
+        Newuser.setState(user.getState());
+        Newuser.setPhoneNumber(user.getPhoneNumber());
+        Newuser.setInterests(user.getInterests());
+
+        usersDao.save(Newuser);
+        return "redirect:/profile/"+ id;
+    }
+    @GetMapping("/profile/delete/{id}")
+    public String getAdminDeleteProfileForm(@PathVariable long id, Model model) {
+       usersDao.delete(usersDao.getById(id));
+        return "redirect:/users";
+    }}
