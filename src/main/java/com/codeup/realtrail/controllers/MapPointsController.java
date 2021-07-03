@@ -160,9 +160,28 @@ public class MapPointsController {
     @GetMapping("/data/save")
     @ResponseBody
     public String convertJsonToDB() {
-//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/government-canyon-state-natural-area.geojson";
-//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/crownridge-park.geojson";
-        String fileName = "/Users/shan/IdeaProjects/realtrail/data/cycle.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Joe-Johnston-Route.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Savannah-Loop.geojson";
+        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Lytles-Loop.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Wildcat-Canyon-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Sendero-Balcones.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Black-Hill-Loop.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Twin-Oaks-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Bear-Grass-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Red-Oak-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Apache-Creek-Greenway-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Medina-River-Greenway-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Salado-Creek-Greenway-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Main-Loop.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Restoration-Way-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Blue-Loop.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Baseball-Field-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Red-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Olmos-Basin-Loop-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Acequia-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/River-Walk.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Leon-Creek-Greenway-Trail.geojson";
+
         List<String> trailNames = getAllTrailNames();
 
         // Create a JSONParser object
@@ -180,7 +199,7 @@ public class MapPointsController {
                 for (JSONObject path : (Iterable<JSONObject>) pathList) {
                     JSONObject properties = (JSONObject) path.get("properties");
                     String trailName = (String) properties.get("name");
-                    if(trailName != null && trailName.equalsIgnoreCase(trail)) {
+                    if(trailName != null && trailName.contains(trail)) {
                         JSONObject mapPoints = (JSONObject) path.get("geometry");
                         JSONArray coordinates = (JSONArray) mapPoints.get("coordinates");
                         for (Object obj : coordinates) {

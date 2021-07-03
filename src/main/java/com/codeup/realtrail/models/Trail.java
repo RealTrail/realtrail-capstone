@@ -45,17 +45,13 @@ public class Trail {
     public Trail() {
     }
 
-    public Trail(String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails, List<PictureURL> trailImages) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
-        this.rating = rating;
         this.length = length;
-        this.elevation = elevation;
         this.type = type;
         this.trailDetails = trailDetails;
-        this.events = events;
         this.trailImages = trailImages;
-        this.trailComments = trailComments;
     }
 
     public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {

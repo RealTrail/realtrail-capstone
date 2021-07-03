@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/head :: head">
+<head th:replace="/fragments/header :: head">
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <meta name="mapboxToken" th:content="${mapboxToken}">
     <title>Create Event</title>
@@ -45,14 +45,19 @@
             </div>
             <div>
                 Choose your trail
-                <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
-                <label for="trailOption1">Choose an existing trail</label>
-                <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
-                <label for="trailOption2">Customize your own trail</label>
+                <div>
+                    <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
+                    <label for="trailOption1">Choose an existing trail</label>
+                </div>
+                <div>
+                    <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
+                    <label for="trailOption2">Customize your own trail</label>
+                </div>
             </div>
 
             <div class="trailOptions">
-                <select id="trailOptions">
+                <select id="trailOptions" name="trailOptions">
+                    <option value="">Nothing selected</option>
                     <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
                 </select>
             </div>
@@ -62,13 +67,52 @@
                 <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
             </div>
             <div id="map" style="height: 500px"></div>
-            <div>
-                <button type="button" id="images">Upload images</button>
-                <input type="hidden" name="images" th:field="*{images}" />
-                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
-            </div>
             <button type="submit" id="createEvent">Submit</button>
         </fieldset>
+    </form>
+
+    <form th:action="@{/trails/create}" id="trail" th:object="${trail}">
+        <div>
+            <label for="trailName">Name</label>
+            <input type="text" id="trailName" th:field="*{name}">
+        </div>
+        <div>
+            <label for="difficultyLevel">Difficulty Level</label>
+            <input type="text" id="difficultyLevel" th:field="*{difficultyLevel}">
+        </div>
+        <div>
+            <label for="trailLength">Length</label>
+            <input type="number" id="trailLength" step="0.1" th:field="*{length}">
+        </div>
+        <div>
+            Type
+            <div>
+                <input type="radio" id="loop" name="trailType" value="Loop" th:field="*{type}">
+                <label for="loop">Loop</label>
+            </div>
+            <div>
+                <input type="radio" id="out" name="trailType" value="Out and back" th:field="*{type}">
+                <label for="out">Out and Back</label>
+            </div>
+            <div>
+                <input type="radio" id="point" name="trailType" value="Point to point" th:field="*{type}">
+                <label for="point">Point to Point</label>
+            </div>
+            <div>
+                <input type="radio" id="cycleway" name="trailType" value="Cycleway" th:field="*{type}">
+                <label for="cycleway">Cycleway</label>
+            </div>
+        </div>
+        <div>
+            <label for="trailDetails">Trail Details</label>
+            <textarea name="trailDetails" id="trailDetails" cols="5" rows="50"></textarea>
+        </div>
+        <div>
+            <button type="button" id="images">Upload images</button>
+            <input type="hidden" id="hidden" name="images" />
+            <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+        </div>
+        <button type="submit" id="createTrail">Submit</button>
     </form>
 </main>
 <footer th:replace="/fragments/footer :: footer"></footer>

@@ -1,13 +1,12 @@
 package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.daos.MapPointsRepository;
+import com.codeup.realtrail.daos.PictureURLsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.daos.EventsRepository;
-import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.EmailService;
-import com.codeup.realtrail.services.StringService;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +29,7 @@ public class EventController {
     private EventsRepository eventsDao;
     private TrailsRepository trailsDao;
     private MapPointsRepository mapPointsDao;
+    private PictureURLsRepository pictureURLsDao;
     private final EmailService emailService;
     private UserService userService;
 
@@ -69,14 +70,28 @@ public class EventController {
     @PostMapping("/create")
     public String saveCreatedEvent(@ModelAttribute Event event,
                                    @RequestParam (name = "eventDate") String eventDate,
-                                   @RequestParam(name = "eventMeetTime") String eventMeetTime,
+                                   @RequestParam (name = "eventMeetTime") String eventMeetTime,
                                    @RequestParam (name = "eventTime") String eventTime,
+                                   @RequestParam (name = "trailOption") String trailOption,
+                                   @RequestParam (name = "trailOptions") String trailId,
+                                   @RequestParam (name = "images") String images,
                                    Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
+        // connect user to new event being created
         event.setOwner(loggedInUser);
         System.out.println(eventDate);
+
+        if (trailOption.equals("existing trail")) {
+            // get selected trail
+            Trail trail = trailsDao.findById(Long.parseLong(trailId));
+            event.setTrail(trail);
+        } else {
+
+            // set the images to the event
+            List<String> urls = new ArrayList<>(Arrays.asList(images.split(", ")));
+        }
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);

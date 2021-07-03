@@ -6,6 +6,11 @@
          e.preventDefault();
          uploadProfileImage();
      });
+
+     // click upload images to upload images
+     $("#images").click(() => {
+         uploadImages();
+     })
  });
 
  const client = filestack.init(fileStackApi);
@@ -49,6 +54,28 @@
      client.picker(options).open();
  }
 
+ function uploadImages() {
+     const options = {
+         accept: ["image/*"],
+         maxFiles: 6,
+         onUploadDone: (results) => {
+             console.log(results);
+             let images = "";
+             for (let image of results.filesUploaded) {
+                 images = images + image.url + ", ";
+             }
+             console.log(images);
+             $("#hidden").val(images);
+             $(".fa-check").toggleClass("hidden");
+         },
+         onFileUploadFailed: (response) => {
+             console.log(response);
+         }
+     }
+
+     client.picker(options).open();
+ }
+
 
  // https://cdn.filestackcontent.com/6NBa6pjQKGy3OEkIH0J2
 
@@ -57,4 +84,7 @@
  // https://cdn.filestackcontent.com/mlddTvwS1GFVI0STXIfa
 
  // https://cdn.filestackcontent.com/B3Da08QOR1mpSwEmTp8p
+
+ // Joe Johnston Route
+ // https://cdn.filestackcontent.com/AsWj1z7CQN6tW4EmVeB5, https://cdn.filestackcontent.com/UJUO8903QGSgNCruXhdV, https://cdn.filestackcontent.com/2ag4o3fSQ9K9TUPF7usw, https://cdn.filestackcontent.com/urU1ed21S26ErDvSA2YZ,
 
