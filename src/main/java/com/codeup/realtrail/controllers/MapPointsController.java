@@ -164,6 +164,14 @@ public class MapPointsController {
 //        String fileName = "/Users/shan/IdeaProjects/realtrail/data/crownridge-park.geojson";
 //        String fileName = "/Users/shan/IdeaProjects/realtrail/data/cycle.geojson";
 //        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Salado-Creek-Greenway-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/friedrich-wildness-park.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/MCAllister-Park.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Olmos-Basin-Trail.geojson";  // trail names are Olmos Basin Greenway Trail and Olmos Basin Loop Trail
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Acequia-Trail.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/downtown.geojson";
+
+
+
 
         List<String> trailNames = getAllTrailNames();
 
@@ -182,7 +190,7 @@ public class MapPointsController {
                 for (JSONObject path : (Iterable<JSONObject>) pathList) {
                     JSONObject properties = (JSONObject) path.get("properties");
                     String trailName = (String) properties.get("name");
-                    if(trailName != null && trailName.equalsIgnoreCase(trail)) {
+                    if(trailName != null && trailName.contains(trail)) {
                         JSONObject mapPoints = (JSONObject) path.get("geometry");
                         JSONArray coordinates = (JSONArray) mapPoints.get("coordinates");
                         for (Object obj : coordinates) {
