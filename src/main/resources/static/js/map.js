@@ -5,93 +5,110 @@ $(document).ready(() => {
     let trails = $("#trails .name").map((index, element) => element.value).get();
     console.log(trails);
 
-    let longitudeArr = [], latitudeArr = [];
+    // let longitudeArr = [], latitudeArr = [];
 
-    $(".mapPoints > input").each((index) => {
-        console.log(index, $(this).attr("name"), $(this).val());
-        // let trailId = $(this).attr("name");
-        // console.log(trailId);
-        // if (index % 2 === 1) {
-        //     console.log($(this).val());
-        //     longitudeArr.push({id: trailId, longitude: $(this).val()});
-        // } else {
-        //     latitudeArr.push({id: trailId, latitude: $(this).val()});
-        // }
-    });
-
-    console.log(longitudeArr);
-
-    // $("form .trailOption").on('change', () => {
-    //
-    //     if ($("input[name='trailOption']:checked").val() === "existing trail") { // user chooses to pick an existing trail
-    //         $("div.trailOptions").show();
-    //         $("div.trailOptions").on('change', () => {
-    //
-    //
-    //             let selectedTrailId = $("#trailOptions").find(":selected").val();
-    //             console.log(selectedTrailId);
-    //             let location = trails[selectedTrailId - 1];
-    //             console.log(location);
-    //
-    //             // get the selected trail coordinates
-    //             let coordinates = getSelectedTrailCoordinates(selectedTrailId, longitudeArr, latitudeArr);
-    //
-    //             // show the map around the location
-    //             geocode(location, mapboxToken).then((results) => {
-    //                 console.log(results);
-    //                 let map = showMap(results);
-    //                 map.on('load', () => {
-    //                     map.addSource('route', {
-    //                         'type': 'geojson',
-    //                         'data': {
-    //                             'type': 'Feature',
-    //                             'properties': {},
-    //                             'geometry': {
-    //                                 'type': 'LineString',
-    //                                 'coordinates': coordinates
-    //                             }
-    //                         }
-    //                     });
-    //                     map.addLayer({
-    //                         'id': 'route',
-    //                         'type': 'line',
-    //                         'source': 'route',
-    //                         'layout': {
-    //                             'line-join': 'round',
-    //                             'line-cap': 'round'
-    //                         },
-    //                         'paint': {
-    //                             'line-color': '#c0273d',
-    //                             'line-width': 6
-    //                         }
-    //                     });
-    //                 });
-    //             });
-    //         });
-    //     } else { // user chooses to customize a trail
-    //
-    //         showMap();
-    //
-    //         $("#mapSearch").click(() => {
-    //             // get coordinates using geocode
-    //             geocode($("#searchedName").val(), mapboxToken).then((results) => {
-    //                 console.log(results);
-    //                 // fly to the place searched
-    //                 map.flyTo({
-    //                     center: results,
-    //                     zoom: 12
-    //                 });
-    //
-    //                 // Create an empty GeoJSON feature collection, which will be used as the data source for the route before users add any new data
-    //                 var nothing = turf.featureCollection([]);
-    //             })
-    //         });
-    //     }
+    // $(".mapPoints > input").each((index) => {
+    //     console.log(index, $(this).attr("name"), $(this).val());
+    //     // let trailId = $(this).attr("name");
+    //     // console.log(trailId);
+    //     // if (index % 2 === 1) {
+    //     //     console.log($(this).val());
+    //     //     longitudeArr.push({id: trailId, longitude: $(this).val()});
+    //     // } else {
+    //     //     latitudeArr.push({id: trailId, latitude: $(this).val()});
+    //     // }
     // });
+
+    // console.log(longitudeArr);
+
+    $("form .trailOption").on('change', () => {
+
+        console.log($("input[name='trailOption']:checked").val());
+
+        if ($("input[name='trailOption']:checked").val() === "existing trail") { // user chooses to pick an existing trail
+            $("#trailOptions").show();
+            $("#trailOptions").on('change', () => {
+
+                let selectedTrailId = $("#trailOptions").find(":selected").val();
+                console.log(selectedTrailId);
+                let location = trails[selectedTrailId - 1];
+                console.log(location);
+
+                $.ajax({
+                    url: "/trails/" + selectedTrailId,
+                    type: "GET",
+                    dataType: 'json',
+                    success: (response) => {
+                        console.log(response);
+                        // here you handle the response from server.
+                        // you can access the data returned doing something like:
+                        var id = response.id;
+                        var name = response.name;
+                    },
+                    error: (error) => {
+                        console.log(error);
+                    }
+                })
+
+                // get the selected trail coordinates
+                let coordinates = getSelectedTrailCoordinates(selectedTrailId, longitudeArr, latitudeArr);
+
+                // show the map around the location
+                geocode(location, mapboxToken).then((results) => {
+                    console.log(results);
+                    let map = showMap(results);
+                    map.on('load', () => {
+                        map.addSource('route', {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'Feature',
+                                'properties': {},
+                                'geometry': {
+                                    'type': 'LineString',
+                                    'coordinates': coordinates
+                                }
+                            }
+                        });
+                        map.addLayer({
+                            'id': 'route',
+                            'type': 'line',
+                            'source': 'route',
+                            'layout': {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            'paint': {
+                                'line-color': '#c0273d',
+                                'line-width': 6
+                            }
+                        });
+                    });
+                });
+            });
+        } else { // user chooses to customize a trail
+
+            showMap();
+
+            $("#mapSearch").click(() => {
+                // get coordinates using geocode
+                geocode($("#searchedName").val(), mapboxToken).then((results) => {
+                    console.log(results);
+                    // fly to the place searched
+                    map.flyTo({
+                        center: results,
+                        zoom: 12
+                    });
+
+                    // Create an empty GeoJSON feature collection, which will be used as the data source for the route before users add any new data
+                    var nothing = turf.featureCollection([]);
+                })
+            });
+        }
+    });
 });
 
 mapboxgl.accessToken = mapboxToken;
-$("div.trailOptions").hide();
+$("#trailOptions").hide();
 $("#map").hide();
 
 function showMap(coordinates) {

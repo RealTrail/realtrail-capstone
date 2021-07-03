@@ -18,104 +18,104 @@
         <input type="hidden" class="lat" th:name="${mapPoints.trail.id}" th:value="${mapPoints.latitude}">
     </div>
     <form th:action="@{/create}" th:method="POST" th:object="${event}">
-        <fieldset>
+        <div>
+            <label for="name">Event Name</label>
+            <input name="name" id="name" th:field="*{name}" />
+        </div>
+        <div>
+            <label for="eventDate">Date</label>
+            <input type="date" name="eventDate" id="eventDate" />
+        </div>
+        <div>
+            <label for="eventTime">Time</label>
+            <input type="time" name="eventTime" id="eventTime" />
+        </div>
+        <div>
+            <label for="meetLocation">Meet Location</label>
+            <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
+        </div>
+        <div>
+            <label for="eventMeetTime">Meet Time</label>
+            <input type="time" name="eventMeetTime" id="eventMeetTime" />
+        </div>
+        <div>
+            <label for="eventDetails">Event Details</label>
+            <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
+        </div>
+        <div>
+            Choose your trail
             <div>
-                <label for="name">Event Name</label>
-                <input name="name" id="name" th:field="*{name}" />
+                <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
+                <label for="trailOption1">Choose an existing trail</label>
             </div>
             <div>
-                <label for="eventDate">Date</label>
-                <input type="date" name="eventDate" id="eventDate" />
+                <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
+                <label for="trailOption2">Customize your own trail</label>
             </div>
-            <div>
-                <label for="eventTime">Time</label>
-                <input type="time" name="eventTime" id="eventTime" />
-            </div>
-            <div>
-                <label for="meetLocation">Meet Location</label>
-                <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
-            </div>
-            <div>
-                <label for="eventMeetTime">Meet Time</label>
-                <input type="time" name="eventMeetTime" id="eventMeetTime" />
-            </div>
-            <div>
-                <label for="eventDetails">Event Details</label>
-                <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
-            </div>
-            <div>
-                Choose your trail
-                <div>
-                    <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
-                    <label for="trailOption1">Choose an existing trail</label>
-                </div>
-                <div>
-                    <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
-                    <label for="trailOption2">Customize your own trail</label>
-                </div>
-            </div>
+        </div>
 
-            <div class="trailOptions">
-                <select id="trailOptions" name="trailOptions">
-                    <option value="">Nothing selected</option>
-                    <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
-                </select>
-            </div>
-            <div>
-                <label for="searchedName"></label>
-                <input type="text" id="searchedName" name="mapSearch">
-                <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
-            </div>
-            <div id="map" style="height: 500px"></div>
-            <button type="submit" id="createEvent">Submit</button>
-        </fieldset>
+        <div>
+            <select id="trailOptions" name="trailOptions">
+                <option value="">Nothing selected</option>
+                <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="searchedName"></label>
+            <input type="text" id="searchedName" name="mapSearch">
+            <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
+        </div>
+        <div id="map" style="height: 500px"></div>
+        <button type="submit" id="createEvent">Submit</button>
     </form>
 
-    <form th:action="@{/trails/create}" id="trail" th:object="${trail}">
-        <div>
-            <label for="trailName">Name</label>
-            <input type="text" id="trailName" th:field="*{name}">
-        </div>
-        <div>
-            <label for="difficultyLevel">Difficulty Level</label>
-            <input type="text" id="difficultyLevel" th:field="*{difficultyLevel}">
-        </div>
-        <div>
-            <label for="trailLength">Length</label>
-            <input type="number" id="trailLength" step="0.1" th:field="*{length}">
-        </div>
-        <div>
-            Type
+    <div>
+        <h2>Customize Your Own Trail</h2>
+        <form action="/trails/create" method="POST">
             <div>
-                <input type="radio" id="loop" name="trailType" value="Loop" th:field="*{type}">
-                <label for="loop">Loop</label>
+                <label for="trailName">Name</label>
+                <input type="text" id="trailName" name="trailName">
             </div>
             <div>
-                <input type="radio" id="out" name="trailType" value="Out and back" th:field="*{type}">
-                <label for="out">Out and Back</label>
+                <label for="difficultyLevel">Difficulty Level</label>
+                <input type="text" id="difficultyLevel" name="difficultyLevel">
             </div>
             <div>
-                <input type="radio" id="point" name="trailType" value="Point to point" th:field="*{type}">
-                <label for="point">Point to Point</label>
+                <label for="trailLength">Length</label>
+                <input type="number" id="trailLength" step="0.1" name="trailLength">
             </div>
             <div>
-                <input type="radio" id="cycleway" name="trailType" value="Cycleway" th:field="*{type}">
-                <label for="cycleway">Cycleway</label>
+                Type
+                <div>
+                    <input type="radio" id="loop" name="trailType" value="Loop">
+                    <label for="loop">Loop</label>
+                </div>
+                <div>
+                    <input type="radio" id="out" name="trailType" value="Out and back">
+                    <label for="out">Out and Back</label>
+                </div>
+                <div>
+                    <input type="radio" id="point" name="trailType" value="Point to point">
+                    <label for="point">Point to Point</label>
+                </div>
+                <div>
+                    <input type="radio" id="cycleway" name="trailType" value="Cycleway">
+                    <label for="cycleway">Cycleway</label>
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="trailDetails">Trail Details</label>
-            <textarea name="trailDetails" id="trailDetails" cols="5" rows="50"></textarea>
-        </div>
-        <div>
-            <button type="button" id="images">Upload images</button>
-            <input type="hidden" id="hidden" name="images" />
-            <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
-        </div>
-        <button type="submit" id="createTrail">Submit</button>
-    </form>
+            <div>
+                <label for="trailDetails">Trail Details</label>
+                <textarea name="trailDetails" id="trailDetails" rows="5" cols="50"></textarea>
+            </div>
+            <div>
+                <button type="button" id="images">Upload images</button>
+                <input type="hidden" id="hidden" name="images" />
+                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+            </div>
+            <button type="submit" id="createTrail">Submit</button>
+        </form>
+    </div>
 </main>
-<footer th:replace="/fragments/footer :: footer"></footer>
 
 <!-- Mapbox JS -->
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
