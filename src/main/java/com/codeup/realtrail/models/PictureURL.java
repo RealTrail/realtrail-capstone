@@ -16,15 +16,19 @@ public class PictureURL {
     private String description;
 
     @ManyToOne
-    @JoinColumn (name = "trail")
+    @JoinColumn (name = "trail_id")
     private Trail trail;
 
     @ManyToOne
-    @JoinColumn (name = "event")
+    @JoinColumn (name = "event_id")
     private Event event;
 
     // constructors
     public PictureURL() {
+    }
+
+    public PictureURL(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public PictureURL(String pictureUrl, String description, Trail trail, Event event) {

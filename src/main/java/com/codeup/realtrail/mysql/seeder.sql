@@ -61,7 +61,7 @@ VALUES
 Accessibility: There are 2 designated accessible spaces in the paved parking lot off of Clubhouse Boulevard at the east end of the trail. Both of them are van-accessible with a striped access aisle. The trail surface is cement, smooth, and typically at least 6 feet wide. The most accessible portion of the trail is the first 3.5 miles out. The estimated grade is mostly gentle (5% or less) except for very steep (over 12%) uphill and downhill sections at about 4.0 through 12.0 miles when going west.  Wheelchair/mobility equipment or stroller users may need assistance in the steeper sections or to avoid them for safety. There are benches along the route for resting.'),
        (6, 'Salado Creek Greenway Trail',
         'Easy',
-        4.9,
+        4.6,
         22.7,
         354,
         'Cycleway',
@@ -84,95 +84,78 @@ On the other side of the busy roadway, the pathway offers a well-shaded retreat 
 
 Segment 3: Jack White Park to South Side Lions Park
 
-Stretching about 7.5 miles, this is the trail’s longest and southernmost section. It begins in Jack White Park on the north side of I-35 and winds south through Pletz County Park, Martin Luther King Park, Comanche Park, and South Side Lions Park, offering the traveler many amenities and picturesque views of the forest and creek.');
-#        (7, 'Bosque, Vern Del, Juniper Ridge and Main Trails Loop',
-#         'Moderate',
-#         4.6,
-#         2.6,
-#         354,
-#         'Loop',
-#         'Friedrich Wilderness Park offers approximately 10 miles of hiking trails with varying degrees of difficulty. It is home for rare birds, terrestrial orchids, steep hills and deep canyons. It is internationally known for bird watching. Perched on the edge of the Balcones Escarpment, Friedrich is a nesting site for two federally listed endangered species of birds: the Black-capped Vireo and the Golden-cheeked Warbler.
-#
-#         Restrooms and water fountains are found at the entrance to the park. Visitors are encouraged to bring water bottles for longer hikes in warm weather. In order to protect this wilderness area, it is important to observe the following rules:
-#
-#         No fires,
-#         no smoking on trails,
-#          Stay on designated trails.
-#         Pedestrians only please; roller blades, skateboards, scooters, bicycles, etc., are not allowed.
-#         To protect the endangered species, pets, including dogs, are not allowed.'),
-#        (5, 'Restoration Way Trail Loop',
-#         'Easy',
-#         4.5,
-#         5.1,
-#         511,
-#         'Loop',
-#         'Restoration Way Trail Loop is a 5.1 mile heavily trafficked loop trail located near San Antonio, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips. SEASONAL CLOSURE: This area is subject to seasonal closure due to weather conditions. For more information, please visit https://www.sanantonio.gov/ParksAndRec/Parks-Facilities/All-Parks-Facilities/Parks-Facilities-Details/ArtMID/14820/ArticleID/2649/Friedrich-Wilderness-Park'),
-#        (6, 'Hillview, Red Oak, and Cedar Flats Trails',
-#         'Moderate',
-#         4.5,
-#         2.6,
-#         331,
-#         'Loop',
-#         'Hillview, Red Oak, and Cedar Flats Trails is a 2.6 mile heavily trafficked loop trail located near San Antonio, Texas that features beautiful wild flowers and is rated as moderate. The trail is primarily used for hiking, walking, trail running, and birding and is accessible year-round. Dogs are also able to use this trail but must be kept on leash.'),
-#        (7, 'Main Loop to Restoration Way Trail',
-#         'Moderate',
-#         4.5,
-#         5.5,
-#         715,
-#         'Loop',
-#         'SEASONAL CLOSURE: This area is subject to seasonal closure due to weather conditions. For more information, please visit https://www.sanantonio.gov/ParksAndRec/Parks-Facilities/All-Parks-Facilities/Parks-Facilities-Details/ArtMID/14820/ArticleID/2649/Friedrich-Wilderness-Park
-#
-#         Friedrich Wilderness Park offers approximately 10 miles of hiking trails with varying degrees of difficulty. It is home for rare birds, terrestrial orchids, steep hills and deep canyons. It is internationally known for bird watching. Perched on the edge if the Balcones Escarpment, Friedrich is a nesting site for two federally listed endangered species of birds: the Black-capped Vireo and the Golden-cheeked Warbler.
-#
-#         Restrooms and water fountains are found at the entrance to the park. Visitors are encouraged to bring water bottles for longer hikes in warm weather. In order to protect this wilderness area, it is important to observe the following rules:
-#
-#         -no fires
-#         -no smoking on trails
-#         -stay on designated trails
-#         -pedestrians only please; roller blades, skateboards, scooters, bicycles, etc., are not allowed
-#         -to protect the endangered species, pets, including dogs, are not allowed'),
-#        (8, 'Salado Greenway Trail',
-#         'Moderate',
-#         4.3,
-#         10.8,
-#             331,
-#         'Out and back',
-#         'Trail is mixed paved and gravel sections, and there is good signage directing you when a different trail option is available. Restrooms are present. Fenced dog parks for small and large dogs (separate).'),
-#        (9, 'McAllister Park Blue Loop Trail',
-#         'Moderate',
-#         4.3,
-#         6.7,
-#         236,
-#         'Loop',
-#         'Great park for mountain biking.  The blue loop is fairly easy; however, it can get tough during the summer months when temperatures soar and there is little shade.  Plan to start early to beat the heat and the crowd.
-#
-#         There are bathrooms by the parking lot and throughout the park.
-#
-#         Accessibility: There is a combination of paved and dirt areas on this trail, and the dirt sections may not be accessible for mobility equipment or strollers. The estimated grade is moderately steep, up to 8%. The paved sections are typically at least three feet wide, but the dirt sections may be as narrow as 1.5 feet wide, may be rocky, and may have a cross-slope of more than 2%.'),
-#        (10, 'San Antonio Cultural Arts Walk',
-# 'Easy',
-#         3.4,
-#         8.1,
-#         196,
-#         'Point to point',
-#         'San Antonio is a haven for artists and musicians of all sorts.
-#
-#         This cultural and arts walking tour focuses on some popular, but possibly not as well-known sights, such as Guenther House, The Museo Alameda, and the Spanish Governor''s Palace.'),
-#        (11, 'San Antonio Mission Trail',
-#         'Easy',
-#         4.6,
-#         15.1,
-#         413,
-#         'Loop',
-#         'This trail guides people from each of the missions in San Antonio.
-#
-#         The word mission usually connotes religion. It''s true that San Antonio''s missions revolved around religion and faith, but it doesn''t describe the importance or full scope for any of them. Though intentionally created to spread the Catholic faith, missions are not churches. The church is merely one building among several in any mission. Each complex served as a separate, unique community.
-#
-# All four churches (Mission Concepcin''s, Mission San Jose''s, Mission San Juan Capistrano''s, and Mission Espada''s) have active Catholic congregations. Though the congregations haven''t been continuously active since the 1700s, many of today''s members are direct descendants of the Indians who built the churches.
-#
-# In addition to the families, the missions served as the foundation for much of what you’’ll see in Texas today. The architecture, food, culture, textiles, and more all began in the missions in one way or another. Each is different and several served as important sites during the Texas Revolution.
-#
-# When you visit the missions, be careful. These are historic structures and the masonry may not be able to hold your weight (such as if you decide to try and walk atop a retaining wall). Also, some structures may not be accessible due to restoration work or otherwise.'),
+Stretching about 7.5 miles, this is the trail’s longest and southernmost section. It begins in Jack White Park on the north side of I-35 and winds south through Pletz County Park, Martin Luther King Park, Comanche Park, and South Side Lions Park, offering the traveler many amenities and picturesque views of the forest and creek.'),
+       (7, 'Main Loop',
+        'Moderate',
+        4.6,
+        2.6,
+        354,
+        'Loop',
+        'Friedrich Wilderness Park offers approximately 10 miles of hiking trails with varying degrees of difficulty. It is home for rare birds, terrestrial orchids, steep hills and deep canyons. It is internationally known for bird watching. Perched on the edge of the Balcones Escarpment, Friedrich is a nesting site for two federally listed endangered species of birds: the Black-capped Vireo and the Golden-cheeked Warbler.
+
+        Restrooms and water fountains are found at the entrance to the park. Visitors are encouraged to bring water bottles for longer hikes in warm weather. In order to protect this wilderness area, it is important to observe the following rules:
+
+        No fires,
+        no smoking on trails,
+         Stay on designated trails.
+        Pedestrians only please; roller blades, skateboards, scooters, bicycles, etc., are not allowed.
+        To protect the endangered species, pets, including dogs, are not allowed.'),
+       (8, 'Restoration Way Trail',
+        'Easy',
+        4.5,
+        5.1,
+        511,
+        'Loop',
+        'Restoration Way Trail Loop is a 5.1 mile heavily trafficked loop trail located near San Antonio, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips. SEASONAL CLOSURE: This area is subject to seasonal closure due to weather conditions. For more information, please visit https://www.sanantonio.gov/ParksAndRec/Parks-Facilities/All-Parks-Facilities/Parks-Facilities-Details/ArtMID/14820/ArticleID/2649/Friedrich-Wilderness-Park'),
+       (9, 'Blue Loop',
+        'Moderate',
+        4.3,
+        6.7,
+        236,
+        'Loop',
+        'Great park for mountain biking.  The blue loop is fairly easy; however, it can get tough during the summer months when temperatures soar and there is little shade.  Plan to start early to beat the heat and the crowd.
+
+        There are bathrooms by the parking lot and throughout the park.
+
+        Accessibility: There is a combination of paved and dirt areas on this trail, and the dirt sections may not be accessible for mobility equipment or strollers. The estimated grade is moderately steep, up to 8%. The paved sections are typically at least three feet wide, but the dirt sections may be as narrow as 1.5 feet wide, may be rocky, and may have a cross-slope of more than 2%.'),
+       (10, 'Baseball Field Trail',
+        'Easy',
+        4.4,
+        2.4,
+        32,
+        'Loop',
+        'This is a short but enjoyable gentle and paved multi-use path through wooded areas. For a longer route, you can continue on the blue trail but it is reportedly rockier.
+
+        Accessibility: There are 3 designated accessible spaces in the paved parking lot off of Turke Roost at the north end of the trail. All of them are van-accessible with striped access aisles. The trail surface is paved asphalt with bumps and cracks. It is typically at least 5 feet wide. The majority of the trail is estimated to be in the gentle (3% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users. '),
+       (11, 'Red Trail',
+        'Easy',
+        3.5,
+        1.9,
+        47,
+        'Point to point',
+        'McAllister Park Red trail is connected to Blue trail and you can go to some other trails form here. Just be aware of mountain bikers.'),
+       (12, 'Olmos Basin Trail',
+        'Easy',
+        4.0,
+        2.4,
+        196,
+        'Loop',
+        'Olmos Basin Trail is good for all skill levels. The trail is primarily used for running and nature trips. Dogs are also able to use this trail but must be kept on leash.'),
+       (13, 'Acequia Trail',
+        'Easy',
+        4.6,
+        15.1,
+        413,
+        'Cycleway',
+        'This trail is also called San Antoino Mission Trail guiding people from each of the missions in San Antonio.
+
+        The word mission usually connotes religion. It''s true that San Antonio''s missions revolved around religion and faith, but it doesn''t describe the importance or full scope for any of them. Though intentionally created to spread the Catholic faith, missions are not churches. The church is merely one building among several in any mission. Each complex served as a separate, unique community.
+
+All four churches (Mission Concepcin''s, Mission San Jose''s, Mission San Juan Capistrano''s, and Mission Espada''s) have active Catholic congregations. Though the congregations haven''t been continuously active since the 1700s, many of today''s members are direct descendants of the Indians who built the churches.
+
+In addition to the families, the missions served as the foundation for much of what you’’ll see in Texas today. The architecture, food, culture, textiles, and more all began in the missions in one way or another. Each is different and several served as important sites during the Texas Revolution.
+
+When you visit the missions, be careful. These are historic structures and the masonry may not be able to hold your weight (such as if you decide to try and walk atop a retaining wall). Also, some structures may not be accessible due to restoration work or otherwise.'),
 #        (12, 'Walker Ranch Loop Trail ',
 #         'Easy',
 #         4.3,

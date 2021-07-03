@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/head :: head">
+<head th:replace="/fragments/header :: head">
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <meta name="mapboxToken" th:content="${mapboxToken}">
     <title>Create Event</title>
@@ -64,7 +64,7 @@
             <div id="map" style="height: 500px"></div>
             <div>
                 <button type="button" id="images">Upload images</button>
-                <input type="hidden" name="images" th:field="*{images}" />
+                <input type="hidden" id="hidden" name="images" />
                 <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
             </div>
             <button type="submit" id="createEvent">Submit</button>

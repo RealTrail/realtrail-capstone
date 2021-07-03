@@ -160,9 +160,11 @@ public class MapPointsController {
     @GetMapping("/data/save")
     @ResponseBody
     public String convertJsonToDB() {
-//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/government-canyon-state-natural-area.geojson";
+        String fileName = "/Users/shan/IdeaProjects/realtrail/data/government-canyon-state-natural-area.geojson";
 //        String fileName = "/Users/shan/IdeaProjects/realtrail/data/crownridge-park.geojson";
-        String fileName = "/Users/shan/IdeaProjects/realtrail/data/cycle.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/cycle.geojson";
+//        String fileName = "/Users/shan/IdeaProjects/realtrail/data/Salado-Creek-Greenway-Trail.geojson";
+
         List<String> trailNames = getAllTrailNames();
 
         // Create a JSONParser object

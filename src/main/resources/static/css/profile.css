@@ -1,11 +1,774 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+/* body{
+  background: #102d3e;
+} */
+
 * {
     box-sizing: border-box;
+    /* border-style: dotted; */
     font-size: 16px;
 }
 
+html, body {
+    background-color: #e5e5e5;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    /* overflow-y: scroll;
+    scroll-behavior: smooth; */
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+
+}
+
+body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+:root {
+    font-family: "Nunito", sans-serif;
+}
+
+h2, h3 {
+    margin: 0;
+}
+
+p{
+    font-size: 14px;
+}
+
+
+/* ****************************** NAVBAR CSS ****************************** */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+blockquote, body, dd, dl, figure, h1, h2, h3, h4, h5, h6, ol, p, pre, ul {
+    margin: 0;
+    padding: 0;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.globalContent {
+    flex-grow: 1;
+}
+
+.RTLOGO{
+    width: 35%;
+    height: 25px;
+}
+
+.container, .container-fluid, .container-lg, .container-wide, .container-xl {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.globalNav {
+    /* font-family: Camphor, Open Sans, Segoe UI, sans-serif; */
+    font-family: 'Archivo Black', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    right: 0;
+    z-index: 500;
+    height: 50px;
+    perspective: 2000px;
+    background-color: #e5e5e5;
+}
+
+.globalNav ul {
+    padding: 0;
+    margin: 0;
+}
+
+.globalNav li {
+    list-style: none;
+}
+
+.globalNav a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    color: #3c6b88;
+    transition: color 0.1s;
+}
+
+.globalNav a:hover {
+    color: #32325d;
+}
+
+.globalNav > .container-lg {
+    padding: 0;
+}
+
+.globalNav .navRoot {
+    position: relative;
+}
+
+.globalNav .navSection.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.globalNav .navSection.primary, .globalNav .navSection.secondary {
+    display: none;
+}
+
+@media (min-width: 670px) {
+    .globalNav .navSection.primary, .globalNav .navSection.secondary {
+        display: flex;
+    }
+}
+.globalNav .navSection.primary {
+    justify-content: center;
+}
+
+.globalNav .navSection.secondary {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.globalNav .navSection.mobile {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (min-width: 670px) {
+    .globalNav .navSection.mobile {
+        display: none;
+    }
+}
+
+.globalNav .rootLink {
+    display: inline-block;
+    height: 50px;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 10px;
+}
+
+@media (min-width: 670px) {
+    .globalNav .rootLink {
+        padding: 0 calc(10px + (100vw - 670px) * .040541);
+    }
+}
+@media (min-width: 1040px) {
+    .globalNav .rootLink {
+        padding: 0 25px;
+    }
+}
+.globalNav .navSection.logo .rootLink {
+    padding-left: 20px !important;
+}
+
+.globalNav .navSection.secondary .rootLink:last-child {
+    padding-right: 20px !important;
+}
+
+.globalNav .navSection.primary .rootLink {
+    font-weight: 500;
+}
+
+.globalNav .colorize {
+    color: #102d3e;
+    transition: color 0.1s ease;
+
+}
+
+.globalNav .colorize.active, .globalNav .colorize:hover {
+    color: #32325d;
+}
+
+.globalNav .item-home h1 {
+    line-height: 50px;
+    font-size: 20px;
+    margin: 0;
+    color: inherit;
+}
+
+.globalNav .item-home svg {
+    vertical-align: -5px;
+}
+
+.globalNav .item-home svg path {
+    fill: currentColor;
+}
+
+.globalNav .item-dashboard:after {
+    font: normal 16px StripeIcons;
+    content: "➞";
+    padding-left: 1px;
+}
+
+.globalNav .dropdownRoot {
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 50px;
+    pointer-events: none;
+    transform: rotateX(-15deg);
+    transform-origin: 50% -50px;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-duration: 0.25s;
+    display: none;
+}
+
+@media (min-width: 670px) {
+    .globalNav .dropdownRoot {
+        display: block;
+    }
+}
+.globalNav.dropdownActive .dropdownRoot {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+}
+
+.globalNav .dropdownBackground {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1), 0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 520px;
+    height: 400px;
+    transform: translateX(0);
+    transform-origin: 0 0;
+}
+
+.globalNav .alternateBackground, .globalNav .dropdownBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    transition-property: transform;
+    transition-duration: 0.25s;
+}
+
+.globalNav .alternateBackground {
+    right: 0;
+    height: 1000px;
+    background: #f6f9fc;
+}
+
+.globalNav .dropdownArrow {
+    top: -6px;
+    margin: 0 0 0 -6px;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    border-radius: 4px 0 0 0;
+    background: #fff;
+    box-shadow: -3px -3px 5px rgba(82, 95, 127, 0.04);
+    will-change: transform;
+    transition-property: transform;
+}
+
+.globalNav .dropdownArrow, .globalNav .dropdownContainer {
+    position: absolute;
+    left: 0;
+    transition-duration: 0.25s;
+}
+
+.globalNav .dropdownContainer {
+    overflow: hidden;
+    top: 0;
+    transform: translateX(0);
+    will-change: transform, width, height;
+    transition-property: transform, width, height;
+}
+
+.globalNav .dropdownSection {
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-duration: 0.25s;
+    background: red;
+}
+
+.globalNav .dropdownSection.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.globalNav .dropdownSection.left {
+    transform: translateX(-150px);
+}
+
+.globalNav .dropdownSection.right {
+    transform: translateX(150px);
+}
+
+.globalNav.dropdownActive .dropdownSection.active {
+    pointer-events: auto;
+}
+
+.globalNav.noDropdownTransition .alternateBackground, .globalNav.noDropdownTransition .dropdownArrow, .globalNav.noDropdownTransition .dropdownBackground, .globalNav.noDropdownTransition .dropdownContainer, .globalNav.noDropdownTransition .dropdownSection {
+    transition: none;
+}
+
+.globalNav .dropdownContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.globalNav .linkGroup {
+    padding: 20px 35px;
+}
+
+.globalNav .linkContainer {
+    display: block;
+    padding: 9px 0;
+}
+
+.globalNav .linkTitle {
+    margin: 0;
+    color: #102d3e;
+    font-size: 16px;
+    line-height: 22px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.globalNav .linkSub {
+    font-size: 15px;
+    line-height: 22px;
+    color: #6b7c93;
+    margin: 5px 0 0;
+    display: block;
+}
+
+.globalNav .linkSub, .globalNav .linkTitle {
+    transition: color 0.1s;
+}
+
+.globalNav .linkContainer:hover .linkTitle, .globalNav .linkTitle:hover {
+    color: #32325d;
+}
+
+.globalNav .linkContainer:hover .linkSub {
+    color: #424770;
+}
+
+.globalNav .hover-fillDark, .globalNav .hover-fillLight {
+    transition: fill 0.1s;
+}
+
+.globalNav .hover-strokeDark, .globalNav .hover-strokeLight {
+    transition: stroke 0.1s;
+}
+
+.globalNav .linkContainer:hover .hover-fillLight {
+    fill: #8898aa;
+}
+
+.globalNav .linkContainer:hover .hover-fillDark {
+    fill: #32325d;
+}
+
+.globalNav .linkContainer:hover .hover-strokeLight {
+    stroke: #8898aa;
+}
+
+.globalNav .linkContainer:hover .hover-strokeDark {
+    stroke: #32325d;
+}
+
+.globalNav .linkIcon {
+    white-space: nowrap;
+}
+
+.globalNav .linkIcon svg {
+    margin: 0 12px -3px -1px;
+}
+
+.globalNav .withIcon {
+    padding-left: 28px;
+}
+
+.globalNav .withIcon .linkTitle {
+    margin-left: -28px;
+}
+
+.globalNav .new-badge {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: 2px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 700;
+    background: #102d3e;
+    transition: background 0.15s;
+    border-radius: 10px;
+    padding: 0 5px;
+    height: auto;
+    top: auto;
+    box-shadow: none;
+}
+
+.globalNav .linkContainer:hover .new-badge {
+    background: #32325d;
+}
+
+.globalNav .productsGroup {
+    display: flex;
+    flex-wrap: wrap;
+    width: 640px;
+    max-width: calc(100vw - 85px);
+    margin: -5px -10px;
+}
+
+.globalNav .productsGroup > li {
+    flex: 1 0 50%;
+}
+
+.globalNav .productsGroup .linkContainer, .globalNav .productsGroup > li {
+    -webkit-box-flex: 1;
+    display: flex;
+}
+
+.globalNav .productsGroup .linkContainer {
+    padding: 18px 10px;
+    flex: 1;
+    align-items: center;
+}
+
+.globalNav .productsGroup svg {
+    width: 48px;
+    height: 48px;
+}
+
+.globalNav .productLinkContent {
+    flex: 1;
+    margin-left: 20px;
+    flex-direction: column;
+    min-height: 71px;
+}
+
+.globalNav .prodsubGroup, .globalNav .productLinkContent {
+    display: flex;
+    justify-content: center;
+}
+
+.globalNav .prodsubGroup .linkContainer {
+    display: inline-flex;
+    flex-direction: row;
+    padding: 13px 30px;
+}
+
+.globalNav .prodsubGroup .linkSub {
+    margin: 0 0 0 10px;
+}
+
+.globalNav .item-subscriptions .linkTitle {
+    color: #24b47e;
+}
+
+.globalNav .item-connect .linkTitle {
+    color: #3297d3;
+}
+
+.globalNav .item-relay .linkTitle {
+    color: #e25950;
+}
+
+.globalNav .item-atlas .linkTitle {
+    color: #e39f48;
+}
+
+.globalNav .item-radar .linkTitle {
+    color: #b76ac4;
+}
+
+.globalNav .item-radar .new-badge {
+    background: #b76ac4;
+}
+
+.globalNav .documentationGroup .linkSub {
+    max-width: 250px;
+}
+
+.globalNav .documentationArticles {
+    font-size: 15px;
+    line-height: 26px;
+    margin: 15px 20px 10px 28px;
+    display: flex;
+    white-space: nowrap;
+}
+
+.globalNav .documentationArticles > ul {
+    margin-right: 40px;
+}
+
+.globalNav .documentationArticles > ul:last-child {
+    margin-right: 0;
+}
+
+.globalNav .documentationArticles h4 {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    margin: 0 0 3px;
+    color: #8898aa;
+}
+
+.globalNav .blogPosts {
+    margin: 5px 10px 5px 28px;
+}
+
+.globalNav .blogPosts a {
+    display: block;
+    white-space: nowrap;
+    padding: 5px 0;
+}
+
+.globalNav .blogPosts a:after {
+    content: "➢";
+    font: normal 16px StripeIcons;
+    margin-left: 6px;
+    vertical-align: -3px;
+}
+
+.globalNav .blogPosts .title {
+    font-size: 15px;
+    line-height: 22px;
+    display: inline-block;
+    white-space: nowrap;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.globalNav .blogPosts .title.new {
+    font-weight: 500;
+}
+
+.globalNav .blogPosts .new-badge {
+    vertical-align: -1px;
+}
+
+.globalNav .navSection.mobile .rootLink {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
+.globalNav .navSection.mobile .rootLink h2 {
+    color: inherit;
+}
+
+.globalNav .navSection.mobile .rootLink h2, .globalNav .navSection.mobile .rootLink h2:after, .globalNav .navSection.mobile .rootLink h2:before {
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    border-radius: 1px;
+    background: currentColor;
+}
+
+.globalNav .navSection.mobile .rootLink h2 {
+    font-size: 0;
+    left: 13px;
+    top: 23px;
+}
+
+.globalNav .navSection.mobile .rootLink h2:after, .globalNav .navSection.mobile .rootLink h2:before {
+    content: "";
+    left: 0;
+}
+
+.globalNav .navSection.mobile .rootLink h2:before {
+    top: -9px;
+}
+
+.globalNav .navSection.mobile .rootLink h2:after {
+    top: 9px;
+}
+
+.globalNav .popup {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+    perspective: 2000px;
+}
+
+.globalNav .popupContainer {
+    background: #fff;
+    box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1), 0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    font-size: 17px;
+    line-height: 40px;
+    white-space: nowrap;
+    flex-grow: 1;
+    transform: rotate3d(1, 1, 0, -15deg);
+    transform-origin: 100% 0;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-duration: 0.25s;
+}
+
+.globalNav .navSection.mobile.globalPopupActive .popupContainer {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.globalNav .popupCloseButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 51px;
+    height: 51px;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.globalNav .popupCloseButton:after, .globalNav .popupCloseButton:before {
+    content: "";
+    position: absolute;
+    background: #102d3e;
+    border-radius: 1px;
+    left: 14px;
+    right: 14px;
+    top: 24px;
+    height: 3px;
+    transform: rotate(45deg);
+    transition: background 0.1s;
+}
+
+.globalNav .popupCloseButton:after {
+    transform: rotate(-45deg);
+}
+
+.globalNav .popupCloseButton:hover:after, .globalNav .popupCloseButton:hover:before {
+    background: #32325d;
+}
+
+.globalNav .mobileSignIn {
+    background: #f6f9fc;
+    display: block;
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+.globalNav .mobileSignIn:after {
+    font: normal 16px StripeIcons;
+    content: "➜";
+    margin-left: 6px;
+}
+
+.globalNav .mobileProducts {
+    padding: 20px 0 15px;
+}
+
+.globalNav .mobileProducts h4 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    color: #102d3e;
+    text-transform: uppercase;
+    margin: -5px 0 0 30px;
+}
+
+.globalNav .mobileProductsList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.globalNav .mobileProductsList > ul {
+    flex-grow: 1;
+}
+
+.globalNav .mobileProductsList > ul:last-child {
+    flex-grow: 3;
+}
+
+.globalNav .mobileProductsList a {
+    padding: 0 30px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 50px;
+}
+
+.globalNav .mobileProductsList a:hover {
+    color: #32325d;
+}
+
+.globalNav .mobileProductsList a svg {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin: 0 15px 0 -3px;
+    vertical-align: -5px;
+}
+
+.globalNav .mobileSecondaryNav {
+    border-top: 2px solid #f6f9fc;
+    padding: 15px 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.globalNav .mobileSecondaryNav > ul {
+    flex-grow: 1;
+}
+
+.globalNav .mobileSecondaryNav > ul:last-child {
+    flex-grow: 3;
+}
+
+.globalNav .mobileSecondaryNav a {
+    padding: 0 20px;
+    min-width: 100px;
+}
+
+
+/* ****************************** PROFILE CSS ****************************** */
 #profileImage {
     width: 5rem;
 }
 
-
+.hidden {
+    visibility: hidden;
+}
 

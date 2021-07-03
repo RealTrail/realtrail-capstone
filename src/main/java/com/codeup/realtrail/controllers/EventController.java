@@ -4,10 +4,8 @@ import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.daos.EventsRepository;
-import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.EmailService;
-import com.codeup.realtrail.services.StringService;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -69,14 +68,21 @@ public class EventController {
     @PostMapping("/create")
     public String saveCreatedEvent(@ModelAttribute Event event,
                                    @RequestParam (name = "eventDate") String eventDate,
-                                   @RequestParam(name = "eventMeetTime") String eventMeetTime,
+                                   @RequestParam (name = "eventMeetTime") String eventMeetTime,
                                    @RequestParam (name = "eventTime") String eventTime,
+                                   @RequestParam (name = "images") String images,
                                    Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
+        // connect user to new event being created
         event.setOwner(loggedInUser);
         System.out.println(eventDate);
+
+        // set the images to the event
+        List<String> urls = new ArrayList<>(Arrays.asList(images.split(", ")));
+        List<PictureURL> pictureUrls = (List<PictureURL>)(List<?>) urls;
+        event.setImages(pictureUrls);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);
