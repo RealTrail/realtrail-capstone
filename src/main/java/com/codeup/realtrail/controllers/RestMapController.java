@@ -33,7 +33,8 @@ public class RestMapController {
         if (errors.hasErrors()) {
 
             result.setMsg(errors.getAllErrors()
-                    .stream().map(x -> x.getDefaultMessage())
+                    .stream()
+                    .map(x -> x.getDefaultMessage())
                     .collect(Collectors.joining(",")));
 
             return ResponseEntity.badRequest().body(result);
