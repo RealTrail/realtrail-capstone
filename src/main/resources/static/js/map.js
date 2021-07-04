@@ -130,5 +130,3 @@ function getSelectedTrailCoordinates(trailId, longitudeArr, latitudeArr) {
     }
     return coordinates;
 }
-
-

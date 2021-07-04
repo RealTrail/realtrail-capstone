@@ -162,36 +162,34 @@ l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
     <a class="close" role="button"></a>
     </div>
 
-<script>
+    <script>
 
-    // ******************** MODAL JS *******************
+        // ******************** MODAL JS *******************
 
-    // Click function for show the Modal
+        // Click function for show the Modal
 
-    $("#trailOption2").on("click", function(){
-        $(".mask2").addClass("active2");
-    });
+        $("#trailOption2").on("click", function(){
+            $(".mask2").addClass("active2");
+        });
 
-    // Function for close the Modal
+        // Function for close the Modal
 
-    function closeModalTwo(){
-        $(".mask2").removeClass("active2");
-    }
-
-    // Call the closeModal function on the clicks/keyboard
-
-    $(".close, .mask2").on("click", function(){
-        closeModalTwo();
-    });
-
-    $(document).keyup(function(e) {
-        if (e.keyCode === 27) {
-            closeModalTwo();
+        function closeModalTwo(){
+            $(".mask2").removeClass("active2");
         }
-    });
 
+        // Call the closeModal function on the clicks/keyboard
 
-    // ******************** MODAL JS *******************
+        $(".close, .mask2").on("click", function(){
+            closeModalTwo();
+        });
+
+        $(document).keyup(function(e) {
+            if (e.keyCode === 27) {
+                closeModalTwo();
+            }
+        });
+
 
     // ******************** MODAL JS *******************
 
@@ -220,11 +218,8 @@ l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
     });
 
 
-    // ******************** MODAL JS *******************
 
-
-
-</script>
+    </script>
 
 
 
@@ -252,4 +247,3 @@ l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
 <script src="/js/navbar.js"></script>
 </body>
 </html>
-
