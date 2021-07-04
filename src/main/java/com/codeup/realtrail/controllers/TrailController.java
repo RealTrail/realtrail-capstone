@@ -25,8 +25,7 @@ public class TrailController{
     }
 
     @GetMapping("/map/{trailId}")
-    public @ResponseBody
-    ResponseEntity<?> getMapPoints(@PathVariable Long trailId, Errors errors){
+    public @ResponseBody ResponseEntity<?> getMapPoints(@PathVariable Long trailId, Errors errors){
         List<MapPoints> coordinates = mapPointsDao.findByTrailId(trailId);
 
         AjaxResponseBody result = new AjaxResponseBody();
