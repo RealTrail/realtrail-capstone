@@ -45,6 +45,14 @@ public class Trail {
     public Trail() {
     }
 
+    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails) {
+        this.name = name;
+        this.difficultyLevel = difficultyLevel;
+        this.length = length;
+        this.type = type;
+        this.trailDetails = trailDetails;
+    }
+
     public Trail(String name, String difficultyLevel, float length, String type, String trailDetails, List<PictureURL> trailImages) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
