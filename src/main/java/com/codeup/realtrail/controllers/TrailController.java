@@ -24,6 +24,7 @@ public class TrailController{
         this.mapPointsDao = mapPointsDao;
     }
 
+    // showTrail.html- shows individual trail with all trail details
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model){
         Trail trail = trailsDao.getById(id);
@@ -54,12 +55,9 @@ public class TrailController{
                 pictureURLList.add(pictureURL);
                 pictureURLSDao.save(pictureURL);
             }
-
             trailSaved.setTrailImages(pictureURLList);
         }
-
         return "events/createEvent";
     }
-
 }
 

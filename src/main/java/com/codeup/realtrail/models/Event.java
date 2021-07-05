@@ -1,6 +1,8 @@
 package com.codeup.realtrail.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -11,22 +13,18 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, length = 100)
-//    @NotBlank(message = "Events must have a name")
-//    @Size(min = 6, message = "A name must be at least 6 characters.")
+    @Column(length = 100)
+    @NotBlank(message = "Events must have a name")
+    @Size(min = 6, message = "A name must be at least 6 characters.")
     private String name;
 
-    @Column(nullable = false, length = 12)
+    @Column(length = 12)
 //    @NotBlank(message = "Events must have a date")
     private LocalDate date;
 
-    @Column(nullable = false, length = 6)
+    @Column(length = 6)
 //    @NotBlank(message = "Events must have a time")
     private LocalTime time;
-
-    @Column(nullable = false, length = 100)
-//    @NotBlank(message = "Events must have a location")
-    private String location;
 
     @ManyToOne
     @JoinColumn (name = "owner_id")
@@ -36,11 +34,11 @@ public class Event {
     @JoinColumn (name = "trail_id")
     private Trail trail;
 
-    @Column(nullable = false, length = 150)
+    @Column(length = 150)
 //    @NotBlank(message = "Events must have a meet location")
     private String meetLocation;
 
-    @Column(nullable = false, length = 12)
+    @Column(length = 12)
 //    @NotBlank(message = "Events must have a meet time")
     private LocalTime meetTime;
 
@@ -62,22 +60,20 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
+    public Event(String name, LocalDate date, LocalTime time, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
         this.name = name;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.trail = trail;
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
     }
 
-    public Event(String name, LocalDate date, LocalTime time, String location, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
+    public Event(String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
         this.name = name;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.owner = owner;
         this.trail = trail;
         this.meetLocation = meetLocation;
@@ -87,12 +83,11 @@ public class Event {
         this.participants = participants;
     }
 
-    public Event(long id, String name, LocalDate date, LocalTime time, String location, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
+    public Event(long id, String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.owner = owner;
         this.trail = trail;
         this.meetLocation = meetLocation;
@@ -137,13 +132,6 @@ public class Event {
     }
     public void setTime(LocalTime time) {
         this.time = time;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Trail getTrail() {

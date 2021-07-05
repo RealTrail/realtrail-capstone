@@ -53,7 +53,7 @@
                 <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
             </select>
         </div>
-        <div>
+        <div id="trailLocation">
             <label for="searchedName"></label>
             <input type="text" id="searchedName" name="mapSearch">
             <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
@@ -127,7 +127,6 @@
                 </form>
             </div>
             <div class="modal-footer2">
-
                 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
                 <svg class="close" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -145,7 +144,6 @@
         </div>
         <a class="close" role="button"></a>
     </div>
-
 </main>
 
 <!-- Mapbox JS -->
