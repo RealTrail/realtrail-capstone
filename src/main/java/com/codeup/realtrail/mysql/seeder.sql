@@ -281,7 +281,7 @@ Accessibility: There are 2 designated accessible spaces in the paved parking lot
 
 The trail surface is paved concrete and smooth. It is typically at least 8 feet wide. The majority of the trail is estimated to be in the mostly gentle (5% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users. ');
 
-INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
+INSERT INTO events (id, name, date, time, meet_location, meet_time, event_details, owner_id, trail_id)
 VALUES
-(1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
-(2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+(1, 'Cool Trail', '2021-06-21', '10:00', 'Burger King', '0700', 'yes', 2, 6),
+(2, 'Hills', '2021-09-20', '13:00', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);

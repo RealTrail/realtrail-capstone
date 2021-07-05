@@ -53,7 +53,7 @@
                 <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
             </select>
         </div>
-        <div>
+        <div id="trailLocation">
             <label for="searchedName"></label>
             <input type="text" id="searchedName" name="mapSearch">
             <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>

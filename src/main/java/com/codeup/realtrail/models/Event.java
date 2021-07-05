@@ -24,10 +24,6 @@ public class Event {
 //    @NotBlank(message = "Events must have a time")
     private LocalTime time;
 
-    @Column(nullable = false, length = 100)
-//    @NotBlank(message = "Events must have a location")
-    private String location;
-
     @ManyToOne
     @JoinColumn (name = "owner_id")
     private User owner;
@@ -62,22 +58,20 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, LocalDate date, LocalTime time, String location, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
+    public Event(String name, LocalDate date, LocalTime time, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
         this.name = name;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.trail = trail;
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
     }
 
-    public Event(String name, LocalDate date, LocalTime time, String location, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
+    public Event(String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
         this.name = name;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.owner = owner;
         this.trail = trail;
         this.meetLocation = meetLocation;
@@ -87,12 +81,11 @@ public class Event {
         this.participants = participants;
     }
 
-    public Event(long id, String name, LocalDate date, LocalTime time, String location, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
+    public Event(long id, String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.owner = owner;
         this.trail = trail;
         this.meetLocation = meetLocation;
@@ -137,13 +130,6 @@ public class Event {
     }
     public void setTime(LocalTime time) {
         this.time = time;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Trail getTrail() {
