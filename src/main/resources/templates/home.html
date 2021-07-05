@@ -122,20 +122,42 @@
                                     <input id="search" th:colspan="3">
                                 </form>
 
-                                <form th:action="@{/create}" method="get">
+                                <form th:action="@{/create}" method="GET">
                                     <button th:type="submit">Create Event</button>
                                 </form>
 
-                                <form th:action="@{/events/edit}" method="get">
-                                    <button th:type="submit">Edit Event</button>
-                                </form>
+
+
                             </div>
                         </div>
                     </div>
                     <div>
                         <div class="slide-wrap">
                             <div class="image"></div>
-                            <p>Itaque architecto earum blanditiis corrupti nobis neque, et eligendi totam ipsa sunt molestias inventore</p>
+                            <form th:action="@{/trails}" method="GET">
+                                <button th:type="submit">Trails In Your Area</button>
+                            </form>
+
+                            <form th:action="@{/search}" method="GET">
+                                <label>View realTrails by category</label>
+                                <div class="trailCategories">
+                                    <label for="trailCategories">Trail Categories</label>
+                                    <select id="trailCategories">
+                                        <option>-- Select A Category --</option>
+                                        <option>Rating</option>
+                                        <option>Difficulty Level</option>
+                                        <option>Length in Miles</option>
+                                        <option>Route Type</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <div th:action="@{/events/{id}/edit}">
+                                <h2>Click button to view your events</h2>
+                                <button th:type="submit">update</button>
+                            </div>
+                            <form th:action="@{/trails}" method="GET">
+                                <button th:type="submit">View All Your Events</button>
+                            </form>
                         </div>
                     </div>
                     <div>
