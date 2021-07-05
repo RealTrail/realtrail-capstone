@@ -1,11 +1,10 @@
 package com.codeup.realtrail.daos;
 
-import com.codeup.realtrail.models.MapPoints;
+import com.codeup.realtrail.models.MapPoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface MapPointsRepository extends JpaRepository<MapPoints, Long> {
-    MapPoints save(MapPoints mapPoints);
-    List<MapPoints> findByTrailId(Long trailId);
+public interface MapPointsRepository extends JpaRepository<MapPoint, Long> {
+    List<MapPoint> findByTrailId(long trailId);
 }

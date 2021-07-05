@@ -74,6 +74,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/profile/settings/{id}",
                         "/profile/delete/{id}"
                 ).hasAuthority("ADMIN");
-        ;
     }
 }

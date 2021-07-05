@@ -1,25 +1,6 @@
 "use strict";
 
 $(document).ready(() => {
-    // get all the trail names
-    // let trails = $("#trails .name").map((index, element) => element.value).get();
-    // console.log(trails);
-
-    // let longitudeArr = [], latitudeArr = [];
-
-    // $(".mapPoints > input").each((index) => {
-    //     console.log(index, $(this).attr("name"), $(this).val());
-    //     // let trailId = $(this).attr("name");
-    //     // console.log(trailId);
-    //     // if (index % 2 === 1) {
-    //     //     console.log($(this).val());
-    //     //     longitudeArr.push({id: trailId, longitude: $(this).val()});
-    //     // } else {
-    //     //     latitudeArr.push({id: trailId, latitude: $(this).val()});
-    //     // }
-    // });
-
-    // console.log(longitudeArr);
 
     $("#trailOption1").on("click", () => { // user chooses to pick an existing trail
         $("#trailOptions").show();
@@ -28,53 +9,43 @@ $(document).ready(() => {
             let selectedTrailId = $("#trailOptions").find(":selected").val();
             console.log(selectedTrailId);
 
+            let coordinates = getSelectedTrailCoordinates();
 
-            $.ajax({
-                type: "GET",
-                url: "/map/" + selectedTrailId,
-                dataType: 'json',
-                success: (response) => {
-                    console.log(response);
-                    // here you handle the response from server.
+            if (typeof(coordinates) === "string") {
 
-                },
-                error: (error) => {
-                    console.log("Error connecting the server");
-                    console.log(error);
-                }
-            })
-
-            // show the map around the location
-            geocode(location, mapboxToken).then((results) => {
-                console.log(results);
-                let map = showMap(results);
-                map.on('load', () => {
-                    map.addSource('route', {
-                        'type': 'geojson',
-                        'data': {
-                            'type': 'Feature',
-                            'properties': {},
-                            'geometry': {
-                                'type': 'LineString',
-                                'coordinates': coordinates
+            } else {
+                // show the map around the location
+                geocode(location, mapboxToken).then((results) => {
+                    console.log(results);
+                    let map = showMap(results);
+                    map.on('load', () => {
+                        map.addSource('route', {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'Feature',
+                                'properties': {},
+                                'geometry': {
+                                    'type': 'LineString',
+                                    'coordinates': coordinates
+                                }
                             }
-                        }
-                    });
-                    map.addLayer({
-                        'id': 'route',
-                        'type': 'line',
-                        'source': 'route',
-                        'layout': {
-                            'line-join': 'round',
-                            'line-cap': 'round'
-                        },
-                        'paint': {
-                            'line-color': '#c0273d',
-                            'line-width': 6
-                        }
+                        });
+                        map.addLayer({
+                            'id': 'route',
+                            'type': 'line',
+                            'source': 'route',
+                            'layout': {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            'paint': {
+                                'line-color': '#c0273d',
+                                'line-width': 6
+                            }
+                        });
                     });
                 });
-            });
+            }
         });
     });
 
@@ -114,14 +85,27 @@ function showMap(coordinates) {
     });
 }
 
-function getSelectedTrailCoordinates(trailId, longitudeArr, latitudeArr) {
+function getSelectedTrailCoordinates() {
     let coordinates = [];
-    for (let i = 0; i < longitudeArr.length; i++) {
-        if (longitudeArr[i].id === trailId) {
-            coordinates.push([longitudeArr[i].longitude, latitudeArr[i].latitude]);
+    $.ajax({
+        type: "GET",
+        url: "/map/" + selectedTrailId,
+        dataType: 'json',
+        success: (response) => {
+            console.log(response);
+            // loop through the array of coordinate object to get an array of coordinates
+            for (let coordinateObj of response) {
+                let mapPoint = [coordinateObj.longitude, coordinateObj.latitude];
+                coordinates.push(mapPoint);
+            }
+            return coordinates;
+        },
+        error: (error) => {
+            console.log("Error connecting the server");
+            console.log(error);
+            return "Error connecting the server";
         }
-    }
-    return coordinates;
+    });
 }
 
 // Function for close the Modal

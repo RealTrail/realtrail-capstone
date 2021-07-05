@@ -55,10 +55,10 @@ public class EventController {
         if (principal != null) {
             // get all the trails and mapPoints
             List<Trail> trailList = trailsDao.findAll();
-            List<MapPoints> mapPointsList = mapPointsDao.findAll();
+            List<MapPoint> mapPointList = mapPointsDao.findAll();
             model.addAttribute("event", new Event());
             model.addAttribute("trails", trailList);
-            model.addAttribute("mapPoints", mapPointsList);
+            model.addAttribute("mapPoints", mapPointList);
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);
             return "events/createEvent";

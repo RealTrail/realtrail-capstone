@@ -121,7 +121,7 @@ package com.codeup.realtrail.controllers;
 
         import com.codeup.realtrail.daos.MapPointsRepository;
         import com.codeup.realtrail.daos.TrailsRepository;
-        import com.codeup.realtrail.models.MapPoints;
+        import com.codeup.realtrail.models.MapPoint;
         import com.codeup.realtrail.models.Trail;
         import org.json.simple.JSONArray;
         import org.json.simple.JSONObject;
@@ -138,11 +138,11 @@ package com.codeup.realtrail.controllers;
         import java.util.List;
 
 @Controller
-public class MapPointsController {
+public class MapPointController {
     private MapPointsRepository mapPointsDao;
     private TrailsRepository trailsDao;
 
-    public MapPointsController(MapPointsRepository mapPointsDao, TrailsRepository trailsDao) {
+    public MapPointController(MapPointsRepository mapPointsDao, TrailsRepository trailsDao) {
         this.mapPointsDao = mapPointsDao;
         this.trailsDao = trailsDao;
     }
@@ -209,7 +209,7 @@ public class MapPointsController {
                             System.out.println("lng = " + lng);
                             System.out.println("lat = " + lat);
                             Trail trailToSave = trailsDao.findTrailByName(trail);
-                            MapPoints coordinatesToSave = new MapPoints(lng, lat, trailToSave);
+                            MapPoint coordinatesToSave = new MapPoint(lng, lat, trailToSave);
                             mapPointsDao.save(coordinatesToSave);
                         }
                     }

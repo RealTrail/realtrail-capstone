@@ -29,6 +29,9 @@ public class Trail {
     @Column(nullable = false)
     private String type;
 
+    @Column(nullable = false)
+    private String address;
+
     @Column(columnDefinition="TEXT")
     private String trailDetails;
 
@@ -45,24 +48,26 @@ public class Trail {
     public Trail() {
     }
 
-    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails) {
+    public Trail(String name, String difficultyLevel, float length, String type, String address, String trailDetails) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
         this.type = type;
+        this.address = address;
         this.trailDetails = trailDetails;
     }
 
-    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails, List<PictureURL> trailImages) {
+    public Trail(String name, String difficultyLevel, float length, String type, String address, String trailDetails, List<PictureURL> trailImages) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
         this.type = type;
+        this.address = address;
         this.trailDetails = trailDetails;
         this.trailImages = trailImages;
     }
 
-    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String address, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -70,6 +75,7 @@ public class Trail {
         this.length = length;
         this.elevation = elevation;
         this.type = type;
+        this.address = address;
         this.trailDetails = trailDetails;
         this.events = events;
         this.trailImages = trailImages;
@@ -125,6 +131,13 @@ public class Trail {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTrailDetails() {
