@@ -9,60 +9,75 @@ $(document).ready(() => {
             let selectedTrailId = $("#trailOptions").find(":selected").val();
             console.log(selectedTrailId);
 
-            let coordinates = [], trailPoint = [];
-            $.ajax({
-                type: "GET",
-                url: "/map/" + selectedTrailId,
-                dataType: 'json',
-                success: (response) => {
-                    console.log(response);
-                    // get the trail location
-                    trailPoint = [response[0].trail.longitude, response[0].trail.latitude];
+            // check if selectedTrailId is empty or null
+            if (selectedTrailId !== null && selectedTrailId.length !== 0) {
+                let coordinates = [], trailPoint = [];
+                $.ajax({
+                    type: "GET",
+                    url: "/map/" + selectedTrailId,
+                    dataType: 'json',
+                    success: (response) => {
+                        console.log(response);
+                        // get the trail location
+                        trailPoint = [response[0].trail.longitude, response[0].trail.latitude];
 
-                    // loop through the array of coordinate object to get an array of coordinates
-                    for (let coordinateObj of response) {
-                        let mapPoint = [coordinateObj.longitude, coordinateObj.latitude];
-                        coordinates.push(mapPoint);
-                    }
-                },
-                error: (error) => {
-                    console.log("Error connecting the server");
-                    console.log(error);
-                    window.location = "/Error";
-                }
-            });
-
-            console.log(coordinates);
-            console.log(trailPoint);
-
-            // show the map around the location
-            let map = showMap(trailPoint);
-            map.on('load', () => {
-                map.addSource('route', {
-                    'type': 'geojson',
-                    'data': {
-                        'type': 'Feature',
-                        'properties': {},
-                        'geometry': {
-                            'type': 'LineString',
-                            'coordinates': coordinates
+                        // loop through the array of coordinate object to get an array of coordinates
+                        for (let coordinateObj of response) {
+                            let mapPoint = [coordinateObj.longitude, coordinateObj.latitude];
+                            coordinates.push(mapPoint);
                         }
-                    }
-                });
-                map.addLayer({
-                    'id': 'route',
-                    'type': 'line',
-                    'source': 'route',
-                    'layout': {
-                        'line-join': 'round',
-                        'line-cap': 'round'
+
+                        // show the map around the location
+                        let map = showMap(trailPoint);
+                        // show the trail route
+                        map.on('load', () => {
+                            map.addSource('route', {
+                                'type': 'geojson',
+                                'data': {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'LineString',
+                                        'coordinates': coordinates
+                                    }
+                                }
+                            });
+
+                            map.addLayer({
+                                'id': 'route',
+                                'type': 'line',
+                                'source': 'route',
+                                'layout': {
+                                    'line-join': 'round',
+                                    'line-cap': 'round'
+                                },
+                                'paint': {
+                                    'line-color': '#c0273d',
+                                    'line-width': 5
+                                }
+                            });
+                        });
+
+                        // source.setData({
+                        //     'type': 'Feature',
+                        //     'properties': {},
+                        //     'geometry': {
+                        //         'type': 'LineString',
+                        //         'coordinates': coordinates
+                        //     }
+                        // });
+
+
                     },
-                    'paint': {
-                        'line-color': '#c0273d',
-                        'line-width': 6
+                    error: (error) => {
+                        console.log("Error connecting the server");
+                        console.log(error);
+                        window.location = "/error";
                     }
                 });
-            });
+            }
+
+
         });
     });
 
@@ -91,6 +106,10 @@ $(document).ready(() => {
 mapboxgl.accessToken = mapboxToken;
 $("#trailOptions").hide();
 $("#map").hide();
+
+function isMapShown() {
+    return $("#map").show();
+}
 
 function showMap(trailPoint) {
     $("#map").show();

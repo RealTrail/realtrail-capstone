@@ -51,23 +51,19 @@ public class Trail {
     public Trail() {
     }
 
-    public Trail(String name, String difficultyLevel, float length, String type, double longitude, double latitude, String trailDetails) {
+    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
         this.type = type;
-        this.longitude = longitude;
-        this.latitude = latitude;
         this.trailDetails = trailDetails;
     }
 
-    public Trail(String name, String difficultyLevel, float length, String type, double longitude, double latitude, String trailDetails, List<PictureURL> trailImages) {
+    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails, List<PictureURL> trailImages) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
         this.type = type;
-        this.longitude = longitude;
-        this.latitude = latitude;
         this.trailDetails = trailDetails;
         this.trailImages = trailImages;
     }
