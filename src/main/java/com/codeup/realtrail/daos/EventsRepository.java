@@ -12,7 +12,6 @@ import java.util.List;
 public interface EventsRepository extends JpaRepository <Event, Long> {
 
     Event findEventById(long id);
-    Event findEventByLocation(String location);
     Event deleteEventByName(String name);
 
 
