@@ -57,17 +57,6 @@ $(document).ready(() => {
                                 }
                             });
                         });
-
-                        // source.setData({
-                        //     'type': 'Feature',
-                        //     'properties': {},
-                        //     'geometry': {
-                        //         'type': 'LineString',
-                        //         'coordinates': coordinates
-                        //     }
-                        // });
-
-
                     },
                     error: (error) => {
                         console.log("Error connecting the server");
@@ -76,15 +65,13 @@ $(document).ready(() => {
                     }
                 });
             }
-
-
         });
     });
 
     // user chooses to customize trail
     $("#trailOption2").on("click", () => {
         $(".mask2").addClass("active2");
-        showMap();
+        showDefaultMap();
 
         $("#mapSearch").click(() => {
             // get coordinates using geocode
@@ -105,11 +92,8 @@ $(document).ready(() => {
 
 mapboxgl.accessToken = mapboxToken;
 $("#trailOptions").hide();
+$("#trailLocation").hide();
 $("#map").hide();
-
-function isMapShown() {
-    return $("#map").show();
-}
 
 function showMap(trailPoint) {
     $("#map").show();
@@ -117,6 +101,17 @@ function showMap(trailPoint) {
         container: 'map',
         style: 'mapbox://styles/mapbox/outdoors-v11',
         center: trailPoint,
+        zoom: 15
+    });
+}
+
+function showDefaultMap() {
+    $("#trailLocation").show();
+    $("#map").show();
+    return new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/outdoors-v11',
+        center: [-98.491142, 29.424349],
         zoom: 15
     });
 }

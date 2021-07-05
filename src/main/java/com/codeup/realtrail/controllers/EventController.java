@@ -29,7 +29,6 @@ public class EventController {
     private EventsRepository eventsDao;
     private TrailsRepository trailsDao;
     private MapPointsRepository mapPointsDao;
-    private PictureURLsRepository pictureURLsDao;
     private final EmailService emailService;
     private UserService userService;
 
