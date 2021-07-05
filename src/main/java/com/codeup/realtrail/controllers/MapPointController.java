@@ -44,27 +44,27 @@ public class MapPointController {
     public String convertJsonToDB() {
 
         List<String> files = new ArrayList<>(Arrays.asList(
-                "/Users/shan/IdeaProjects/realtrail/data/Joe-Johnston-Route.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Savannah-Loop.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Lytles-Loop.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Wildcat-Canyon-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Sendero-Balcones.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Black-Hill-Loop.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Twin-Oaks-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Bear-Grass-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Red-Oak-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Apache-Creek-Greenway-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Medina-River-Greenway-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Salado-Creek-Greenway-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Main-Loop.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Restoration-Way-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Blue-Loop.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Baseball-Field-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Red-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Olmos-Basin-Loop-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Acequia-Trail.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/River-Walk.geojson",
-                "/Users/shan/IdeaProjects/realtrail/data/Leon-Creek-Greenway-Trail.geojson"
+                "data/Joe-Johnston-Route.geojson",
+                "data/Savannah-Loop.geojson",
+                "data/Lytles-Loop.geojson",
+                "data/Wildcat-Canyon-Trail.geojson",
+                "data/Sendero-Balcones.geojson",
+                "data/Black-Hill-Loop.geojson",
+                "data/Twin-Oaks-Trail.geojson",
+                "data/Bear-Grass-Trail.geojson",
+                "data/Red-Oak-Trail.geojson",
+                "data/Apache-Creek-Greenway-Trail.geojson",
+                "data/Medina-River-Greenway-Trail.geojson",
+                "data/Salado-Creek-Greenway-Trail.geojson",
+                "data/Main-Loop.geojson",
+                "data/Restoration-Way-Trail.geojson",
+                "data/Blue-Loop.geojson",
+                "data/Baseball-Field-Trail.geojson",
+                "data/Red-Trail.geojson",
+                "data/Olmos-Basin-Loop-Trail.geojson",
+                "data/Acequia-Trail.geojson",
+                "data/River-Walk.geojson",
+                "data/Leon-Creek-Greenway-Trail.geojson"
         ));
 
         List<String> trailNames = getAllTrailNames();
