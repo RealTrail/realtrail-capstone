@@ -5,7 +5,6 @@ import java.util.List;
 public class AjaxResponseBody {
     String msg;
     User user;
-    Event event;
 
     public AjaxResponseBody() {
     }
@@ -13,7 +12,6 @@ public class AjaxResponseBody {
     public AjaxResponseBody(String msg, User user, Event event) {
         this.msg = msg;
         this.user = user;
-        this.event = event;
     }
 
     public String getMsg() {
@@ -28,12 +26,5 @@ public class AjaxResponseBody {
     }
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-    public void setEvent(Event event) {
-        this.event = event;
     }
 }

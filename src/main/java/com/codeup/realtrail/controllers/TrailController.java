@@ -39,10 +39,11 @@ public class TrailController{
                               @RequestParam(name = "trailLength") float trailLength,
                               @RequestParam(name = "difficultyLevel") String difficultyLevel,
                               @RequestParam(name = "trailType") String trailType,
-                              @RequestParam(name = "trailAddress") String trailAddress,
+                              @RequestParam(name = "longitude") double longitude,
+                              @RequestParam(name = "latitude") double latitude,
                               @RequestParam(name = "trailDetails") String trailDetails,
                               @RequestParam(name = "images") String images) {
-        Trail trail = new Trail(trailName, difficultyLevel, trailLength, trailType, trailAddress, trailDetails);
+        Trail trail = new Trail(trailName, difficultyLevel, trailLength, trailType, longitude, latitude, trailDetails);
         Trail trailSaved = trailsDao.save(trail);
 
         if (!images.isEmpty()) {

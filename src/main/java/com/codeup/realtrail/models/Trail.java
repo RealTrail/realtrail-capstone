@@ -30,7 +30,10 @@ public class Trail {
     private String type;
 
     @Column(nullable = false)
-    private String address;
+    private double longitude;
+
+    @Column(nullable = false)
+    private double latitude;
 
     @Column(columnDefinition="TEXT")
     private String trailDetails;
@@ -48,26 +51,28 @@ public class Trail {
     public Trail() {
     }
 
-    public Trail(String name, String difficultyLevel, float length, String type, String address, String trailDetails) {
+    public Trail(String name, String difficultyLevel, float length, String type, double longitude, double latitude, String trailDetails) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
         this.type = type;
-        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.trailDetails = trailDetails;
     }
 
-    public Trail(String name, String difficultyLevel, float length, String type, String address, String trailDetails, List<PictureURL> trailImages) {
+    public Trail(String name, String difficultyLevel, float length, String type, double longitude, double latitude, String trailDetails, List<PictureURL> trailImages) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
         this.type = type;
-        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.trailDetails = trailDetails;
         this.trailImages = trailImages;
     }
 
-    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String address, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, double longitude, double latitude, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -75,7 +80,8 @@ public class Trail {
         this.length = length;
         this.elevation = elevation;
         this.type = type;
-        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.trailDetails = trailDetails;
         this.events = events;
         this.trailImages = trailImages;
@@ -133,11 +139,18 @@ public class Trail {
         this.type = type;
     }
 
-    public String getAddress() {
-        return address;
+    public double getLongitude() {
+        return longitude;
     }
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public String getTrailDetails() {
