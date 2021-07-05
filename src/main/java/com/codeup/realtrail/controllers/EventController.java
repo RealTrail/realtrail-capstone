@@ -63,7 +63,7 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public String saveCreatedEvent(@ModelAttribute Event event, Model model,
+    public String saveEvent(@ModelAttribute Event event, Model model,
                                    @RequestParam (name = "eventDate") String eventDate,
                                    @RequestParam(name = "eventMeetTime") String eventMeetTime,
                                    @RequestParam (name = "eventTime") String eventTime
@@ -71,15 +71,14 @@ public class EventController {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
-
-
         event.setOwner(loggedInUser);
         System.out.println(eventDate);
+        System.out.println(eventMeetTime);
+        System.out.println(eventTime);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);
         LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
 
         event.setTime(LocalTime.parse(eventTime));
         event.setMeetTime(LocalTime.parse(eventMeetTime));
@@ -94,7 +93,6 @@ public class EventController {
         return "redirect:/events/" + saveEvent.getId();
     }
 
-
     @GetMapping("/events")
     public String eventsPage(Model model){
         List<Event> eventsList = eventsDao.findAll();
@@ -103,7 +101,7 @@ public class EventController {
         return "events/showAllEvents";
     }
 
-    // show.html page
+    // showEvent.html page
     @GetMapping("/events/{id}")
     public String individualEventPage(@PathVariable Long id, Model model){
         Event event= eventsDao.getById(id);
@@ -114,26 +112,27 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}/edit")
-    public String showEditEvent(Model model) {
-        Event event = userService.getLoggedInOwner();
-        Event eventToEdit = eventsDao.getById(event.getId());
-        eventsDao.save(event);
-        model.addAttribute("event", eventToEdit);
-        return "events/editEvent";
+    public String showEditEvent(@PathVariable long id, Model model, Principal principal) {
+        String errorMessage;
+        if (principal != null) {
+            User user = userService.getLoggedInUser();
+            Event event = eventsDao.getById(id);
+            if (event.getOwner().getId() == user.getId()) {
+                model.addAttribute("event", event);
+                return "events/editEvent";
+            } else {
+                errorMessage = "User is not event owner";
+                model.addAttribute("errorMessage", errorMessage);
+                return "redirect:/profile";
+            }
+        } else {
+            return "redirect:/login";
+        }
     }
 
-    @PostMapping("/events/{id}edit")
-    public String saveEditedEvent(@ModelAttribute Event event, Model model
-    ){
-        // connect user to new event being created
-        User loggedInUser = userService.getLoggedInUser();
-        event.setOwner(loggedInUser);
-        System.out.println(loggedInUser.getUsername());
-
+    @PostMapping("/events/{id}/edit")
+    public String updateEvent(@ModelAttribute Event event, Model model){
         eventsDao.save(event);
-        List<Event> ownersEvents = eventsDao.findByOwner(loggedInUser);
-//        model.addAttribute("noEventsFound", ownersEvents.size() == 0);
-        model.addAttribute("events", ownersEvents);
         return "events/showEvent";
     }
 

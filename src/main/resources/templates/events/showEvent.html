@@ -10,12 +10,21 @@
     <div th:if="${event == null}">
         Event not found.
     </div>
-    <div th:if="${event}">
-        <div th:text="${eventId}">ID</div>
-        <div th:text="${event.owner}">Event coordinator:</div>
-        <div><h3 th:text="${event.name}"></h3>Event name:</div>
-        <div><p th:text="${event.eventDetails}"></p>Event details:</div>
-        <div><h4 th:text="${event.date}"></h4>date:</div>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    </p>
+    <div  th:if="${event}">
+        <div>ID<h3 th:text="${event.id}"></h3></div>
+        <div>Event coordinator:<h3 th:text="${event.owner}"></h3></div>
+        <div>Event name:<h3 th:text="${event.name}"></h3></div>
+        <div>Event details:<h4 th:text="${event.eventDetails}"></h4></div>
+        <div>date:<h4 th:text="${event.date}"></h4></div>
         <div>time:<h4 th:text="${event.time}"></h4></div>
         <div>location:<h4 th:text="${event.location}"></h4></div>
         <div>trail:<h4 th:text="${event.trail}"></h4></div>
@@ -28,11 +37,11 @@
 
     <div>
         <h2>Click the update link to edit your event</h2>
-        <a href="/events/{id}/edit">Update</a>
+        <a th:href="${'/events/'+ event.id + '/edit'}">Update</a>
     </div>
-    <form th:action="@{/events/{id}/delete}" method="POST">
-        <h2>Click the update button to edit your event</h2>
-        <button th:type="submit">update</button>
+    <form th:action="@{|/events/{id}/delete|}" method="POST">
+        <h2>Click the delete button to delete your event</h2>
+        <button th:type="submit">delete</button>
     </form>
 </div>
 <footer th:replace="/fragments/footer :: footer"></footer>

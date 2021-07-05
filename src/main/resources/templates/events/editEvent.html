@@ -5,50 +5,48 @@
 </head>
 <body>
 <nav th:replace="/fragments/navbar :: navbar"></nav>
-
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+</p>
 <main>
     <h2>Edit Event Details</h2>
     <!--    <div sec:authorize="isAuthenticated()">-->
 
     <fieldset>
-        <form th:action="@{/events/{id}/edit(id=${event.getId()})}" th:object="${event}" method="POST">
-            <div th:value="${event.id}"><p>Event Id</p></div>
+        <form th:action="@{|/events/{id}/edit|}" th:object="${event}" method="POST">
+            <div th:field="*{id}"><p>Event Id</p></div>
             <div>
                 <label for="name">name</label>
-                <input type="text" name="name" id="name" th:value="${event.name}"/>
+                <input type="text" name="name" id="name" th:field="*{name}"/>
             </div>
             <div>
                 <label for="date">date</label>
-                <input type="text" name="date" id="date" th:value="${event.date}" />
+                <input type="text" name="date" id="date" th:field="*{date}" />
             </div>
             <div>
                 <label for="time">time</label>
-                <input type="text" name="time" id="time" th:value="${event.time}" />
-            </div>
-            <div>
-                <label for="trail">trail </label>
-                <input type="text" name="trail" id="trail" th:value="${event.date}" />
+                <input type="text" name="time" id="time" th:field="*{time}" />
             </div>
             <div>
                 <label for="meetLocation">meet location</label>
-                <input type="text" id="meetLocation" name="meetLocation" th:value="${event.meetLocation}" />
+                <input type="text" id="meetLocation" name="meetLocation" th:field="*{meetLocation}" />
             </div>
             <div>
                 <label for="meetTime">meet time</label>
-                <input type="text" id="meetTime" name="meetTime" th:value="${event.meetTime}" />
+                <input type="text" id="meetTime" name="meetTime" th:field="*{meetTime}" />
             </div>
             <div>
                 <label for="eventDetails">event details</label>
-                <input id="eventDetails" type="text" name="eventDetails" th:value="${event.eventDetails}" />
+                <input id="eventDetails" type="text" name="eventDetails" th:field="*{eventDetails}" />
             </div>
-            <div>
-                <button type="button" class="btn btn-primary" id="images">Upload images</button>
-                <input type="hidden" name="images" id="hidden" th:value="${event.images}">
-                <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
-            </div>
+
             <button>Submit Edits</button>
         </form>
-            <a href="/events/{id}/delete(id=${event.getId()})}">
+            <a href="/events/${event.id}/delete">
                 <button class="btn btn-danger">Delete Event</button>
             </a>
     </fieldset>
