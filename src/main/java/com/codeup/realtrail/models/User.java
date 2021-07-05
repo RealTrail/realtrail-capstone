@@ -238,4 +238,5 @@ public class User {
     public void setCreatedEvents(List<Event> createdEvents) {
         this.createdEvents = createdEvents;
     }
+
 }

@@ -3,6 +3,7 @@ package com.codeup.realtrail.controllers;
 import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.Event;
+import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,12 +21,14 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     private ValidationService validationService;
     private EventsRepository eventsDao;
+    private EmailService emailService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService, EventsRepository eventsDao) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService, EventsRepository eventsDao, EmailService emailService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
         this.validationService = validationService;
         this.eventsDao = eventsDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/")
@@ -79,6 +82,7 @@ public class UserController {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
             usersDao.save(user);
+            emailService.Send(user, "Your email had been verified!", user.getEmail());
             return "redirect:/login";
         }
     }
