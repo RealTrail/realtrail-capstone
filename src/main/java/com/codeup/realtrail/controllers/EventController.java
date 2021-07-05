@@ -67,7 +67,7 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public String saveCreatedEvent(@ModelAttribute Event event,
+    public String saveEvent(@ModelAttribute Event event, Model model,
                                    @RequestParam (name = "eventDate") String eventDate,
                                    @RequestParam (name = "eventMeetTime") String eventMeetTime,
                                    @RequestParam (name = "eventTime") String eventTime,
@@ -81,6 +81,8 @@ public class EventController {
         // connect user to new event being created
         event.setOwner(loggedInUser);
         System.out.println(eventDate);
+        System.out.println(eventMeetTime);
+        System.out.println(eventTime);
 
         if (trailOption.equals("existing trail")) {
             // get selected trail
@@ -103,12 +105,11 @@ public class EventController {
         System.out.println(newDate);
 
         Event saveEvent = eventsDao.save(event);
-        emailService.prepareAndSend(event,"new event created", event.getName());
+//        emailService.prepareAndSend(event,"new event created", event.getName());
         model.addAttribute("event", event);
 
         return "redirect:/events/" + saveEvent.getId();
     }
-
 
     @GetMapping("/events")
     public String eventsPage(Model model){
@@ -118,7 +119,7 @@ public class EventController {
         return "events/showAllEvents";
     }
 
-    // show.html page
+    // showEvent.html page
     @GetMapping("/events/{id}")
     public String individualEventPage(@PathVariable Long id, Model model){
         Event event= eventsDao.getById(id);
@@ -129,11 +130,30 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}/edit")
-    public String showEditEvent(Model model, @PathVariable Long id){
-        Event eventToEdit = eventsDao.getById(id);
-        model.addAttribute("event", eventToEdit);
-        return "events/editEvent";
+    public String showEditEvent(@PathVariable long id, Model model, Principal principal) {
+        String errorMessage;
+        if (principal != null) {
+            User user = userService.getLoggedInUser();
+            Event event = eventsDao.getById(id);
+            if (event.getOwner().getId() == user.getId()) {
+                model.addAttribute("event", event);
+                return "events/editEvent";
+            } else {
+                errorMessage = "User is not event owner";
+                model.addAttribute("errorMessage", errorMessage);
+                return "redirect:/profile";
+            }
+        } else {
+            return "redirect:/login";
+        }
     }
+
+    @PostMapping("/events/{id}/edit")
+    public String updateEvent(@ModelAttribute Event event, Model model){
+        eventsDao.save(event);
+        return "events/showEvent";
+    }
+
 
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id){
@@ -141,11 +161,11 @@ public class EventController {
         return "redirect:/events/showAllEvents";
     }
 
-    @GetMapping("/search")
-    public String searchByName(Model model, @RequestParam(name = "term") String term){
-        List<Event> events = eventsDao.searchByName(term);
-        model.addAttribute("events", events);
-        return "events/showAllEvents";
-    }
+//    @GetMapping("/search")
+//    public String searchByName(Model model, @RequestParam(name = "term") String term){
+//        List<Event> events = eventsDao.searchByName(term);
+//        model.addAttribute("events", events);
+//        return "events/showAllEvents";
+//    }
 
 }

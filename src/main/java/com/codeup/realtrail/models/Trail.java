@@ -11,19 +11,19 @@ public class Trail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false)
     private String difficultyLevel;
 
-    @Column
+    @Column(nullable = false)
     private float rating;
 
     @Column(nullable = false)
     private float length;
 
-    @Column
+    @Column(nullable = false)
     private float elevation;
 
     @Column(nullable = false)
@@ -83,8 +83,7 @@ public class Trail {
         this.trailImages = trailImages;
         this.trailComments = trailComments;
     }
-
-    // getters and setters
+// getters and setters
 
     public long getId() {
         return id;
