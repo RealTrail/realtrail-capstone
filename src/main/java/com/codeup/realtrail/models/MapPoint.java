@@ -5,16 +5,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "map_points")
-public class MapPoints {
+public class MapPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    private float longitude;
+    private double longitude;
 
     @Column
-    private float latitude;
+    private double latitude;
 
     @Column
     private String mapDetails;
@@ -23,17 +23,23 @@ public class MapPoints {
     private Trail trail;
 
     //constructors
-    public MapPoints() {
+    public MapPoint() {
     }
 
-    public MapPoints(float longitude, float latitude, String mapDetails, Trail trail) {
+    public MapPoint(double longitude, double latitude, Trail trail) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.trail = trail;
+    }
+
+    public MapPoint(float longitude, float latitude, String mapDetails, Trail trail) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.mapDetails = mapDetails;
         this.trail = trail;
     }
 
-    public MapPoints(long id, float longitude, float latitude, String mapDetails, Trail trail) {
+    public MapPoint(long id, float longitude, float latitude, String mapDetails, Trail trail) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -50,17 +56,17 @@ public class MapPoints {
         this.id = id;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

@@ -1,6 +1,7 @@
 package com.codeup.realtrail;
 
 import com.codeup.realtrail.services.UserDetailsLoader;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -65,6 +66,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/events/{id}/edit" // only authenticated users can edit events
                 )
                 .authenticated()
-        ;
+                .antMatchers(
+
+
+                        "/profile/{id}",  // only authenticated users can see an event
+                        "/profile/{id}/edit",// only authenticated users can edit events
+                        "/profile/settings/{id}",
+                        "/profile/delete/{id}"
+                ).hasAuthority("ADMIN");
     }
 }

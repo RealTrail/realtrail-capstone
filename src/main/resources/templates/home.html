@@ -11,7 +11,7 @@
     <!-- ******************* SIDE NAV *********************** -->
 
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<!--        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
 
     <!-- ********** calendar goes in here ******************** -->
 
@@ -19,14 +19,21 @@
         <div class="displayed-event" th:each="event: ${events}">
             <input type="hidden" th:value="${event.id}">
             <input type="hidden" th:value="${event.name}">
-            <input type="hidden" th:value="${event.location}">
+<!--            <input type="hidden" th:value="${event.location}">-->
             <input type="hidden" th:value="${event.time}">
-            <input type="hidden" th:value="${event.meetTime}">
+<!--            <input type="hidden" th:value="${event.meetTime}">-->
             <input type="hidden" th:value="${event.date}">
         </div>
-        <div id='calendar' style="width:650px "></div>
+        <div id='calendar'></div>
         <input type="hidden" id="Event" th:value="${events}">
+
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <lottie-player id="calendarClose" class="closebtn" onclick="closeNav()" src="https://assets5.lottiefiles.com/private_files/lf30_MRHieC.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" hover   ></lottie-player>
+
     </div>
+
+
+
 
     <div id="main">
 

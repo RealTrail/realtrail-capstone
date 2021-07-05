@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface EventsRepository extends JpaRepository <Event, Long>{
+public interface EventsRepository extends JpaRepository <Event, Long> {
 
     Event findEventById(long id);
     Event findEventByLocation(String location);

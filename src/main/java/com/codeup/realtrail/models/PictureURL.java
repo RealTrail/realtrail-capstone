@@ -1,5 +1,7 @@
 package com.codeup.realtrail.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,34 +14,27 @@ public class PictureURL {
     @Column
     private String pictureUrl;
 
-    @Column
-    private String description;
-
     @ManyToOne
-    @JoinColumn (name = "trail")
+    @JoinColumn (name = "trail_id")
     private Trail trail;
-
-    @ManyToOne
-    @JoinColumn (name = "event")
-    private Event event;
 
     // constructors
     public PictureURL() {
     }
 
-    public PictureURL(String pictureUrl, String description, Trail trail, Event event) {
+    public PictureURL(String pictureUrl) {
         this.pictureUrl = pictureUrl;
-        this.description = description;
-        this.trail = trail;
-        this.event = event;
     }
 
-    public PictureURL(long id, String pictureUrl, String description, Trail trail, Event event) {
+    public PictureURL(String pictureUrl, Trail trail) {
+        this.pictureUrl = pictureUrl;
+        this.trail = trail;
+    }
+
+    public PictureURL(long id, String pictureUrl, Trail trail) {
         this.id = id;
         this.pictureUrl = pictureUrl;
-        this.description = description;
         this.trail = trail;
-        this.event = event;
     }
 
     // getters and setters
@@ -58,25 +53,11 @@ public class PictureURL {
         this.pictureUrl = pictureUrl;
     }
 
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Trail getTrail() {
         return trail;
     }
     public void setTrail(Trail trail) {
         this.trail = trail;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-    public void setEvent(Event event) {
-        this.event = event;
     }
 }
 

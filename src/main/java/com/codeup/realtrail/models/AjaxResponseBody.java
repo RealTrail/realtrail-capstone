@@ -1,42 +1,30 @@
 package com.codeup.realtrail.models;
 
-import com.codeup.realtrail.models.User;
+import java.util.List;
 
 public class AjaxResponseBody {
     String msg;
-    User result;
-    Event results;
+    User user;
 
     public AjaxResponseBody() {
     }
 
-    public AjaxResponseBody(String msg, User result, Event results) {
+    public AjaxResponseBody(String msg, User user, Event event) {
         this.msg = msg;
-        this.result = result;
-        this.results = results;
+        this.user = user;
     }
 
     public String getMsg() {
         return msg;
     }
-
     public void setMsg(String msg) {
         this.msg = msg;
     }
 
-    public User getResult() {
-        return result;
+    public User getUser() {
+        return user;
     }
-
-    public void setResult(User result) {
-        this.result = result;
-    }
-
-    public Event getResults() {
-        return results;
-    }
-
-    public void setResults(Event results) {
-        this.results = results;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
