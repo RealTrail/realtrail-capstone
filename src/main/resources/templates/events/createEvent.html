@@ -10,13 +10,6 @@
 
 <main style="margin: 5rem">
     <h1>Create an Event</h1>
-    <div id="trails" th:each="trail : ${trails}">
-        <input type="hidden" class="name" th:value="${trail.name}">
-    </div>
-    <div class="mapPoints" th:each="mapPoints : ${mapPoints}">
-        <input type="hidden" class="lng" th:name="${mapPoints.trail.id}" th:value="${mapPoints.longitude}">
-        <input type="hidden" class="lat" th:name="${mapPoints.trail.id}" th:value="${mapPoints.latitude}">
-    </div>
     <form th:action="@{/create}" th:method="POST" th:object="${event}">
         <div>
             <label for="name">Event Name</label>
@@ -65,13 +58,9 @@
             <input type="text" id="searchedName" name="mapSearch">
             <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
         </div>
-        <div id="map" style="height: 500px"></div>
+        <div id="map" style="height: 900px"></div>
         <button type="submit" id="createEvent">Submit</button>
     </form>
-
-
-
-
 
     <div class="mask2" role="dialog"></div>
     <div class="modal2" role="alert">
@@ -79,154 +68,83 @@
         <!-- Modal content -->
         <div class="modal-content2">
             <div class="modal-header2">
-                <!-- <span class="close">&times;</span> -->
-                <h2 class="type1">RealTrail</h2>
-                <br>
-
+                <h2 class="type1">Customize Your Own Trail</h2>
             </div>
             <div class="modal-body2">
-
-                <div>
-                    <h2>Customize Your Own Trail</h2>
-                    <form action="/trails/create" method="POST">
+                <form action="/trails/create" method="POST">
+                    <div>
+                        <label for="trailName">Name</label>
+                        <input type="text" id="trailName" name="trailName">
+                    </div>
+                    <div>
+                        <label for="trailLength">Length</label>
+                        <input type="number" id="trailLength" step="0.1" name="trailLength">miles
+                    </div>
+                    <div>
+                        Difficulty Level
                         <div>
-                            <label for="trailName">Name</label>
-                            <input type="text" id="trailName" name="trailName">
+                            <input type="radio" id="easy" name="difficultyLevel" value="Easy">
+                            <label for="easy">Easy</label>
                         </div>
                         <div>
-                            <label for="difficultyLevel">Difficulty Level</label>
-                            <input type="text" id="difficultyLevel" name="difficultyLevel">
+                            <input type="radio" id="moderate" name="difficultyLevel" value="Moderate">
+                            <label for="moderate">Moderate</label>
                         </div>
                         <div>
-                            <label for="trailLength">Length</label>
-                            <input type="number" id="trailLength" step="0.1" name="trailLength">
+                            <input type="radio" id="strenuous" name="difficultyLevel" value="Strenuous">
+                            <label for="strenuous">Strenuous</label>
+                        </div>
+                    </div>
+                    <div>
+                        Type
+                        <div>
+                            <input type="radio" id="loop" name="trailType" value="Loop">
+                            <label for="loop">Loop</label>
                         </div>
                         <div>
-                            Type
-                            <div>
-                                <input type="radio" id="loop" name="trailType" value="Loop">
-                                <label for="loop">Loop</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="out" name="trailType" value="Out and back">
-                                <label for="out">Out and Back</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="point" name="trailType" value="Point to point">
-                                <label for="point">Point to Point</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="cycleway" name="trailType" value="Cycleway">
-                                <label for="cycleway">Cycleway</label>
-                            </div>
+                            <input type="radio" id="out" name="trailType" value="Out and back">
+                            <label for="out">Out and Back</label>
                         </div>
                         <div>
-                            <label for="trailDetails">Trail Details</label>
-                            <textarea name="trailDetails" id="trailDetails" rows="5" cols="50"></textarea>
+                            <input type="radio" id="point" name="trailType" value="Point to point">
+                            <label for="point">Point to Point</label>
                         </div>
                         <div>
-                            <button type="button" id="images">Upload images</button>
-                            <input type="hidden" id="hidden" name="images" />
-                            <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+                            <input type="radio" id="cycleway" name="trailType" value="Cycleway">
+                            <label for="cycleway">Cycleway</label>
                         </div>
-                        <button type="submit" id="createTrail">Submit</button>
-                    </form>
-                </div>
-
-
-
-
+                    </div>
+                    <div>
+                        <label for="trailDetails">Trail Details</label>
+                        <textarea name="trailDetails" id="trailDetails" rows="5" cols="50"></textarea>
+                    </div>
+                    <div>
+                        <button type="button" id="images">Upload images</button>
+                        <input type="hidden" id="hidden" name="images" />
+                        <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
+                    </div>
+                    <button type="submit" id="createTrail">Submit</button>
+                </form>
             </div>
             <div class="modal-footer2">
-
 
                 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
                 <svg class="close" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                      x="0px" y="0px" width="100%" height="24.6px" viewBox="0 0 24.6 24.6" style="enable-background:new 0 0 24.6 24.6;"
                      xml:space="preserve">
-<style type="text/css">
-.st0{fill:#FFFFFF;}
-</style>
-                    <defs>
-</defs>
+                    <style type="text/css">
+                    .st0{fill:#FFFFFF;}
+                    </style>
+                    <defs></defs>
                     <path class="st0" d="M24,16.9l-4.6-4.6L24,7.7c0.7-0.7,0.7-1.9,0-2.7l-4.5-4.5c-0.7-0.7-1.9-0.7-2.7,0l-4.6,4.6L7.7,0.6
-C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
-l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
-</svg>
+                    C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
+                    l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
+                </svg>
             </div>
         </div>
-
+        <a class="close" role="button"></a>
     </div>
-
-    <a class="close" role="button"></a>
-    </div>
-
-    <script>
-
-        // ******************** MODAL JS *******************
-
-        // Click function for show the Modal
-
-        $("#trailOption2").on("click", function(){
-            $(".mask2").addClass("active2");
-        });
-
-        // Function for close the Modal
-
-        function closeModalTwo(){
-            $(".mask2").removeClass("active2");
-        }
-
-        // Call the closeModal function on the clicks/keyboard
-
-        $(".close, .mask2").on("click", function(){
-            closeModalTwo();
-        });
-
-        $(document).keyup(function(e) {
-            if (e.keyCode === 27) {
-                closeModalTwo();
-            }
-        });
-
-
-    // ******************** MODAL JS *******************
-
-    // Click function for show the Modal
-
-    $("#myBtn").on("click", function(){
-        $(".mask").addClass("active");
-    });
-
-    // Function for close the Modal
-
-    function closeModal(){
-        $(".mask").removeClass("active");
-    }
-
-    // Call the closeModal function on the clicks/keyboard
-
-    $(".close, .mask").on("click", function(){
-        closeModal();
-    });
-
-    $(document).keyup(function(e) {
-        if (e.keyCode === 27) {
-            closeModal();
-        }
-    });
-
-
-
-    </script>
-
-
-
-
-
-
-
 
 </main>
 
@@ -243,7 +161,7 @@ l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
     console.log(fileStackApi);
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
-<script src="/js/map.js"></script>
 <script src="/js/navbar.js"></script>
+<script src="/js/map.js"></script>
 </body>
 </html>
