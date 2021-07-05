@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface MapPointsRepository extends JpaRepository<MapPoint, Long> {
     List<MapPoint> findByTrailId(long trailId);
-    long getTrailIdByLongitudeAndLatitude(double lng, double lat);
 }
