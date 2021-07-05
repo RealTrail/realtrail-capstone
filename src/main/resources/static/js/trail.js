@@ -65,8 +65,8 @@ $("body, #mainContainer").on("scroll", function() {
 
 function openNav() {
 
-    document.getElementById("mySidenav").style.width = "60%";
-    document.getElementById("main").style.marginLeft = "60%";
+    document.getElementById("mySidenav").style.width = "80%";
+    document.getElementById("main").style.marginLeft = "80%";
     document.getElementById("mySidenav").classList.add('puff-in-center');
     // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
