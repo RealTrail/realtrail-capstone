@@ -11,23 +11,29 @@ public class Trail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false)
     private String difficultyLevel;
 
-    @Column
+    @Column(nullable = false)
     private float rating;
 
     @Column(nullable = false)
     private float length;
 
-    @Column
+    @Column(nullable = false)
     private float elevation;
 
     @Column(nullable = false)
     private String type;
+
+    @Column(nullable = false)
+    private double longitude;
+
+    @Column(nullable = false)
+    private double latitude;
 
     @Column(columnDefinition="TEXT")
     private String trailDetails;
@@ -45,6 +51,14 @@ public class Trail {
     public Trail() {
     }
 
+    public Trail(String name, String difficultyLevel, float length, String type, String trailDetails) {
+        this.name = name;
+        this.difficultyLevel = difficultyLevel;
+        this.length = length;
+        this.type = type;
+        this.trailDetails = trailDetails;
+    }
+
     public Trail(String name, String difficultyLevel, float length, String type, String trailDetails, List<PictureURL> trailImages) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -54,7 +68,7 @@ public class Trail {
         this.trailImages = trailImages;
     }
 
-    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, double longitude, double latitude, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -62,13 +76,14 @@ public class Trail {
         this.length = length;
         this.elevation = elevation;
         this.type = type;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.trailDetails = trailDetails;
         this.events = events;
         this.trailImages = trailImages;
         this.trailComments = trailComments;
     }
-
-    // getters and setters
+// getters and setters
 
     public long getId() {
         return id;
@@ -117,6 +132,20 @@ public class Trail {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public String getTrailDetails() {

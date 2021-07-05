@@ -16,7 +16,7 @@ INSERT INTO interests(interest) VALUES
    ('Mountain Biking'),
    ('Road Biking');
 
-INSERT INTO trails(id, name, difficulty_level, rating, length, elevation, type, trail_details)
+INSERT INTO trails(id, name, difficulty_level, rating, length, elevation, type, longitude, latitude, trail_details)
 VALUES
        (1, 'Joe Johnston Route',
        'Moderate',
@@ -24,6 +24,8 @@ VALUES
        9.3,
        652,
        'Loop',
+        -98.7673,
+        29.5745,
        'Government Canyon State Natural Area charges an entrance fee per adult, while children 12 and under are free. Reservations can be made at https://tpwd.texas.gov/state-parks/government-canyon. Trails may close due to poor conditions or weather. Check out their Facebook accounts (https://www.facebook.com/TPWDGCSNA/) for the latest trail reports, or call the park. Nice Point to Point trail. Dinosaur footprints recently found has added to the traffic. Rocky, mild elevations pretty canyon where the footprints were discovered.'),
        (2, 'Savannah Loop',
         'Easy',
@@ -31,6 +33,8 @@ VALUES
         2.3,
         62,
         'Loop',
+        -98.7543,
+        29.5450,
         'Savannah Trail Loop is a 2.3 mile heavily trafficked loop trail located near San Antonio, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips and is accessible year-round. Dogs are also able to use this trail but must be kept on leash.'),
        (3, 'Lytle''s Loop',
         'Easy',
@@ -38,6 +42,8 @@ VALUES
         4.4,
         131,
         'Loop',
+        -98.7494,
+        29.5459,
         'Lytle''s Loop Trail is a 4.4 mile heavily trafficked loop trail located near San Antonio, Texas that features beautiful wild flowers and is good for all skill levels. The trail offers a number of activity options and is best used from February until October. Dogs are also able to use this trail but must be kept on leash.'),
        (4, 'Wildcat Canyon Trail',
         'Easy',
@@ -45,6 +51,8 @@ VALUES
         5.4,
         301,
         'Out and back',
+        -98.7550,
+        29.5709,
         'Government Canyon Wildcat Canyon Trail is a 5.4 mile moderately trafficked out and back trail located near San Antonio, Texas that features beautiful wild flowers and is rated as moderate. The trail offers a number of activity options and is accessible year-round.'),
        (5, 'Sendero Balcones',
         'Easy',
@@ -52,6 +60,8 @@ VALUES
         4.5,
         331,
         'Point to point',
+        -98.7449,
+        29.5774,
         'Stretching across Government Canyon''s backcountry, Sendero Balcones cuts a path along the top of the Balcones Escarpment. This rough, rock-strewn trail requires constant attention to pathfinding and can be very mentally tiring.
 
 The track splits off from Recharge Trail at a signed map and a trail marker just east of Bluff Spurs. It is a rocky, moderately technical singletrack, at times widening to doubletrack. The rocks come in varying sizes. While they don''t require any climbing, they often create hazardous footing throughout Sendero Balcones'' four-plus miles, and therein lies most of the challenge of this route. It requires an eyes-down approach to hiking and a slower pace than other area trails. On the up side, nearly the entire trail is covered by tree canopy, providing plenty of shade from the scorching Texas sun.
@@ -63,6 +73,8 @@ The path makes a steady, low-grade climb up to the top of one of the Balcones'' 
         5.0,
         283,
         'Point to point',
+        -98.7453,
+        29.5992,
         'The longest trail in Government Canyon, secluded Black Hill Loop circles the Protected Habitat Area. The northern end starts at a large gate close to where Sendero Balcones turns west. Singletrack and considerably smoother, at least at the beginning, the route heads off to the northeast on a mostly flat course. Some grass overgrowth helps cushion the path even further, making it a welcome break from the rocky trails that connect to it.
 
 A greater variety of plant life is present along Black Hill Loop. Look for different types of cacti and some very large sotol plants. Black Hill is also much more open to the sky, with some nice large clearings to break up the forested sections. A few rocky sections add some changes, but they are not technical, making for an easy and fast first two miles.
@@ -76,6 +88,8 @@ As Black Hill nears the two-mile point, a neighborhood is visible to the left. N
         2.7,
         288,
         'Point to point',
+        -98.7542,
+        29.5801,
         'The Twin Oaks Trail begins a little after reaching the two mile point on Joe Johnston Route. Look for the bench/trail map/marker combination present at most of the park''s major intersections. The path begins as a fairly wide singletrack, taking a frequently winding path through tree canopy. The live oaks that give this trail its name are a staple of the Texas Hill Country, and they provide ample shade from the sun throughout the route.
 
 As Twin Oaks climbs, it becomes a little more technical than the Joe Johnston Route. Smooth and rocky sections alternate, and while there are a few tricky areas requiring some pathfinding through debris, they are usually short and not very troublesome. Users familiar with other Hill Country routes will find Twin Oaks to be familiar territory; this is a "stereotypical" central Texas trail.
@@ -91,6 +105,8 @@ The final portion is a counterclockwise circle, with a slow climb up and back do
         1.8,
         150,
         'Loop',
+         -98.6262,
+         29.6230,
         'Nice little trail. Narrow in some areas. Clearly marked though.
 
         Easy walk thru Crownridge Canyon Natural Area. Several plant reclamation areas throughout the park with small informative plaques.'),
@@ -100,6 +116,8 @@ The final portion is a counterclockwise circle, with a slow climb up and back do
         1.3,
         72,
         'Loop',
+        -98.6300,
+        29.6199,
         'Nice little trail. Narrow in some areas. Clearly marked though.
 
         You''ll see the marker for Bear Grass at the top of the Red Oak trail. It goes off the pavement into natural terrain. Steep in areas and muddy after rain.'),
@@ -109,6 +127,8 @@ The final portion is a counterclockwise circle, with a slow climb up and back do
         12.3,
         259,
         'Cycleway',
+        -98.5186,
+        29.4133,
         'Apache Creek Greenway is a 12.3 mile out and back trail located near San Antonio, Texas. The trail is rated as moderate and offers a number of activity options.'),
        (11, 'Medina River Greenway Trail',
         'Easy',
@@ -116,6 +136,8 @@ The final portion is a counterclockwise circle, with a slow climb up and back do
         13.3,
         413,
         'Cycleway',
+        -98.5141,
+        29.2626,
         'This is a nice long greenway trail that starts at the golf course and has a varied terrain - lakes, fields, and the river.
 
 Accessibility: There are 2 designated accessible spaces in the paved parking lot off of Clubhouse Boulevard at the east end of the trail. Both of them are van-accessible with a striped access aisle. The trail surface is cement, smooth, and typically at least 6 feet wide. The most accessible portion of the trail is the first 3.5 miles out. The estimated grade is mostly gentle (5% or less) except for very steep (over 12%) uphill and downhill sections at about 4.0 through 12.0 miles when going west.  Wheelchair/mobility equipment or stroller users may need assistance in the steeper sections or to avoid them for safety. There are benches along the route for resting.'),
@@ -125,6 +147,8 @@ Accessibility: There are 2 designated accessible spaces in the paved parking lot
         22.7,
         354,
         'Cycleway',
+        -98.4914,
+        29.5549,
         'Salado Creek Greenway offers 19 miles of paved trail along San Antonio''s east side. Although the trail is still under development, its three completed segments (listed below, north to south) offer connections to many parks and neighborhoods.
 Segment 1: Huebner Road to West Avenue
 
@@ -151,6 +175,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         2.6,
         354,
         'Loop',
+        -98.6310,
+        29.6394,
         'Friedrich Wilderness Park offers approximately 10 miles of hiking trails with varying degrees of difficulty. It is home for rare birds, terrestrial orchids, steep hills and deep canyons. It is internationally known for bird watching. Perched on the edge of the Balcones Escarpment, Friedrich is a nesting site for two federally listed endangered species of birds: the Black-capped Vireo and the Golden-cheeked Warbler.
 
         Restrooms and water fountains are found at the entrance to the park. Visitors are encouraged to bring water bottles for longer hikes in warm weather. In order to protect this wilderness area, it is important to observe the following rules:
@@ -166,6 +192,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         5.1,
         511,
         'Loop',
+        -98.6403,
+        29.6347,
         'Restoration Way Trail Loop is a 5.1 mile heavily trafficked loop trail located near San Antonio, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for hiking, walking, running, and nature trips. SEASONAL CLOSURE: This area is subject to seasonal closure due to weather conditions. For more information, please visit https://www.sanantonio.gov/ParksAndRec/Parks-Facilities/All-Parks-Facilities/Parks-Facilities-Details/ArtMID/14820/ArticleID/2649/Friedrich-Wilderness-Park'),
        (15, 'Blue Loop',
         'Moderate',
@@ -173,6 +201,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         6.7,
         236,
         'Loop',
+        -98.4504,
+        29.5565,
         'Great park for mountain biking.  The blue loop is fairly easy; however, it can get tough during the summer months when temperatures soar and there is little shade.  Plan to start early to beat the heat and the crowd.
 
         There are bathrooms by the parking lot and throughout the park.
@@ -184,6 +214,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         2.4,
         32,
         'Loop',
+        -98.4531,
+        29.5570,
         'This is a short but enjoyable gentle and paved multi-use path through wooded areas. For a longer route, you can continue on the blue trail but it is reportedly rockier.
 
         Accessibility: There are 3 designated accessible spaces in the paved parking lot off of Turke Roost at the north end of the trail. All of them are van-accessible with striped access aisles. The trail surface is paved asphalt with bumps and cracks. It is typically at least 5 feet wide. The majority of the trail is estimated to be in the gentle (3% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users. '),
@@ -193,6 +225,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         1.9,
         47,
         'Point to point',
+        -98.4533,
+        29.5550,
         'McAllister Park Red trail is connected to Blue trail and you can go to some other trails form here. Just be aware of mountain bikers.'),
        (18, 'Olmos Basin Loop Trail',
         'Easy',
@@ -200,6 +234,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         2.4,
         196,
         'Loop',
+        -98.4803,
+        29.4838,
         'Olmos Basin Trail is good for all skill levels. The trail is primarily used for running and nature trips. Dogs are also able to use this trail but must be kept on leash.'),
        (19, 'Acequia Trail',
         'Easy',
@@ -207,6 +243,8 @@ Stretching about 7.5 miles, this is the trail’s longest and southernmost secti
         15.1,
         413,
         'Cycleway',
+        -98.4579,
+        29.3373,
         'This trail is also called San Antoino Mission Trail guiding people from each of the missions in San Antonio.
 
         The word mission usually connotes religion. It''s true that San Antonio''s missions revolved around religion and faith, but it doesn''t describe the importance or full scope for any of them. Though intentionally created to spread the Catholic faith, missions are not churches. The church is merely one building among several in any mission. Each complex served as a separate, unique community.
@@ -222,6 +260,8 @@ When you visit the missions, be careful. These are historic structures and the m
         15,
         141,
         'Loop',
+        -98.4886,
+        29.4166,
         'History, River, Plaza, Cathedral, Tower, Alamo, parks, Rivercenter, King William
 
         This is a 15 mile long series of walkways that run along the San Antonio river, with shopping, dining and other attractions along the route. Walk on sidewalks at river-level & on west side of the River. The Walk ends at a wide stairs going up to old town square, Bexar County Courthouse, & San Fernando Cathedral. South on Soledad St. to Nueva St. & re-enter River Walk at the dam. Go to end & cross Guenther St. bridge. Pass thru King William homes & re-enter River Walk on east bank. Go to La Villita River Theatre. Through La Villita, Hemisfair Plaza, to Inst. of Texan Cultures & Tower. North to Commerce St., north on Alamo St. to The Alamo. Cross Alamo St. into River Center. Re-enter River Walk & north to footbridge. Right & back to bridge at dam. Right & north along east bank of river. Leave River Walk at Travis St. & follow to Travis Park. Diagonally across Park & follow Jefferson St. by war memorials & auditorium to Lexington. Left back to Sheraton'),
@@ -231,6 +271,8 @@ When you visit the missions, be careful. These are historic structures and the m
         12.3,
         196,
         'Point to point',
+        -98.6242,
+        29.5312,
         'Leon Creek Greenway Trail is a 12.3 mile heavily trafficked point-to-point trail located near Shavano Park, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for walking, running, and road biking and is accessible year-round. Dogs are also able to use this trail but must be kept on leash.
 
         The route shown on this page is the flat paved path along the creek. There are numerous dirt mountain biking and hiking trails off of this paved trail. Electric motor vehicles are reportedly not allowed on this trail, and you may get ticketed if you use them.
@@ -239,7 +281,7 @@ Accessibility: There are 2 designated accessible spaces in the paved parking lot
 
 The trail surface is paved concrete and smooth. It is typically at least 8 feet wide. The majority of the trail is estimated to be in the mostly gentle (5% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users. ');
 
-INSERT INTO events (id, name, date, time, location, meet_location, meet_time, event_details, owner_id, trail_id)
+INSERT INTO events (id, name, date, time, meet_location, meet_time, event_details, owner_id, trail_id)
 VALUES
-(1, 'Cool Trail', '2021-06-21', '10:00', 'San Antonio', 'Burger King', '0700', 'yes', 2, 6),
-(2, 'Hills', '2021-09-20', '13:00', 'San Antonio', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+(1, 'Cool Trail', '2021-06-21', '10:00', 'Burger King', '0700', 'yes', 2, 6),
+(2, 'Hills', '2021-09-20', '13:00', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);

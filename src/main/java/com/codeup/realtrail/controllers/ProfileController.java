@@ -78,21 +78,21 @@ public class ProfileController {
 
     // set up ajax post request response
     @PostMapping("/profile/image")
-    public @ResponseBody ResponseEntity<?> uploadImageResultViaAjax(
+    public @ResponseBody ResponseEntity<?> uploadProfileImage(
             @Valid @RequestBody AjaxRequestBody requestBody) {
         String profileImageUrl = requestBody.getProfileImageUrl();
 
-        AjaxResponseBody result = new AjaxResponseBody();
+        AjaxResponseBody response = new AjaxResponseBody();
 
         if (profileImageUrl != null) {
             User user = userService.getLoggedInUser();
             user.setProfileImageUrl(profileImageUrl);
             usersDao.save(user);
-            result.setUser(user);
-            return ResponseEntity.ok(result);
+            response.setUser(user);
+            return ResponseEntity.ok(response);
         } else {
-            result.setMsg("No image uploaded.");
-            return ResponseEntity.badRequest().body(result);
+            response.setMsg("No image uploaded.");
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
@@ -103,7 +103,6 @@ public class ProfileController {
 
             // pass the user to view/showProfile.html
             model.addAttribute("user", user);
-
             return "users/showProfile";
         } else {
             return "redirect:/login";
@@ -124,18 +123,18 @@ public class ProfileController {
         }
     }
 
-    @GetMapping("/profile/settings/{id}")
+    @GetMapping("/profile/{id}/edit")
     public String getAdminEditProfileForm(@PathVariable long id, Model model) {
         User user = usersDao.getById(id);
-            // pass the user to create profile form to show prepopulated data in the form
-            model.addAttribute("user", user);
-            model.addAttribute("interests", userInterestsDao.findAll());
-            model.addAttribute("fileStackApi", filestackApi);
-            return "users/AdminProfile";
+        // pass the user to create profile form to show prepopulated data in the form
+        model.addAttribute("user", user);
+        model.addAttribute("interests", userInterestsDao.findAll());
+        model.addAttribute("fileStackApi", filestackApi);
+        return "users/AdminProfile";
 
     }
 
-    @PostMapping("/profile/settings/{id}")
+    @PostMapping("/profile/{id}/edit")
     public String postAdminEditProfileForm(@PathVariable long id,@ModelAttribute User user, Model model) {
         User Newuser = usersDao.getById(id);
         System.out.println("user.getEmail() = " + user.getEmail());
@@ -151,8 +150,10 @@ public class ProfileController {
         usersDao.save(Newuser);
         return "redirect:/profile/"+ id;
     }
-    @GetMapping("/profile/delete/{id}")
+
+    @GetMapping("/profile/{id}/delete")
     public String getAdminDeleteProfileForm(@PathVariable long id, Model model) {
        usersDao.delete(usersDao.getById(id));
         return "redirect:/users";
-    }}
+    }
+}

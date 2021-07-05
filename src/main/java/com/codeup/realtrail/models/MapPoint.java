@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "map_points")
-public class MapPoints {
+public class MapPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,28 +23,23 @@ public class MapPoints {
     private Trail trail;
 
     //constructors
-    public MapPoints() {
+    public MapPoint() {
     }
 
-    public MapPoints(double longitude, double latitude) {
-        this.longitude = longitude;
-        this.latitude = latitude;
-    }
-
-    public MapPoints(double longitude, double latitude, Trail trail) {
+    public MapPoint(double longitude, double latitude, Trail trail) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.trail = trail;
     }
 
-    public MapPoints(float longitude, float latitude, String mapDetails, Trail trail) {
+    public MapPoint(float longitude, float latitude, String mapDetails, Trail trail) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.mapDetails = mapDetails;
         this.trail = trail;
     }
 
-    public MapPoints(long id, float longitude, float latitude, String mapDetails, Trail trail) {
+    public MapPoint(long id, float longitude, float latitude, String mapDetails, Trail trail) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;

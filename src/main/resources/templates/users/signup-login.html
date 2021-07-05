@@ -36,10 +36,10 @@
                     <label for="password">Password</label>
                 </div>
 
-                <div th:if="${param.error}">
+                <div th:if="${param.error}" style="color:red; margin-bottom:1rem">
                     Invalid Username and Password.
                 </div>
-                <div th:if="${param.logout}">
+                <div th:if="${param.logout}" style="color:red; margin-bottom:1rem">
                     You have been logged out.
                 </div>
 

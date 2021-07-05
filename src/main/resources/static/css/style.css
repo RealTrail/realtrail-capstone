@@ -1259,7 +1259,7 @@ small {
     left: -20px;
     right: 50%;
     bottom: -20px;
-    background-color: rgba(46, 54, 66, 0.3);
+    background-color: lightslategray;
     /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
     transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
     border-radius: 20px;
