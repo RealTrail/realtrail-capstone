@@ -109,6 +109,27 @@ public class ProfileController {
         }
     }
 
+    @GetMapping("/profile/{id}/edit")
+    public String getAdminEditProfileForm(@PathVariable long id, Model model, Principal principal) {
+        User user = usersDao.getById(id);
+        // pass the user to create profile form to show prepopulated data in the form
+        model.addAttribute("user", user);
+        model.addAttribute("interests", userInterestsDao.findAll());
+        model.addAttribute("fileStackApi", filestackApi);
+        return "users/adminProfile";
+    }
+
+    @PostMapping("/profile/{id}/edit")
+    public String editUsersProfile(@PathVariable long id,@ModelAttribute User user, Model model) {
+        user.setId(id);
+        System.out.println("user.getEmail() = " + user.getEmail());
+        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
+
+        usersDao.save(user);
+        model.addAttribute("user", user);
+        return "redirect:/profile" + id;
+    }
+
     @GetMapping("/profile/{id}")
     public String goToIndividualProfile(@PathVariable long id, Model model) {
         User loggedInUser = userService.getLoggedInUser();
@@ -117,43 +138,9 @@ public class ProfileController {
             User searchedUser = usersDao.getById(id);
             model.addAttribute("user", searchedUser);
 
-            return "users/showProfile";
+            return "users/profile";
         } else {
             return "error";
         }
-    }
-
-    @GetMapping("/profile/{id}/edit")
-    public String getAdminEditProfileForm(@PathVariable long id, Model model) {
-        User user = usersDao.getById(id);
-        // pass the user to create profile form to show prepopulated data in the form
-        model.addAttribute("user", user);
-        model.addAttribute("interests", userInterestsDao.findAll());
-        model.addAttribute("fileStackApi", filestackApi);
-        return "users/AdminProfile";
-
-    }
-
-    @PostMapping("/profile/{id}/edit")
-    public String postAdminEditProfileForm(@PathVariable long id,@ModelAttribute User user, Model model) {
-        User Newuser = usersDao.getById(id);
-        System.out.println("user.getEmail() = " + user.getEmail());
-        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
-        Newuser.setFirstName(user.getFirstName());
-        Newuser.setLastName(user.getLastName());
-        Newuser.setGender(user.getGender());
-        Newuser.setCity(user.getCity());
-        Newuser.setState(user.getState());
-        Newuser.setPhoneNumber(user.getPhoneNumber());
-        Newuser.setInterests(user.getInterests());
-
-        usersDao.save(Newuser);
-        return "redirect:/profile/"+ id;
-    }
-
-    @GetMapping("/profile/{id}/delete")
-    public String getAdminDeleteProfileForm(@PathVariable long id, Model model) {
-       usersDao.delete(usersDao.getById(id));
-        return "redirect:/users";
     }
 }

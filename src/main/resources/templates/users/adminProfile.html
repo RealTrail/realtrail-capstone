@@ -18,8 +18,7 @@
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 
-
-    <form th:action="@{'/profile/settings/'+${user.id}}" th:method="POST" th:object="${user}" name="profile">
+    <form th:action="@{/profile/{id}/edit/(id=${user.id})}" th:method="POST" th:object="${user}">
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>
@@ -65,11 +64,8 @@
             </div>
         </fieldset>
         <button type="submit" class="btn" id="createProfile">Complete</button>
-        <a th:href="@{'/profile/delete/'+${user.id}}" class="btn" id="delete">Delete</a>
     </form>
-    <a href="/profile">Close</a>
-
-
+    <a th:href="${'/profile/' + user.id}">Close</a>
 </main>
 
 <footer th:replace="/fragments/footer :: footer"></footer>
@@ -81,6 +77,5 @@
     const fileStackApi = [[${fileStackApi}]];
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
-<script src="/js/"></script>
 </body>
 </html>
