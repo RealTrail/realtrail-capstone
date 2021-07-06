@@ -33,6 +33,21 @@ public class EmailService {
             System.err.println(ex.getMessage());
         }
     }
+    public void prepareAndSendJoin(User user, String subject, String body) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom(from);
+        msg.setTo(user.getEmail());
+        msg.setSubject(subject);
+        msg.setText(body);
+
+        try{
+            this.emailSender.send(msg);
+        }
+        catch (MailException ex) {
+            // simply log it and go on...
+            System.err.println(ex.getMessage());
+        }
+    }
 
     public void Send(User user, String subject, String body){
         SimpleMailMessage msg = new SimpleMailMessage();

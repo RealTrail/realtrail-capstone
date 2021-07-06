@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +45,7 @@ public class EventController {
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
+
     }
 
     // Create Event
@@ -167,6 +167,7 @@ public class EventController {
 //        model.addAttribute("events", events);
 //        return "events/showAllEvents";
 //    }
+
     @PostMapping("/events/{id}/join")
     public String joinEvent(@PathVariable long id){
         Event event = eventsDao.getById(id);
@@ -175,6 +176,10 @@ public class EventController {
         participants.add(user);
         event.setParticipants(participants);
         eventsDao.save(event);
-        return ("redirect:/events/" + id);
+        emailService.prepareAndSendJoin(user, event.getName(),"Thank you for joining the event!\n" + event.getDate() + "\n" + event.getEventDetails());
+        return ("redirect:/events/" + id + "?joined");
+
+
     }
+
 }
