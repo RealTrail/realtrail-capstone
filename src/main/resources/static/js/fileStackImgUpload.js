@@ -6,11 +6,6 @@
          e.preventDefault();
          uploadProfileImage();
      });
-
-     // click upload images to upload images
-     $("#images").click(() => {
-         uploadImages();
-     })
  });
 
  const client = filestack.init(fileStackApi);
