@@ -36,12 +36,14 @@ public class TrailController{
     }
 
     @PostMapping("/trails/create")
+    @ResponseBody
     public String createTrail(@RequestParam(name = "trailName") String trailName,
-                              @RequestParam(name = "trailLength") float trailLength,
-                              @RequestParam(name = "difficultyLevel") String difficultyLevel,
-                              @RequestParam(name = "trailType") String trailType,
-                              @RequestParam(name = "trailDetails") String trailDetails,
-                              @RequestParam(name = "images") String images) {
+                            @RequestParam(name = "trailLength") float trailLength,
+                            @RequestParam(name = "difficultyLevel") String difficultyLevel,
+                            @RequestParam(name = "trailType") String trailType,
+                            @RequestParam(name = "trailDetails") String trailDetails,
+                            @RequestParam(name = "images") String images,
+                            Model model) {
         Trail trail = new Trail(trailName, difficultyLevel, trailLength, trailType, trailDetails);
         Trail trailSaved = trailsDao.save(trail);
 
@@ -57,7 +59,8 @@ public class TrailController{
             }
             trailSaved.setTrailImages(pictureURLList);
         }
-        return "events/createEvent";
+        model.addAttribute("trail", trailSaved);
+        return "Trail saved";
     }
 }
 
