@@ -890,22 +890,353 @@ footer .row {
         padding-left: 1em;
     }
 }
+/********************************** PROFILE SETTINGS ***************************/
+
+@import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
+body {
+    margin: 0;
+    background-color: #e5e5e5;
+
+}
 
 
 
+:root {
+    font-family: "Nunito", sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
+}
 
-.mainContainer{
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+}
 
-    /* display: none; */
-    /* overflow-x: hidden;
-    overflow-y: auto;
-    display: inline;
+small {
+    font-size: 0.9em;
+    line-height: 2.5em;
+    display: block;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 23px;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    line-height: 1em;
+    background: #ff4757;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+img#profileImage{
     position: absolute;
+    margin: auto;
+    top: -659px;
+    right: 0px;
+    bottom: 0;
+    left: -615px;
+    width: 200px;
+    clip-path: circle(45%);
+
+}
+
+
+.btnUpload{
+    display: inline-block;
+
+
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    line-height: 1em;
+    background: #01d4c3;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+    transition: all 1s ease-in-out;
+    transform: scale(1.04);
+
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    border-radius: 50%; /* the magic */
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    opacity: 0;
+
+    position: relative;
+    margin: auto;
+    top: 57px;
+    right: 0px;
+    bottom: 0;
+    left: -308px
+}
+
+@media (max-width: 747px) {
+    .btnUpload {
+        position: relative;
+        margin: auto;
+        top: 25px;
+        right: 0;
+        bottom: 0;
+        left: -43px
+
+    }
+}
+
+.btnUpload:hover{
+    transform: scale(2.05);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    transition: all 1s ease-in-out;
+    transform: scale(1.04);
+}
+
+
+
+.btn:hover {
+    transform: scale(1.05);
+}
+.btn.btn-light {
+    /* color: #ff4757;
+    background: white;
+    border: 2px solid #ff4757; */
+
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 23px;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    line-height: 1em;
+    background: #ff4757;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#createProfile{
+    position: relative;
+    left: 109px;
+}
+
+input[type="tel" i] {
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.selections {
+    display: inline-flex;
+
+}
+
+.gender{
+    display: inline-flex;
+    align-items: baseline;
+    position: relative;
+    left: 15px;
+    top: -14px;
+
+}
+
+/*FORM SIZE*/
+
+.form {
+    position: relative;
+    width: 80vw;
+    max-width: 80%;
+
+    margin: 0 auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-top-right-radius: 50px;
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+
+
+}
+.form__wrapperpasspp {
+    /* position: absolute;
+    top: 200px;
+    width: 100%;
+    height: 100vh;
+    padding: 10vh 20px; */
+    /* background: #efefef; */
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    top:200px;
+    text-align: left;
+
+
+
+}
+.form__options {
+    padding: 160px 0;
+    display: flex;
+    height: 500px;
+}
+.form__options > div {
+    width: 50%;
+    text-align: center;
+}
+
+
+
+.form__bodypasspp {
+    position: relative;
     top: 0;
+    left: -20px;
+    right: -20px;
+    bottom: 0;
+    padding: 20px 0;
+    transition: 0.5s;
+    display: flex;
+    pointer-events: none;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+
+}
+
+
+
+
+.form__bodypasspp form {
+    pointer-events: all;
+    margin: 20px 0;
+    transition: opacity 0.3s;
+}
+.form__bodypasspp form h2 {
+    margin-top: 0;
+    color: white;
+    font-size: 3em;
+}
+.form__bodypasspp form .input-field {
+    margin-bottom: 10px;
+
+}
+.form__bodypasspp form label {
+    display: block;
+    color: white;
+    line-height: 2em;
+    /* font-weight: 300; */
+
+}
+.form__bodypasspp form input[type=text], .form__bodypasspp form input[type=password], .form__bodypasspp form input[type=email] {
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.profile {
+    /* max-width: 95%;
+    max-height: 95%; */
+    background-size: 100% 100%;
+    position: absolute;
+    top: 10;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: 0 auto; */
+    /* margin: auto; */
+    z-index: -1;
+    overflow:hidden;
+
+}
+.profile path {
+    fill-opacity: 0;
+    stroke: #09f698;
+    stroke-width: 0.3;
+    stroke-dasharray: 670;
+    stroke-dashoffset: 670;
+    animation: draw 10s infinite linear;
+    animation-direction: alternate;
+    overflow:hidden;
+}
+
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.form__backgroundpp {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 746px;
+    width: 80vw;
+    max-width: 80%;
+    max-width: 580px;
+    background-color: rgba(46, 54, 66, 0.4);
+    /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    border-radius: 20px;
+
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-top-right-radius: 50px;
+    /* text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+    border-right-style: 11px solid ; */
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    /*border-top: 3px solid rgba(245, 240, 240, 1.9);*/
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    pointer-events: none;
+    z-index: 1;
+
+
+}
+
+.form__backgroundpp1 {
+    position: absolute;
+    top: 215px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 731px;
+    width: 80vw;
+    max-width: 80%;
+    max-width: 580px;
+    background-color: rgba(255, 255, 255, 0.9);
+    /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    border-radius: 20px;
+
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-top-right-radius: 50px;
+    /* text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+    border-right-style: 11px solid ; */
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    /*border-top: 3px solid rgba(245, 240, 240, 1.9);*/
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    z-index: -2;
+
+
 
 }
 
@@ -1346,7 +1677,7 @@ small {
 
 /*PASSWORD CHECK CSS*/
 
-span {
+.loginspan {
     width: 100%;
     display: flex;
     margin: 20px 0px 0px 0px;
