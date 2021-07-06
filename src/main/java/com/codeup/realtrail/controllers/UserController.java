@@ -26,7 +26,7 @@ public class UserController {
     private ValidationService validationService;
     private EmailService emailService;
     private UserService userService;
-  
+
     public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, ValidationService validationService, EmailService emailService, UserService userService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;

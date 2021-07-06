@@ -103,7 +103,7 @@
                     <div th:each="trail : ${trails}">
                         <div class="slide-wrap">
                             <div class="image">
-                                <img src="" alt="trail image">
+                                <img class="image" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
                             </div>
                             <div class="header">
                                 <h3 th:text="${'Trail Name:  ' + trail.name}"></h3>
