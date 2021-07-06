@@ -7,6 +7,7 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container">
+    <div th:if="${param.joined}">Thank you for joining the event!</div>
     <div th:if="${event == null}">
         Event not found.
     </div>
