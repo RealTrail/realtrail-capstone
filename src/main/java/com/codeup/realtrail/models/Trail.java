@@ -35,7 +35,7 @@ public class Trail {
     @Column(nullable = false)
     private double latitude;
 
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT", nullable = false)
     private String trailDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")

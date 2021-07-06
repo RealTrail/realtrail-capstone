@@ -69,9 +69,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 )
                 .authenticated()
                 .antMatchers(
-                        "/profile/{id}",  // only admin can visit all the users profile
-                        "/profile/{id}/edit",  // admin can edit any user's profile
-                        "/profile/{id}/delete"  // admin can delete any user's profile
+                        "/users",  // only admin can visit the users page
+                        "/profile/{id}",  // only admin can visit individual user page
+                        "/profile/{id}/edit",
+                        "/users/{id}/delete"  // admin can delete any user's profile
                 ).hasAuthority("ADMIN");
     }
 }
