@@ -14,7 +14,7 @@
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 
-    <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}" name="profile">
+    <form th:action="@{${postUrl}}" th:method="POST" th:object="${user}" name="profile">
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>

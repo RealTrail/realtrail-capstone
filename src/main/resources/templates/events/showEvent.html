@@ -41,6 +41,10 @@
         <h2>Click the delete button to delete your event</h2>
         <button th:type="submit">delete</button>
     </form>
+    <form th:action="@{|/events/${id}/join|}" method="POST">
+        <h2>Click the join button to join your event</h2>
+        <button th:type="submit">Join</button>
+    </form>
 </div>
 <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
