@@ -68,13 +68,13 @@ public class EventController {
 
     @PostMapping("/create")
     public String saveEvent(@ModelAttribute Event event,
-                                   @RequestParam (name = "eventDate") String eventDate,
-                                   @RequestParam (name = "eventMeetTime") String eventMeetTime,
-                                   @RequestParam (name = "eventTime") String eventTime,
-                                   @RequestParam (name = "trailOption") String trailOption,
-                                   @RequestParam (name = "trailOptions") String trailId,
-                                   @RequestParam (name = "images") String images,
-                                   Model model) throws ParseException {
+                            @RequestParam (name = "eventDate") String eventDate,
+                            @RequestParam (name = "eventMeetTime") String eventMeetTime,
+                            @RequestParam (name = "eventTime") String eventTime,
+                            @RequestParam (name = "trailOption") String trailOption,
+                            @RequestParam (name = "trailOptions") String trailId,
+                            @RequestParam (name = "images") String images,
+                            Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
