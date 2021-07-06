@@ -1,9 +1,10 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.EventsRepository;
+import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
-import com.codeup.realtrail.models.Event;
+import com.codeup.realtrail.models.Trail;
 import com.codeup.realtrail.services.EmailService;
+import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,30 +12,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class UserController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
+    private TrailsRepository trailsDao;
     private ValidationService validationService;
-    private EventsRepository eventsDao;
     private EmailService emailService;
+    private UserService userService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService, EventsRepository eventsDao, EmailService emailService) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, ValidationService validationService, EmailService emailService, UserService userService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
+        this.trailsDao = trailsDao;
         this.validationService = validationService;
-        this.eventsDao = eventsDao;
         this.emailService = emailService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        List<Event> eventsList = eventsDao.findAll();
-        model.addAttribute("events", eventsList);
+        List<Trail> trailList =  trailsDao.findAll();
+        model.addAttribute("trails", trailList);
         return "home";
     }
 
@@ -87,5 +92,27 @@ public class UserController {
         }
     }
 
+    @GetMapping("/users")
+    public String showAllUsers(Model model, Principal principal) {
+        if (principal != null) {
+            User user = userService.getLoggedInUser();
+            if (user.isAdmin()) {
+                List<User> users = usersDao.findAll();
+                model.addAttribute("users", users);
+                model.addAttribute("loggedInUser", user);
+                return "users/allUsers";
+            } else {
+                return "error";
+            }
+        } else {
+            return "redirect:/login";
+        }
+    }
 
+    @PostMapping("/users/{id}/delete")
+    public String getAdminDeleteProfileForm(@PathVariable long id) {
+
+        usersDao.delete(usersDao.getById(id));
+        return "redirect:/users";
+    }
 }

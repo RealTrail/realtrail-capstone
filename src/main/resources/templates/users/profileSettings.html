@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/fragments/head :: head">
 <head th:replace="/fragments/header :: head">
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <title>Create Profile</title>
@@ -8,17 +7,12 @@
 <body>
 <nav th:replace="/fragments/navbar :: navbar"></nav>
 <main>
-    <div th:if="${user == null}">
-        Please log in first.
-    </div>
-
     <h1>Public Profile</h1>
     <form action="/profile/image" method="POST">
         <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
         <input type="hidden" id="profileImageUrl" name="profileImageUrl" th:value="replaceme" >
         <button type="submit" id="upload">Upload profile image</button>
     </form>
-
 
     <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
         <fieldset>
@@ -68,8 +62,6 @@
         <button type="submit" class="btn" id="createProfile">Complete</button>
     </form>
     <a href="/profile">Close</a>
-
-
 </main>
 
 <footer th:replace="/fragments/footer :: footer"></footer>

@@ -909,8 +909,241 @@ footer .row {
 
 }
 
+/********************************* RESET PASSWORD*******************************/
+
+
+
+/*FORM SIZE*/
+
+.form {
+    position: relative;
+    width: 80vw;
+    max-width: 80%;
+
+    margin: 0 auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-top-right-radius: 50px;
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+
+}
+.form__wrapperpass {
+    /* position: absolute;
+    top: 200px;
+    width: 100%;
+    height: 100vh;
+    padding: 10vh 20px; */
+    /* background: #efefef; */
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    top:200px;
+    text-align: left;
+
+
+
+}
+.form__options {
+    padding: 160px 0;
+    display: flex;
+    height: 500px;
+}
+.form__options > div {
+    width: 50%;
+    text-align: center;
+}
+
+
+
+.form__bodypass {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    right: -20px;
+    bottom: 0;
+    padding: 20px 0;
+    transition: 0.5s;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    z-index: 1;
+
+}
+
+
+
+
+.form__bodypass form {
+    pointer-events: all;
+    margin: 20px 0;
+    transition: opacity 0.3s;
+}
+.form__bodypass form h2 {
+    margin-top: 0;
+    color: white;
+    font-size: 3em;
+}
+.form__bodypass form .input-field {
+    margin-bottom: 10px;
+
+}
+.form__bodypass form label {
+    display: block;
+    color: white;
+    line-height: 2em;
+    font-weight: 300;
+
+}
+.form__bodypass form input[type=text], .form__bodypass form input[type=password], .form__bodypass form input[type=email] {
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+}
+
+
+.password {
+    /* max-width: 95%;
+    max-height: 95%; */
+    background-size: 100% 100%;
+    position: absolute;
+    top: 10;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* margin: auto; */
+    z-index: -1;
+    overflow:hidden;
+
+}
+.password path {
+    fill-opacity: 0;
+    stroke: #000;
+    stroke-width: 0.3;
+    stroke-dasharray: 1170;
+    stroke-dashoffset: 1170;
+    animation: draw 30s infinite linear;
+    animation-direction: alternate;
+    overflow:hidden;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.form__background2 {
+    position: absolute;
+    top: 274px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 500px;
+    width: 80vw;
+    max-width: 80%;
+    max-width: 580px;
+    background-color: rgba(46, 54, 66, 0.4);
+    /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    border-radius: 20px;
+
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-top-right-radius: 50px;
+    /* text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+    border-right-style: 11px solid ; */
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    /*border-top: 3px solid rgba(245, 240, 240, 1.9);*/
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+
+
+}
+
+.form__background3 {
+    position: absolute;
+    top: 274px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 486px;
+    width: 80vw;
+    max-width: 80%;
+    max-width: 580px;
+    background-color: rgba(255, 255, 255, 0.9);
+    /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    border-radius: 20px;
+
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-top-right-radius: 50px;
+    /* text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+    border-right-style: 11px solid ; */
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    /*border-top: 3px solid rgba(245, 240, 240, 1.9);*/
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    z-index: -2;
+
+
+
+}
+
+.form__background4 {
+    position: relative;
+    top: 194px;
+    left: 442px;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 486px;
+    width: 80vw;
+    max-width: 80%;
+    max-width: 580px;
+
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    z-index: 2;
+
+
+
+
+}
+
+@media (max-width: 700px) {
+    .form__background4 {
+        position: absolute;
+        margin: auto;
+        top: -937px;
+        right: 0;
+        bottom: 0;
+        left: -48px;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+
+
 
 /* ****************************** SIGNUP-LOGIN PAGE ****************************** */
+
 
 
 p.errorMessage {
@@ -1450,7 +1683,7 @@ span {
 
 
 /* ****************************** SHOW PROFILE PAGE ****************************** */
-#profileImage {
+.profileImage {
     width: 5rem;
 }
 
@@ -1540,6 +1773,7 @@ span {
     cursor: pointer;
     position: relative;
     z-index: 9999;
+
 
 
 }
@@ -1686,48 +1920,14 @@ span {
     font-weight: 700;
 }
 
+#modalClose{
+    position: absolute;
+    bottom: 50px;
+    left: 110px;
+}
 
-.close {
 
-    -webkit-animation: spin 4s linear infinite;
-    -moz-animation: spin 4s linear infinite;
-    animation: spin 4s linear infinite;
-    border-radius: 50%;
-}
-@-moz-keyframes spin {
-    100% {
-        -moz-transform: rotate(360deg);
-    }
-}
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-@-moz-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@-o-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
+
 
 
 /**************************** CALENDAR *****************************/
@@ -1763,11 +1963,13 @@ span {
 #calendarClose{
     position: absolute;
     margin: auto;
-    top: -52px;
-    right: -49px;
+    top: -37px;
+    right: -33px;
+    z-index: 11;
 
 
 }
+
 
 
 
