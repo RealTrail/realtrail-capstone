@@ -50,6 +50,7 @@ public class ProfileController {
             model.addAttribute("user", user);
             model.addAttribute("interests", userInterestsDao.findAll());
             model.addAttribute("fileStackApi", filestackApi);
+            model.addAttribute("postUrl", "/profile/settings");
             return "users/profileSettings";
         } else {
             return "redirect:/login";
@@ -116,18 +117,26 @@ public class ProfileController {
         model.addAttribute("user", user);
         model.addAttribute("interests", userInterestsDao.findAll());
         model.addAttribute("fileStackApi", filestackApi);
+        model.addAttribute("postUrl", "/profile/" + id + "/edit");
         return "users/adminProfile";
     }
 
     @PostMapping("/profile/{id}/edit")
+
     public String editUsersProfile(@PathVariable long id,@ModelAttribute User user, Model model) {
-        user.setId(id);
+        var newUser = usersDao.getById(id);
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setPhoneNumber(user.getPhoneNumber());
+        newUser.setCity(user.getCity());
+        newUser.setState(user.getState());
+        newUser.setGender(user.getGender());
+        newUser.setInterests(user.getInterests());
         System.out.println("user.getEmail() = " + user.getEmail());
         System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
 
-        usersDao.save(user);
-        model.addAttribute("user", user);
-        return "redirect:/profile" + id;
+        usersDao.save(newUser);
+        return "redirect:/profile/" + id;
     }
 
     @GetMapping("/profile/{id}")

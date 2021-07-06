@@ -167,5 +167,14 @@ public class EventController {
 //        model.addAttribute("events", events);
 //        return "events/showAllEvents";
 //    }
-
+    @PostMapping("/events/{id}/join")
+    public String joinEvent(@PathVariable long id){
+        Event event = eventsDao.getById(id);
+        User user = userService.getLoggedInUser();
+        List<User> participants =  event.getParticipants();
+        participants.add(user);
+        event.setParticipants(participants);
+        eventsDao.save(event);
+        return ("redirect:/events/" + id);
+    }
 }
