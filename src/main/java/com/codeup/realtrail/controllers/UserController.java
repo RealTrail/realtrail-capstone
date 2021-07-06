@@ -4,6 +4,7 @@ import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.Trail;
 import com.codeup.realtrail.services.EmailService;
+import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +24,7 @@ public class UserController {
     private TrailsRepository trailsDao;
     private ValidationService validationService;
     private EmailService emailService;
+    private UserService userService;
 
     public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, ValidationService validationService, EmailService emailService) {
         this.usersDao = usersDao;
