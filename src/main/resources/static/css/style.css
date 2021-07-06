@@ -1683,7 +1683,7 @@ span {
 
 
 /* ****************************** SHOW PROFILE PAGE ****************************** */
-#profileImage {
+.profileImage {
     width: 5rem;
 }
 
