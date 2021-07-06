@@ -378,7 +378,7 @@ INSERT INTO picture_urls (id, picture_url, trail_id) VALUES (1, 'https://cdn-ass
 
 
 
-# INSERT INTO events (id, name, date, time, meet_location, meet_time, event_details, owner_id, trail_id)
-# VALUES
-# (1, 'Cool Trail', '2021-06-21', '10:00', 'Burger King', '0700', 'yes', 2, 6)
-# (2, 'Hills', '2021-09-20', '13:00', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+INSERT INTO events (id, name, date, time, meet_location, meet_time, event_details, owner_id, trail_id)
+VALUES
+(1, 'Cool Trail', '2021-06-21', '10:00', 'Burger King', '0700', 'yes', 2, 6),
+(2, 'Hills', '2021-09-20', '13:00', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);

@@ -54,19 +54,37 @@
      client.picker(options).open();
  }
 
- function uploadImages() {
+ function getTrailInfo() {
+     let trailName = $("#trailName").val();
+     let trailLength = parseFloat($("#trailLength").val());
+     let difficultyLevel = $("input[name='difficultyLevel']:checked").val();
+     let trailType = $("input[name='trailType']:checked").val();
+     let trailDetails = $("#trailDetails").val();
+     return {
+         name: trailName,
+         length: trailLength,
+         difficultyLevel: difficultyLevel,
+         type: trailType,
+         trailDetails: trailDetails
+     }
+ }
+
+
+ function uploadImages(trail) {
      const options = {
          accept: ["image/*"],
          maxFiles: 6,
          onUploadDone: (results) => {
              console.log(results);
-             let images = "";
+             let images = [];
              for (let image of results.filesUploaded) {
-                 images = images + image.url + ", ";
+                 images.push(image.url);
              }
              console.log(images);
              $("#hidden").val(images);
              $(".fa-check").toggleClass("hidden");
+             trail.images = images;
+
          },
          onFileUploadFailed: (response) => {
              console.log(response);

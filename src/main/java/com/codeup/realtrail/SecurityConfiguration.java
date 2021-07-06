@@ -72,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/users",  // only admin can visit the users page
                         "/profile/{id}",  // only admin can visit individual user page
                         "/profile/{id}/edit",
-                        "/profile/{id}/delete"  // admin can delete any user's profile
+                        "/users/{id}/delete"  // admin can delete any user's profile
                 ).hasAuthority("ADMIN");
     }
 }
