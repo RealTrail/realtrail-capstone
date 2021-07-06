@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,30 +38,9 @@ public class TrailController{
 
     @PostMapping("/trails/create")
     @ResponseBody
-    public String createTrail(@RequestParam(name = "trailName") String trailName,
-                            @RequestParam(name = "trailLength") float trailLength,
-                            @RequestParam(name = "difficultyLevel") String difficultyLevel,
-                            @RequestParam(name = "trailType") String trailType,
-                            @RequestParam(name = "trailDetails") String trailDetails,
-                            @RequestParam(name = "images") String images,
-                            Model model) {
-        Trail trail = new Trail(trailName, difficultyLevel, trailLength, trailType, trailDetails);
+    public Trail createTrail(@Valid @RequestBody Trail trail) {
         Trail trailSaved = trailsDao.save(trail);
-
-        if (!images.isEmpty()) {
-            // convert the urls inside hidden input into an array of url
-            String[] urls = images.split(", ");
-            List<PictureURL> pictureURLList = new ArrayList<>();
-
-            for (String url : urls) {
-                PictureURL pictureURL = new PictureURL(url, trailSaved);
-                pictureURLList.add(pictureURL);
-                pictureURLSDao.save(pictureURL);
-            }
-            trailSaved.setTrailImages(pictureURLList);
-        }
-        model.addAttribute("trail", trailSaved);
-        return "Trail saved";
+        return trailSaved;
     }
 }
 

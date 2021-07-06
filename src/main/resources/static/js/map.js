@@ -73,6 +73,36 @@ $(document).ready(() => {
         $(".mask2").addClass("active2");
         showDefaultMap();
 
+        // get the trail info typed in create trail modal form
+        let trail = getTrailInfo();
+        console.log(trail);
+
+        if ($("#hidden").val() !== null) {
+            let images = $("#hidden").val().split(", ");
+            console.log(images);
+            trail.trailImages = images;
+        }
+
+        $("#createTrail").click((e) => {
+            e.preventDefault();
+            $.ajax({
+                url: "/trails/create",
+                type: "POST",
+                data: JSON.stringify(trail),
+                contentType: "application/json",
+                dataType: "json",
+                timeout: 600000,
+                success: (response) => {
+                    console.log("trail saved!");
+                    console.log(response);
+
+                },
+                error: (error) => {
+                    console.log("Error: ", error);
+                }
+            })
+        })
+
         $("#mapSearch").click(() => {
             // get coordinates using geocode
             geocode($("#searchedName").val(), mapboxToken).then((results) => {
@@ -132,3 +162,22 @@ $(document).keyup((e) => {
     }
 });
 
+function getTrailInfo() {
+    let trailName, trailLength, difficultyLevel, trailType, trailDetails;
+    $("#trailName").keyup(() => trailName = $("#trailName").val());
+    $("#trailLength").on("change", () => trailLength = parseFloat($("#trailLength").val()))
+    $("#difficultyLevel").keyup
+    let difficultyLevel = $("input[name='difficultyLevel']:checked").val();
+    let trailType = $("input[name='trailType']:checked").val();
+    let trailDetails = $("#trailDetails").val();
+
+    console.log(trailName, trailLength, difficultyLevel, trailType, trailDetails);
+
+    return {
+        name: trailName,
+        length: trailLength,
+        difficultyLevel: difficultyLevel,
+        type: trailType,
+        trailDetails: trailDetails
+    }
+}
