@@ -18,7 +18,6 @@
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 
-
     <form th:action="@{/profile/{id}/edit/(id=${user.id})}" th:method="POST" th:object="${user}">
         <fieldset>
             <legend>
@@ -67,12 +66,11 @@
         <button type="submit" class="btn" id="createProfile">Complete</button>
     </form>
     <a th:href="${'/profile/' + user.id}">Close</a>
-
-
 </main>
 
 <footer th:replace="/fragments/footer :: footer"></footer>
 
+<script type="text/javascript" src="/js/sticky.js"></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     // assign fileStackApi to a variable

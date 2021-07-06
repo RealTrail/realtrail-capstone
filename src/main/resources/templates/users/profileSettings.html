@@ -14,7 +14,7 @@
         <button type="submit" id="upload">Upload profile image</button>
     </form>
 
-    <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
+    <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}" name="profile">
         <fieldset>
             <legend>
                 <h3>Personal Details</h3>
@@ -66,6 +66,7 @@
 
 <footer th:replace="/fragments/footer :: footer"></footer>
 
+<script type="text/javascript" src="/js/sticky.js"></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     // assign fileStackApi to a variable
