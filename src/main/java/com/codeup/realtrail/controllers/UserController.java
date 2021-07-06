@@ -1,7 +1,9 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.Event;
 import com.codeup.realtrail.models.Trail;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
@@ -23,14 +25,16 @@ public class UserController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
     private TrailsRepository trailsDao;
+    private EventsRepository eventsDao;
     private ValidationService validationService;
     private EmailService emailService;
     private UserService userService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, ValidationService validationService, EmailService emailService, UserService userService) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, EventsRepository eventsDao, ValidationService validationService, EmailService emailService, UserService userService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
         this.trailsDao = trailsDao;
+        this.eventsDao = eventsDao;
         this.validationService = validationService;
         this.emailService = emailService;
         this.userService = userService;
@@ -39,7 +43,9 @@ public class UserController {
     @GetMapping("/")
     public String showHomePage(Model model) {
         List<Trail> trailList =  trailsDao.findAll();
+        List<Event> events = eventsDao.findAll();
         model.addAttribute("trails", trailList);
+        model.addAttribute("events", events);
         return "home";
     }
 
