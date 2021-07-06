@@ -29,17 +29,13 @@ public class Trail {
     @Column(nullable = false)
     private String type;
 
-<<<<<<< HEAD
     @Column(nullable = false)
     private double longitude;
 
     @Column(nullable = false)
     private double latitude;
 
-    @Column(columnDefinition="TEXT")
-=======
     @Column(columnDefinition="TEXT", nullable = false)
->>>>>>> fc0bb6818ec07ca507a92115ae2bf03903d7b6b2
     private String trailDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
@@ -55,7 +51,6 @@ public class Trail {
     public Trail() {
     }
 
-<<<<<<< HEAD
     public Trail(String name, String difficultyLevel, float length, String type, String trailDetails) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -65,10 +60,6 @@ public class Trail {
     }
 
     public Trail(String name, String difficultyLevel, float length, String type, String trailDetails, List<PictureURL> trailImages) {
-=======
-    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
-        this.id = id;
->>>>>>> fc0bb6818ec07ca507a92115ae2bf03903d7b6b2
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.length = length;
@@ -77,12 +68,8 @@ public class Trail {
         this.trailImages = trailImages;
     }
 
-<<<<<<< HEAD
     public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, double longitude, double latitude, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
         this.id = id;
-=======
-    public Trail(String name, String difficultyLevel, float rating, float length, float elevation, String type, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
->>>>>>> fc0bb6818ec07ca507a92115ae2bf03903d7b6b2
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.rating = rating;

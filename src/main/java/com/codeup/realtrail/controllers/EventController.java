@@ -67,7 +67,7 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public String saveEvent(@ModelAttribute Event event, Model model,
+    public String saveEvent(@ModelAttribute Event event,
                             @RequestParam (name = "eventDate") String eventDate,
                             @RequestParam (name = "eventMeetTime") String eventMeetTime,
                             @RequestParam (name = "eventTime") String eventTime,

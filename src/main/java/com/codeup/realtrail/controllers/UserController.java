@@ -1,8 +1,11 @@
 package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.daos.EventsRepository;
+import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.Event;
+import com.codeup.realtrail.models.Trail;
+import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.ValidationService;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,20 +21,23 @@ import java.util.List;
 public class UserController {
     private UsersRepository usersDao;
     private PasswordEncoder passwordEncoder;
+    private TrailsRepository trailsDao;
     private ValidationService validationService;
-    private EventsRepository eventsDao;
+    private EmailService emailService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, ValidationService validationService, EventsRepository eventsDao) {
+
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, ValidationService validationService, EmailService emailService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
+        this.trailsDao = trailsDao;
         this.validationService = validationService;
-        this.eventsDao = eventsDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        List<Event> eventsList = eventsDao.findAll();
-        model.addAttribute("events", eventsList);
+        List<Trail> trailList =  trailsDao.findAll();
+        model.addAttribute("trails", trailList);
         return "home";
     }
 
