@@ -10,21 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private UsersRepository usersDao;
-    private EventsRepository eventsDao;
 
-    public UserService(UsersRepository usersDao, EventsRepository eventsDao) {
+    public UserService(UsersRepository usersDao) {
         this.usersDao = usersDao;
-        this.eventsDao = eventsDao;
     }
 
     public User getLoggedInUser() {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return usersDao.findById(loggedInUser.getId()).get();
     }
-
-    public Event getLoggedInOwner(){
-        User loggedInOwner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return eventsDao.findById(loggedInOwner.getId()).get();
-    }
-
 }

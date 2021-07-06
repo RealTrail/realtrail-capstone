@@ -8,39 +8,33 @@
 
 <main>
 
-    <!-- ******************* SIDE NAV *********************** -->
+    <!-- ------------- SIDE NAV ------------- -->
 
     <div id="mySidenav" class="sidenav">
 <!--        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
 
-    <!-- ********** calendar goes in here ******************** -->
+    <!-- ------------- calendar goes in here ------------- -->
 
         <!--        getting all hidden value for event-->
-<!--        <div class="displayed-event" th:each="event: ${events}">-->
-<!--            <input type="hidden" th:value="${event.id}">-->
-<!--            <input type="hidden" th:value="${event.name}">-->
+       <div class="displayed-event" th:each="event: ${events}">
+           <input type="hidden" th:value="${event.id}">
+           <input type="hidden" th:value="${event.name}">
 <!--&lt;!&ndash;            <input type="hidden" th:value="${event.location}">&ndash;&gt;-->
-<!--            <input type="hidden" th:value="${event.time}">-->
+           <input type="hidden" th:value="${event.time}">
 <!--&lt;!&ndash;            <input type="hidden" th:value="${event.meetTime}">&ndash;&gt;-->
-<!--            <input type="hidden" th:value="${event.date}">-->
-<!--        </div>-->
-<!--        <div id='calendar'></div>-->
-<!--        <input type="hidden" id="Event" th:value="${events}">-->
+           <input type="hidden" th:value="${event.date}">
+       </div>
+       <div id='calendar'></div>
+       <input type="hidden" id="Event" th:value="${events}">
 
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player id="calendarClose" class="closebtn" onclick="closeNav()" src="https://assets5.lottiefiles.com/private_files/lf30_MRHieC.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" hover   ></lottie-player>
+        <lottie-player id="calendarClose" class="closebtn" onclick="closeNav()" src="https://assets5.lottiefiles.com/private_files/lf30_MRHieC.json"  background="transparent"  speed="1"  style="width: 170px; height: 170px;" hover   ></lottie-player>
 
     </div>
 
+    <div id="main"></div>
 
-
-
-    <div id="main">
-
-    </div>
-
-
-    <!-- ******************* SIDE NAV *********************** -->
+    <!-- ------------- SIDE NAV ------------- -->
 
     <div class="clock"></div>
 
@@ -48,12 +42,9 @@
         function clock() {
             var time = new Date(),
 
-
                 hours = time.getHours(),
 
-
                 minutes = time.getMinutes(),
-
 
                 seconds = time.getSeconds();
 
@@ -172,8 +163,6 @@
             // cursordragontouch: false, // drag cursor in touch / touchbehavior mode also
             // oneaxismousemode: "auto", // it permits horizontal scrolling with mousewheel on horizontal only content, if false (vertical-only) mousewheel don't scroll horizontally, if value is auto detects two-axis mouse
             // scriptpath: "" // define custom path for boxmode icons ("" => same script path)
-
-
         });
 
     </script>

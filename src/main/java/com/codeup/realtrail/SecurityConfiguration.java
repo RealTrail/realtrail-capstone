@@ -54,25 +54,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/signup", "/login", "/trails") // anyone can see the home and the trails pages
+                .antMatchers("/", "/signup", "/login", "/error") // anyone can see the home and the trails pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/create", // only authenticated users can create an event
+                        "/profile",  // only authenticated users can visit profile page
+                        "/profile/settings",  // only authenticated users can create or edit profile
+                        "/create",  // only authenticated users can create an event
                         "/events",  // only authenticated users can see all events
                         "/events/{id}",  // only authenticated users can see an event
                         "/events/{id}/edit" // only authenticated users can edit events
                 )
                 .authenticated()
                 .antMatchers(
-
-
-                        "/profile/{id}",  // only authenticated users can see an event
-                        "/profile/{id}/edit",// only authenticated users can edit events
-                        "/profile/settings/{id}",
-                        "/profile/delete/{id}"
+                        "/users",  // only admin can visit the users page
+                        "/profile/{id}",  // only admin can visit individual user page
+                        "/profile/{id}/edit",
+                        "/profile/{id}/delete"  // admin can delete any user's profile
                 ).hasAuthority("ADMIN");
     }
 }
