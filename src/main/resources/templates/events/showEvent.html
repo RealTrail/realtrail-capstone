@@ -5,39 +5,47 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="container">
+<main class="container">
     <div th:if="${param.joined}">Thank you for joining the event!</div>
     <div th:if="${event == null}">
         Event not found.
     </div>
 
     <div  th:if="${event}">
-        <div>ID<h3 th:text="${event.id}"></h3></div>
-        <div>Event coordinator:<h3 th:text="${event.owner}"></h3></div>
         <div>Event name:<h3 th:text="${event.name}"></h3></div>
-        <div>Event details:<h4 th:text="${event.eventDetails}"></h4></div>
+        <div>Event coordinator:<h3 th:text="${event.owner.username}"></h3></div>
         <div>date:<h4 th:text="${event.date}"></h4></div>
         <div>time:<h4 th:text="${event.time}"></h4></div>
-        <div>trail:<h4 th:text="${event.trail}"></h4></div>
+        <div>Event details:<h4 th:text="${event.eventDetails}"></h4></div>
+        <div>trail:<a th:href="${'/events/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
         <div>meet location:<h4 th:text="${event.meetLocation}"></h4></div>
         <div>meet time:<h4 th:text="${event.meetTime}"></h4></div>
         <div>trail comments:<h4 th:text="${event.trailComments}"></h4></div>
-        <div>participants:<h4 th:text="${event.participants}"></h4></div>
+        <div>participants:
+            <div th:each="participant : ${event.participants}">
+                <h4 th:text="${participant.username}"></h4>
+            </div>
+        </div>
     </div>
 
-    <div>
-        <h2>Click the update link to edit your event</h2>
-        <a th:href="${'/events/'+ event.id + '/edit'}">Update</a>
+    <div th:if="${event.owner.id == user.id}">
+        <div>
+            <a th:href="${'/events/'+ event.id + '/edit'}">Update</a>
+        </div>
+
+        <form th:action="@{|/events/{id}/delete|}" method="POST">
+            <h2>Click the delete button to delete your event</h2>
+            <button th:type="submit">delete</button>
+        </form>
     </div>
-    <form th:action="@{|/events/{id}/delete|}" method="POST">
-        <h2>Click the delete button to delete your event</h2>
-        <button th:type="submit">delete</button>
-    </form>
-    <form th:action="@{|/events/${id}/join|}" method="POST">
-        <h2>Click the join button to join your event</h2>
-        <button th:type="submit">Join</button>
-    </form>
-</div>
+
+    <div th:if="${event.owner.id != user.id}">
+        <form th:action="@{|/events/${id}/join|}" method="POST">
+            <h2>Click the join button to join your event</h2>
+            <button th:type="submit">Join</button>
+        </form>
+    </div>
+</main>
 <footer th:replace="/fragments/footer :: footer"></footer>
 </body>
 </html>

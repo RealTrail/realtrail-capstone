@@ -121,11 +121,12 @@ public class EventController {
 
     // showEvent.html page
     @GetMapping("/events/{id}")
-    public String individualEventPage(@PathVariable Long id, Model model){
+    public String individualEventPage(@PathVariable Long id, Model model, Principal principal){
+        User user = userService.getLoggedInUser();
         Event event= eventsDao.getById(id);
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
-
+        model.addAttribute("user", user);
         return "events/showEvent";
     }
 
