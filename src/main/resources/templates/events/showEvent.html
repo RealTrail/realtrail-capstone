@@ -5,14 +5,14 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<main class="container">
+<main style="margin-top: 5rem">
     <div th:if="${param.joined}">Thank you for joining the event!</div>
     <div th:if="${param.alreadyjoined}">You have already joined the event!</div>
     <div th:if="${event == null}">
         Event not found.
     </div>
 
-    <div  th:if="${event}">
+    <div th:if="${event}">
         <div>Event name:<h3 th:text="${event.name}"></h3></div>
         <div>Event coordinator:<h3 th:text="${event.owner.username}"></h3></div>
         <div>date:<h4 th:text="${event.date}"></h4></div>
@@ -26,8 +26,8 @@
                 <h4 th:text="${participant.username}"></h4>
             </div>
             <div>Comments:
-                <div th:each="Comments : ${event.trailComments}">
-                    <h4 th:text="${Comments.getContent()}"></h4>
+                <div th:each="comment : ${event.eventComments}">
+                    <h4 th:text="${comment.content}"></h4>
                 </div>
                 </div>
         </div>
