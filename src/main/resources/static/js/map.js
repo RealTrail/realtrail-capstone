@@ -73,18 +73,35 @@ $(document).ready(() => {
         $(".mask2").addClass("active2");
         showDefaultMap();
 
-        // get the trail info typed in create trail modal form
-        let trail = getTrailInfo();
-        console.log(trail);
-
-        if ($("#hidden").val() !== null) {
-            let images = $("#hidden").val().split(", ");
-            console.log(images);
-            trail.trailImages = images;
-        }
+        // click upload images to upload images
+        $("#images").click(() => {
+            uploadImages();
+        });
 
         $("#createTrail").click((e) => {
             e.preventDefault();
+
+            // check if the user has entered info in the inputs
+            checkInputs();
+
+            let trail = {};
+            // get the trail info typed in create trail modal form
+            trail.name = $("#trailName").val();
+            trail.length = parseFloat($("#trailLength").val());
+            trail.difficultyLevel = $("input[name='difficultyLevel']:checked").val();
+            trail.type = $("input[name='trailType']:checked").val();
+            trail.trailDetails = $("#trailDetails").val();
+
+            console.log(trail);
+
+            if ($("#hidden").val() !== undefined) {
+                let images = $("#hidden").val().split(", ");
+                console.log(images);
+                trail.trailImages = images;
+            }
+
+            console.log(trail);
+
             $.ajax({
                 url: "/trails/create",
                 type: "POST",
@@ -162,22 +179,20 @@ $(document).keyup((e) => {
     }
 });
 
-function getTrailInfo() {
-    let trailName, trailLength, difficultyLevel, trailType, trailDetails;
-    $("#trailName").keyup(() => trailName = $("#trailName").val());
-    $("#trailLength").on("change", () => trailLength = parseFloat($("#trailLength").val()))
-    $("#difficultyLevel").keyup
-    let difficultyLevel = $("input[name='difficultyLevel']:checked").val();
-    let trailType = $("input[name='trailType']:checked").val();
-    let trailDetails = $("#trailDetails").val();
-
-    console.log(trailName, trailLength, difficultyLevel, trailType, trailDetails);
-
-    return {
-        name: trailName,
-        length: trailLength,
-        difficultyLevel: difficultyLevel,
-        type: trailType,
-        trailDetails: trailDetails
+function checkInputs() {
+    if ($("#trailName").val() === undefined) {
+        $("p.trailName").text("Name cannot be empty!");
+    }
+    if ($("trailLength").val() === undefined) {
+        $("p.trailName").text("Length cannot be empty!");
+    }
+    if ($("input[name='difficultyLevel']:checked").val() === undefined) {
+        $("p.trailName").text("Difficulty level cannot be unchecked!");
+    }
+    if ($("input[name='trailType']:checked").val() === undefined) {
+        $("p.trailName").text("Type cannot be unchecked!");
+    }
+    if ($("#trailDetails").val() === undefined) {
+        $("p.trailName").text("Trail details cannot be empty!");
     }
 }

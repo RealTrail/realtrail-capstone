@@ -7,7 +7,6 @@ public class AjaxRequestBody {
 
     @NotBlank(message = "profile image url can't be empty!")
     String profileImageUrl;
-    Trail trail;
 
     public AjaxRequestBody(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
