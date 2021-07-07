@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head th:replace="/fragments/head :: head">
     <meta charset="UTF-8">
     <title>Show Trail</title>
-    <link rel="stylesheet" href="css/trail.css">
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -13,7 +12,6 @@
     </div>
     <div>
 <!--        <h2>Search a trail by name, difficulty level, rating, or location </h2>-->
-        <h4 th:text="${trailId}">ID</h4>
         <h2 th:text="${trail.name}">Trail name:</h2>
         <h3 th:text="${trail.difficultyLevel}">difficulty level:</h3>
         <h4 th:text="${trail.rating}">rating:</h4>
@@ -21,12 +19,12 @@
         <h4 th:text="${trail.elevation}">elevation change:</h4>
         <h4 th:text="${trail.type}">route type:</h4>
         <h4 th:text="${trail.trailDetails}">trail details:</h4>
-        <h4 th:text="${trail.events}">trail events:</h4>
-        <div th:each="trail : ${trails}">
-            <h4 th:text="${trail.trailImages}">trail images:</h4>
+        <div>
+            <img th:each="image : ${trail.trailImages}" th:src="${image.pictureUrl}" alt="trail image">
         </div>
-        <div th:each="trail : ${trails}">
-            <h4 th:text="${trail.trailComments}">trail comments:</h4>
+        <div th:each="comment : ${trail.trailComments}">
+            <div><span th:text="comment.owner.username"></span> <span th:text="comment.date"></span></div>
+            <p th:text="${comment.content}"></p>
         </div>
     </div>
 </main>
