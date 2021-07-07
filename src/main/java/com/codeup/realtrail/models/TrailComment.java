@@ -14,6 +14,9 @@ public class TrailComment {
     @Column
     private LocalDateTime date;
 
+    @Column(nullable = false)
+    private int rating;
+
     @Column(nullable = false, columnDefinition="TEXT")
     private String content;
 
@@ -30,16 +33,18 @@ public class TrailComment {
     public TrailComment() {
     }
 
-    public TrailComment(LocalDateTime date, String content, User owner, Trail trail) {
+    public TrailComment(LocalDateTime date, int rating, String content, User owner, Trail trail) {
         this.date = date;
+        this.rating = rating;
         this.content = content;
         this.owner = owner;
         this.trail = trail;
     }
 
-    public TrailComment(long id, LocalDateTime date, String content, User owner, Trail trail) {
+    public TrailComment(long id, LocalDateTime date, int rating, String content, User owner, Trail trail) {
         this.id = id;
         this.date = date;
+        this.rating = rating;
         this.content = content;
         this.owner = owner;
         this.trail = trail;
@@ -59,6 +64,13 @@ public class TrailComment {
     }
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public String getContent() {
