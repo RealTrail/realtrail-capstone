@@ -39,7 +39,13 @@ public class TrailController{
     @PostMapping("/trails/create")
     @ResponseBody
     public Trail createTrail(@Valid @RequestBody Trail trail) {
+        System.out.println("trail.getTrailImages() = " + trail.getTrailImages());
+
         Trail trailSaved = trailsDao.save(trail);
+        for (PictureURL url : trail.getTrailImages()) {
+            url.setTrail(trailSaved);
+            pictureURLSDao.save(url);
+        }
         return trailSaved;
     }
 }
