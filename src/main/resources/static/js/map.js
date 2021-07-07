@@ -82,7 +82,31 @@ $(document).ready(() => {
             e.preventDefault();
 
             // check if the user has entered info in the inputs
-            checkInputs();
+            if ($("#trailName").val() === undefined) {
+                $("p.trailName").text("Name cannot be empty!");
+            } else {
+                $("p.trailName").css("display: none");
+            }
+            if ($("trailLength").val() === undefined) {
+                $("p.trailLength").text("Length cannot be empty!");
+            } else {
+                $("p.trailLength").css("display: none");
+            }
+            if ($("input[name='difficultyLevel']:checked").val() === undefined) {
+                $("p.difficultyLevel").text("Difficulty level cannot be unchecked!");
+            } else {
+                $("p.difficultyLevel").css("display: none");
+            }
+            if ($("input[name='trailType']:checked").val() === undefined) {
+                $("p.trailType").text("Type cannot be unchecked!");
+            } else {
+                $("p.trailType").css("display: none");
+            }
+            if ($("#trailDetails").val() === undefined) {
+                $("p.trailDetails").text("Trail details cannot be empty!");
+            } else {
+                $("p.trailDetails").css("display: none");
+            }
 
             let trail = {};
             // get the trail info typed in create trail modal form
@@ -95,30 +119,32 @@ $(document).ready(() => {
             console.log(trail);
 
             if ($("#hidden").val() !== undefined) {
-                let images = $("#hidden").val().split(", ");
+                let images = $("#hidden").val().substring(0, $("#hidden").val().length - 1).split(", ");
                 console.log(images);
                 trail.trailImages = images;
             }
 
             console.log(trail);
 
-            $.ajax({
-                url: "/trails/create",
-                type: "POST",
-                data: JSON.stringify(trail),
-                contentType: "application/json",
-                dataType: "json",
-                timeout: 600000,
-                success: (response) => {
-                    console.log("trail saved!");
-                    console.log(response);
+            if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails) {
+                $.ajax({
+                    url: "/trails/create",
+                    type: "POST",
+                    data: JSON.stringify(trail),
+                    contentType: "application/json",
+                    dataType: "json",
+                    timeout: 600000,
+                    success: (response) => {
+                        console.log("trail saved!");
+                        console.log(response);
 
-                },
-                error: (error) => {
-                    console.log("Error: ", error);
-                }
-            })
-        })
+                    },
+                    error: (error) => {
+                        console.log("Error: ", error);
+                    }
+                });
+            }
+        });
 
         $("#mapSearch").click(() => {
             // get coordinates using geocode
@@ -178,21 +204,3 @@ $(document).keyup((e) => {
         closeModalTwo();
     }
 });
-
-function checkInputs() {
-    if ($("#trailName").val() === undefined) {
-        $("p.trailName").text("Name cannot be empty!");
-    }
-    if ($("trailLength").val() === undefined) {
-        $("p.trailName").text("Length cannot be empty!");
-    }
-    if ($("input[name='difficultyLevel']:checked").val() === undefined) {
-        $("p.trailName").text("Difficulty level cannot be unchecked!");
-    }
-    if ($("input[name='trailType']:checked").val() === undefined) {
-        $("p.trailName").text("Type cannot be unchecked!");
-    }
-    if ($("#trailDetails").val() === undefined) {
-        $("p.trailName").text("Trail details cannot be empty!");
-    }
-}

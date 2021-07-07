@@ -248,11 +248,11 @@ Accessibility: There are 2 designated accessible spaces in the paved parking lot
 The trail surface is paved concrete and smooth. It is typically at least 8 feet wide. The majority of the trail is estimated to be in the mostly gentle (5% or less) grade category. This trail will likely be navigable for most wheelchairs/mobility equipment or stroller users. ');
 
 INSERT INTO picture_urls (id, picture_url, trail_id) VALUES (1, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482612/large_bb9f26b14665214374ba39969507ad83.jpg', 1),
-                                                            (2, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482612/large_bb9f26b14665214374ba39969507ad83.jpg', 1),
-                                                            (3, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482612/large_bb9f26b14665214374ba39969507ad83.jpg', 1),
-                                                            (4, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482612/large_bb9f26b14665214374ba39969507ad83.jpg', 1),
-                                                            (5, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482612/large_bb9f26b14665214374ba39969507ad83.jpg', 1),
-                                                            (6, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482612/large_bb9f26b14665214374ba39969507ad83.jpg', 1),
+                                                            (2, 'https://cdn2.apstatic.com/photos/hike/7057369_smallMed_1555946899.jpg', 1),
+                                                            (3, 'https://cdn-assets.alltrails.com/uploads/photo/image/37459340/extra_large_3918ad862c2a6b99a8ee1d282cd264c5.jpg', 1),
+                                                            (4, 'https://cdn-assets.alltrails.com/uploads/photo/image/37349392/extra_large_2ebd740186ff15182b7d10edf6917b2a.jpg', 1),
+                                                            (5, 'https://cdn-assets.alltrails.com/uploads/photo/image/37349391/extra_large_94adc746e3052151c2e95934bbef2d20.jpg', 1),
+                                                            (6, 'https://cdn-assets.alltrails.com/uploads/photo/image/36345576/extra_large_eb42306a53280b6fc89100847819692d.jpg', 1),
                                                             (7, 'https://cdn-assets.alltrails.com/uploads/photo/image/10798896/large_bb97842cfcdf28ca7eada3240b23395b.jpg', 2),
                                                             (8, 'https://cdn-assets.alltrails.com/uploads/photo/image/37483071/large_559d65b261985d1eccd38fdfeb29dcb5.jpg', 2),
                                                             (9, 'https://cdn-assets.alltrails.com/uploads/photo/image/37482993/large_4dcd70a2f4d0df1ea487a3337feab9e7.jpg', 2),
