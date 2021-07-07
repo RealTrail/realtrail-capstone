@@ -7,6 +7,7 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main class="container">
     <div th:if="${param.joined}">Thank you for joining the event!</div>
+    <div th:if="${param.alreadyjoined}">You have already joined the event!</div>
     <div th:if="${event == null}">
         Event not found.
     </div>
@@ -25,7 +26,7 @@
                 <h4 th:text="${participant.username}"></h4>
             </div>
             <div>Comments:
-                <div th:each="Comments : ${event.eventComments}">
+                <div th:each="Comments : ${event.trailComments}">
                     <h4 th:text="${Comments.getContent()}"></h4>
                 </div>
                 </div>

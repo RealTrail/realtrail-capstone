@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,12 +69,12 @@ public class EventController {
 
     @PostMapping("/create")
     public String saveEvent(@ModelAttribute Event event,
-                            @RequestParam (name = "eventDate") String eventDate,
-                            @RequestParam (name = "eventMeetTime") String eventMeetTime,
-                            @RequestParam (name = "eventTime") String eventTime,
-                            @RequestParam (name = "trailOption") String trailOption,
-                            @RequestParam (name = "trailOptions") String trailId,
-                            @RequestParam (name = "images") String images,
+                            @RequestParam(name = "eventDate") String eventDate,
+                            @RequestParam(name = "eventMeetTime") String eventMeetTime,
+                            @RequestParam(name = "eventTime") String eventTime,
+                            @RequestParam(name = "trailOption") String trailOption,
+                            @RequestParam(name = "trailOptions") String trailId,
+                            @RequestParam(name = "images") String images,
                             Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
@@ -112,7 +113,7 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public String eventsPage(Model model){
+    public String eventsPage(Model model) {
         List<Event> eventsList = eventsDao.findAll();
         model.addAttribute("noEventsFound", eventsList.size() == 0);
         model.addAttribute("events", eventsList);
@@ -121,9 +122,9 @@ public class EventController {
 
     // showEvent.html page
     @GetMapping("/events/{id}")
-    public String individualEventPage(@PathVariable Long id, Model model, Principal principal){
+    public String individualEventPage(@PathVariable Long id, Model model, Principal principal) {
         User user = userService.getLoggedInUser();
-        Event event= eventsDao.getById(id);
+        Event event = eventsDao.getById(id);
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         model.addAttribute("user", user);
@@ -150,14 +151,14 @@ public class EventController {
     }
 
     @PostMapping("/events/{id}/edit")
-    public String updateEvent(@ModelAttribute Event event, Model model){
+    public String updateEvent(@ModelAttribute Event event, Model model) {
         eventsDao.save(event);
         return "events/showEvent";
     }
 
 
     @PostMapping("/events/{id}/delete")
-    public String deleteEvent(@PathVariable long id){
+    public String deleteEvent(@PathVariable long id) {
         eventsDao.deleteById(id);
         return "redirect:/events/showAllEvents";
     }
@@ -170,17 +171,22 @@ public class EventController {
 //    }
 
     @PostMapping("/events/{id}/join")
-    public String joinEvent(@PathVariable long id){
+    public String joinEvent(@PathVariable long id) {
         Event event = eventsDao.getById(id);
         User user = userService.getLoggedInUser();
-        List<User> participants =  event.getParticipants();
-        participants.add(user);
-        event.setParticipants(participants);
-        eventsDao.save(event);
-        emailService.prepareAndSendJoin(user, event.getName(),"Thank you for joining the event!\n" + event.getDate() + "\n" + event.getEventDetails());
-        return ("redirect:/events/" + id + "?joined");
-
-
+        List<User> participants = event.getParticipants();
+        if (!participants.contains(user)) {
+            participants.add(user);
+            event.setParticipants(participants);
+            eventsDao.save(event);
+            emailService.prepareAndSendJoin(user, event.getName(), "Thank you for joining the event!\n" + event.getDate() + "\n" + event.getEventDetails());
+            return ("redirect:/events/" + id + "?joined");
+        } else {
+            return "redirect:/events/" + id + "?alreadyjoined";
+        }
     }
 
+
 }
+
+
