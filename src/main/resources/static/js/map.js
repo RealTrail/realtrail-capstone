@@ -138,10 +138,14 @@ $(document).ready(() => {
                     success: (response) => {
                         console.log("trail saved!");
                         console.log(response);
+                        $("#trailId").val(response.id);
+                        closeModalTwo();
 
+                        console.log($("#trailId").val());
                     },
                     error: (error) => {
                         console.log("Error: ", error);
+                        window.location = "/error";
                     }
                 });
             }
