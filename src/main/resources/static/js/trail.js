@@ -106,3 +106,11 @@ $(document).keyup(function(e) {
 
 
 // ******************** MODAL JS *******************
+
+// ******************** Trail Search ***************
+
+// Filter by difficulty level
+$(document).ready(function () {
+    let trails = [];
+});
+
