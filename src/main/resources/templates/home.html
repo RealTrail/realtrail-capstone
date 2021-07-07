@@ -89,13 +89,32 @@
         <div class="parallax__cover"></div>
 
         <div class="mainContainer" >
-            <div class="container">
-                <input type="text" id="box" placeholder="Search Trails..." class="search__box">
-                <i class="fas fa-search search__icon" id="icon" onclick="toggleShow()"></i>
+                <div class="trail-form">
+                    <form th:action="@{/search-trail}" method="get">
+                        <div class="container">
+                            <input type="text" placeholder="Search Trails..." name="keyword" class="search__box">
+                            <i class="fas fa-search search__icon" id="icon" onclick="toggleShow()"></i>
 
-            </div>
-
-
+                        </div>
+                    </form>
+                    <form th:action="@{/filter/difficulty-level}" method="GET">
+                            <label>Filter by Difficulty Level</label>
+                            <select id="difficultyLevel">
+                                <option th:value="Easy">Easy</option>
+                                <option th:value="Moderate">Moderate</option>
+                                <option th:value="Strenuous">Strenuous</option>
+                            </select>
+<!--                        <button th:type="submit">Trail Results</button>-->
+                    </form>
+                    <form th:action="@{/filter/type}" method="GET">
+                        <label>Filter by Difficulty Level</label>
+                        <select id="type">
+                            <option disabled>Route Type</option>
+                            <option th:value="loop">Loop</option>
+                            <option th:value="outAndBack">Out and Back</option>
+                            <option th:value="pointToPoint">Point to Point</option>
+                        </select>
+                    </form>
             <div class="boxx"onclick="openNav()"></div>
 
             <div class="slider-container" >

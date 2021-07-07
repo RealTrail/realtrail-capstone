@@ -74,5 +74,22 @@ public class TrailController{
 
         return "redirect:/trails/" + id;
     }
+
+    @GetMapping("/search-trail")
+    public String getSearchedTrail(@RequestParam (value="keyword", required = false) String name, Model model) {
+        Trail trail = trailsDao.findByKeyword("%" + name + "%");
+//        List<Trail> trailList = trailsDao.findByKeyword("%:keyword%");
+        System.out.println("trail.getName() = " + trail.getName());
+        System.out.println("trail.getId() = " + trail.getId());
+        Trail searchResult = trailsDao.findById(trail.getId());
+
+        model.addAttribute("trails", searchResult);
+        return "home";
+
+    }
+
+//    @GetMapping("/searchCat")
+//    public
+
 }
 
