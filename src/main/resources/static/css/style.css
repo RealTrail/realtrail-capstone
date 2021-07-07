@@ -1716,8 +1716,8 @@ small {
 
 /* -- IMAGE CAROUSEL -- */
 .slider-container {
-    max-width: 900px;
-    width: 100%;
+
+    width: 90%;
     margin: 0 auto;
     /* padding-top: 50px; */
     position: absolute;
@@ -1727,6 +1727,7 @@ small {
     height: 10px;
     z-index: 1000;
 
+
 }
 
 .slick-slide {
@@ -1734,11 +1735,12 @@ small {
     height: auto;
 
 }
-.slick-slide .slide-wrap {
+.slick-slide  {
     margin: 0 10px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    background-color: rgb(252, 243, 232);
+
+
 
 
 }
@@ -1746,20 +1748,68 @@ small {
     padding: 10px;
     margin: 0;
 
+
 }
-.slick-slide .image {
+.slick-slide  {
     height: 230px;
     width: auto;
-    background: gray;
+    /* background: gray; */
     border-radius: 5px;
-    border-bottom-right-radius:0px ;
-    border-bottom-left-radius:0px ;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.slick-slide img
+{
+    display:block;
+    height:500px;
+}
+
+
+
+/************* RESIZE IMAGES AND FIT TO CONTAINER **************/
+
+img.image{
+    object-fit: cover;
+    width: 100%;
+    height: 450px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    filter: contrast(135%) brightness(90%)saturate(130%);
+}
+/****************************************************************/
+
+
+div.header{
+    display:inline-flex;
+    flex-direction: column;
+    align-items: baseline;
+    height: 180px;
+    width: 100%;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    position:relative;
+    top: -14px;
+    background-color: rgba(225,225,225,1);
+    backdrop-filter: blur(30px);
+    /* filter: blur(1px); */
+    z-index: 11;
+}
+
+div.header h3{
+    display:inline-flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 /* -- SLIDE SHOW BUTTONS -- */
 .slick-arrow {
     position: absolute;
-    top: calc(50% - 20px);
+    top: calc(28% - 20px);
     height: 20px;
     width: 20px;
     cursor: pointer;
@@ -1780,6 +1830,11 @@ small {
     background: url(https://image.flaticon.com/icons/png/512/318/318476.png) no-repeat;
     background-size: contain;
     filter: invert(100%);
+}
+
+
+.slick-list{
+    height:800px;
 }
 
 /* -- SEARCH BAR -- */
