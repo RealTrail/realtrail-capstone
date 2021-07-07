@@ -46,7 +46,7 @@ public class Event {
     private String eventDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<TrailComment> trailComments;
+    private List<EventComment> eventComments;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -70,7 +70,7 @@ public class Event {
         this.eventDetails = eventDetails;
     }
 
-    public Event(String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
+    public Event(String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<EventComment> eventComments, List<User> participants) {
         this.name = name;
         this.date = date;
         this.time = time;
@@ -79,11 +79,11 @@ public class Event {
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
-        this.trailComments = trailComments;
+        this.eventComments = eventComments;
         this.participants = participants;
     }
 
-    public Event(long id, String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<TrailComment> trailComments, List<User> participants) {
+    public Event(long id, String name, LocalDate date, LocalTime time, User owner, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails, List<EventComment> eventComments, List<User> participants) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -93,7 +93,7 @@ public class Event {
         this.meetLocation = meetLocation;
         this.meetTime = meetTime;
         this.eventDetails = eventDetails;
-        this.trailComments = trailComments;
+        this.eventComments = eventComments;
         this.participants = participants;
     }
 
@@ -162,11 +162,11 @@ public class Event {
         this.eventDetails = eventDetails;
     }
 
-    public List<TrailComment> getTrailComments() {
-        return trailComments;
+    public List<EventComment> getEventComments() {
+        return eventComments;
     }
-    public void setTrailComments(List<TrailComment> trailComments) {
-        this.trailComments = trailComments;
+    public void setEventComments(List<EventComment> eventComments) {
+        this.eventComments = eventComments;
     }
 
     public List<User> getParticipants() {

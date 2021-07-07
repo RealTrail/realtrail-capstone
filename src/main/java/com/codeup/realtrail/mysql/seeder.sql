@@ -16,6 +16,8 @@ INSERT INTO interests(interest) VALUES
    ('Mountain Biking'),
    ('Road Biking');
 
+INSERT INTO users_interests (user_id, interest_id) VALUES (1, 1), (1, 2), (1, 3), (2, 1), (2, 4), (3, 2), (4, 4), (5, 1), (5, 2), (5, 3);
+
 INSERT INTO trails(id, name, difficulty_level, rating, length, elevation, type, longitude, latitude, trail_details)
 VALUES
        (1, 'Joe Johnston Route',
@@ -375,10 +377,19 @@ INSERT INTO picture_urls (id, picture_url, trail_id) VALUES (1, 'https://cdn-ass
                                                             (126, 'https://cdn-assets.alltrails.com/uploads/photo/image/36100080/large_2576257907b1c8d1d37c94783306654f.jpg', 21);
 
 
-
-
-
 INSERT INTO events (id, name, date, time, meet_location, meet_time, event_details, owner_id, trail_id)
 VALUES
 (1, 'Cool Trail', '2021-06-21', '10:00', 'Burger King', '0700', 'yes', 2, 6),
 (2, 'Hills', '2021-09-20', '13:00', 'Mcdonald', '12:00', 'The best ride of your life', 4, 7);
+
+
+INSERT INTO trail_comments (id, content, date, rating, owner_id, trail_id)
+VALUES (1, 'Great hike but very rocky.', '2019-08-14 12:00:09', 4, 2, 1),
+       (2, 'Nice wide trail, partly of shaded & a few people on the trail.', '2021-03-26 09:23:34', 4, 4, 1),
+       (3, 'Haven''t been here a while.  Didn''t do the whole trail just to the dino tracks and back via Joe Johnston. Not much to see on the way there. Tin barn is off trail. But dino tracks worth the hike.', '2021-03-19 17:08:00', 4, 5, 1),
+       (4, 'Perfect trail to just go on a stroll on, take the kids, or go on a nice run!', '2021-03-06 20:43:29', 5, 2, 2);
+
+INSERT INTO event_comments (id, content, date, event_id, owner_id)
+VALUES (1, 'Great event to go.', '2021-06-22 18:00:00', 1, 1),
+       (2, 'I really enjoyed it. Would love to join in more events like this!', '2021-06-26 10:26:00', 1, 3);
+

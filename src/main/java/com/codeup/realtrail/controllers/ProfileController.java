@@ -122,20 +122,9 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/{id}/edit")
-
-    public String editUsersProfile(@PathVariable long id,@ModelAttribute User user, Model model) {
-        var newUser = usersDao.getById(id);
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getLastName());
-        newUser.setPhoneNumber(user.getPhoneNumber());
-        newUser.setCity(user.getCity());
-        newUser.setState(user.getState());
-        newUser.setGender(user.getGender());
-        newUser.setInterests(user.getInterests());
-        System.out.println("user.getEmail() = " + user.getEmail());
-        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
-
-        usersDao.save(newUser);
+    public String editUsersProfile(@PathVariable long id, @ModelAttribute User user, Model model) {
+        user.setId(id);
+        usersDao.save(user);
         return "redirect:/profile/" + id;
     }
 
