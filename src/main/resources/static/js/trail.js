@@ -112,5 +112,31 @@ $(document).keyup(function(e) {
 // Filter by difficulty level
 $(document).ready(function () {
     let trails = [];
+
+    $("img.image").each(function () {
+        console.log($(this).attr("src"));
+    });
+
+    $("img.image").map(function(index, element) {
+        console.log(index, element.attr("src"));
+    });
+
+    $(".header > h3")  // an array of names
+
+    // an array of difficulty levels
+
+    // an array of length
+
+    // make trail obj
+    //for loop
+   // let trail = {name: // nameArr[i], difficultyLevle: difficultylevelArr[i], ...}
+   // trails.push(trail)  ==> after for loop, you get all the trails
+
+    // $("#difficultyLevel").on("change", function() {
+    //     if ($("#difficultyLevel"):selected.val() === "easy") {
+    //         // build the cards.
+    //     } else if ( === "")
+    // })
+
 });
 
