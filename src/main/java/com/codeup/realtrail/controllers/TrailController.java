@@ -48,12 +48,17 @@ public class TrailController{
     @ResponseBody
     public Trail createTrail(@Valid @RequestBody Trail trail) {
         System.out.println("trail.getTrailImages() = " + trail.getTrailImages());
-
-        Trail trailSaved = trailsDao.save(trail);
-        for (PictureURL url : trail.getTrailImages()) {
-            url.setTrail(trailSaved);
-            pictureURLSDao.save(url);
+        Trail trailSaved;
+        if (trail.getTrailImages() == null) {
+            trailSaved = trailsDao.save(trail);
+        } else {
+            trailSaved = trailsDao.save(trail);
+            for (PictureURL url : trail.getTrailImages()) {
+                url.setTrail(trailSaved);
+                pictureURLSDao.save(url);
+            }
         }
+
         return trailSaved;
     }
 

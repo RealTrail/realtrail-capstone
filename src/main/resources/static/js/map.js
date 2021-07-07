@@ -127,24 +127,24 @@ $(document).ready(() => {
 
             console.log(trail);
 
-            // if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails) {
-            //     $.ajax({
-            //         url: "/trails/create",
-            //         type: "POST",
-            //         data: JSON.stringify(trail),
-            //         contentType: "application/json",
-            //         dataType: "json",
-            //         timeout: 600000,
-            //         success: (response) => {
-            //             console.log("trail saved!");
-            //             console.log(response);
-            //
-            //         },
-            //         error: (error) => {
-            //             console.log("Error: ", error);
-            //         }
-            //     });
-            // }
+            if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails) {
+                $.ajax({
+                    url: "/trails/create",
+                    type: "POST",
+                    data: JSON.stringify(trail),
+                    contentType: "application/json",
+                    dataType: "json",
+                    timeout: 600000,
+                    success: (response) => {
+                        console.log("trail saved!");
+                        console.log(response);
+
+                    },
+                    error: (error) => {
+                        console.log("Error: ", error);
+                    }
+                });
+            }
         });
 
         $("#mapSearch").click(() => {
@@ -206,9 +206,9 @@ $(document).ready(() => {
                 });
 
                 // add create, update, or delete actions
-                map.on('draw.create', someFunction);
-                map.on('draw.update', someFunction);
-                map.on('draw.delete', someFunction);
+                map.on('draw.create', updateRoute);
+                map.on('draw.update', updateRoute);
+                map.on('draw.delete', removeRoute);
 
 
             })
