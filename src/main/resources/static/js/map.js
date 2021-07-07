@@ -87,7 +87,7 @@ $(document).ready(() => {
             } else {
                 $("p.trailName").css("display: none");
             }
-            if ($("trailLength").val() === undefined) {
+            if ($("#trailLength").val() === undefined) {
                 $("p.trailLength").text("Length cannot be empty!");
             } else {
                 $("p.trailLength").css("display: none");
