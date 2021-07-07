@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/fragments/header :: head">
+<head th:replace="fragments/header :: head">
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <title>Admin</title>
 </head>
 <body>
-<nav th:replace="/fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
     <div th:if="${user == null}">
         Please log in first.
@@ -68,7 +68,7 @@
     <a th:href="${'/profile/' + user.id}">Close</a>
 </main>
 
-<footer th:replace="/fragments/footer :: footer"></footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 
 <script type="text/javascript" src="/js/sticky.js"></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>

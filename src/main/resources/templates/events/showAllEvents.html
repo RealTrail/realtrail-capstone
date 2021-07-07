@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/fragments/head :: head">
+<head th:replace="fragments/head :: head">
   <title>Show All Events</title>
 </head>
 <body>
-    <nav th:replace="/fragments/navbar :: navbar"></nav>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <main class="m-5">
         <div th:if="${noEventsFound}">
             <h1>No events were found.</h1>
         </div>
-      
-      
+
         <h2>Review the list for trail events happening near you!</h2>
- 
         <div th:each="event : ${events}">
 <!--            add map here-->
-            <h3 th:text="${event.name}">Event name</h3>
+            <h3 th:text="${event.name}"></h3>
             <h3 th:text="${event.date}">Event date</h3>
             <h3 th:text="${event.time}">Event time</h3>
-            <h3 th:text="${event.location}">Event location</h3>
-            <p th:text="${event.eventDetails}">Event details</p>
+            <p th:text="${event.eventDetails}"></p>
         </div>
     </main>
 
-    <footer th:replace="/fragments/footer :: footer"></footer>
+    <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
