@@ -82,7 +82,7 @@ $(document).ready(() => {
             e.preventDefault();
 
             // check if the user has entered info in the inputs
-            do {checkInputs()} while ($("#trailName").val() === undefined || $("#trailLength").val() === undefined || $("input[name='difficultyLevel']:checked").val() === undefined || $("input[name='trailType']:checked").val() === undefined || $("#trailDetails").val() === undefined);
+            checkInputs();
 
             let trail = {};
             // get the trail info typed in create trail modal form
