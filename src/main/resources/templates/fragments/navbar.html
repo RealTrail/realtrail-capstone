@@ -20,10 +20,10 @@
             </div>
             <div class="modal-body">
                 <p class="par">
-                    RealTrail is a group web application built with Java, Spring Boot, MySQL, HTML, CSS, JavaScript, and jQuery.
+                    RealTrail provides hiking trail information including trail name, length, route, location, and images to all visitors and users. Users can create hiking or biking events for other users to join in based on the existing trails or through customized biking trails. Future features include downloading the trail map for offline usage and a chat box for each event.
                 </p>
                 <p class="par">
-                    Users can view all the existing trails as well as creating, editing, searching and deleting hiking trails. According to the trails, the users can also create, update and delete trail related events. Furthermore, we have downloading the trail map for offline usage as our stretch goal.
+                    Technologies used:  Java, Spring Boot, Thymeleaf, MySQL, HTML, CSS, JavaScript, jQuery, AJAX, Filestack API, Mapbox API, Open Street Map, Directions API.
                 </p>
 
                 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
@@ -103,7 +103,7 @@
                     <div class="popup">
                         <div class="popupContainer">
                             <a class="popupCloseButton">Close</a>
-                            <div class="mobileProducts" sec:authorize="isAuthenticated()">
+                            <div sec:authorize="isAuthenticated()" class="mobileProducts">
                                 <h4>Dashboard</h4>
                                 <div class="mobileProductsList">
                                     <ul>
@@ -137,13 +137,14 @@
                                     </li>
                                     <li><a class="item-workswith" href="#footer">Contact Us</a></li>
                                     <li><a class="item-gallery" href="/">Customers</a></li>
-                                    <li sec:authorize="isAuthenticated()"><a class="item-documentation" href="/logout">Logout</a></li>
+                                    <li><a sec:authorize="isAuthenticated()" class="item-documentation" href="/logout">Logout</a></li>
                                 </ul>
                                 <ul>
                                     <li><a id="myBtnM" class="item-about" href="#" onclick="return false;">About Real Trail</a></li>
                                     <li><a class="item-blog" href="/profile" sec:authorize="isAuthenticated()">Manage Events</a></li>
                                 </ul>
                             </div>
+                            <a class="mobileSignIn" data-adroll-segment="submit_two" href="/signup" sec:authorize="not isAuthenticated()">Signup</a>
                             <a class="mobileSignIn" data-adroll-segment="submit_two" href="/login" sec:authorize="not isAuthenticated()">Login</a>
                         </div>
                     </div>
