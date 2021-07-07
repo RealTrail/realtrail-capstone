@@ -25,30 +25,24 @@ public class TrailComment {
     @JoinColumn (name = "trail_id")
     private Trail trail;
 
-    @ManyToOne
-    @JoinColumn (name = "event_id")
-    private Event event;
-
     // constructors
 
     public TrailComment() {
     }
 
-    public TrailComment(LocalDateTime date, String content, User owner, Trail trail, Event event) {
+    public TrailComment(LocalDateTime date, String content, User owner, Trail trail) {
         this.date = date;
         this.content = content;
         this.owner = owner;
         this.trail = trail;
-        this.event = event;
     }
 
-    public TrailComment(long id, LocalDateTime date, String content, User owner, Trail trail, Event event) {
+    public TrailComment(long id, LocalDateTime date, String content, User owner, Trail trail) {
         this.id = id;
         this.date = date;
         this.content = content;
         this.owner = owner;
         this.trail = trail;
-        this.event = event;
     }
 
     // getters and setters
@@ -86,12 +80,5 @@ public class TrailComment {
     }
     public void setTrail(Trail trail) {
         this.trail = trail;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-    public void setEvent(Event event) {
-        this.event = event;
     }
 }
