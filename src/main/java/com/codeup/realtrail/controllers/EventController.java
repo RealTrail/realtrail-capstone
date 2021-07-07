@@ -1,10 +1,7 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.MapPointsRepository;
-import com.codeup.realtrail.daos.PictureURLsRepository;
-import com.codeup.realtrail.daos.TrailsRepository;
+import com.codeup.realtrail.daos.*;
 import com.codeup.realtrail.models.User;
-import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
@@ -30,6 +27,7 @@ public class EventController {
     private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
+    private EventParticipantsRepository participantsDao;
 
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
@@ -39,13 +37,13 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventParticipantsRepository participantsDao) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
-
+        this.participantsDao = participantsDao;
     }
 
     // Create Event
@@ -179,8 +177,11 @@ public class EventController {
         eventsDao.save(event);
         emailService.prepareAndSendJoin(user, event.getName(),"Thank you for joining the event!\n" + event.getDate() + "\n" + event.getEventDetails());
         return ("redirect:/events/" + id + "?joined");
-
-
     }
-
+//Cancel
+    @PostMapping("/events/{id}/cancel")
+    public String cancelEvent (@PathVariable long id){
+        participantsDao.;
+        return "redirect:/profile";
+    }
 }
