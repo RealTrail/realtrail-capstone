@@ -109,6 +109,8 @@ public class ProfileController {
             User user = userService.getLoggedInUser();
             List<Event> createdEvents = user.getCreatedEvents();
             List<Event> joinedEvents = user.getEvents();
+            System.out.println(createdEvents);
+            System.out.println(joinedEvents);
             // pass the user to view/showProfile.html
             model.addAttribute("user", user);
             model.addAttribute("events", joinedEvents);
