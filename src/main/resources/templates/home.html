@@ -109,11 +109,10 @@
                     <label for="type"></label>
                     <select id="type" name="type">
                         <option th:value="null">Filter by Route Type</option>
-                        <option th:value="loop">Loop</option>
-                        <option th:value="outAndBack">Out and Back</option>
-                        <option th:value="pointToPoint">Point to Point</option>
+                        <option th:value="Loop">Loop</option>
+                        <option th:value="Out_and_back">Out and back</option>
+                        <option th:value="Point_to_point">Point to point</option>
                         <option th:value="Cycleway">Cycleway</option>
-
                     </select>
                 </div>
             </div>
@@ -156,8 +155,8 @@
 
     <script>
         $("#parallax").niceScroll({
-            scrollspeed: 150, // scrolling speed
-            mousescrollstep: 150, // scrolling speed with mouse wheel (pixel)
+            scrollspeed: 120, // scrolling speed
+            mousescrollstep: 120, // scrolling speed with mouse wheel (pixel)
             // emulatetouch: false, // enable cursor-drag scrolling like touch devices in desktop computer
             hwacceleration: true, // use hardware accelerated scroll when supported
             // boxzoom: false, // enable zoom for box content
