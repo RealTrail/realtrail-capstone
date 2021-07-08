@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/head :: head">
+<head th:replace="fragments/head :: head">
     <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<nav th:replace="/fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
 
@@ -89,28 +90,46 @@
         <div class="parallax__cover"></div>
 
         <div class="mainContainer" >
-            <div class="container">
-                <input type="text" id="box" placeholder="Search Trails..." class="search__box">
-                <i class="fas fa-search search__icon" id="icon" onclick="toggleShow()"></i>
+            <div class="trail-form">
+                <form th:action="@{/search-trail}" method="get">
+                    <div class="container">
+                        <input type="text" placeholder="Search Trails..." name="keyword" class="search__box">
+                        <i class="fas fa-search search__icon" id="icon" onclick="toggleShow()"></i>
+                    </div>
+                </form>
+                <div style="margin-top:10rem; position: absolute; z-index: 1000">
+                    <label for="difficultyLevel">Filter by Difficulty Level</label>
+                    <select id="difficultyLevel">
+                        <option th:value="Easy">Easy</option>
+                        <option th:value="Moderate">Moderate</option>
+                        <option th:value="Strenuous">Strenuous</option>
+                    </select>
 
+                    <label for="type">Filter by Difficulty Level</label>
+                    <select id="type">
+                        <option th:value="loop">Loop</option>
+                        <option th:value="outAndBack">Out and Back</option>
+                        <option th:value="pointToPoint">Point to Point</option>
+                    </select>
+                </div>
             </div>
-
-
-            <div class="boxx"onclick="openNav()"></div>
+            <div class="boxx" onclick="openNav()"></div>
 
             <div class="slider-container" >
                 <div class="slider">
                     <div th:each="trail : ${trails}">
-                        <div class="slide-wrap">
-                            <div class="image">
-                                <img class="image" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
+                        <a th:href="${'/trails/' + trail.id}">
+                            <div class="slide-wrap">
+                                <div class="image">
+                                    <img class="image" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
+                                </div>
+                                <div class="header">
+                                    <h3 th:text="${trail.name}"></h3>
+                                    <h4 th:text="${'Difficulty Level:  ' + trail.difficultyLevel}"></h4>
+                                    <h4 th:text="${'Trail length (miles):  ' + trail.length}"></h4>
+                                </div>
                             </div>
-                            <div class="header">
-                                <h3 th:text="${'Trail Name:  ' + trail.name}"></h3>
-                                <h4 th:text="${'Difficulty Level:  ' + trail.difficultyLevel}"></h4>
-                                <h4 th:text="${'Trail length (miles):  ' + trail.length}"></h4>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -166,9 +185,5 @@
         });
 
     </script>
-
-
-<!--<footer th:replace="/fragments/footer :: footer"></footer>-->
-
 </body>
 </html>

@@ -1,27 +1,27 @@
 $(".slider")
     .slick({
-        slidesToShow: 3,
+        slidesToShow: 6,
         slidesToScroll: 1,
         arrows: true,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1665,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 4,
                     slidesToScroll: 3,
                     infinite: true,
                     dots: false
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 1000,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 3,
                     slidesToScroll: 2
                 }
             },
             {
-                breakpoint: 480,
+                breakpoint: 579,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1
@@ -106,3 +106,37 @@ $(document).keyup(function(e) {
 
 
 // ******************** MODAL JS *******************
+
+// ******************** Trail Search ***************
+
+// Filter by difficulty level
+$(document).ready(function () {
+    let trails = [];
+
+    $("img.image").each(function () {
+        console.log($(this).attr("src"));
+    });
+
+    $("img.image").map(function(index, element) {
+        console.log(index, element.attr("src"));
+    });
+
+    $(".header > h3")  // an array of names
+
+    // an array of difficulty levels
+
+    // an array of length
+
+    // make trail obj
+    //for loop
+   // let trail = {name: // nameArr[i], difficultyLevle: difficultylevelArr[i], ...}
+   // trails.push(trail)  ==> after for loop, you get all the trails
+
+    // $("#difficultyLevel").on("change", function() {
+    //     if ($("#difficultyLevel"):selected.val() === "easy") {
+    //         // build the cards.
+    //     } else if ( === "")
+    // })
+
+});
+

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/fragments/head :: head">
+<head th:replace="fragments/head :: head">
   <title>Error Page</title>
 </head>
 <body>
-<nav th:replace="/fragments/navbar :: navbar"></nav>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
     <div th:if="${param.error}">
@@ -14,9 +14,11 @@
 <!--    <div th:if="${}">-->
 <!--        <p th:text="${errorMessage}"></p>-->
 <!--    </div>-->
-</main>
 
-<footer th:replace="/fragments/footer :: footer"></footer>
+    <div>
+        <p>Oops, error connecting the server!</p>
+    </div>
+</main>
 
 </body>
 </html>
