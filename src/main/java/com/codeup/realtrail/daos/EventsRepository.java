@@ -11,24 +11,4 @@ import java.util.List;
 
 public interface EventsRepository extends JpaRepository <Event, Long> {
 
-    Event findEventById(long id);
-    Event deleteEventByName(String name);
-
-
-
-    List<Event> findAllByOwner(User owner);
-
-
-    List<Event> searchByName(String name);
-
-//    void update(Event event);
-
-
-//    Event saveEvent(Event event);
-//    @Modifying
-//    @Transactional
-//    @Query("UPDATE Event e SET e.name= :getName, e.date= :getDate, e.time= :getTime, e.location= :getLocation, e.trail= :getTrail, e.meetLocation= :getMeetLocation, e.meetTime= :getMeetTime, e.eventDetails= :getEventDetails, e.images= :getImages, e.participants= :getParticipants")
-
-
-
 }

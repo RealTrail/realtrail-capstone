@@ -31,6 +31,14 @@
                 </div>
                 </div>
         </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/events/{id}/comment(id=${event.id})}" th:object="${eventComment}" th:method="POST">
+                <textarea th:name="eventComment" id="" cols="30" rows="10" th:field="*{content}"></textarea>
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+
     </div>
 
     <div th:if="${event.owner.id == user.id}">

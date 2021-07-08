@@ -1,22 +1,23 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.MapPointsRepository;
-import com.codeup.realtrail.daos.PictureURLsRepository;
-import com.codeup.realtrail.daos.TrailsRepository;
+import com.codeup.realtrail.daos.*;
 import com.codeup.realtrail.models.User;
-import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
+import com.codeup.realtrail.daos.EventCommentsRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
+
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class EventController {
     private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
+    private EventParticipantsRepository participantsDao;
+    private EventCommentsRepository eventCommentsDao;
 
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
@@ -40,13 +43,14 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventParticipantsRepository participantsDao, EventCommentsRepository eventCommentsDao) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
-
+        this.participantsDao = participantsDao;
+        this.eventCommentsDao = eventCommentsDao;
     }
 
     // Create Event
@@ -125,9 +129,12 @@ public class EventController {
     public String individualEventPage(@PathVariable Long id, Model model, Principal principal) {
         User user = userService.getLoggedInUser();
         Event event = eventsDao.getById(id);
+        EventComment eventComment = new EventComment();
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         model.addAttribute("user", user);
+        model.addAttribute("eventComment",eventComment);
+        model.addAttribute("postUrl", "/events/" + id + "/comment");
         return "events/showEvent";
     }
 
@@ -160,7 +167,7 @@ public class EventController {
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {
         eventsDao.deleteById(id);
-        return "redirect:/events/showAllEvents";
+        return "redirect:/profile";
     }
 
 //    @GetMapping("/search")
@@ -186,7 +193,24 @@ public class EventController {
         }
     }
 
+    @PostMapping("/events/{id}/comment")
+    public String saveEventComment(@PathVariable long id, @ModelAttribute EventComment eventComment){
+        User user = userService.getLoggedInUser();
+        Event event = eventsDao.getById(id);
+        LocalDateTime date = LocalDateTime.now();
+        eventComment.setDate(date);
+        eventComment.setEvent(event);
+        eventComment.setOwner(user);
+        eventCommentsDao.save(eventComment);
 
+        return "redirect:/events/" + id;
+    }
+//Cancel
+    @PostMapping("/events/{id}/cancel")
+    public String cancelEvent (@PathVariable long id){
+        participantsDao.deleteById(id);
+        return "redirect:/profile";
+    }
 }
 
 
