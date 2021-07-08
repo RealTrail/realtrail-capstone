@@ -60,6 +60,28 @@
   </fieldset>
   <a href="/profile/settings">Edit</a>
   <a href="/password/reset">Reset Password</a>
+
+  <h2>You have created these events</h2>
+  <div th:each="event:${createdEvents}" class="profile-event-card">
+    <h3 th:text="${event.name}"></h3>
+    <h3 th:text="${event.date}"></h3>
+    <h3 th:text="${event.time}"></h3>
+    <form th:action="@{/events/{id}/delete(id=${event.id})}" th:method="POST">
+      <button th:type="submit" >Delete</button>
+    </form>
+    </div>
+
+  <h2>You have joined these events</h2>
+    <div th:each="event:${events}" class="profile-event-card">
+      <h3 th:text="${event.name}"></h3>
+      <h3 th:text="${event.date}"></h3>
+      <h3 th:text="${event.time}"></h3>
+    <form th:action="@{/events/{id}/cancel(id=${event.id})}" th:method="POST">
+        <button th:type="submit" >Cancel</button>
+    </form>
+    </div>
+
+
 </main>
 
 <footer th:replace="fragments/footer :: footer"></footer>

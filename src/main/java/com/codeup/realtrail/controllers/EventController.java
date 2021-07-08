@@ -32,6 +32,7 @@ public class EventController {
     private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
+    private EventParticipantsRepository participantsDao;
     private EventCommentsRepository eventCommentsDao;
 
     //Importing File Stack Api Key
@@ -42,12 +43,13 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventCommentsRepository eventCommentsDao) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventParticipantsRepository participantsDao, EventCommentsRepository eventCommentsDao) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
+        this.participantsDao = participantsDao;
         this.eventCommentsDao = eventCommentsDao;
     }
 
@@ -165,7 +167,7 @@ public class EventController {
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {
         eventsDao.deleteById(id);
-        return "redirect:/events/showAllEvents";
+        return "redirect:/profile";
     }
 
 //    @GetMapping("/search")
@@ -203,7 +205,12 @@ public class EventController {
 
         return "redirect:/events/" + id;
     }
-
+//Cancel
+    @PostMapping("/events/{id}/cancel")
+    public String cancelEvent (@PathVariable long id){
+        participantsDao.deleteById(id);
+        return "redirect:/profile";
+    }
 }
 
 
