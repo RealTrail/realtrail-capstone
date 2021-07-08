@@ -31,11 +31,12 @@
                  url: "/profile/image",
                  type: "POST",
                  data: JSON.stringify(profileImageObj),
-                 contentType: "application/json;charset=UTF-8",
+                 contentType: "application/json; charset=UTF-8",
                  dataType: "json",
                  timeout: 600000,
                  success: (response) => {
                      console.log("image uploaded successfully!");
+                     console.log(response);
                      console.log(response.profileImageUrl);
                      $("#profileImg").val(response.profileImageUrl);
                  },

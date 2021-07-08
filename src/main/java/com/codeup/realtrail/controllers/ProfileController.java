@@ -5,9 +5,11 @@ import com.codeup.realtrail.models.AjaxResponseBody;
 import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.Event;
+import com.codeup.realtrail.models.ProfileImageUpdateRequest;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,9 +83,9 @@ public class ProfileController {
     }
 
     // set up ajax post request response
-    @PostMapping("/profile/image")
-    public @ResponseBody ResponseEntity<?> uploadProfileImage(@RequestBody User user) {
-        String profileImageUrl = user.getProfileImageUrl();
+    @RequestMapping(value = "/profile/image", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<?> uploadProfileImage(@RequestBody ProfileImageUpdateRequest profileImageUpdateRequest) {
+        String profileImageUrl = profileImageUpdateRequest.getProfileImageUrl();
 
         AjaxResponseBody response = new AjaxResponseBody();
 

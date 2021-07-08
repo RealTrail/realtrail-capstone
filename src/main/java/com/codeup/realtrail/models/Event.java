@@ -68,6 +68,13 @@ public class Event {
     public Event() {
     }
 
+    public Event(String name, Trail trail, String meetLocation, String eventDetails) {
+        this.name = name;
+        this.trail = trail;
+        this.meetLocation = meetLocation;
+        this.eventDetails = eventDetails;
+    }
+
     public Event(String name, LocalDate date, LocalTime time, Trail trail, String meetLocation, LocalTime meetTime, String eventDetails) {
         this.name = name;
         this.date = date;
