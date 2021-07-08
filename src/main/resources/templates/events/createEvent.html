@@ -52,7 +52,7 @@
                 <div>
                     <select id="trailOptions" name="trailOptions">
                         <option value="">Nothing selected</option>
-                        <option th:each="trail : ${trails}" th:value="${trail}" th:name="${trail.id}" th:text="${trail.name}" th:field="*{trail}"></option>
+                        <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}" th:name="${trail.longitude + ' ' + trail.latitude}"></option>
                     </select>
                 </div>
                 <div id="trailLocation">

@@ -8,8 +8,6 @@ import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
 
-import org.springframework.data.jpa.repository.Query;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.stereotype.Controller;
