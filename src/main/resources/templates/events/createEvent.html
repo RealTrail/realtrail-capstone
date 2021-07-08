@@ -50,7 +50,7 @@
         <div>
             <select id="trailOptions" name="trailOptions">
                 <option value="">Nothing selected</option>
-                <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
+                <option th:each="trail : ${trails}" th:value="${trail}" th:name="${trail.id}" th:text="${trail.name}" th:field="*{trail}"></option>
             </select>
         </div>
         <div id="trailLocation">
@@ -156,6 +156,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
 <script src="/js/mapbox-geocoder-utils.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js'></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     // assign fileStackApi to a variable
