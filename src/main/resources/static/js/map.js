@@ -6,21 +6,21 @@ $(document).ready(() => {
     $("#trailOption1").on("click", () => {
         $("#trailOptions").show();
         $("#trailOptions").on('change', () => {
-
+            // get the trail id and location
             let selectedTrailId = $("select#trailOptions").find(":selected").val();
+            let trailPoint = $("select#trailOptions").find(":selected").attr("name").split(" ");
             console.log(selectedTrailId);
+            console.log(trailPoint);
 
             // check if selectedTrailId is empty or null
             if (selectedTrailId !== null && selectedTrailId.length !== 0) {
-                let coordinates = [], trailPoint = [];
+                let coordinates = [];
                 $.ajax({
                     type: "GET",
                     url: "/trails/" + selectedTrailId + "/map",
                     dataType: 'json',
                     success: (response) => {
                         console.log(response);
-                        // get the trail location
-                        trailPoint = [response[0].trail.longitude, response[0].trail.latitude];
 
                         // loop through the array of coordinate object to get an array of coordinates
                         for (let coordinateObj of response) {
