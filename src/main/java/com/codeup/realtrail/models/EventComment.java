@@ -1,6 +1,9 @@
 package com.codeup.realtrail.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -19,10 +22,12 @@ public class EventComment {
 
     @ManyToOne
     @JoinColumn (name = "event_id")
+    @JsonBackReference(value = "event-eventComments")
     private Event event;
 
     @ManyToOne
     @JoinColumn (name = "owner_id")
+    @JsonBackReference(value = "owner-eventComments")
     private User owner;
 
     // constructors

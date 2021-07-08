@@ -6,7 +6,11 @@ import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
+
 import org.springframework.data.jpa.repository.Query;
+
+import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,10 @@ public class TrailController{
     private UserService userService;
     private TrailCommentsRepository trailCommentsDao;
 
+    // importing mapbox token
+    @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
+    private String mapboxToken;
+
     public TrailController(TrailsRepository trailsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService, TrailCommentsRepository trailCommentsDao) {
         this.trailsDao = trailsDao;
         this.pictureURLSDao = pictureURLSDao;
@@ -36,11 +44,13 @@ public class TrailController{
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model){
         Trail trail = trailsDao.getById(id);
-        List<MapPoint> coordinates = mapPointsDao.findByTrailId(id);
+        List<MapPoint> coordinates = mapPointsDao.findAllByTrail(trail);
         TrailComment trailComment = new TrailComment();
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
         model.addAttribute("trailComment", trailComment);
+        model.addAttribute("coordinates", coordinates);
+        model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
         return "trails/showTrail";
     }
@@ -59,7 +69,6 @@ public class TrailController{
                 pictureURLSDao.save(url);
             }
         }
-
         return trailSaved;
     }
 
@@ -72,21 +81,17 @@ public class TrailController{
         trailComment.setTrail(trail);
         trailComment.setOwner(user);
         trailCommentsDao.save(trailComment);
-
         return "redirect:/trails/" + id;
     }
 
     @GetMapping("/search-trail")
     public String getSearchedTrail(@RequestParam (value="keyword", required = false) String name, Model model) {
         Trail trail = trailsDao.findByKeyword("%" + name + "%");
-//        List<Trail> trailList = trailsDao.findByKeyword("%:keyword%");
         System.out.println("trail.getName() = " + trail.getName());
         System.out.println("trail.getId() = " + trail.getId());
         Trail searchResult = trailsDao.findById(trail.getId());
-
         model.addAttribute("trails", searchResult);
         return "home";
-
     }
 
     @GetMapping("/filter/difficulty-level")

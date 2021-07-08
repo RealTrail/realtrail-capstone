@@ -1,21 +1,23 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.MapPointsRepository;
-import com.codeup.realtrail.daos.PictureURLsRepository;
-import com.codeup.realtrail.daos.TrailsRepository;
+import com.codeup.realtrail.daos.*;
 import com.codeup.realtrail.models.User;
-import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
+import com.codeup.realtrail.daos.EventCommentsRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+
+
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class EventController {
     private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
+    private EventParticipantsRepository participantsDao;
+    private EventCommentsRepository eventCommentsDao;
 
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
@@ -39,13 +43,14 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventParticipantsRepository participantsDao, EventCommentsRepository eventCommentsDao) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
-
+        this.participantsDao = participantsDao;
+        this.eventCommentsDao = eventCommentsDao;
     }
 
     // Create Event
@@ -68,12 +73,12 @@ public class EventController {
 
     @PostMapping("/create")
     public String saveEvent(@ModelAttribute Event event,
-                            @RequestParam (name = "eventDate") String eventDate,
-                            @RequestParam (name = "eventMeetTime") String eventMeetTime,
-                            @RequestParam (name = "eventTime") String eventTime,
-                            @RequestParam (name = "trailOption") String trailOption,
-                            @RequestParam (name = "trailOptions") String trailId,
-                            @RequestParam (name = "images") String images,
+                            @RequestParam(name = "eventDate") String eventDate,
+                            @RequestParam(name = "eventMeetTime") String eventMeetTime,
+                            @RequestParam(name = "eventTime") String eventTime,
+                            @RequestParam(name = "trailOption") String trailOption,
+                            @RequestParam(name = "trailOptions") String trailId,
+                            @RequestParam(name = "images") String images,
                             Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
@@ -112,7 +117,7 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public String eventsPage(Model model){
+    public String eventsPage(Model model) {
         List<Event> eventsList = eventsDao.findAll();
         model.addAttribute("noEventsFound", eventsList.size() == 0);
         model.addAttribute("events", eventsList);
@@ -121,12 +126,15 @@ public class EventController {
 
     // showEvent.html page
     @GetMapping("/events/{id}")
-    public String individualEventPage(@PathVariable Long id, Model model, Principal principal){
+    public String individualEventPage(@PathVariable Long id, Model model, Principal principal) {
         User user = userService.getLoggedInUser();
-        Event event= eventsDao.getById(id);
+        Event event = eventsDao.getById(id);
+        EventComment eventComment = new EventComment();
         model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         model.addAttribute("user", user);
+        model.addAttribute("eventComment",eventComment);
+        model.addAttribute("postUrl", "/events/" + id + "/comment");
         return "events/showEvent";
     }
 
@@ -150,16 +158,16 @@ public class EventController {
     }
 
     @PostMapping("/events/{id}/edit")
-    public String updateEvent(@ModelAttribute Event event, Model model){
+    public String updateEvent(@ModelAttribute Event event, Model model) {
         eventsDao.save(event);
         return "events/showEvent";
     }
 
 
     @PostMapping("/events/{id}/delete")
-    public String deleteEvent(@PathVariable long id){
+    public String deleteEvent(@PathVariable long id) {
         eventsDao.deleteById(id);
-        return "redirect:/events/showAllEvents";
+        return "redirect:/profile";
     }
 
 //    @GetMapping("/search")
@@ -170,17 +178,39 @@ public class EventController {
 //    }
 
     @PostMapping("/events/{id}/join")
-    public String joinEvent(@PathVariable long id){
+    public String joinEvent(@PathVariable long id) {
         Event event = eventsDao.getById(id);
         User user = userService.getLoggedInUser();
-        List<User> participants =  event.getParticipants();
-        participants.add(user);
-        event.setParticipants(participants);
-        eventsDao.save(event);
-        emailService.prepareAndSendJoin(user, event.getName(),"Thank you for joining the event!\n" + event.getDate() + "\n" + event.getEventDetails());
-        return ("redirect:/events/" + id + "?joined");
-
-
+        List<User> participants = event.getParticipants();
+        if (!participants.contains(user)) {
+            participants.add(user);
+            event.setParticipants(participants);
+            eventsDao.save(event);
+            emailService.prepareAndSendJoin(user, event.getName(), "Thank you for joining the event!\n" + event.getDate() + "\n" + event.getEventDetails());
+            return ("redirect:/events/" + id + "?joined");
+        } else {
+            return "redirect:/events/" + id + "?alreadyjoined";
+        }
     }
 
+    @PostMapping("/events/{id}/comment")
+    public String saveEventComment(@PathVariable long id, @ModelAttribute EventComment eventComment){
+        User user = userService.getLoggedInUser();
+        Event event = eventsDao.getById(id);
+        LocalDateTime date = LocalDateTime.now();
+        eventComment.setDate(date);
+        eventComment.setEvent(event);
+        eventComment.setOwner(user);
+        eventCommentsDao.save(eventComment);
+
+        return "redirect:/events/" + id;
+    }
+//Cancel
+    @PostMapping("/events/{id}/cancel")
+    public String cancelEvent (@PathVariable long id){
+        participantsDao.deleteById(id);
+        return "redirect:/profile";
+    }
 }
+
+

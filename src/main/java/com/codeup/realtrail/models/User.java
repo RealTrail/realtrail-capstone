@@ -1,5 +1,10 @@
 package com.codeup.realtrail.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -25,6 +30,7 @@ public class User {
 
     @NotBlank
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(length = 12)
@@ -45,6 +51,7 @@ public class User {
     @Column(columnDefinition = "boolean default false")
     private boolean isAdmin;
 
+    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="users_interests",
@@ -53,16 +60,20 @@ public class User {
     )
     private List<UserInterest> interests;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "participants")
     private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @JsonManagedReference(value = "owner-trailComments")
     private List<TrailComment> trailComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @JsonManagedReference(value = "owner-eventComments")
     private List<EventComment> eventComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @JsonManagedReference(value = "owner-createdEvents")
     private List<Event> createdEvents;
 
 
@@ -81,6 +92,10 @@ public class User {
         this.username = copy.username;
         this.email = copy.email;
         this.password = copy.password;
+    }
+
+    public User(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
