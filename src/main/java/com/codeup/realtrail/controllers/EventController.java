@@ -157,7 +157,7 @@ public class EventController {
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id){
         eventsDao.deleteById(id);
-        return "redirect:/events/showAllEvents";
+        return "redirect:/profile";
     }
 
 //    @GetMapping("/search")
@@ -181,7 +181,7 @@ public class EventController {
 //Cancel
     @PostMapping("/events/{id}/cancel")
     public String cancelEvent (@PathVariable long id){
-        participantsDao.;
+        participantsDao.deleteById(id);
         return "redirect:/profile";
     }
 }

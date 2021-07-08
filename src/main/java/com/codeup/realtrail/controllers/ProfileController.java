@@ -26,6 +26,7 @@ public class ProfileController {
     private UserService userService;
     private EventsRepository eventsDao;
 
+
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
     private String  filestackApi;
@@ -106,10 +107,12 @@ public class ProfileController {
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
+            List<Event> createdEvents = user.getCreatedEvents();
             List<Event> joinedEvents = user.getEvents();
             // pass the user to view/showProfile.html
             model.addAttribute("user", user);
             model.addAttribute("events", joinedEvents);
+            model.addAttribute("createdEvents", createdEvents);
             return "users/showProfile";
         } else {
             return "redirect:/login";
