@@ -8,60 +8,68 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main style="margin: 5rem">
-    <h1>Create an Event</h1>
-    <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
-        <div>
-            <label for="name">Event Name</label>
-            <input name="name" id="name" th:field="*{name}" />
-        </div>
-        <div>
-            <label for="eventDate">Date</label>
-            <input type="date" name="eventDate" id="eventDate" />
-        </div>
-        <div>
-            <label for="eventTime">Time</label>
-            <input type="time" name="eventTime" id="eventTime" />
-        </div>
-        <div>
-            <label for="meetLocation">Meet Location</label>
-            <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
-        </div>
-        <div>
-            <label for="eventMeetTime">Meet Time</label>
-            <input type="time" name="eventMeetTime" id="eventMeetTime" />
-        </div>
-        <div>
-            <label for="eventDetails">Event Details</label>
-            <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
-        </div>
-        <div>
-            Choose your trail
-            <div>
-                <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
-                <label for="trailOption1">Choose an existing trail</label>
-            </div>
-            <div>
-                <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
-                <label for="trailOption2">Customize your biking trail</label>
-            </div>
-        </div>
+<main style="margin: 4rem">
+    <div class=".form__wrapperpassc">
+        <div class="form__bodypassc">
+            <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
+                <h2>Create an Event</h2>
 
-        <div>
-            <select id="trailOptions" name="trailOptions">
-                <option value="">Nothing selected</option>
-                <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
-            </select>
+                <div>
+                    <label for="name">Event Name</label>
+                    <input name="name" id="name" th:field="*{name}" />
+                </div>
+                <div>
+                    <label for="eventDate">Date</label>
+                    <input type="date" name="eventDate" id="eventDate" />
+                </div>
+                <div>
+                    <label for="eventTime">Time</label>
+                    <input type="time" name="eventTime" id="eventTime" />
+                </div>
+                <div>
+                    <label for="meetLocation">Meet Location</label>
+                    <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
+                </div>
+                <div>
+                    <label for="eventMeetTime">Meet Time</label>
+                    <input type="time" name="eventMeetTime" id="eventMeetTime" />
+                </div>
+                <div>
+                    <label for="eventDetails">Event Details</label>
+                    <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
+                </div>
+                <div>
+                    <h2>Choose your trail</h2>
+                    <div>
+                        <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
+                        <label for="trailOption1">Choose an existing trail</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
+                        <label for="trailOption2">Customize your biking trail</label>
+                    </div>
+                </div>
+                <div>
+                    <select id="trailOptions" name="trailOptions">
+                        <option value="">Nothing selected</option>
+                        <option th:each="trail : ${trails}" th:value="${trail}" th:name="${trail.id}" th:text="${trail.name}" th:field="*{trail}"></option>
+                    </select>
+                </div>
+                <div id="trailLocation">
+                    <label for="searchedName"></label>
+                    <input type="text" id="searchedName" name="mapSearch">
+                    <input type="hidden" id="trailId" style="display: none">
+                    <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
+                </div>
+                <div id="map" style="height: 900px"></div>
+                <button type="submit" id="createEvent">Submit</button>
+            </form>
         </div>
-        <div id="trailLocation">
-            <label for="searchedName"></label>
-            <input type="text" id="searchedName" name="mapSearch">
-            <input type="hidden" id="trailId" style="display: none">
-            <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
-        </div>
-        <div id="map" style="height: 900px"></div>
-        <button type="submit" id="createEvent">Submit</button>
-    </form>
+    </div>
+
+
+    <div class="form__backgroundc"></div>
+    <div class="form__backgroundc2"></div>
 
     <div class="mask2" role="dialog"></div>
     <div class="modal2" role="alert">
@@ -138,14 +146,14 @@
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
                      x="0px" y="0px" width="100%" height="24.6px" viewBox="0 0 24.6 24.6" style="enable-background:new 0 0 24.6 24.6;"
                      xml:space="preserve">
-                    <style type="text/css">
-                    .st0{fill:#FFFFFF;}
-                    </style>
+                        <style type="text/css">
+                        .st0{fill:#FFFFFF;}
+                        </style>
                     <defs></defs>
                     <path class="st0" d="M24,16.9l-4.6-4.6L24,7.7c0.7-0.7,0.7-1.9,0-2.7l-4.5-4.5c-0.7-0.7-1.9-0.7-2.7,0l-4.6,4.6L7.7,0.6
-                    C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
-                    l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
-                </svg>
+                        C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
+                        l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
+                    </svg>
             </div>
         </div>
         <a class="close" role="button"></a>
@@ -156,6 +164,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
 <script src="/js/mapbox-geocoder-utils.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js'></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     // assign fileStackApi to a variable
