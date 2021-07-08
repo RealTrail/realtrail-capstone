@@ -6,6 +6,7 @@ import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -88,8 +89,15 @@ public class TrailController{
 
     }
 
+    @GetMapping("/filter/difficulty-level")
+    public String filterDifficultyLevel(Model model) {
+        List<String> filterLevel = trailsDao.findByDifficultyLevel();
+        model.addAttribute("trails", filterLevel);
+        return "home";
+    }
+
+
 //    @GetMapping("/searchCat")
 //    public
-
 }
 
