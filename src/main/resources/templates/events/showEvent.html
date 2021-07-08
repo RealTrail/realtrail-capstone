@@ -25,11 +25,17 @@
             <div th:each="participant : ${event.participants}">
                 <h4 th:text="${participant.username}"></h4>
             </div>
-            <div>Comments:
-                <div th:each="comment : ${event.eventComments}">
-                    <h4 th:text="${comment.content}"></h4>
+
+        </div>
+        <div>Comments:
+            <div th:each="comment : ${event.eventComments}">
+                <h4 th:text="${comment.content}"></h4>
+                <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
+                    <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
                 </div>
-                </div>
+            </div>
         </div>
 
         <div sec:authorize="isAuthenticated()">
