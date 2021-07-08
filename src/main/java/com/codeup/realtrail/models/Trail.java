@@ -1,6 +1,7 @@
 package com.codeup.realtrail.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -41,19 +42,19 @@ public class Trail {
     private String trailDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
-    @JsonBackReference
+    @JsonManagedReference(value = "trail-events")
     private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
-    @JsonBackReference
+    @JsonManagedReference(value = "trail-trailImages")
     private List<PictureURL> trailImages;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
-    @JsonBackReference
+    @JsonManagedReference(value = "trail-trailComments")
     private List<TrailComment> trailComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
-    @JsonBackReference
+    @JsonManagedReference(value = "trail-mapPoints")
     private List<MapPoint> mapPoints;
 
     // constructors

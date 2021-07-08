@@ -105,23 +105,21 @@ $(document).keyup(function(e) {
 });
 
 
-// ******************** MODAL JS *******************
-
 // ******************** Trail Search ***************
 
 // Filter by difficulty level
 $(document).ready(function () {
     let trails = [];
+    //
+    // $("img.image").each(function () {
+    //     console.log($(this).attr("src"));
+    // });
+    //
+    // $("img.image").map(function(index, element) {
+    //     console.log(index, element.attr("src"));
+    // });
 
-    $("img.image").each(function () {
-        console.log($(this).attr("src"));
-    });
-
-    $("img.image").map(function(index, element) {
-        console.log(index, element.attr("src"));
-    });
-
-    $(".header > h3")  // an array of names
+    // $(".header > h3")  // an array of names
 
     // an array of difficulty levels
 
@@ -129,14 +127,33 @@ $(document).ready(function () {
 
     // make trail obj
     //for loop
-   // let trail = {name: // nameArr[i], difficultyLevle: difficultylevelArr[i], ...}
+   // let trail = {name: // nameArr[i], difficultyLevel: difficultylevelArr[i], ...}
    // trails.push(trail)  ==> after for loop, you get all the trails
 
-    // $("#difficultyLevel").on("change", function() {
-    //     if ($("#difficultyLevel"):selected.val() === "easy") {
-    //         // build the cards.
-    //     } else if ( === "")
-    // })
+    $("#difficultyLevel").on("change", function() {
+        $("#type").hide()
+        $(".slick-slide").each(function (i){
+            var diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
+            if ($("#difficultyLevel :selected").text() !== diffLevel){
+                $(this).css("display", "none")
+            } else {
+                $(this).css("display", "block")
+            }
+        })
+    })
+
+    $("#type").on("change", function() {
+        $("#difficultyLevel").hide()
+        $(".slick-slide").each(function (i){
+            var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
+            console.log(routeType);
+            if ($("#type :selected").text() !== routeType){
+                $(this).css("display", "none")
+            } else {
+                $(this).css("display", "block")
+            }
+        })
+    })
 
 });
 

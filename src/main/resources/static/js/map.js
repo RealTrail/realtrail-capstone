@@ -2,7 +2,8 @@
 
 $(document).ready(() => {
 
-    $("#trailOption1").on("click", () => { // user chooses to pick an existing trail
+    // user chooses to pick an existing trail
+    $("#trailOption1").on("click", () => {
         $("#trailOptions").show();
         $("#trailOptions").on('change', () => {
 
@@ -14,7 +15,7 @@ $(document).ready(() => {
                 let coordinates = [], trailPoint = [];
                 $.ajax({
                     type: "GET",
-                    url: "/trails/" + selectedTrailId + "/map/",
+                    url: "/trails/" + selectedTrailId + "/map",
                     dataType: 'json',
                     success: (response) => {
                         console.log(response);
@@ -61,7 +62,7 @@ $(document).ready(() => {
                     error: (error) => {
                         console.log("Error connecting the server");
                         console.log(error);
-                        // window.location = "/error";
+                        window.location = "/error";
                     }
                 });
             }
@@ -132,7 +133,7 @@ $(document).ready(() => {
                     url: "/trails/create",
                     type: "POST",
                     data: JSON.stringify(trail),
-                    contentType: "application/json",
+                    contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     timeout: 600000,
                     success: (response) => {
@@ -213,7 +214,7 @@ $(document).ready(() => {
                     },
                     error: (error) => {
                         console.log("Error: ", error);
-                        window.location = "/error";
+                        // window.location = "/error";
                     }
                 });
             }

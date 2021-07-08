@@ -11,8 +11,6 @@
 <main style="margin: 4rem">
     <div class=".form__wrapperpassc">
         <div class="form__bodypassc">
-
-
             <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
                 <h2>Create an Event</h2>
 
@@ -51,11 +49,10 @@
                         <label for="trailOption2">Customize your biking trail</label>
                     </div>
                 </div>
-
                 <div>
                     <select id="trailOptions" name="trailOptions">
                         <option value="">Nothing selected</option>
-                        <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}"></option>
+                        <option th:each="trail : ${trails}" th:value="${trail}" th:name="${trail.id}" th:text="${trail.name}" th:field="*{trail}"></option>
                     </select>
                 </div>
                 <div id="trailLocation">
@@ -69,6 +66,8 @@
             </form>
         </div>
     </div>
+
+
     <div class="form__backgroundc"></div>
     <div class="form__backgroundc2"></div>
 
@@ -165,16 +164,15 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
 <script src="/js/mapbox-geocoder-utils.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js'></script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     // assign fileStackApi to a variable
     const fileStackApi = [[${fileStackApi}]];
     // assign mapboxToken to a variable
     const mapboxToken = [[${mapboxToken}]];
-    console.log(fileStackApi);
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
-<script src="/js/navbar.js"></script>
 <script src="/js/map.js"></script>
 </body>
 </html>
