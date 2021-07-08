@@ -1,5 +1,7 @@
 package com.codeup.realtrail.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,13 +41,20 @@ public class Trail {
     private String trailDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    @JsonBackReference
     private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    @JsonBackReference
     private List<PictureURL> trailImages;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    @JsonBackReference
     private List<TrailComment> trailComments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trail")
+    @JsonBackReference
+    private List<MapPoint> mapPoints;
 
     // constructors
     public Trail() {
@@ -68,7 +77,7 @@ public class Trail {
         this.trailImages = trailImages;
     }
 
-    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, double longitude, double latitude, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments) {
+    public Trail(long id, String name, String difficultyLevel, float rating, float length, float elevation, String type, double longitude, double latitude, String trailDetails, List<Event> events, List<PictureURL> trailImages, List<TrailComment> trailComments, List<MapPoint> mapPoints) {
         this.id = id;
         this.name = name;
         this.difficultyLevel = difficultyLevel;
@@ -82,8 +91,10 @@ public class Trail {
         this.events = events;
         this.trailImages = trailImages;
         this.trailComments = trailComments;
+        this.mapPoints = mapPoints;
     }
-// getters and setters
+
+    // getters and setters
 
     public long getId() {
         return id;
@@ -174,5 +185,12 @@ public class Trail {
     }
     public void setTrailComments(List<TrailComment> trailComments) {
         this.trailComments = trailComments;
+    }
+
+    public List<MapPoint> getMapPoints() {
+        return mapPoints;
+    }
+    public void setMapPoints(List<MapPoint> mapPoints) {
+        this.mapPoints = mapPoints;
     }
 }

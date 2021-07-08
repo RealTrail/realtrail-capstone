@@ -1,6 +1,8 @@
 package com.codeup.realtrail.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,10 +24,12 @@ public class TrailComment {
 
     @ManyToOne
     @JoinColumn (name = "owner_id")
+    @JsonManagedReference
     private User owner;
 
     @ManyToOne
     @JoinColumn (name = "trail_id")
+    @JsonManagedReference
     private Trail trail;
 
     // constructors

@@ -1,5 +1,8 @@
 package com.codeup.realtrail.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -28,9 +31,11 @@ public class Event {
 
     @ManyToOne
     @JoinColumn (name = "owner_id")
+    @JsonManagedReference
     private User owner;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "trail_id")
     private Trail trail;
 
@@ -46,6 +51,7 @@ public class Event {
     private String eventDetails;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @JsonBackReference
     private List<EventComment> eventComments;
 
     @ManyToMany(cascade = CascadeType.ALL)
