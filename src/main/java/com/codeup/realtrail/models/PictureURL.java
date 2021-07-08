@@ -16,6 +16,7 @@ public class PictureURL {
 
     @ManyToOne
     @JoinColumn (name = "trail_id")
+    @JsonManagedReference
     private Trail trail;
 
     // constructors

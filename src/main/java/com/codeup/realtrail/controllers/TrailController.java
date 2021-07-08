@@ -35,7 +35,7 @@ public class TrailController{
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model){
         Trail trail = trailsDao.getById(id);
-        List<MapPoint> coordinates = mapPointsDao.findByTrailId(id);
+        List<MapPoint> coordinates = mapPointsDao.findAllByTrail(trail);
         TrailComment trailComment = new TrailComment();
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
