@@ -4,7 +4,6 @@ import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.models.AjaxResponseBody;
 import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
-import com.codeup.realtrail.models.AjaxRequestBody;
 import com.codeup.realtrail.models.Event;
 import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -85,17 +83,16 @@ public class ProfileController {
 
     // set up ajax post request response
     @PostMapping("/profile/image")
-    public @ResponseBody ResponseEntity<?> uploadProfileImage(
-            @Valid @RequestBody AjaxRequestBody requestBody) {
-        String profileImageUrl = requestBody.getProfileImageUrl();
+    public @ResponseBody ResponseEntity<?> uploadProfileImage(@RequestBody User user) {
+        String profileImageUrl = user.getProfileImageUrl();
 
         AjaxResponseBody response = new AjaxResponseBody();
 
         if (profileImageUrl != null) {
-            User user = userService.getLoggedInUser();
-            user.setProfileImageUrl(profileImageUrl);
-            usersDao.save(user);
-            response.setUser(user);
+            User loggedInUser = userService.getLoggedInUser();
+            loggedInUser.setProfileImageUrl(profileImageUrl);
+            usersDao.save(loggedInUser);
+            response.setUser(loggedInUser);
             return ResponseEntity.ok(response);
         } else {
             response.setMsg("No image uploaded.");

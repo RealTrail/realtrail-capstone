@@ -105,8 +105,6 @@ $(document).keyup(function(e) {
 });
 
 
-// ******************** MODAL JS *******************
-
 // ******************** Trail Search ***************
 
 // Filter by difficulty level
