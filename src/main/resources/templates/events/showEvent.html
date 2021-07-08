@@ -21,17 +21,19 @@
         <div>trail:<a th:href="${'/events/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
         <div>meet location:<h4 th:text="${event.meetLocation}"></h4></div>
         <div>meet time:<h4 th:text="${event.meetTime}"></h4></div>
-        <div>participants:
-            <div th:each="participant : ${event.participants}">
-                <h4 th:text="${participant.username}"></h4>
+        <div th:if="${event.owner.id == user.id}">
+            <div>participants:
+                <div th:each="participant : ${event.participants}">
+                    <h4 th:text="${participant.username}"></h4>
+                </div>
             </div>
-
         </div>
         <div>Comments:
             <div th:each="comment : ${event.eventComments}">
                 <h4 th:text="${comment.content}"></h4>
                 <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
-                    <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}" method="post">
+                    <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
+                          method="post">
                         <button type="submit">Delete</button>
                     </form>
                 </div>
