@@ -1,6 +1,7 @@
 package com.codeup.realtrail.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -42,6 +43,7 @@ public class User {
     private String gender;
 
     @Column
+    @JsonProperty
     private String profileImageUrl;
 
     @Column(columnDefinition = "boolean default false")
@@ -86,6 +88,10 @@ public class User {
         this.username = copy.username;
         this.email = copy.email;
         this.password = copy.password;
+    }
+
+    public User(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {

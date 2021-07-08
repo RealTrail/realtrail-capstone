@@ -12,12 +12,6 @@
     </div>
 
     <h1>Admin</h1>
-    <form action="/profile/image" method="POST">
-        <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
-        <input type="hidden" id="profileImageUrl" name="profileImageUrl" th:value="replaceme" >
-        <button type="submit" id="upload">Upload profile image</button>
-    </form>
-
     <form th:action="@{/profile/{id}/edit/(id=${user.id})}" th:method="POST" th:object="${user}">
         <fieldset>
             <legend>

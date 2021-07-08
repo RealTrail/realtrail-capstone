@@ -62,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/profile",  // only authenticated users can visit profile page
                         "/profile/settings",  // only authenticated users can create or edit profile
+                        "/profile/image",   // only authenticated users can update profile image
                         "/create",  // only authenticated users can create an event
                         "/events",  // only authenticated users can see all events
                         "/events/{id}",  // only authenticated users can see an event

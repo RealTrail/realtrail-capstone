@@ -15,19 +15,23 @@
          accept: ["image/*"],
          maxFiles: 1,
          onUploadDone: (results) => {
+             console.log(results.filesUploaded[0].url);
+
              $("#profileImage").attr("src", results.filesUploaded[0].url); // display the new image on web page
              $("#profileImageUrl").val(results.filesUploaded[0].url); // save the new image url to a hidden input
 
              let profileImageObj = {
-                 profileImageUrl: $(".profileImageUrl").val()
+                 profileImageUrl: $("#profileImageUrl").val()
              }
+
+             console.log(profileImageObj);
 
              // do AJAX request to save profile image to db
              $.ajax({
                  url: "/profile/image",
                  type: "POST",
                  data: JSON.stringify(profileImageObj),
-                 contentType: "application/json",
+                 contentType: "application/json;charset=UTF-8",
                  dataType: "json",
                  timeout: 600000,
                  success: (response) => {
@@ -37,7 +41,7 @@
                  },
                  error: (error) => {
                      console.log("Error: ", error);
-                     alert("No image uploaded!");
+                     // alert("No image uploaded!");
                  }
              });
          },
