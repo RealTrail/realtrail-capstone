@@ -1,6 +1,8 @@
 package com.codeup.realtrail.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -28,6 +30,7 @@ public class User {
 
     @NotBlank
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(length = 12)
@@ -43,12 +46,12 @@ public class User {
     private String gender;
 
     @Column
-    @JsonProperty
     private String profileImageUrl;
 
     @Column(columnDefinition = "boolean default false")
     private boolean isAdmin;
 
+    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="users_interests",
@@ -57,19 +60,20 @@ public class User {
     )
     private List<UserInterest> interests;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "participants")
     private List<Event> events;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    @JsonBackReference
+    @JsonManagedReference(value = "owner-trailComments")
     private List<TrailComment> trailComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    @JsonBackReference
+    @JsonManagedReference(value = "owner-eventComments")
     private List<EventComment> eventComments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    @JsonBackReference
+    @JsonManagedReference(value = "owner-createdEvents")
     private List<Event> createdEvents;
 
 

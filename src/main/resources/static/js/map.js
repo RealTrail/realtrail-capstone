@@ -15,7 +15,7 @@ $(document).ready(() => {
                 let coordinates = [], trailPoint = [];
                 $.ajax({
                     type: "GET",
-                    url: "/trails/" + selectedTrailId + "/map/",
+                    url: "/trails/" + selectedTrailId + "/map",
                     dataType: 'json',
                     success: (response) => {
                         console.log(response);

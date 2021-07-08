@@ -1,6 +1,7 @@
 package com.codeup.realtrail.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class MapPoint {
 
     @ManyToOne
     @JoinColumn (name = "trail_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "trail-mapPoints")
     private Trail trail;
 
     //constructors

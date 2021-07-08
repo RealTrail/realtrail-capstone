@@ -2090,7 +2090,7 @@ div.header h4{
 
 /* ****************************** CREATE EVENT PAGE ****************************** */
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
 
@@ -2344,14 +2344,7 @@ div.header h4{
 @-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
 
 
-/* ****************************** PROFILE PAGE CSS ****************************** */
-#profileImage {
-    width: 5rem;
-}
 
-.hidden {
-    visibility: hidden;
-}
 
 
 /* ****************************** CREATE EVENT PAGE CSS ****************************** */

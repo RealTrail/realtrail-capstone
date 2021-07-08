@@ -1,5 +1,6 @@
 package com.codeup.realtrail.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class PictureURL {
 
     @ManyToOne
     @JoinColumn (name = "trail_id")
-    @JsonManagedReference
+    @JsonBackReference(value = "trail-trailImages")
     private Trail trail;
 
     // constructors

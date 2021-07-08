@@ -1,6 +1,9 @@
 package com.codeup.realtrail.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class UserInterest {
     @Column(nullable = false, length = 100)
     private String interest;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "interests")
     private List<User> users;
 
