@@ -56,13 +56,14 @@ public class EventController {
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
             // get all the trails and mapPoints
-            List<Trail> trailList = trailsDao.findAll();
-            List<MapPoint> mapPointList = mapPointsDao.findAll();
+
             model.addAttribute("event", new Event());
-            model.addAttribute("trails", trailList);
-            model.addAttribute("mapPoints", mapPointList);
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);
+            List<Trail> trailList = trailsDao.findAll();
+            List<MapPoint> mapPointList = mapPointsDao.findAll();
+            model.addAttribute("trails", trailList);
+            model.addAttribute("mapPoints", mapPointList);
             return "events/createEvent";
         } else {
             return "redirect:/login";
@@ -144,8 +145,10 @@ public class EventController {
             Event event = eventsDao.getById(id);
             if (event.getOwner().getId() == user.getId()) {
                 model.addAttribute("event", event);
+
                 return "events/editEvent";
-            } else {
+            }
+            else {
                 errorMessage = "User is not event owner";
                 model.addAttribute("errorMessage", errorMessage);
                 return "redirect:/profile";
@@ -160,7 +163,6 @@ public class EventController {
         eventsDao.save(event);
         return "events/showEvent";
     }
-
 
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {
