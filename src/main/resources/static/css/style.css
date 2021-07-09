@@ -2679,3 +2679,39 @@ div.header h4{
         transform: rotate(360deg);
     }
 }
+
+/***************************** ERROR PAGE ****************************************/
+
+.errorBody{
+    background-color: #152e3d;
+    position: relative;
+}
+.error-page{
+    /*margin-top: 5rem;*/
+    /*position: absolute;*/
+    /*margin: auto;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*background-color: #ccc;*/
+    /*border-radius: 3px;*/
+}
+
+.errorAnimation{
+    /*!*position: absolute;*!*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    position: absolute;
+    margin-left: inherit;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+}
