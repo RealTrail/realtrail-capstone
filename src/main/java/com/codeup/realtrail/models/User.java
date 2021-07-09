@@ -40,9 +40,6 @@ public class User {
     @Column(length = 2)
     private String state;
 
-    @Column(updatable = false)
-    private String gender;
-
     @Column
     private String profileImageUrl;
 
@@ -94,7 +91,7 @@ public class User {
         this.profileImageUrl = profileImageUrl;
     }
 
-    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
+    public User(String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String profileImageUrl, boolean isAdmin, List<UserInterest> interests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -103,13 +100,12 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.state = state;
-        this.gender = gender;
         this.profileImageUrl = profileImageUrl;
         this.isAdmin = isAdmin;
         this.interests = interests;
     }
 
-    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String gender, String profileImageUrl, boolean isAdmin, List<UserInterest> interests, List<Event> events, List<TrailComment> trailComments, List<EventComment> eventComments, List<Event> createdEvents) {
+    public User(long id, String firstName, String lastName, String username, String email, String password, String phoneNumber, String city, String state, String profileImageUrl, boolean isAdmin, List<UserInterest> interests, List<Event> events, List<TrailComment> trailComments, List<EventComment> eventComments, List<Event> createdEvents) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -119,7 +115,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.state = state;
-        this.gender = gender;
         this.profileImageUrl = profileImageUrl;
         this.isAdmin = isAdmin;
         this.interests = interests;
@@ -194,13 +189,6 @@ public class User {
         this.state = state;
     }
 
-    public String getGender() {
-        return gender;
-    }
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
@@ -249,5 +237,4 @@ public class User {
     public void setCreatedEvents(List<Event> createdEvents) {
         this.createdEvents = createdEvents;
     }
-
 }

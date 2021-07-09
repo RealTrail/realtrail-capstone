@@ -43,29 +43,18 @@
                     <label for="state">State</label>
                 </div>
 
-                <div class="selections">
-                    <label>Gender</label>
-                    <div class="gender">
-                        <input type="radio" id="male" name="gender" value="M" th:field="*{gender}"/>
-                        <label for="male" class="radio"><pre>   Male   </pre></label>
-                        <input type="radio" id="female" name="gender" value="F" th:field="*{gender}"/>
-                        <label for="female" class="radio"><pre>   Female   </pre></label>
-                    </div>
-                </div>
                 <label>Interests</label>
                 <div th:each="interest : ${interests}">
                     <label th:class="${'interest' + interest.id}">
-                        <input type="checkbox" name="categories" th:field="*{interests}" th:value="${interest.id}"
-                               th:text="${interest.interest}">
+                        <input type="checkbox" name="categories" th:field="*{interests}" th:value="${interest.id}" th:text="${interest.interest}">
                     </label>
                 </div>
 
                 <br>
 
                 <button type="submit" class="btn" id="createProfile">Complete</button>
+                <div><a href="/profile" class="btn">Close</a></div>
             </form>
-
-            <a href="/profile">Close</a>
         </div>
     </div>
 

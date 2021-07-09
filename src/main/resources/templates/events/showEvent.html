@@ -18,7 +18,7 @@
         <h4 th:text="${'date: ' + event.date}"></h4>
         <h4 th:text="${'time: ' + event.time}"></h4>
         <h4 th:text="${event.eventDetails}"></h4>
-        <div>Trail:<a th:href="${'/events/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
+        <div>Trail:<a th:href="${'/trails/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
         <div>Meet location:<h4 th:text="${event.meetLocation}"></h4></div>
         <div>Meet time:<h4 th:text="${event.meetTime}"></h4></div>
         <div th:if="${event.owner.id == user.id}">
