@@ -23,7 +23,7 @@
                     RealTrail provides hiking trail information including trail name, length, route, location, and images to all visitors and users. Users can create hiking or biking events for other users to join in based on the existing trails or through customized biking trails. Future features include downloading the trail map for offline usage and a chat box for each event.
                 </p>
                 <p class="par">
-                    Technologies used:  Java, Spring Boot, Thymeleaf, MySQL, HTML, CSS, JavaScript, jQuery, AJAX, Filestack API, Mapbox API, Open Street Map, Directions API.
+                    Technologies used:  Java, Spring Boot, Thymeleaf, MySQL, HTML, CSS, JavaScript, jQuery, AJAX, Filestack API, Mapbox GL JS, Directions API, Open Street Map, Directions API.
                 </p>
 
                 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
@@ -80,6 +80,9 @@
                 </li>
 
                 <li class="navSection primary">
+                    <a class="rootLink item-products hasDropdown colorize" data-dropdown="products" sec:authorize="hasAnyAuthority('ADMIN')">
+                        Admin
+                    </a>
                     <a class="rootLink item-products hasDropdown colorize" data-dropdown="products" sec:authorize="isAuthenticated()">
                         Dashboard
                     </a>
@@ -141,7 +144,7 @@
                                 </ul>
                                 <ul>
                                     <li><a id="myBtnM" class="item-about" href="#" onclick="return false;">About Real Trail</a></li>
-                                    <li><a class="item-blog" href="/profile" sec:authorize="isAuthenticated()">Manage Events</a></li>
+                                    <li><a class="item-blog" href="/profile#createdEvents" sec:authorize="isAuthenticated()">Manage Events</a></li>
                                 </ul>
                             </div>
                             <a class="mobileSignIn" data-adroll-segment="submit_two" href="/signup" sec:authorize="not isAuthenticated()">Signup</a>
@@ -173,8 +176,16 @@
                                         <p class="linkSub">Edit your public and private information.</p>
                                     </div>
                                 </a></li>
+                                <li><a class="linkContainer item-radar" href="/events">
+                                    <svg viewBox="0 0 48 48"><path class="hover-fillLight" fill="#F6A4EB" d="M43.1 18.3L26.9 2.1a7.12 7.12 0 00-10.1 0L.6 18.3l-.6.6h13.9c.8 0 1.5-.7 1.5-1.5v-3.3c0-1.5 1.7-2.5 3-1.7l15.9 9.2c1.3.8 1.3 2.7 0 3.5l-15.9 9.2c-1.3.8-3-.2-3-1.7v-3.2c0-.8-.7-1.5-1.5-1.5H.1c.1.2.3.4.5.5l16.2 16.2c2.8 2.8 7.3 2.8 10.1 0l16.2-16.2c2.8-2.8 2.8-7.3 0-10.1z"/>
+                                    </svg>
+                                    <div class="productLinkContent">
+                                        <h3 class="linkTitle">View All Events</h3>
+                                        <p class="linkSub">View all the events at RealTrail.</p>
+                                    </div>
+                                </a></li>
                                 <li><a class="linkContainer item-relay" href="/password/reset">
-                                    <svg viewBox="0 0 48 48"><path fill="#FFA27B" class="hover-fillLight"d="M43.1 18.3L26.9 2.1a7.12 7.12 0 00-10.1 0L.6 18.3l-.6.6h13.9c.8 0 1.5-.7 1.5-1.5v-3.3c0-1.5 1.7-2.5 3-1.7l15.9 9.2c1.3.8 1.3 2.7 0 3.5l-15.9 9.2c-1.3.8-3-.2-3-1.7v-3.2c0-.8-.7-1.5-1.5-1.5H.1c.1.2.3.4.5.5l16.2 16.2c2.8 2.8 7.3 2.8 10.1 0l16.2-16.2c2.8-2.8 2.8-7.3 0-10.1z"/>
+                                    <svg viewBox="0 0 48 48"><path fill="#FFA27B" class="hover-fillLight" d="M43.1 18.3L26.9 2.1a7.12 7.12 0 00-10.1 0L.6 18.3l-.6.6h13.9c.8 0 1.5-.7 1.5-1.5v-3.3c0-1.5 1.7-2.5 3-1.7l15.9 9.2c1.3.8 1.3 2.7 0 3.5l-15.9 9.2c-1.3.8-3-.2-3-1.7v-3.2c0-.8-.7-1.5-1.5-1.5H.1c.1.2.3.4.5.5l16.2 16.2c2.8 2.8 7.3 2.8 10.1 0l16.2-16.2c2.8-2.8 2.8-7.3 0-10.1z"/>
                                     </svg>
                                     <div class="productLinkContent">
                                         <h3 class="linkTitle">Account Settings</h3>
@@ -189,7 +200,7 @@
                                         <p class="linkSub">Create an event for others to join.</p>
                                     </div>
                                 </a></li>
-                                <li><a class="linkContainer item-radar" href="/">
+                                <li><a class="linkContainer item-radar" href="/profile#joinedEvents">
                                     <svg viewBox="0 0 48 48"><path class="hover-fillLight" fill="#F6A4EB" d="M43.1 18.3L26.9 2.1a7.12 7.12 0 00-10.1 0L.6 18.3l-.6.6h13.9c.8 0 1.5-.7 1.5-1.5v-3.3c0-1.5 1.7-2.5 3-1.7l15.9 9.2c1.3.8 1.3 2.7 0 3.5l-15.9 9.2c-1.3.8-3-.2-3-1.7v-3.2c0-.8-.7-1.5-1.5-1.5H.1c.1.2.3.4.5.5l16.2 16.2c2.8 2.8 7.3 2.8 10.1 0l16.2-16.2c2.8-2.8 2.8-7.3 0-10.1z"/>
                                     </svg>
                                     <div class="productLinkContent">
@@ -206,7 +217,7 @@
                                     <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path class="hover-fillLight" fill="#87BBFD" d="M15.998 12.495a1.03 1.03 0 0 1-.595.908L8.93 16.395a1.018 1.018 0 0 1-.86 0l-6.473-2.992a1.03 1.03 0 0 1-.594-.908V4.51c.006-.2.07-.39.18-.55L8.5 7.338l7.32-3.38c.108.16.172.35.178.55v7.984z"></path><path class="hover-fillDark" fill="#6772E5" d="M15.998 12.495a1.03 1.03 0 0 1-.595.908L8.93 16.395a1.026 1.026 0 0 1-.43.095V7.34l7.32-3.38c.11.16.173.35.18.55v7.984z"></path><path class="hover-fillLight" fill="#87BBFD" d="M8.5 5C6.567 5 5 4.228 5 3.275v-1.15h.098c.36.768 1.742 1.34 3.402 1.34 1.66.002 3.043-.572 3.402-1.34H12v1.15C12 4.228 10.433 5 8.5 5z"></path></svg>Logout</h3>
                                 </a>
                             </li>
-                            <li><a class="linkContainer item-workswith" href="/profile" sec:authorize="isAuthenticated()">
+                            <li><a class="linkContainer item-workswith" href="/profile#createdEvents" sec:authorize="isAuthenticated()">
                                 <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path class="hover-fillLight" fill="#87BBFD" d="M15.998 12.495a1.03 1.03 0 0 1-.595.908L8.93 16.395a1.018 1.018 0 0 1-.86 0l-6.473-2.992a1.03 1.03 0 0 1-.594-.908V4.51c.006-.2.07-.39.18-.55L8.5 7.338l7.32-3.38c.108.16.172.35.178.55v7.984z"></path><path class="hover-fillDark" fill="#6772E5" d="M15.998 12.495a1.03 1.03 0 0 1-.595.908L8.93 16.395a1.026 1.026 0 0 1-.43.095V7.34l7.32-3.38c.11.16.173.35.18.55v7.984z"></path><path class="hover-fillLight" fill="#87BBFD" d="M8.5 5C6.567 5 5 4.228 5 3.275v-1.15h.098c.36.768 1.742 1.34 3.402 1.34 1.66.002 3.043-.572 3.402-1.34H12v1.15C12 4.228 10.433 5 8.5 5z"></path></svg>Manage Events</h3>
                             </a></li>
                         </ul>
@@ -261,24 +272,23 @@
                             <li><a class="linkContainer item-apiReference" >
                                 <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path d="M2 15h13M2 11h13M2 7h13M2 3h13" fill="none" stroke="#6772e5" class="hover-strokeDark" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Full API Reference</h3>
                             </a></li>
-                            <li><a class="linkContainer item-apiStatus" href="/">
-                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>All Trails</h3>
+                            <li><a class="linkContainer item-apiStatus" href="https://www.alltrails.com/">
+                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>AllTrails</h3>
                             </a></li>
-                            <li><a class="linkContainer item-openSource" href="/">
-                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>Open Street Map</h3>
+                            <li><a class="linkContainer item-openSource" href="https://www.openstreetmap.org/">
+                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>OpenStreetMap</h3>
                             </a></li>
+                            <li><a class="linkContainer item-openSource" href="https://www.mapbox.com/">
+                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>MapBox</h3>
                             </a></li>
-                            <li><a class="linkContainer item-openSource" href="/">
-                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>Map Box</h3>
+                            <li><a class="linkContainer item-openSource" href="https://fullcalendar.io/">
+                                <h3 class="linkTitle linkIcon"><svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>FullCalendar</h3>
                             </a></li>
                         </ul>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     </header>
 </nav>
 

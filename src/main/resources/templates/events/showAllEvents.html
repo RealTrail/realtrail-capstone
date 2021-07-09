@@ -13,11 +13,16 @@
 
         <h2>Review the list for trail events happening near you!</h2>
         <div th:each="event : ${events}">
-<!--            add map here-->
-            <h3 th:text="${event.name}"></h3>
-            <h3 th:text="${event.date}">Event date</h3>
-            <h3 th:text="${event.time}">Event time</h3>
-            <p th:text="${event.eventDetails}"></p>
+            <a href="${'/events/' + event.id}">
+                <h3 th:text="${event.name}"></h3>
+                <p th:text="${event.owner.username}"></p>
+                <p th:text="${event.date}">Event date</p>
+                <p th:text="${event.time}">Event time</p>
+                <p>
+                    <a href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
+                </p>
+
+            </a>
         </div>
     </main>
 
