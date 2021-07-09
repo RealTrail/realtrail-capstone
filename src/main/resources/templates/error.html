@@ -6,7 +6,7 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main>
+<main style="margin-top: 5rem">
     <div th:if="${param.error}">
         <p>You cannot visit this page since you're not admin.</p>
     </div>
@@ -15,9 +15,12 @@
 <!--        <p th:text="${errorMessage}"></p>-->
 <!--    </div>-->
 
+
+<!--    if ajax request return an error-->
     <div>
         <p>Oops, error connecting the server!</p>
     </div>
+
 </main>
 
 </body>
