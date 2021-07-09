@@ -10,7 +10,6 @@
     <!--    <div sec:authorize="isAuthenticated()">-->
     <fieldset>
         <form th:action="@{|/events/{id}/edit|}" th:object="${event}" method="POST">
-            <div th:field="*{id}"><p>Event Id</p></div>
             <div>
                 <label for="name">name</label>
                 <input type="text" name="name" id="name" th:field="*{name}"/>

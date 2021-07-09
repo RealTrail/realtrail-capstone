@@ -53,7 +53,7 @@ $(document).ready(() => {
                                     'line-cap': 'round'
                                 },
                                 'paint': {
-                                    'line-color': '#c0273d',
+                                    'line-color': '#dd5765',
                                     'line-width': 5
                                 }
                             });
