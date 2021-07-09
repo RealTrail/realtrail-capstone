@@ -4,7 +4,6 @@ import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.PictureURLsRepository;
 import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
-import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
 
@@ -26,11 +25,10 @@ public class TrailController{
     private MapPointsRepository mapPointsDao;
     private UserService userService;
 
-
-
     // importing mapbox token
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
+
     public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
 
         this.trailsDao = trailsDao;
@@ -38,9 +36,6 @@ public class TrailController{
         this.pictureURLSDao = pictureURLSDao;
         this.mapPointsDao = mapPointsDao;
         this.userService = userService;
-
-
-
     }
 
     // showTrail.html- shows individual trail with all trail details

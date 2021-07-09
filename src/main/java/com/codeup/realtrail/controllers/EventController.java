@@ -76,7 +76,7 @@ public class EventController {
                             @RequestParam(name = "eventTime") String eventTime,
                             @RequestParam(name = "trailOption", required = false) String trailOption,
                             @RequestParam(name = "trailOptions", required = false) String trailId,
-                            @RequestParam(name = "createdTrailId") String createdTrailId) throws ParseException {
+                            @RequestParam(name = "createdTrailId", required = false) String createdTrailId) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
