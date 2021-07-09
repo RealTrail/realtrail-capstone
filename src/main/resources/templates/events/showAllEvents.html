@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head :: head">
-  <title>Show All Events</title>
+    <title>Show All Events</title>
 </head>
 <body>
     <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -13,15 +13,14 @@
 
         <h2>Review the list for trail events happening near you!</h2>
         <div th:each="event : ${events}">
-            <a href="${'/events/' + event.id}">
+            <a th:href="${'/events/' + event.id}">
                 <h3 th:text="${event.name}"></h3>
-                <p th:text="${event.owner.username}"></p>
-                <p th:text="${event.date}">Event date</p>
-                <p th:text="${event.time}">Event time</p>
+                <p>by: <span th:text="${event.owner.username}"></span></p>
+                <p th:text="${'Date: ' + event.date}"></p>
+                <p th:text="${'Time: ' + event.time}"></p>
                 <p>
-                    <a href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
+                    Trail: <a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
                 </p>
-
             </a>
         </div>
     </main>

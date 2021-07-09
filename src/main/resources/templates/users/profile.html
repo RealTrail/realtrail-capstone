@@ -1,87 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head :: head">
-  <title>Show Profile</title>
+    <title>Show Profile</title>
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
-  <h1>Show Profile</h1>
-  <fieldset>
-    <legend>
-      <h3>Personal Details</h3>
-    </legend>
-    <table>
-      <tr>
-        <th><img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image"></th>
-      </tr>
-      <tr>
-        <th>Username</th>
-        <td th:text="${user.username}"></td>
-      </tr>
-      <tr th:if="${user.firstName == null || user.lastName == null}">
-        <th>Name</th>
-        <td>"No name available"</td>
-      </tr>
-      <tr th:if="${user.firstName != null && user.lastName != null}">
-        <th>Name</th>
-        <td th:text="${user.firstName + ' ' + user.lastName}"></td>
-      </tr>
-      <tr>
-        <th>Email</th>
-        <td th:text="${user.email}"></td>
-      </tr>
-      <tr th:if="${user.phoneNumber == null}">
-        <th>Phone Number</th>
-        <td>No phone number available</td>
-      </tr>
-      <tr th:if="${user.phoneNumber != null}">
-        <th>Phone Number</th>
-        <td th:text="${user.phoneNumber}"></td>
-      </tr>
-      <tr th:if="${user.city == null || user.state == null}">
-        <th>City, State</th>
-        <td>No city and state available</td>
-      </tr>
-      <tr th:if="${user.city != null && user.state != null}">
-        <th>City, State</th>
-        <td th:text="${user.city + ', ' + user.state}"></td>
-      </tr>
-      <tr th:if="user.interests == null">
-        <th>Interests</th>
-        <td>No interests selected</td>
-      </tr>
-      <tr th:if="user.interests != null">
-        <th>Interests</th>
-        <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
-      </tr>
-    </table>
-  </fieldset>
-  <a href="/profile/settings">Edit</a>
-  <a href="/password/reset">Reset Password</a>
+    <h1>Here is your Profile</h1>
+    <fieldset>
+        <legend>
+            <h3>Personal Details</h3>
+        </legend>
+        <table>
+            <tr>
+                <th><img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image"></th>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td th:text="${user.username}"></td>
+            </tr>
+            <tr th:if="${user.firstName == null || user.lastName == null}">
+                <th>Name</th>
+                <td>No name available</td>
+            </tr>
+            <tr th:if="${user.firstName != null && user.lastName != null}">
+                <th>Name</th>
+                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr th:if="${user.phoneNumber == null}">
+                <th>Phone Number</th>
+                <td>No phone number available</td>
+            </tr>
+            <tr th:if="${user.phoneNumber != null}">
+                <th>Phone Number</th>
+                <td th:text="${user.phoneNumber}"></td>
+            </tr>
+            <tr th:if="${user.city == null || user.state == null}">
+                <th>City, State</th>
+                <td>No city and state available</td>
+            </tr>
+            <tr th:if="${user.city != null && user.state != null}">
+                <th>City, State</th>
+                <td th:text="${user.city + ', ' + user.state}"></td>
+            </tr>
+            <tr th:if="user.interests == null">
+                <th>Interests</th>
+                <td>No interests selected</td>
+            </tr>
+            <tr th:if="user.interests != null">
+                <th>Interests</th>
+                <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
+            </tr>
+        </table>
+    </fieldset>
+    <a href="/profile/settings" class="btn">Edit</a>
+    <a href="/password/reset" class="btn">Reset Password</a>
 
-  <h2>You have created these events</h2>
-  <div th:each="event:${createdEvents}" id="createdEvents" class="profile-event-card">
-    <h3 th:text="${event.name}"></h3>
-    <h3 th:text="${event.date}"></h3>
-    <h3 th:text="${event.time}"></h3>
-    <form th:action="@{/events/{id}/delete(id=${event.id})}" th:method="POST">
-      <button th:type="submit" >Delete</button>
-    </form>
+
+    <div th:if="${user.createdEvents == null}">
+        <h2>You have not created any events. <a href="/create">Create one now</a></h2>
+    </div>
+    <div th:if="${user.createdEvents != null}">
+        <h2>You have created these events</h2>
+        <div th:each="event : ${user.createdEvents}" id="createdEvents">
+            <h3 th:text="${event.name}"></h3>
+            <h3 th:text="${event.date}"></h3>
+            <h3 th:text="${event.time}"></h3>
+            <form th:action="@{/events/{id}/delete(id=${event.id})}" th:method="POST">
+                <button th:type="submit" class="btn">Delete</button>
+            </form>
+        </div>
     </div>
 
-  <h2>You have joined these events</h2>
-    <div th:each="event : ${events}" id="joinedEvents" class="profile-event-card">
-      <h3 th:text="${event.name}"></h3>
-      <h3 th:text="${event.date}"></h3>
-      <h3 th:text="${event.time}"></h3>
-    <form th:action="@{/events/{id}/cancel(id=${event.id})}" th:method="POST">
-        <button th:type="submit" >Cancel</button>
-    </form>
+    <div th:if="${user.events == null}">
+        <h2>You have not joined any events. <a href="/events">Want to join now?</a></h2>
     </div>
-
-
+    <div th:if="${user.events != null}">
+        <h2>You have joined these events</h2>
+        <div th:each="event : ${user.events}" id="joinedEvents">
+            <h3 th:text="${event.name}"></h3>
+            <h3 th:text="${event.date}"></h3>
+            <h3 th:text="${event.time}"></h3>
+            <form th:action="@{/events/{id}/cancel(id=${event.id})}" th:method="POST">
+                <button th:type="submit" class="btn">Cancel</button>
+            </form>
+        </div>
+    </div>
 </main>
 
 <footer th:replace="fragments/footer :: footer"></footer>
