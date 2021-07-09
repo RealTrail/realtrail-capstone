@@ -9,7 +9,7 @@
     <h2>Edit Event Details</h2>
     <!--    <div sec:authorize="isAuthenticated()">-->
     <fieldset>
-        <form th:action="@{|/events/{id}/edit|}" th:object="${event}" method="POST">
+        <form th:action="@{|/events/{id}/edit|}" th:object="${event}" method="POST" name="editEvent">
             <div>
                 <label for="name">name</label>
                 <input type="text" name="name" id="name" th:field="*{name}"/>
@@ -43,5 +43,7 @@
     </fieldset>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
+
+<script type="text/javascript" src="/js/sticky.js"></script>
 </body>
 </html>
