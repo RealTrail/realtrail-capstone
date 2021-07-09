@@ -59,7 +59,7 @@ public class JSONReadFromFile {
 
     // only need to run it once
     public static void main(String[] args) {
-//        filterData("/Users/shan/IdeaProjects/realtrail/data/SATrails2.geojson", "/Users/shan/IdeaProjects/realtrail/data/Leon-Creek-Greenway-Trail.geojson", "Leon Creek Greenway Trail");
+//        filterData("data/cycle.geojson", "data/Salado-Creek-Greenway-Trail.geojson", "Salado Creek Greenway Trail");
 
     }
 }
