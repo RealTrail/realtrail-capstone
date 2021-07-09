@@ -76,8 +76,7 @@ public class EventController {
                             @RequestParam(name = "eventTime") String eventTime,
                             @RequestParam(name = "trailOption", required = false) String trailOption,
                             @RequestParam(name = "trailOptions", required = false) String trailId,
-                            @RequestParam(name = "images", required = false) String images,
-                            Model model) throws ParseException {
+                            @RequestParam(name = "createdTrailId") String createdTrailId) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
@@ -87,15 +86,15 @@ public class EventController {
         System.out.println(eventMeetTime);
         System.out.println(eventTime);
 
+        Trail trail;
         if (trailOption.equals("existing trail")) {
             // get selected trail
-            Trail trail = trailsDao.findById(Long.parseLong(trailId));
-            event.setTrail(trail);
+            trail = trailsDao.findById(Long.parseLong(trailId));
         } else {
-
-            // set the images to the event
-            List<String> urls = new ArrayList<>(Arrays.asList(images.split(", ")));
+            // get the newly created trail
+            trail = trailsDao.findById(Long.parseLong(createdTrailId));
         }
+        event.setTrail(trail);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);
@@ -107,11 +106,10 @@ public class EventController {
         event.setDate(localDate);
         System.out.println(newDate);
 
-        Event saveEvent = eventsDao.save(event);
-//        emailService.prepareAndSend(event,"new event created", event.getName());
-        model.addAttribute("event", event);
+        Event savedEvent = eventsDao.save(event);
+        emailService.prepareAndSend(event,"new event created", event.getName());
 
-        return "redirect:/events/" + saveEvent.getId();
+        return "redirect:/events/" + savedEvent.getId();
     }
 
     @GetMapping("/events")
@@ -124,14 +122,12 @@ public class EventController {
 
     // showEvent.html page
     @GetMapping("/events/{id}")
-    public String individualEventPage(@PathVariable Long id, Model model, Principal principal) {
+    public String individualEventPage(@PathVariable Long id, Model model) {
         User user = userService.getLoggedInUser();
         Event event = eventsDao.getById(id);
-        EventComment eventComment = new EventComment();
-        model.addAttribute("eventId", id);
         model.addAttribute("event", event);
         model.addAttribute("user", user);
-        model.addAttribute("eventComment",eventComment);
+        model.addAttribute("eventComment",new EventComment());
         model.addAttribute("postUrl", "/events/" + id + "/comment");
         return "events/showEvent";
     }

@@ -63,9 +63,9 @@
              console.log(results);
              let images = "";
              for (let image of results.filesUploaded) {
-                 images = images + image.url + ", ";
+                 images = images + image.url + " ";
              }
-             $("#hidden").val(images);
+             $("#hidden").val(images.substring(0, images.length - 1));
              $(".fa-check").toggleClass("hidden");
          },
          onFileUploadFailed: (response) => {

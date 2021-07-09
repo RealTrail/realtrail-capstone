@@ -149,9 +149,10 @@ $(document).ready(() => {
                             // get coordinates using geocode
                             geocode($("#searchedName").val(), mapboxToken).then((results) => {
                                 console.log(results);
+                                let coordinates = [results[0], results[1]];
                                 // fly to the place searched
                                 map.flyTo({
-                                    center: results,
+                                    center: coordinates,
                                     zoom: 13,
                                     minZoom: 11  // keep it local
                                 });
