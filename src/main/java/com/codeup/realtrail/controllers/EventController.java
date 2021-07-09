@@ -74,9 +74,9 @@ public class EventController {
                             @RequestParam(name = "eventDate") String eventDate,
                             @RequestParam(name = "eventMeetTime") String eventMeetTime,
                             @RequestParam(name = "eventTime") String eventTime,
-                            @RequestParam(name = "trailOption") String trailOption,
-                            @RequestParam(name = "trailOptions") String trailId,
-                            @RequestParam(name = "images") String images,
+                            @RequestParam(name = "trailOption", required = false) String trailOption,
+                            @RequestParam(name = "trailOptions", required = false) String trailId,
+                            @RequestParam(name = "images", required = false) String images,
                             Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
