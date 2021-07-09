@@ -22,7 +22,7 @@
             </tr>
             <tr th:if="${user.firstName == null || user.lastName == null}">
             <th>Name</th>
-            <td th:text="No name available"></td>
+            <td>"No name available"</td>
         </tr>
             <tr th:if="${user.firstName != null && user.lastName != null}">
                 <th>Name</th>
