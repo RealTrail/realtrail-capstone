@@ -3,25 +3,28 @@
 <head th:replace="fragments/head :: head">
   <title>Error Page</title>
 </head>
-<body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<body class="errorBody">
 
-<main style="margin-top: 5rem">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<!--    <main style="margin-top: 5rem" >-->
+        <main class="error-page">
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <div class="errorAnimation"><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_sqyN48.json"  background="#152e3d"  speed="1"  style="width: 1000px; height: 1000px;" loop controls autoplay></lottie-player></div>
+
     <div th:if="${param.error}">
         <p>You cannot visit this page since you're not admin.</p>
-    </div>
-
-<!--    <div th:if="${}">-->
-<!--        <p th:text="${errorMessage}"></p>-->
 <!--    </div>-->
 
+<!--&lt;!&ndash;    <div th:if="${}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <p th:text="${errorMessage}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
 
-<!--    if ajax request return an error-->
-    <div>
+
+<!--&lt;!&ndash;    if ajax request return an error&ndash;&gt;-->
+<!--    <div>-->
         <p>Oops, error connecting the server!</p>
     </div>
 
 </main>
-
 </body>
 </html>
