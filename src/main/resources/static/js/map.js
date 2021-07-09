@@ -54,7 +54,7 @@ $(document).ready(() => {
                                 },
                                 'paint': {
                                     'line-color': '#dd5765',
-                                    'line-width': 5
+                                    'line-width': 4
                                 }
                             });
                         });
@@ -117,26 +117,30 @@ $(document).ready(() => {
             trail.type = $("input[name='trailType']:checked").val();
             trail.trailDetails = $("#trailDetails").val();
 
-            console.log(trail);
             console.log($("#hidden").val());
+
 
             if ($("#hidden").val() !== undefined && $("#hidden").val() !== "") {
                 let images = $("#hidden").val().substring(0, $("#hidden").val().length - 1).split(", ");
                 console.log(images);
                 trail.trailImages = images;
+            } else {
+                trail.trailImages = ['https://cdn.filestackcontent.com/jIg7ZLZtTQiX0kNbmvxj'];
             }
 
             console.log(trail);
 
             if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails) {
-                $.ajax({
-                    url: "/trails/create",
-                    type: "POST",
-                    data: JSON.stringify(trail),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    timeout: 600000,
-                    success: (response) => {
+
+                // do ajax post to save the trail in db
+                    $.ajax({
+                        url: "/trails/create",
+                        type: "POST",
+                        data: JSON.stringify(trail),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        timeout: 600000,
+                        success: (response) => {
                         console.log("trail saved!");
                         console.log(response);
                         $("#trailId").val(response.id);
@@ -149,13 +153,20 @@ $(document).ready(() => {
                             // get coordinates using geocode
                             geocode($("#searchedName").val(), mapboxToken).then((results) => {
                                 console.log(results);
-                                let coordinates = [results[0], results[1]];
                                 // fly to the place searched
                                 map.flyTo({
-                                    center: coordinates,
+                                    center: results,
                                     zoom: 13,
                                     minZoom: 11  // keep it local
                                 });
+
+
+                                // get the start point of the trail on the map using marker
+                                let start;
+                                map.on('click', (e) => {
+                                    console.log(e);
+                                });
+
 
                                 let draw = new MapboxDraw({
                                     displayControlsDefault: false,
@@ -163,61 +174,84 @@ $(document).ready(() => {
                                         line_string: true,
                                         trash: true
                                     },
-                                    styles: [
-                                        // ACTIVE (being drawn)
-                                        // line stroke
-                                        {
-                                            "id": "gl-draw-line",
-                                            "type": "line",
-                                            "filter": ["all", ["==", "$type", "LineString"], ["!=", "mode", "static"]],
-                                            "layout": {
-                                                "line-cap": "round",
-                                                "line-join": "round"
-                                            },
-                                            "paint": {
-                                                "line-color": "#3b9ddd",
-                                                "line-dasharray": [0.2, 2],
-                                                "line-width": 4,
-                                                "line-opacity": 0.7
-                                            }
-                                        },
-                                        // vertex point halos
-                                        {
-                                            "id": "gl-draw-polygon-and-line-vertex-halo-active",
-                                            "type": "circle",
-                                            "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
-                                            "paint": {
-                                                "circle-radius": 10,
-                                                "circle-color": "#FFF"
-                                            }
-                                        },
-                                        // vertex points
-                                        {
-                                            "id": "gl-draw-polygon-and-line-vertex-active",
-                                            "type": "circle",
-                                            "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
-                                            "paint": {
-                                                "circle-radius": 6,
-                                                "circle-color": "#3b9ddd",
-                                            }
-                                        },
-                                    ]
+                                    styles: drawStyles()
                                 });
 
-                                // add create, update, or delete actions
-                                map.on('draw.create', updateRoute);
-                                map.on('draw.update', updateRoute);
-                                map.on('draw.delete', removeRoute);
+
+                                // Add the Draw control to your map
+                                map.addControl(draw);
+
+                                map.on('load', () => {
+                                    // draw.add({});
+                                    addRoute(start);
+                                    // add create, update, or delete actions
+                                    map.on('draw.create', updateRoute);
+                                    map.on('draw.update', updateRoute);
+                                    map.on('draw.delete', updateRoute);
+
+                                    // // Add starting point to the map
+                                    // map.addLayer({
+                                    //     id: 'point',
+                                    //     type: 'circle',
+                                    //     source: {
+                                    //         type: 'geojson',
+                                    //         data: {
+                                    //             type: 'FeatureCollection',
+                                    //             features: [{
+                                    //                 type: 'Feature',
+                                    //                 properties: {},
+                                    //                 geometry: {
+                                    //                     type: 'Point',
+                                    //                     coordinates: start
+                                    //                 }
+                                    //             }
+                                    //             ]
+                                    //         }
+                                    //     },
+                                    //     paint: {
+                                    //         'circle-radius': 10,
+                                    //         'circle-color': '#3887be'
+                                    //     }
+                                    // });
+                                    //
+                                    //
+                                    // // Add starting point to the map
+                                    // map.addLayer({
+                                    //     id: 'point',
+                                    //     type: 'circle',
+                                    //     source: {
+                                    //         type: 'geojson',
+                                    //         data: {
+                                    //             type: 'FeatureCollection',
+                                    //             features: [{
+                                    //                 type: 'Feature',
+                                    //                 properties: {},
+                                    //                 geometry: {
+                                    //                     type: 'Point',
+                                    //                     coordinates: start
+                                    //                 }
+                                    //             }
+                                    //             ]
+                                    //         }
+                                    //     },
+                                    //     paint: {
+                                    //         'circle-radius': 10,
+                                    //         'circle-color': '#3887be'
+                                    //     }
+                                    //
+                                    // });
+                                });
 
 
-                            })
+                            });
                         });
                     },
-                    error: (error) => {
+                        error: (error) => {
                         console.log("Error: ", error);
                         // window.location = "/error";
                     }
-                });
+                    });
+
             }
         });
     });
@@ -265,46 +299,88 @@ $(document).keyup((e) => {
     }
 });
 
+// set up drawOptions
+function drawStyles() {
+    return [
+        // ACTIVE (being drawn)
+        // line stroke
+        {
+            "id": "gl-draw-line",
+            "type": "line",
+            "filter": ["all", ["==", "$type", "LineString"], ["!=", "mode", "static"]],
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round"
+            },
+            "paint": {
+                "line-color": "#3b9ddd",
+                "line-dasharray": [0.2, 2],
+                "line-width": 4,
+                "line-opacity": 0.7
+            }
+        },
+        // vertex point halos
+        {
+            "id": "gl-draw-polygon-and-line-vertex-halo-active",
+            "type": "circle",
+            "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+            "paint": {
+                "circle-radius": 10,
+                "circle-color": "#FFF"
+            }
+        },
+        // vertex points
+        {
+            "id": "gl-draw-polygon-and-line-vertex-active",
+            "type": "circle",
+            "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+            "paint": {
+                "circle-radius": 6,
+                "circle-color": "#3b9ddd",
+            }
+        },
+    ]
+}
 
 // use the coordinates you just drew to make your directions request
 function updateRoute() {
-    removeRoute(); // overwrite any existing layers
+    removeRoute();  // overwrite any existing layers
     let data = draw.getAll();
-    let answer = document.getElementById('calculated-line');
     let lastFeature = data.features.length - 1;
     let coords = data.features[lastFeature].geometry.coordinates;
     let newCoords = coords.join(';')
+    console.log(newCoords);
     getMatch(newCoords);
 }
 
 // make a directions request
 function getMatch(e) {
-    // https://www.mapbox.com/api-documentation/#directions
     let url = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
     let request = new XMLHttpRequest();
     request.responseType = 'json';
     request.open('GET', url, true);
     request.onload  = () => {
-        let jsonResponse = request.response;
+        let jsonResponse = JSON.parse(request.response);
         console.log(jsonResponse);
-        let distance = jsonResponse.routes[0].distance*0.001; // convert to km
-        let duration = jsonResponse.routes[0].duration/60; // convert to minutes
-        // add results to info box
-        document.getElementById('calculated-line').innerHTML = 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
-        let coords = jsonResponse.routes[0].geometry;
+        // let distance = jsonResponse.routes[0].distance*0.001; // convert to km
+        // let duration = jsonResponse.routes[0].duration/60; // convert to minutes
+        // // add results to info box
+        // document.getElementById('calculated-line').innerHTML = 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
+        let route = jsonResponse.routes[0].geometry.coordinates;
         // add the route to the map
-        addRoute(coords);
+        addRoute(route);
     };
     request.send();
 }
 
 // adds the route as a layer on the map
-function addRoute (coords) {
+function addRoute (coordinates) {
     // check if the route is already loaded
     if (map.getSource('route')) {
         map.removeLayer('route')
         map.removeSource('route')
-    } else{
+        //map.getSource('route').setData(geojson);  ????
+    } else {
         map.addLayer({
             "id": "route",
             "type": "line",
@@ -313,7 +389,10 @@ function addRoute (coords) {
                 "data": {
                     "type": "Feature",
                     "properties": {},
-                    "geometry": coords
+                    "geometry": {
+                        type: 'LineString',
+                        coordinates: coordinates
+                    }
                 }
             },
             "layout": {
@@ -322,11 +401,11 @@ function addRoute (coords) {
             },
             "paint": {
                 "line-color": "#3b9ddd",
-                "line-width": 8,
+                "line-width": 4,
                 "line-opacity": 0.8
             }
         });
-    };
+    }
 }
 
 // remove the layer if it exists
@@ -335,7 +414,7 @@ function removeRoute () {
         map.removeLayer('route');
         map.removeSource('route');
         document.getElementById('calculated-line').innerHTML = '';
-    } else  {
+    } else {
         return;
     }
 }
