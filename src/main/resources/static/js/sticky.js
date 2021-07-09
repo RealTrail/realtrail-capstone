@@ -48,10 +48,56 @@
         localStorage['phoneNumber'] = nameField.value;
     }, false);
 
+    //Edit event
+    var form = document.getElementsByName('editEvent')[0];
+    if (localStorage['name'] !== undefined) {
+        var displayArea = document.getElementById('name');
+        displayArea.textContent = localStorage['name'];
+    }
+    form.addEventListener('submit', function() {
+        var nameField = document.getElementsByName('name')[0];
+        localStorage['name'] = nameField.value;
+    }, false);
+
+    var form = document.getElementsByName('editEvent')[0];
+    if (localStorage['date'] !== undefined) {
+        var displayArea = document.getElementById('date');
+        displayArea.textContent = localStorage['date'];
+    }
+    form.addEventListener('submit', function() {
+        var nameField = document.getElementsByName('date')[0];
+        localStorage['date'] = nameField.value;
+    }, false);
+
+    var form = document.getElementsByName('editEvent')[0];
+    if (localStorage['time'] !== undefined) {
+        var displayArea = document.getElementById('time');
+        displayArea.textContent = localStorage['time'];
+    }
+    form.addEventListener('submit', function() {
+        var nameField = document.getElementsByName('time')[0];
+        localStorage['time'] = nameField.value;
+    }, false);
+
+    var form = document.getElementsByName('editEvent')[0];
+    if (localStorage['meetTime'] !== undefined) {
+        var displayArea = document.getElementById('meetTime');
+        displayArea.textContent = localStorage['meetTime'];
+    }
+    form.addEventListener('submit', function() {
+        var nameField = document.getElementsByName('meetTime')[0];
+        localStorage['meetTime'] = nameField.value;
+    }, false);
+
+    var form = document.getElementsByName('editEvent')[0];
+    if (localStorage['eventDetails'] !== undefined) {
+        var displayArea = document.getElementById('eventDetails');
+        displayArea.textContent = localStorage['eventDetails'];
+    }
+    form.addEventListener('submit', function() {
+        var nameField = document.getElementsByName('eventDetails')[0];
+        localStorage['eventDetails'] = nameField.value;
+    }, false);
+
 
 })();
-
-
-
-
-//
