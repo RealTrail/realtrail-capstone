@@ -55,7 +55,6 @@ public class Event {
     @JsonManagedReference(value = "event-eventComments")
     private List<EventComment> eventComments;
 
-    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="events_participants",

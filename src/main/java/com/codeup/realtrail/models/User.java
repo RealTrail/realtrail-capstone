@@ -49,7 +49,6 @@ public class User {
     @Column(columnDefinition = "boolean default false")
     private boolean isAdmin;
 
-    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="users_interests",
@@ -58,7 +57,6 @@ public class User {
     )
     private List<UserInterest> interests;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "participants")
     private List<Event> events;
 

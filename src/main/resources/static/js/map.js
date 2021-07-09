@@ -133,7 +133,7 @@ $(document).ready(() => {
                     url: "/trails/create",
                     type: "POST",
                     data: JSON.stringify(trail),
-                    contentType: "application/json;charset=utf-8",
+                    contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     timeout: 600000,
                     success: (response) => {
