@@ -40,20 +40,11 @@
         </form>
     </div>
 
-    <input type="hidden" id="coordinates" th:value="${trail.longitude + ' ' + trail.latitude}" style="display: none">
-    <div th:each="mapPoint : ${coordinates}" class="hidden">
-        <input type="hidden" th:value="${mapPoint.longitude + ' ' + mapPoint.latitude}" class="mapPoints hidden">
-    </div>
-    <div id="map" style="height: 900px"></div>
-
-    <h4 th:text="${trail.trailDetails}">trail details:</h4>
-    <h4 th:text="${trail.events}">trail events:</h4>
-    <!--        <div th:each="trail : ${trails}">-->
-    <!--            <h4 th:text="${trail.trailImages}">trail images:</h4>-->
-    <!--        </div>-->
-
+    <div th:if="trail.mapPoints == null">
+        No map available.
     </div>
 
+    <div th:if="trail.mapPoints != null" id="map" style="height: 900px"></div>
 
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>

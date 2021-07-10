@@ -2,8 +2,12 @@
 
 $(document).ready(() => {
 
+    let existingTrails = $("#trailOptions option").map((index, element) => element.text);
+    console.log(existingTrails);
+
     // user chooses to pick an existing trail
     $("#trailOption1").on("click", () => {
+        $("#trailLocation").hide();
         $("#trailOptions").show();
         $("#trailOptions").on('change', () => {
             // get the trail id and location
@@ -110,8 +114,10 @@ $(document).ready(() => {
             }
 
             let trail = {};
+
+
             // get the trail info typed in create trail modal form
-            trail.name = $("#trailName").val();
+            trail.name = formatTrailName($("#trailName").val());
             trail.length = parseFloat($("#trailLength").val());
             trail.difficultyLevel = $("input[name='difficultyLevel']:checked").val();
             trail.type = $("input[name='trailType']:checked").val();
@@ -130,129 +136,66 @@ $(document).ready(() => {
 
             console.log(trail);
 
-            if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails) {
+            if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails && (!isExist(trail.name, existingTrails))) {
 
                 // do ajax post to save the trail in db
-                    $.ajax({
-                        url: "/trails/create",
-                        type: "POST",
-                        data: JSON.stringify(trail),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        timeout: 600000,
-                        success: (response) => {
+                $.ajax({
+                    url: "/trails/create",
+                    type: "POST",
+                    data: JSON.stringify(trail),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    timeout: 600000,
+                    success: (response) => {
                         console.log("trail saved!");
                         console.log(response);
+                        if (response.id === null)
                         $("#trailId").val(response.id);
                         closeModalTwo();
 
                         console.log($("#trailId").val());
 
-                        showDefaultMap();
-                        $("#mapSearch").click(() => {
-                            // get coordinates using geocode
-                            geocode($("#searchedName").val(), mapboxToken).then((results) => {
-                                console.log(results);
-                                // fly to the place searched
-                                map.flyTo({
-                                    center: results,
-                                    zoom: 13,
-                                    minZoom: 11  // keep it local
-                                });
+                        let map = showDefaultMap();
 
-
-                                // get the start point of the trail on the map using marker
-                                let start;
-                                map.on('click', (e) => {
-                                    console.log(e);
-                                });
-
-
-                                let draw = new MapboxDraw({
-                                    displayControlsDefault: false,
-                                    controls: {
-                                        line_string: true,
-                                        trash: true
-                                    },
-                                    styles: drawStyles()
-                                });
-
-
-                                // Add the Draw control to your map
-                                map.addControl(draw);
-
-                                map.on('load', () => {
-                                    // draw.add({});
-                                    addRoute(start);
-                                    // add create, update, or delete actions
-                                    map.on('draw.create', updateRoute);
-                                    map.on('draw.update', updateRoute);
-                                    map.on('draw.delete', updateRoute);
-
-                                    // // Add starting point to the map
-                                    // map.addLayer({
-                                    //     id: 'point',
-                                    //     type: 'circle',
-                                    //     source: {
-                                    //         type: 'geojson',
-                                    //         data: {
-                                    //             type: 'FeatureCollection',
-                                    //             features: [{
-                                    //                 type: 'Feature',
-                                    //                 properties: {},
-                                    //                 geometry: {
-                                    //                     type: 'Point',
-                                    //                     coordinates: start
-                                    //                 }
-                                    //             }
-                                    //             ]
-                                    //         }
-                                    //     },
-                                    //     paint: {
-                                    //         'circle-radius': 10,
-                                    //         'circle-color': '#3887be'
-                                    //     }
-                                    // });
-                                    //
-                                    //
-                                    // // Add starting point to the map
-                                    // map.addLayer({
-                                    //     id: 'point',
-                                    //     type: 'circle',
-                                    //     source: {
-                                    //         type: 'geojson',
-                                    //         data: {
-                                    //             type: 'FeatureCollection',
-                                    //             features: [{
-                                    //                 type: 'Feature',
-                                    //                 properties: {},
-                                    //                 geometry: {
-                                    //                     type: 'Point',
-                                    //                     coordinates: start
-                                    //                 }
-                                    //             }
-                                    //             ]
-                                    //         }
-                                    //     },
-                                    //     paint: {
-                                    //         'circle-radius': 10,
-                                    //         'circle-color': '#3887be'
-                                    //     }
-                                    //
-                                    // });
-                                });
-
-
+                        // initialize draw
+                        let draw = new MapboxDraw({
+                                displayControlsDefault: false,
+                                controls: {
+                                    line_string: true,
+                                    trash: true
+                                },
+                                styles: drawStyles()
                             });
+
+                        // Add the Draw control to your map
+                        map.addControl(draw);
+
+                        // type in the search area to center the map to the searched location
+                        getSearchLocation();
+
+                        // add create, update, or delete actions
+                        map.on('draw.create', updateRoute);
+                        map.on('draw.update', updateRoute);
+                        map.on('draw.delete', updateRoute);
+
+                        map.on('click', (e) => {
+                            console.log(e.lngLat);
                         });
                     },
-                        error: (error) => {
+                    error: (error) => {
                         console.log("Error: ", error);
                         // window.location = "/error";
                     }
-                    });
-
+                });
             }
+        });
+    });
+
+    $("#zipCode").keyup(() => {
+        let address = getTrailAddress();
+        geocode(address, mapboxToken).then((results) => {
+            $("#trailPoint").val(results.join(", "));
+            console.log($("#trailPoint").val());
         });
     });
 });
@@ -272,17 +215,6 @@ function showMap(trailPoint) {
     });
 }
 
-function showDefaultMap() {
-    $("#trailLocation").show();
-    $("#map").show();
-    return new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/outdoors-v11',
-        center: [-98.491142, 29.424349],
-        zoom: 15
-    });
-}
-
 // Function for close the Modal
 function closeModalTwo(){
     $(".mask2").removeClass("active2");
@@ -298,6 +230,18 @@ $(document).keyup((e) => {
         closeModalTwo();
     }
 });
+
+
+function showDefaultMap() {
+    $("#trailLocation").show();
+    $("#map").show();
+    return new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/outdoors-v11',
+        center: [-98.491142, 29.424349],
+        zoom: 15
+    });
+}
 
 // set up drawOptions
 function drawStyles() {
@@ -342,39 +286,54 @@ function drawStyles() {
     ]
 }
 
-// use the coordinates you just drew to make your directions request
-function updateRoute() {
+// get coordinates using geocode
+function getSearchLocation(map) {
+    $("#mapSearch").click(() => {
+        // get coordinates using geocode
+        geocode($("#searchedName").val(), mapboxToken).then((results) => {
+            console.log(results);
+            // fly to the place searched
+            map.flyTo({
+                center: results,
+                zoom: 13,
+                minZoom: 11  // keep it local
+            });
+        });
+    });
+}
+
+// get the coordinates that were just drew to make your directions request
+function updateRoute(draw) {
     removeRoute();  // overwrite any existing layers
     let data = draw.getAll();
     let lastFeature = data.features.length - 1;
     let coords = data.features[lastFeature].geometry.coordinates;
-    let newCoords = coords.join(';')
+    let newCoords = coords.join(';');
+    $("#createdCoordinates").val(newCoords);
+    console.log(coords);
     console.log(newCoords);
+    console.log($("#createdCoordinates").val());
     getMatch(newCoords);
 }
 
 // make a directions request
-function getMatch(e) {
-    let url = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
+function getMatch(map, e) {
+    let url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
     let request = new XMLHttpRequest();
     request.responseType = 'json';
     request.open('GET', url, true);
     request.onload  = () => {
-        let jsonResponse = JSON.parse(request.response);
+        let jsonResponse = request.response;
         console.log(jsonResponse);
-        // let distance = jsonResponse.routes[0].distance*0.001; // convert to km
-        // let duration = jsonResponse.routes[0].duration/60; // convert to minutes
-        // // add results to info box
-        // document.getElementById('calculated-line').innerHTML = 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
         let route = jsonResponse.routes[0].geometry.coordinates;
         // add the route to the map
-        addRoute(route);
+        addRoute(map, route);
     };
     request.send();
 }
 
 // adds the route as a layer on the map
-function addRoute (coordinates) {
+function addRoute (map, coordinates) {
     // check if the route is already loaded
     if (map.getSource('route')) {
         map.removeLayer('route')
@@ -409,12 +368,41 @@ function addRoute (coordinates) {
 }
 
 // remove the layer if it exists
-function removeRoute () {
+function removeRoute (map) {
     if (map.getSource('route')) {
         map.removeLayer('route');
         map.removeSource('route');
-        document.getElementById('calculated-line').innerHTML = '';
     } else {
         return;
+    }
+}
+
+// get trail address
+function getTrailAddress() {
+    if ($("#line2").val() === undefined || $("#line2").val() === "") {
+        return $("#line1").val() + ", " + $("line2").val() + ", " + $("#city").val() + ", " + $("#state").val() + " " + $("#zipCode").val();
+    } else {
+        return $("#line1").val() + ", " + $("#city").val() + ", " + $("#state").val() + ", " + $("#zipCode").val();
+    }
+}
+
+// format trail name
+function formatTrailName(trailName) {
+    let nameArr = trailName.trim().split(" ");
+    for (let name of nameArr) {
+        name = formatString(name);
+    }
+    return nameArr.join(" ");
+}
+
+function formatString(string) {
+    return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function isExist(string, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (string === array[i]) {
+            return true;
+        }
     }
 }

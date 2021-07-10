@@ -30,7 +30,6 @@ public class TrailController{
     private String mapboxToken;
 
     public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
-
         this.trailsDao = trailsDao;
         this.trailCommentsDao = trailCommentsDao;
         this.pictureURLSDao = pictureURLSDao;
@@ -42,16 +41,11 @@ public class TrailController{
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model){
         Trail trail = trailsDao.getById(id);
-        List<MapPoint> coordinates = mapPointsDao.findAllByTrail(trail);
-        TrailComment trailComment = new TrailComment();
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
-
-        model.addAttribute("trailComment", trailComment);
-        model.addAttribute("coordinates", coordinates);
+        model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
-
         model.addAttribute("loggedInUser",userService.getLoggedInUser());
 
         return "trails/showTrail";
@@ -60,7 +54,6 @@ public class TrailController{
     @PostMapping("/trails/create")
     @ResponseBody
     public Trail createTrail(@Valid @RequestBody Trail trail) {
-        System.out.println("trail.getTrailImages() = " + trail.getTrailImages());
         Trail trailSaved;
         if (trail.getTrailImages() == null) {
             trailSaved = trailsDao.save(trail);
