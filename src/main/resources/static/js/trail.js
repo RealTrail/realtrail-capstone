@@ -82,7 +82,7 @@ function closeNav() {
 
 // Click function for show the Modal
 
-$("#myBtn").on("click", function(){
+$("#myBtn, #myBtnM").on("click", function(){
     $(".mask").addClass("active");
 });
 
@@ -103,6 +103,7 @@ $(document).keyup(function(e) {
         closeModal();
     }
 });
+
 
 // ******************** Trail Search ***************
 
