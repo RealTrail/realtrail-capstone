@@ -7,8 +7,8 @@ $(document).ready(() => {
 
     // user chooses to pick an existing trail
     $("#trailOption1").on("click", () => {
-        $("#trailLocation").hide();
-        $("#trailOptions").show();
+        $("#trailLocation").addClass("hidden");
+        $("#trailOptions").removeClass("hidden");
         $("#trailOptions").on('change', () => {
             // get the trail id and location
             let selectedTrailId = $("select#trailOptions").find(":selected").val();
@@ -33,7 +33,7 @@ $(document).ready(() => {
                         }
 
                         // show the map around the location
-                        let map = showMap(trailPoint);
+                        map = showMap(trailPoint);
                         // show the trail route
                         map.on('load', () => {
                             map.addSource('route', {
@@ -75,7 +75,14 @@ $(document).ready(() => {
 
     // user chooses to customize trail
     $("#trailOption2").on("click", () => {
-        $("#trailOptions").hide();
+        // set map center back to San Antonio
+        map = showMap([-98.491142, 29.424349]);
+        map.on('load', () => {
+            removeRoute();
+        });
+
+        $("#trailOptions").addClass("hidden");
+        $("#trailLocation").removeClass("hidden");
         $(".mask2").addClass("active2");
 
         // click upload images to upload images
@@ -123,9 +130,6 @@ $(document).ready(() => {
             trail.type = $("input[name='trailType']:checked").val();
             trail.trailDetails = $("#trailDetails").val();
 
-            console.log($("#hidden").val());
-
-
             if ($("#hidden").val() !== undefined && $("#hidden").val() !== "") {
                 let images = $("#hidden").val().substring(0, $("#hidden").val().length - 1).split(", ");
                 console.log(images);
@@ -135,6 +139,13 @@ $(document).ready(() => {
             }
 
             console.log(trail);
+
+            // check if the trail already exist in the database
+            if (isExist(trail.name, existingTrails)) {
+                $("p.trailExist").text("Trail already exists!")
+            } else {
+                $("p.trailExist").css("display: none");
+            }
 
             if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails && (!isExist(trail.name, existingTrails))) {
 
@@ -149,29 +160,13 @@ $(document).ready(() => {
                     success: (response) => {
                         console.log("trail saved!");
                         console.log(response);
-                        if (response.id === null)
                         $("#trailId").val(response.id);
                         closeModalTwo();
 
                         console.log($("#trailId").val());
 
-                        let map = showDefaultMap();
-
-                        // initialize draw
-                        let draw = new MapboxDraw({
-                                displayControlsDefault: false,
-                                controls: {
-                                    line_string: true,
-                                    trash: true
-                                },
-                                styles: drawStyles()
-                            });
-
                         // Add the Draw control to your map
                         map.addControl(draw);
-
-                        // type in the search area to center the map to the searched location
-                        getSearchLocation();
 
                         // add create, update, or delete actions
                         map.on('draw.create', updateRoute);
@@ -180,6 +175,8 @@ $(document).ready(() => {
 
                         map.on('click', (e) => {
                             console.log(e.lngLat);
+                            $("#trailPoint").val(e.lngLat.lng + "," + e.lngLat.lat);
+                            console.log($("#trailPoint").val());
                         });
                     },
                     error: (error) => {
@@ -190,30 +187,7 @@ $(document).ready(() => {
             }
         });
     });
-
-    $("#zipCode").keyup(() => {
-        let address = getTrailAddress();
-        geocode(address, mapboxToken).then((results) => {
-            $("#trailPoint").val(results.join(", "));
-            console.log($("#trailPoint").val());
-        });
-    });
 });
-
-mapboxgl.accessToken = mapboxToken;
-$("#trailOptions").hide();
-$("#trailLocation").hide();
-$("#map").hide();
-
-function showMap(trailPoint) {
-    $("#map").show();
-    return new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/outdoors-v11',
-        center: trailPoint,
-        zoom: 15
-    });
-}
 
 // Function for close the Modal
 function closeModalTwo(){
@@ -232,13 +206,44 @@ $(document).keyup((e) => {
 });
 
 
-function showDefaultMap() {
-    $("#trailLocation").show();
-    $("#map").show();
+mapboxgl.accessToken = mapboxToken;
+let map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/outdoors-v11',
+    center: [-98.491142, 29.424349],
+    zoom: 15
+});
+
+// initialize draw
+let draw = new MapboxDraw({
+    displayControlsDefault: false,
+    controls: {
+        line_string: true,
+        trash: true
+    },
+    styles: drawStyles()
+});
+
+// type in the search area to center the map to the searched location
+$("#mapSearch").click(() => {
+    console.log($("#searchedName").val());
+    // get coordinates using geocode
+    geocode($("#searchedName").val(), mapboxToken).then((results) => {
+        console.log(results);
+        // fly to the place searched
+        map.flyTo({
+            center: results,
+            zoom: 13,
+            minZoom: 11  // keep it local
+        });
+    });
+});
+
+function showMap(trailPoint) {
     return new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/outdoors-v11',
-        center: [-98.491142, 29.424349],
+        center: trailPoint,
         zoom: 15
     });
 }
@@ -286,24 +291,8 @@ function drawStyles() {
     ]
 }
 
-// get coordinates using geocode
-function getSearchLocation(map) {
-    $("#mapSearch").click(() => {
-        // get coordinates using geocode
-        geocode($("#searchedName").val(), mapboxToken).then((results) => {
-            console.log(results);
-            // fly to the place searched
-            map.flyTo({
-                center: results,
-                zoom: 13,
-                minZoom: 11  // keep it local
-            });
-        });
-    });
-}
-
 // get the coordinates that were just drew to make your directions request
-function updateRoute(draw) {
+function updateRoute() {
     removeRoute();  // overwrite any existing layers
     let data = draw.getAll();
     let lastFeature = data.features.length - 1;
@@ -311,13 +300,12 @@ function updateRoute(draw) {
     let newCoords = coords.join(';');
     $("#createdCoordinates").val(newCoords);
     console.log(coords);
-    console.log(newCoords);
     console.log($("#createdCoordinates").val());
     getMatch(newCoords);
 }
 
 // make a directions request
-function getMatch(map, e) {
+function getMatch(e) {
     let url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
     let request = new XMLHttpRequest();
     request.responseType = 'json';
@@ -327,13 +315,13 @@ function getMatch(map, e) {
         console.log(jsonResponse);
         let route = jsonResponse.routes[0].geometry.coordinates;
         // add the route to the map
-        addRoute(map, route);
+        addRoute(route);
     };
     request.send();
 }
 
 // adds the route as a layer on the map
-function addRoute (map, coordinates) {
+function addRoute (coordinates) {
     // check if the route is already loaded
     if (map.getSource('route')) {
         map.removeLayer('route')
@@ -359,7 +347,7 @@ function addRoute (map, coordinates) {
                 "line-cap": "round"
             },
             "paint": {
-                "line-color": "#3b9ddd",
+                "line-color": "#048d3b",
                 "line-width": 4,
                 "line-opacity": 0.8
             }
@@ -368,7 +356,7 @@ function addRoute (map, coordinates) {
 }
 
 // remove the layer if it exists
-function removeRoute (map) {
+function removeRoute () {
     if (map.getSource('route')) {
         map.removeLayer('route');
         map.removeSource('route');

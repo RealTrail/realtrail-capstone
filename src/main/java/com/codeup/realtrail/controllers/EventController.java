@@ -96,8 +96,12 @@ public class EventController {
         } else {
             // get the newly created trail
             trail = trailsDao.findById(Long.parseLong(createdTrailId));
-            trail.setLongitude(Double.parseDouble(point.substring(0, point.indexOf(", "))));
-            trail.setLatitude(Double.parseDouble(point.substring(point.indexOf(", "))));
+            trail.setLongitude(Double.parseDouble(point.substring(0, point.indexOf(","))));
+            trail.setLatitude(Double.parseDouble(point.substring(point.indexOf(",") + 1)));
+
+            System.out.println("Double.parseDouble(point.longitude = " + Double.parseDouble(point.substring(0, point.indexOf(","))));
+            System.out.println("Double.parseDouble(point.latitude = " + Double.parseDouble(point.substring(point.indexOf(",") + 1)));
+
             if (createdCoordinates != null && !createdCoordinates.isEmpty()) {
                 List<String> coordinates = Arrays.asList(createdCoordinates.split(";"));
                 for(String mapPoint : coordinates) {
