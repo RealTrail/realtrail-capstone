@@ -181,7 +181,7 @@ $(document).ready(() => {
                     },
                     error: (error) => {
                         console.log("Error: ", error);
-                        // window.location = "/error";
+                        window.location = "/error";
                     }
                 });
             }
