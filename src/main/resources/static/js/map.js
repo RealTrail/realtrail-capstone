@@ -3,13 +3,12 @@
 $(document).ready(() => {
 
     let existingTrails = $("#trailOptions option").map((index, element) => element.text);
-    existingTrails.pop();
     console.log(existingTrails);
 
     // user chooses to pick an existing trail
     $("#trailOption1").on("click", () => {
-        $("#trailLocation").hide();
-        $("#trailOptions").show();
+        $("#trailLocation").addClass("hidden");
+        $("#trailOptions").removeClass("hidden");
         $("#trailOptions").on('change', () => {
             // get the trail id and location
             let selectedTrailId = $("select#trailOptions").find(":selected").val();
@@ -34,7 +33,7 @@ $(document).ready(() => {
                         }
 
                         // show the map around the location
-                        let map = showMap(trailPoint);
+                        map = showMap(trailPoint);
                         // show the trail route
                         map.on('load', () => {
                             map.addSource('route', {
@@ -76,8 +75,14 @@ $(document).ready(() => {
 
     // user chooses to customize trail
     $("#trailOption2").on("click", () => {
-        $("#trailOptions").hide();
-        $("#trailLocation").show();
+        // set map center back to San Antonio
+        map = showMap([-98.491142, 29.424349]);
+        map.on('load', () => {
+            removeRoute();
+        });
+
+        $("#trailOptions").addClass("hidden");
+        $("#trailLocation").removeClass("hidden");
         $(".mask2").addClass("active2");
 
         // click upload images to upload images
@@ -125,9 +130,6 @@ $(document).ready(() => {
             trail.type = $("input[name='trailType']:checked").val();
             trail.trailDetails = $("#trailDetails").val();
 
-            console.log($("#hidden").val());
-
-
             if ($("#hidden").val() !== undefined && $("#hidden").val() !== "") {
                 let images = $("#hidden").val().substring(0, $("#hidden").val().length - 1).split(", ");
                 console.log(images);
@@ -137,6 +139,13 @@ $(document).ready(() => {
             }
 
             console.log(trail);
+
+            // check if the trail already exist in the database
+            if (isExist(trail.name, existingTrails)) {
+                $("p.trailExist").text("Trail already exists!")
+            } else {
+                $("p.trailExist").css("display: none");
+            }
 
             if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails && (!isExist(trail.name, existingTrails))) {
 
@@ -156,6 +165,9 @@ $(document).ready(() => {
 
                         console.log($("#trailId").val());
 
+                        // Add the Draw control to your map
+                        map.addControl(draw);
+
                         // add create, update, or delete actions
                         map.on('draw.create', updateRoute);
                         map.on('draw.update', updateRoute);
@@ -163,7 +175,7 @@ $(document).ready(() => {
 
                         map.on('click', (e) => {
                             console.log(e.lngLat);
-                            $("#trailPoint").val(e.lngLat.lng + ", " + e.lngLat.lat);
+                            $("#trailPoint").val(e.lngLat.lng + "," + e.lngLat.lat);
                             console.log($("#trailPoint").val());
                         });
                     },
@@ -177,8 +189,22 @@ $(document).ready(() => {
     });
 });
 
-$("#trailOptions").hide();
-$("#trailLocation").hide();
+// Function for close the Modal
+function closeModalTwo(){
+    $(".mask2").removeClass("active2");
+}
+
+// Call the closeModal function on the clicks/keyboard
+$(".close, .mask2").on("click", function(){
+    closeModalTwo();
+});
+
+$(document).keyup((e) => {
+    if (e.keyCode === 27) {
+        closeModalTwo();
+    }
+});
+
 
 mapboxgl.accessToken = mapboxToken;
 let map = new mapboxgl.Map({
@@ -198,10 +224,6 @@ let draw = new MapboxDraw({
     styles: drawStyles()
 });
 
-// Add the Draw control to your map
-map.addControl(draw);
-
-
 // type in the search area to center the map to the searched location
 $("#mapSearch").click(() => {
     console.log($("#searchedName").val());
@@ -218,7 +240,6 @@ $("#mapSearch").click(() => {
 });
 
 function showMap(trailPoint) {
-    $("#map").show();
     return new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/outdoors-v11',
@@ -226,23 +247,6 @@ function showMap(trailPoint) {
         zoom: 15
     });
 }
-
-// Function for close the Modal
-function closeModalTwo(){
-    $(".mask2").removeClass("active2");
-}
-
-// Call the closeModal function on the clicks/keyboard
-$(".close, .mask2").on("click", function(){
-    closeModalTwo();
-});
-
-$(document).keyup((e) => {
-    if (e.keyCode === 27) {
-        closeModalTwo();
-    }
-});
-
 
 // set up drawOptions
 function drawStyles() {
@@ -343,7 +347,7 @@ function addRoute (coordinates) {
                 "line-cap": "round"
             },
             "paint": {
-                "line-color": "#3b9ddd",
+                "line-color": "#048d3b",
                 "line-width": 4,
                 "line-opacity": 0.8
             }

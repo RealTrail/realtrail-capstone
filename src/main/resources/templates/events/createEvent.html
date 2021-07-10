@@ -49,12 +49,12 @@
                     </div>
                 </div>
                 <div>
-                    <select id="trailOptions" name="trailOptions">
+                    <select id="trailOptions" name="trailOptions" class="hidden">
                         <option value="">Nothing selected</option>
                         <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}" th:name="${trail.longitude + ' ' + trail.latitude}"></option>
                     </select>
                 </div>
-                <div id="trailLocation">
+                <div id="trailLocation" class="hidden">
                     <label for="searchedName"></label>
                     <input type="text" id="searchedName" name="mapSearch">
                     <input type="hidden" id="trailId" name="createdTrailId">
@@ -79,6 +79,7 @@
         <div class="modal-content2">
             <div class="modal-header2">
                 <h2 class="type1">Customize Your Hiking Trail</h2>
+                <p class="errorMessage trailExist"></p>
             </div>
             <div class="modal-body2">
                 <form action="/trails/create" method="POST">
