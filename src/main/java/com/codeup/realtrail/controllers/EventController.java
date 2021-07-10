@@ -70,13 +70,16 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public String saveEvent(@ModelAttribute Event event,
-                            @RequestParam(name = "eventDate") String eventDate,
-                            @RequestParam(name = "eventMeetTime") String eventMeetTime,
-                            @RequestParam(name = "eventTime") String eventTime,
-                            @RequestParam(name = "trailOption", required = false) String trailOption,
-                            @RequestParam(name = "trailOptions", required = false) String trailId,
-                            @RequestParam(name = "createdTrailId", required = false) String createdTrailId) throws ParseException {
+    public String saveEvent(
+            @ModelAttribute Event event,
+            @RequestParam(name = "eventDate") String eventDate,
+            @RequestParam(name = "eventMeetTime") String eventMeetTime,
+            @RequestParam(name = "eventTime") String eventTime,
+            @RequestParam(name = "trailOption", required = false) String trailOption,
+            @RequestParam(name = "trailOptions", required = false) String trailId,
+            @RequestParam(name = "createdTrailId", required = false) String createdTrailId,
+            @RequestParam(name = "createdCoordinates", required = false) String createdCoordinates,
+            @RequestParam(name = "trailPoint", required = false) String point) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
@@ -93,6 +96,16 @@ public class EventController {
         } else {
             // get the newly created trail
             trail = trailsDao.findById(Long.parseLong(createdTrailId));
+            trail.setLongitude(Double.parseDouble(point.substring(0, point.indexOf(", "))));
+            trail.setLatitude(Double.parseDouble(point.substring(point.indexOf(", "))));
+            if (createdCoordinates != null && !createdCoordinates.isEmpty()) {
+                List<String> coordinates = Arrays.asList(createdCoordinates.split(";"));
+                for(String mapPoint : coordinates) {
+                    double longitude = Double.parseDouble(mapPoint.substring(0, mapPoint.indexOf(",")));
+                    double latitude = Double.parseDouble(mapPoint.substring(mapPoint.indexOf(",") + 1));
+                    mapPointsDao.save(new MapPoint(longitude, latitude, trail));
+                }
+            }
         }
         event.setTrail(trail);
 
