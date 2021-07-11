@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -70,6 +72,39 @@ public class EventController {
         }
     }
 
+
+    @PostMapping("/events/{id}/edit")
+    public String updateEvent(@PathVariable long id, @ModelAttribute Event event,
+//                              @RequestParam(name = "eventDate") String eventDate,
+                              @RequestParam(name = "eventMeetTime") LocalTime eventMeetTime,
+                              @RequestParam(name = "eventTime") LocalTime eventTime,
+                              Model model)
+            throws ParseException
+    {
+//        SimpleDateFormat formatterEdit = new SimpleDateFormat("yyyy-MM-dd");
+
+
+//        Date newDate = formatterEdit.parse(eventDate);
+//        LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        event.setDate(localDate);
+//        event.setTime(event.time);
+//        event.setMeetTime(eventMeetTime);
+//        event.setTime(eventTime);
+//        event.setMeetTime(eventMeetTime);
+        event.setTime(eventTime);
+        event.setMeetTime(eventMeetTime);
+
+
+//        event.setDate(localDate);
+//        System.out.println(newDate);
+
+        event.setId(id);
+        eventsDao.save(event);
+        return "redirect:/events/" + id;
+//                "events/showEvent" + id;
+
+    }
+
     @PostMapping("/create")
     public String saveEvent(@ModelAttribute Event event,
                             @RequestParam(name = "eventDate") String eventDate,
@@ -82,7 +117,7 @@ public class EventController {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
-        // connect user to new event being created
+        // connect updated event to user
         event.setOwner(loggedInUser);
         System.out.println(eventDate);
         System.out.println(eventMeetTime);
@@ -93,10 +128,12 @@ public class EventController {
             Trail trail = trailsDao.findById(Long.parseLong(trailId));
             event.setTrail(trail);
         } else {
-
             // set the images to the event
             List<String> urls = new ArrayList<>(Arrays.asList(images.split(", ")));
         }
+        System.out.println("eventTime = " + eventTime);
+
+
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);
@@ -145,10 +182,8 @@ public class EventController {
             Event event = eventsDao.getById(id);
             if (event.getOwner().getId() == user.getId()) {
                 model.addAttribute("event", event);
-
                 return "events/editEvent";
-            }
-            else {
+            } else {
                 errorMessage = "User is not event owner";
                 model.addAttribute("errorMessage", errorMessage);
                 return "redirect:/profile";
@@ -158,11 +193,12 @@ public class EventController {
         }
     }
 
-    @PostMapping("/events/{id}/edit")
-    public String updateEvent(@ModelAttribute Event event, Model model) {
-        eventsDao.save(event);
-        return "events/showEvent";
-    }
+//    @PostMapping("/events/{id}/edit")
+//    public String updateEvent(@PathVariable long id, @ModelAttribute Event event, Model model) {
+//        event.setId(id);
+//        eventsDao.save(event);
+//        return "redirect:/events/" + id;
+//    }
 
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {

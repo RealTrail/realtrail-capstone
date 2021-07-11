@@ -13,6 +13,7 @@
     </div>
 
     <div th:if="${event}">
+        <div th:text="${eventId}">ID</div>
         <div>Event name:<h3 th:text="${event.name}"></h3></div>
         <div>Event coordinator:<h3 th:text="${event.owner.username}"></h3></div>
         <div>date:<h4 th:text="${event.date}"></h4></div>
@@ -51,7 +52,7 @@
 
     <div th:if="${event.owner.id == user.id}">
         <div>
-            <a th:href="${'/events/'+ event.id + '/edit'}">Update</a>
+            <a th:href="${'/events/'+ event.id + '/edit'}">Edit Event</a>
         </div>
 
         <form th:action="@{|/events/{id}/delete|}" method="POST">
