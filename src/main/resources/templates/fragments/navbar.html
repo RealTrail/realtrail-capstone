@@ -80,7 +80,7 @@
                 </li>
 
                 <li class="navSection primary">
-                    <a class="rootLink item-products hasDropdown colorize" data-dropdown="products" sec:authorize="hasAnyAuthority('ADMIN')">
+                    <a class="rootLink item-products hasDropdown colorize" data-dropdown="admin" sec:authorize="hasAnyAuthority('ADMIN')">
                         Admin
                     </a>
                     <a class="rootLink item-products hasDropdown colorize" data-dropdown="products" sec:authorize="isAuthenticated()">
@@ -147,6 +147,7 @@
                                     <li><a id="myBtnM" class="item-about" href="#" onclick="return false;">About Real Trail</a></li>
                                     <li><a class="item-workswith" href="#footer">Contact Us</a></li>
                                     <li><a class="item-blog" href="/profile#createdEvents" sec:authorize="isAuthenticated()">Manage Events</a></li>
+                                    <li><a class="item-blog" href="/users" sec:authorize="hasAnyAuthority('ADMIN')">View All Users</a></li>
                                 </ul>
                             </div>
                             <a class="mobileSignIn" data-adroll-segment="submit_two" href="/signup" sec:authorize="not isAuthenticated()">Signup</a>
@@ -254,6 +255,12 @@
                                 </a></li>
                             </ul>
                         </div>
+                        <div class="documentationArticles">
+                            <ul class="linkGroup linkList developersGroup">
+
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
 
@@ -292,6 +299,24 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="dropdownSection right" data-dropdown="admin">
+                    <div class="dropdownContent">
+
+                        <ul class="linkGroup linkList companyGroup">
+                            <li><a class="linkContainer item-about" href="/users" sec:authorize="hasAnyAuthority('ADMIN')">
+                                <h3  class="linkTitle linkIcon"><svg width="17" height="17"><path d="M2 15h13M2 11h13M2 7h13M2 3h13" fill="none" stroke="#6772e5" class="hover-strokeDark" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>View All Users</h3>
+                            </a></li>
+
+                        </ul>
+
+                        <ul class="linkGroup linkList developersGroup">
+<!--                            **** ADD IN TO SECONDARY NEV COLOR HERE****-->
+
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </header>
