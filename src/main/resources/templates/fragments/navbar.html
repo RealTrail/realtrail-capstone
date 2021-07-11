@@ -304,8 +304,8 @@
                     <div class="dropdownContent">
 
                         <ul class="linkGroup linkList companyGroup">
-                            <li><a class="linkContainer item-about" href="#" onclick="return false;">
-                                <h3 id="myBtn" class="linkTitle linkIcon"><svg width="17" height="17"><path d="M2 15h13M2 11h13M2 7h13M2 3h13" fill="none" stroke="#6772e5" class="hover-strokeDark" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>View All Users</h3>
+                            <li><a class="linkContainer item-about" href="/users" sec:authorize="hasAnyAuthority('ADMIN')">
+                                <h3  class="linkTitle linkIcon"><svg width="17" height="17"><path d="M2 15h13M2 11h13M2 7h13M2 3h13" fill="none" stroke="#6772e5" class="hover-strokeDark" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>View All Users</h3>
                             </a></li>
 
                         </ul>
