@@ -49,14 +49,15 @@
 
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{/trails/{id}/comment(id=${trail.id})}" th:object="${trailComment}" th:method="POST">
-            <div>Rating:
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+            <div id="stars">Rating:
+                <i class='fa fa-star star' data-value='1'></i>
+                <i class='fa fa-star star' data-value='2'></i>
+                <i class='fa fa-star star' data-value='3'></i>
+                <i class='fa fa-star star' data-value='4'></i>
+                <i class='fa fa-star star' data-value='5'></i>
             </div>
-            <textarea th:name="comment" id="" cols="30" rows="10" th:field="*{content}"></textarea>
+            <input type="hidden" id="rating" th:field="*{rating}">
+            <textarea th:name="comment" cols="20" rows="10" th:field="*{content}"></textarea>
             <button type="submit">Submit</button>
         </form>
     </div>

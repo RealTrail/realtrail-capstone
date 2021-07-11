@@ -9,6 +9,7 @@ $(document).ready(() => {
     $("#trailOption1").on("click", () => {
         $("#trailLocation").addClass("hidden");
         $("#trailOptions").removeClass("hidden");
+        $("#map").addClass("map");
         $("#trailOptions").on('change', () => {
             // get the trail id and location
             let selectedTrailId = $("select#trailOptions").find(":selected").val();
@@ -57,7 +58,7 @@ $(document).ready(() => {
                                         'line-cap': 'round'
                                     },
                                     'paint': {
-                                        'line-color': '#dd5765',
+                                        'line-color': '#048d3b',
                                         'line-width': 4
                                     }
                                 });
@@ -81,6 +82,7 @@ $(document).ready(() => {
 
     // user chooses to customize trail
     $("#trailOption2").on("click", () => {
+        $("#map").addClass("map");
         // set map center back to San Antonio
         map = showMap([-98.491142, 29.424349]);
         map.on('load', () => {
