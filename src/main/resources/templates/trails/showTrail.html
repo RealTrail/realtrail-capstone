@@ -6,46 +6,70 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<main>
+<main style="margin-top: 5rem">
     <div th:if="${trail == null}">
-        <h2>Trail not found.</h2>
+        <h1>Trail not found.</h1>
     </div>
-    <div>
-        <h2 th:text="${trail.name}"></h2>
-        <h3 th:text="${trail.difficultyLevel}"></h3>
-        <h4 th:text="${trail.rating}">rating:</h4>
-        <h3 th:text="${trail.length}">length(in miles):</h3>
-        <h4 th:text="${trail.elevation}">elevation change:</h4>
-        <h4 th:text="${trail.type}">route type:</h4>
+    <div th:if="${trail != null}">
+        <h1 th:text="${trail.name}"></h1>
+        <h4 th:text="${trail.difficultyLevel}"></h4>
+        <div th:if="${trail.rating != 0}">
+            <h4 th:text="${'rating: ' + trail.rating}"></h4>
+        </div>
+        <div th:if="${trail.rating == 0}">
+            <h4>No rating available</h4>
+        </div>
+        <h4 th:text="${'length: ' + trail.length + 'miles'}"></h4>
+        <h4 th:text="${'elevation change: ' +  trail.elevation}"></h4>
+        <h4 th:text="${'route type: ' +  trail.type}"></h4>
         <h4 th:text="${trail.trailDetails}"></h4>
         <div>
             <img th:each="image : ${trail.trailImages}" th:src="${image.pictureUrl}" alt="trail image">
         </div>
-        <div th:each="comment : ${trail.trailComments}">
-            <div><span th:text="comment.owner.username"></span> <span th:text="comment.date"></span></div>
-            <p th:text="${comment.content}"></p>
-            <div th:if="${loggedInUser.isAdmin() || loggedInUser.id == comment.owner.id}">
-                <form th:action="@{/trails/{id}/comment/{cid}/delete(id=${trail.id},cid=${comment.id})}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-            </div>
 
+        <div th:if="${!trail.trailComments.isEmpty()}" th:each="comment : ${trail.trailComments}">
+            <div>
+                <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
+                <span th:text="${comment.owner.username}"></span>
+            </div>
+            <div>
+                <span th:text="${comment.rating}"></span>  <span th:text="${comment.date}"></span>
+            </div>
+            <p th:text="${comment.content}"></p>
+            <div sec:authorize="isAuthenticated()">
+                <div th:if="${loggedInUser.isAdmin() || loggedInUser.id == comment.owner.id}">
+                    <form th:action="@{/trails/{id}/comment/{cid}/delete(id=${trail.id},cid=${comment.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{/trails/{id}/comment(id=${trail.id})}" th:object="${trailComment}" th:method="POST">
+            <div>Rating:
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </div>
             <textarea th:name="comment" id="" cols="30" rows="10" th:field="*{content}"></textarea>
-            <button type="submit">Submit Comment</button>
+            <button type="submit">Submit</button>
         </form>
     </div>
 
-    <div th:if="trail.mapPoints == null">
+    <div th:if="${trail.mapPoints.isEmpty() || trail.longitude == 0 || trail.latitude == 0}">
         No map available.
     </div>
-
-    <div th:if="trail.mapPoints != null" id="map" style="height: 900px"></div>
-
+    <div th:if="${!trail.mapPoints.isEmpty() && trail.longitude != 0 && trail.latitude != 0}">
+        <input type="hidden" id="trailId" th:value="${trail.id}">
+        <input type="hidden" id="trailLocation" th:value="${trail.longitude + ',' + trail.latitude}">
+        <button class="btn" id="getMap">Get trail map</button>
+        <div id="map"></div>
+    </div>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 
@@ -60,7 +84,5 @@
 <!-- Mapbox Geocoder Util Methods -->
 <script src="/js/mapbox-geocoder-utils.js"></script>
 <script src="/js/showTrailMap.js"></script>
-<script src="/js/login.js"></script>
-<script src="/js/navbar.js"></script>
 </body>
 </html>
