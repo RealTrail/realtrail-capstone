@@ -2265,6 +2265,20 @@ div.header h4{
     clip-path: circle(45%);
 }
 
+/* ****************************** SHOW TRAIL PAGE ****************************** */
+.map {
+    height: 700px;
+}
+
+.checked {
+    color: #ffd603;
+}
+i.star {
+    font-size: 1.5rem;
+    color: #ccc;
+}
+
+
 /* ****************************** CREATE EVENT PAGE ****************************** */
 
 .hidden {

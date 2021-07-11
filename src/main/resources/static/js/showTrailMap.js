@@ -1,9 +1,7 @@
 "use strict";
 
 $(document).ready(() => {
-
     let id = $("#trailId").val();
-
     // get the trail location coordinates
     let trailPoint = $("#trailLocation").val().split(",");
     console.log(trailPoint);
@@ -11,6 +9,7 @@ $(document).ready(() => {
     let coordinates = [];
 
     $("#getMap").click(() =>{
+        // get the coordinates from db
         $.ajax({
             type: "GET",
             url: "/trails/" + id + "/map",
@@ -23,7 +22,7 @@ $(document).ready(() => {
                 }
                 console.log(coordinates);
 
-                $("#map").css("height",  "700px");
+                $("#map").addClass("map");
                 // show the map around the location
                 let map = new mapboxgl.Map({
                     container: 'map',
@@ -55,7 +54,7 @@ $(document).ready(() => {
                                 'line-cap': 'round'
                             },
                             'paint': {
-                                'line-color': '#dd5765',
+                                'line-color': '#048d3b',
                                 'line-width': 4
                             }
                         });
@@ -74,6 +73,36 @@ $(document).ready(() => {
                 window.location = "/error";
             }
         });
+    });
+
+    $(".star").hover(
+        () => {
+            let rating = parseInt($(this).attr("data-value"), 10);
+            console.log(rating);
+            $(this).parent().children().each((element) => {
+                if (element < rating) {
+                    $(this).addClass("checked");
+                } else {
+                    $(this).removeClass("checked");
+                }
+            });
+        },
+        () => {
+            $(this).parent().children().each((element) => $(this).removeClass("checked"));
+        });
+
+    $("#stars .star").click(() => {
+        let rating = Number($(this).attr("data-value"));
+        console.log(rating);
+        for (let i = 0; i < 5; i++) {
+            $(this).parent().children().eq(i).removeClass('checked');
+        }
+
+        for (let i = 0; i < rating; i++) {
+            $(this).parent().children().eq(i).addClass('checked');
+        }
+        let ratingValue = parseInt($("#stars > .star.checked").last().data("value"));
+        $("#rating").val(ratingValue);
     });
 });
 
