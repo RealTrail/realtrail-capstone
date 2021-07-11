@@ -17,11 +17,11 @@
             </div>
             <div>
                 <label for="date">Date</label>
-                <input type="text" name="date" id="date" th:field="*{date}" />
+                <input type="text" name="eventDate" id="date" th:value="*{date}" />
             </div>
             <div>
                 <label for="time">Time</label>
-                <input type="time" name="time" id="time" th:value="*{time}"/>
+                <input type="time" name="eventTime" id="time" th:value="*{time}"/>
             </div>
             <div>
                 <label for="meetLocation">Meet Location</label>
@@ -29,7 +29,7 @@
             </div>
             <div>
                 <label for="meetTime">Meet Time</label>
-                <input type="time" id="meetTime" name="meetTime" th:value="*{meetTime}"/>
+                <input type="time" name="eventMeetTime" id="meetTime"  th:value="*{meetTime}"/>
             </div>
             <div>
                 <label for="eventDetails">Event Details</label>

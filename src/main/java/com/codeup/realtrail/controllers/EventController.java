@@ -75,28 +75,25 @@ public class EventController {
 
     @PostMapping("/events/{id}/edit")
     public String updateEvent(@PathVariable long id, @ModelAttribute Event event,
-//                              @RequestParam(name = "eventDate") String eventDate,
-                              @RequestParam(name = "eventMeetTime") LocalTime eventMeetTime,
-                              @RequestParam(name = "eventTime") LocalTime eventTime,
+                              @RequestParam(name = "eventDate") String eventDate,
+                              @RequestParam(name = "eventMeetTime", required = false) String eventMeetTime,
+                              @RequestParam(name = "eventTime", required = false) String eventTime,
                               Model model)
             throws ParseException
     {
-//        SimpleDateFormat formatterEdit = new SimpleDateFormat("yyyy-MM-dd");
+        Event eventFromDb = eventsDao.getById(id);
+
+        SimpleDateFormat formatterEdit = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate = formatterEdit.parse(eventDate);
+        LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        event.setDate(localDate);
+        event.setTime(LocalTime.parse(eventTime));
+        event.setMeetTime(LocalTime.parse(eventMeetTime));
+        event.setOwner(eventFromDb.getOwner());
+        event.setTrail(eventFromDb.getTrail());
 
 
-//        Date newDate = formatterEdit.parse(eventDate);
-//        LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        event.setDate(localDate);
-//        event.setTime(event.time);
-//        event.setMeetTime(eventMeetTime);
-//        event.setTime(eventTime);
-//        event.setMeetTime(eventMeetTime);
-        event.setTime(eventTime);
-        event.setMeetTime(eventMeetTime);
-
-
-//        event.setDate(localDate);
-//        System.out.println(newDate);
+        System.out.println(newDate);
 
         event.setId(id);
         eventsDao.save(event);
@@ -133,16 +130,14 @@ public class EventController {
         }
         System.out.println("eventTime = " + eventTime);
 
-
-
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatter.parse(eventDate);
         LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
+        event.setDate(localDate);
         event.setTime(LocalTime.parse(eventTime));
         event.setMeetTime(LocalTime.parse(eventMeetTime));
 
-        event.setDate(localDate);
+
         System.out.println(newDate);
 
         Event saveEvent = eventsDao.save(event);
