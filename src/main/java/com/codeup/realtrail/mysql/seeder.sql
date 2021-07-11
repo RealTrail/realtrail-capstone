@@ -1,14 +1,14 @@
 USE realtrail_db;
 
-INSERT INTO users(id, city, email, first_name, last_name, password, phone_number, profile_image_url, state, username)
+INSERT INTO users(id, is_admin, city, email, first_name, last_name, password, phone_number, profile_image_url, state, username)
 VALUES
-    (1, 'Universal City', 'shanshan@shan.com', 'Shanshan', 'Su', '$2a$10$IjGrLooGQ0EiT6OS4K96Ou6/7m7d7ZIYcIIZZS3FX0yTVDEurzrIK','210-123-4567', 'https://cdn.filestackcontent.com/072ckNiNS8iImzI53sMY', 'TX', 'Shan'),
-    (2, 'San Antonio', 'kjar@gmail.com', 'Karla', 'Jara', '$2a$10$bzg3Tcw4Q/srFDwlmUYEYeJrT5CFZvCUsQMXiZO3QLTB7Icj3kwRa', '123-435-0743', 'https://cdn.filestackcontent.com/PBwhSh4nSAGwF1Tlcr2U', 'TX', 'kjar007'),
-    (3, 'San Antonio', 'salimkk780@gmail.com', 'Salim', 'Ahmedabadi', '$2a$10$DbbWwSbI18D3zXJaLGYCeuyHQ0LNmxlzojTW3/bKNQaB/V3Lqsm6e', '378-987-1735', 'https://cdn.filestackcontent.com/odZiQGMQXiObAbybdNrO', 'TX', 'salimk785'),
-    (4, 'San Antonio', 'victor.g.hernandez87@gmail.com', 'Victor', 'Hernandez', 'encrypted_password', '988-198-2928', 'https://ca.slack-edge.com/T029BRGN0-U01KK05TXP0-99b4452cba22-512', 'TX', 'G-man'),
-    (5, 'Killeen', 'emmanuel.stephen68@gmail.com', 'Emmanuel', 'Stephen', '$2a$10$FQzRQY.zOlvbL4EGwVTR5.P3i8S5as30fVVg9ApYQHD3r3sn2kZDO', '943-294-9923', 'https://avatars.githubusercontent.com/u/59237112?v=4', 'TX', 'manii1'),
-   (7, 'Princeton', 'cat123@cat.com', 'Kitty', 'Cute',  '$2a$10$Vm0gJalOoURhce98oeYhYOhKZvD8F0/3F/Vgx4dKj714RJuQRyetC', '993-156-9231', 'https://cdn.filestackcontent.com/luOfEwtiThetHDkagICG', 'NJ', 'cat'),
-   (8, null, 'momo80@hotmail.com', null, null, '$2a$10$VH4m1vAKLQ7fIexUbx5CUOY3eTuvSWDbVL3c.z5DTsql3vqYSKp6G', null, null, null, 'mono');
+    (1, 1, 'Universal City', 'shanshan@shan.com', 'Shanshan', 'Su', '$2a$10$IjGrLooGQ0EiT6OS4K96Ou6/7m7d7ZIYcIIZZS3FX0yTVDEurzrIK','210-123-4567', 'https://cdn.filestackcontent.com/072ckNiNS8iImzI53sMY', 'TX', 'Shan'),
+    (2, 1, 'San Antonio', 'kjar@gmail.com', 'Karla', 'Jara', '$2a$10$bzg3Tcw4Q/srFDwlmUYEYeJrT5CFZvCUsQMXiZO3QLTB7Icj3kwRa', '123-435-0743', 'https://cdn.filestackcontent.com/PBwhSh4nSAGwF1Tlcr2U', 'TX', 'kjar007'),
+    (3, 1, 'San Antonio', 'salimkk780@gmail.com', 'Salim', 'Ahmedabadi', '$2a$10$DbbWwSbI18D3zXJaLGYCeuyHQ0LNmxlzojTW3/bKNQaB/V3Lqsm6e', '378-987-1735', 'https://cdn.filestackcontent.com/odZiQGMQXiObAbybdNrO', 'TX', 'salimk785'),
+    (4, 1, 'San Antonio', 'victor.g.hernandez87@gmail.com', 'Victor', 'Hernandez', 'encrypted_password', '988-198-2928', 'https://ca.slack-edge.com/T029BRGN0-U01KK05TXP0-99b4452cba22-512', 'TX', 'G-man'),
+    (5, 1, 'Killeen', 'emmanuel.stephen68@gmail.com', 'Emmanuel', 'Stephen', '$2a$10$FQzRQY.zOlvbL4EGwVTR5.P3i8S5as30fVVg9ApYQHD3r3sn2kZDO', '943-294-9923', 'https://avatars.githubusercontent.com/u/59237112?v=4', 'TX', 'manii1'),
+   (7, 0, 'Princeton', 'cat123@cat.com', 'Kitty', 'Cute',  '$2a$10$Vm0gJalOoURhce98oeYhYOhKZvD8F0/3F/Vgx4dKj714RJuQRyetC', '993-156-9231', 'https://cdn.filestackcontent.com/luOfEwtiThetHDkagICG', 'NJ', 'cat'),
+   (8, 0, null, 'momo80@hotmail.com', null, null, '$2a$10$VH4m1vAKLQ7fIexUbx5CUOY3eTuvSWDbVL3c.z5DTsql3vqYSKp6G', null, null, null, 'mono');
 
 INSERT INTO interests(interest) VALUES
    ('Walking/Running'),
@@ -242,8 +242,8 @@ When you visit the missions, be careful. These are historic structures and the m
         12.3,
         196,
         'Point to point',
-        -98.6242,
-        29.5312,
+        -98.6271,
+        29.5242,
         'Leon Creek Greenway Trail is a 12.3 mile heavily trafficked point-to-point trail located near Shavano Park, Texas that features beautiful wild flowers and is good for all skill levels. The trail is primarily used for walking, running, and road biking and is accessible year-round. Dogs are also able to use this trail but must be kept on leash.
         The route shown on this page is the flat paved path along the creek. There are numerous dirt mountain biking and hiking trails off of this paved trail. Electric motor vehicles are reportedly not allowed on this trail, and you may get ticketed if you use them.
 Accessibility: There are 2 designated accessible spaces in the paved parking lot off of North Loop 1604 West at the north end of the trail. Both of them are van-accessible with striped access aisles. There are 4 designated accessible spaces in the paved parking lot off of North Western at the south end of the trail. All of them are van-accessible with striped access aisles.
