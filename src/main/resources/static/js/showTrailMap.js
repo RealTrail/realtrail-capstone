@@ -23,8 +23,14 @@ $(document).ready(() => {
                 }
                 console.log(coordinates);
 
+                $("#map").css("height",  "700px");
                 // show the map around the location
-                map = showMap(trailPoint);
+                let map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/outdoors-v11',
+                    center: trailPoint,
+                    zoom: 15
+                });
 
                 if (id <= 21) {
                     // show the trail route
@@ -57,17 +63,68 @@ $(document).ready(() => {
                 } else {
                     map.on('load', () =>{
                         let trailToSearch = coordinates.join(';');
-                        addRoute(trailToSearch);
+                        console.log(trailToSearch);
+                        getMatch(trailToSearch);
                     });
                 }
             },
             error: (error) => {
                 console.log("Error connecting the server");
                 console.log(error);
-                // window.location = "/error";
+                window.location = "/error";
             }
         });
     });
 });
 
 mapboxgl.accessToken = mapboxToken;
+
+// make a directions request
+function getMatch(e) {
+    let url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
+    let request = new XMLHttpRequest();
+    request.responseType = 'json';
+    request.open('GET', url, true);
+    request.onload  = () => {
+        let jsonResponse = request.response;
+        console.log(jsonResponse);
+        let route = jsonResponse.routes[0].geometry.coordinates;
+        // add the route to the map
+        addRoute(route);
+    };
+    request.send();
+}
+
+// adds the route as a layer on the map
+function addRoute (coordinates) {
+    // check if the route is already loaded
+    if (map.getSource('route')) {
+        map.removeLayer('route')
+        map.removeSource('route')
+    } else {
+        map.addLayer({
+            "id": "route",
+            "type": "line",
+            "source": {
+                "type": "geojson",
+                "data": {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        type: 'LineString',
+                        coordinates: coordinates
+                    }
+                }
+            },
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "#048d3b",
+                "line-width": 4,
+                "line-opacity": 0.8
+            }
+        });
+    }
+}

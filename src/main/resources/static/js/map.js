@@ -65,7 +65,7 @@ $(document).ready(() => {
                         } else {
                             map.on('load', () =>{
                                 let trailToSearch = coordinates.join(';');
-                                addRoute(trailToSearch);
+                                getMatch(trailToSearch);
                             });
                         }
                     },

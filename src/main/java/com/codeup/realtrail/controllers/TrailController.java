@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,15 +40,25 @@ public class TrailController{
 
     // showTrail.html- shows individual trail with all trail details
     @GetMapping("/trails/{id}")
-    public String individualTrailPage(@PathVariable Long id, Model model){
+    public String individualTrailPage(@PathVariable Long id, Model model, Principal principal){
         Trail trail = trailsDao.getById(id);
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
         model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
-        model.addAttribute("loggedInUser",userService.getLoggedInUser());
-
+        if (!trail.getTrailComments().isEmpty()) {
+            long total = 0L;
+            for (TrailComment comment : trail.getTrailComments()) {
+                total += comment.getRating();
+            }
+            float average = (float) total / trail.getTrailComments().size();
+            trail.setRating(average);
+            model.addAttribute("average", average);
+        }
+        if (principal != null) {
+            model.addAttribute("loggedInUser",userService.getLoggedInUser());
+        }
         return "trails/showTrail";
     }
 

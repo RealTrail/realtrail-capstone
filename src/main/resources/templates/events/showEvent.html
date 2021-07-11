@@ -21,14 +21,14 @@
         <div>Trail:<a th:href="${'/trails/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
         <div>Meet location:<h4 th:text="${event.meetLocation}"></h4></div>
         <div>Meet time:<h4 th:text="${event.meetTime}"></h4></div>
-        <div th:if="${event.owner.id == user.id}">
+        <div th:if="${event.owner.id == user.id && event.participants != null}">
             <div>Participants:
                 <div th:each="participant : ${event.participants}">
                     <p th:text="${participant.username}"></p>
                 </div>
             </div>
         </div>
-        <div>Comments:
+        <div th:if="${event.eventComments != null}">Comments:
             <div th:each="comment : ${event.eventComments}">
                 <h4 th:text="${comment.content}"></h4>
                 <div th:if="${user.isAdmin() || user.id == comment.owner.id}">

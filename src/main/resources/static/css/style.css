@@ -2261,7 +2261,8 @@ div.header h4{
 
 /* ****************************** SHOW PROFILE PAGE ****************************** */
 .profileImage {
-    width: 5rem;
+    width: 4rem;
+    clip-path: circle(45%);
 }
 
 /* ****************************** CREATE EVENT PAGE ****************************** */
