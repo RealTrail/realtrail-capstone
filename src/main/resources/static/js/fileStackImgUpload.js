@@ -70,6 +70,7 @@
          },
          onFileUploadFailed: (response) => {
              console.log(response);
+             wiindow.location = "/error";
          }
      }
 

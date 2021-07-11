@@ -55,15 +55,12 @@ public class TrailController{
     @ResponseBody
     public Trail createTrail(@Valid @RequestBody Trail trail) {
         Trail trailSaved;
-        if (trail.getTrailImages() == null) {
-            trailSaved = trailsDao.save(trail);
-        } else {
-            trailSaved = trailsDao.save(trail);
-            for (PictureURL url : trail.getTrailImages()) {
-                url.setTrail(trailSaved);
-                pictureURLSDao.save(url);
-            }
+        trailSaved = trailsDao.save(trail);
+        for (PictureURL url : trail.getTrailImages()) {
+            url.setTrail(trailSaved);
+            pictureURLSDao.save(url);
         }
+
         return trailSaved;
     }
 

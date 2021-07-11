@@ -15,8 +15,10 @@
                 <h2>Create an Event</h2>
                 <div>
                     <label for="name">Event Name</label>
-                    <input name="name" id="name" th:field="*{name}" />
+                    <input name="name" id="name" th:field="*{name}"/>
+                    <p>Event name has to be longer than 6 characters.</p>
                 </div>
+                <p class="errorMessage" th:text="${message}"></p>
                 <div>
                     <label for="eventDate">Date</label>
                     <input type="date" name="eventDate" id="eventDate" />
@@ -136,8 +138,8 @@
                     <p class="errorMessage trailDetails"></p>
                     <div>
                         <button type="button" id="images">Upload images</button>
+                        <i id="imagesUploadHint" class="fa fa-check hidden" style="color:green"></i>
                         <input type="hidden" id="hidden" name="images" />
-                        <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
                     </div>
                     <button type="submit" id="createTrail">Submit</button>
                 </form>
@@ -176,7 +178,5 @@
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
 <script src="/js/map.js"></script>
-<script src="/js/login.js"></script>
-<script src="/js/navbar.js"></script>
 </body>
 </html>

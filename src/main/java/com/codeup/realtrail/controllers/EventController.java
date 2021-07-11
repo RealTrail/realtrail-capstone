@@ -79,54 +79,57 @@ public class EventController {
             @RequestParam(name = "trailOptions", required = false) String trailId,
             @RequestParam(name = "createdTrailId", required = false) String createdTrailId,
             @RequestParam(name = "createdCoordinates", required = false) String createdCoordinates,
-            @RequestParam(name = "trailPoint", required = false) String point) throws ParseException {
+            @RequestParam(name = "trailPoint", required = false) String point,
+            Model model) throws ParseException {
         // connect user to new event being created
         User loggedInUser = userService.getLoggedInUser();
 
-        // connect user to new event being created
-        event.setOwner(loggedInUser);
-        System.out.println(eventDate);
-        System.out.println(eventMeetTime);
-        System.out.println(eventTime);
-
-        Trail trail;
-        if (trailOption.equals("existing trail")) {
-            // get selected trail
-            trail = trailsDao.findById(Long.parseLong(trailId));
+        if (event.getName().length() < 6) {
+            model.addAttribute("message", "Event name has to be at least 6 characters!");
+            return "events/createEvent";
         } else {
-            // get the newly created trail
-            trail = trailsDao.findById(Long.parseLong(createdTrailId));
-            trail.setLongitude(Double.parseDouble(point.substring(0, point.indexOf(","))));
-            trail.setLatitude(Double.parseDouble(point.substring(point.indexOf(",") + 1)));
+            // connect user to new event being created
+            event.setOwner(loggedInUser);
 
-            System.out.println("Double.parseDouble(point.longitude = " + Double.parseDouble(point.substring(0, point.indexOf(","))));
-            System.out.println("Double.parseDouble(point.latitude = " + Double.parseDouble(point.substring(point.indexOf(",") + 1)));
+            Trail trail;
+            if (trailOption.equals("existing trail")) {
+                // get selected trail
+                trail = trailsDao.findById(Long.parseLong(trailId));
+            } else {
+                // get the newly created trail
+                trail = trailsDao.findById(Long.parseLong(createdTrailId));
+                trail.setLongitude(Double.parseDouble(point.substring(0, point.indexOf(","))));
+                trail.setLatitude(Double.parseDouble(point.substring(point.indexOf(",") + 1)));
 
-            if (createdCoordinates != null && !createdCoordinates.isEmpty()) {
-                List<String> coordinates = Arrays.asList(createdCoordinates.split(";"));
-                for(String mapPoint : coordinates) {
-                    double longitude = Double.parseDouble(mapPoint.substring(0, mapPoint.indexOf(",")));
-                    double latitude = Double.parseDouble(mapPoint.substring(mapPoint.indexOf(",") + 1));
-                    mapPointsDao.save(new MapPoint(longitude, latitude, trail));
+                System.out.println("Double.parseDouble(point.longitude = " + Double.parseDouble(point.substring(0, point.indexOf(","))));
+                System.out.println("Double.parseDouble(point.latitude = " + Double.parseDouble(point.substring(point.indexOf(",") + 1)));
+
+                if (createdCoordinates != null && !createdCoordinates.isEmpty()) {
+                    List<String> coordinates = Arrays.asList(createdCoordinates.split(";"));
+                    for(String mapPoint : coordinates) {
+                        double longitude = Double.parseDouble(mapPoint.substring(0, mapPoint.indexOf(",")));
+                        double latitude = Double.parseDouble(mapPoint.substring(mapPoint.indexOf(",") + 1));
+                        mapPointsDao.save(new MapPoint(longitude, latitude, trail));
+                    }
                 }
             }
+            event.setTrail(trail);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date newDate = formatter.parse(eventDate);
+            LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            event.setTime(LocalTime.parse(eventTime));
+            event.setMeetTime(LocalTime.parse(eventMeetTime));
+
+            event.setDate(localDate);
+            System.out.println(newDate);
+
+            Event savedEvent = eventsDao.save(event);
+            emailService.prepareAndSend(event,"new event created", event.getName());
+
+            return "redirect:/events/" + savedEvent.getId();
         }
-        event.setTrail(trail);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date newDate = formatter.parse(eventDate);
-        LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        event.setTime(LocalTime.parse(eventTime));
-        event.setMeetTime(LocalTime.parse(eventMeetTime));
-
-        event.setDate(localDate);
-        System.out.println(newDate);
-
-        Event savedEvent = eventsDao.save(event);
-        emailService.prepareAndSend(event,"new event created", event.getName());
-
-        return "redirect:/events/" + savedEvent.getId();
     }
 
     @GetMapping("/events")

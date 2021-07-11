@@ -43,9 +43,12 @@
     <div th:if="trail.mapPoints == null">
         No map available.
     </div>
-
-    <div th:if="trail.mapPoints != null" id="map" style="height: 900px"></div>
-
+    <div th:if="trail.mapPoints != null" >
+        <input type="hidden" id="trailId" th:value="${trail.id}">
+        <input type="hidden" id="trailLocation" th:value="${trail.longitude + ',' + trail.latitude}">
+        <button class="btn" id="getMap">Get trail map</button>
+        <div id="map" style="height: 900px"></div>
+    </div>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 
@@ -59,8 +62,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
 <script src="/js/mapbox-geocoder-utils.js"></script>
+<script src="/js/map.js"></script>
 <script src="/js/showTrailMap.js"></script>
-<script src="/js/login.js"></script>
-<script src="/js/navbar.js"></script>
 </body>
 </html>

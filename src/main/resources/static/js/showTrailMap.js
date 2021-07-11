@@ -1,51 +1,73 @@
 "use strict";
 
 $(document).ready(() => {
-    mapboxgl.accessToken = mapboxToken;
 
-    let coordinates = $("#coordinates").val().split(" ");
-    console.log(coordinates);
+    let id = $("#trailId").val();
 
-    // get all the mapPoints on the trail
-    let mapPoints = [];
-    $(".mapPoints").each(() => {
-        let mapPoint = $(this).val().split(" ");
-        console.log(mapPoint);
-        mapPoints.push(mapPoint);
-    });
+    // get the trail location coordinates
+    let trailPoint = $("#trailLocation").val().split(",");
+    console.log(trailPoint);
 
-    let map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/outdoors-v11',
-        center: coordinates,
-        zoom: 15
-    });
-    map.on('load', () => {
-        map.addSource('route', {
-            'type': 'geojson',
-            'data': {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                    'type': 'LineString',
-                    'coordinates': mapPoints
+    let coordinates = [];
+
+    $("#getMap").click(() =>{
+        $.ajax({
+            type: "GET",
+            url: "/trails/" + id + "/map",
+            dataType: 'json',
+            success: (response) => {
+                // loop through the array of coordinate object to get an array of coordinates
+                for (let coordinateObj of response) {
+                    let mapPoint = [coordinateObj.longitude, coordinateObj.latitude];
+                    coordinates.push(mapPoint);
                 }
-            }
-        });
+                console.log(coordinates);
 
-        map.addLayer({
-            'id': 'route',
-            'type': 'line',
-            'source': 'route',
-            'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
+                // show the map around the location
+                map = showMap(trailPoint);
+
+                if (id <= 21) {
+                    // show the trail route
+                    map.on('load', () => {
+                        map.addSource('route', {
+                            'type': 'geojson',
+                            'data': {
+                                'type': 'Feature',
+                                'properties': {},
+                                'geometry': {
+                                    'type': 'LineString',
+                                    'coordinates': coordinates
+                                }
+                            }
+                        });
+                        map.addLayer({
+                            'id': 'route',
+                            'type': 'line',
+                            'source': 'route',
+                            'layout': {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            'paint': {
+                                'line-color': '#dd5765',
+                                'line-width': 4
+                            }
+                        });
+                    });
+                } else {
+                    map.on('load', () =>{
+                        let trailToSearch = coordinates.join(';');
+                        addRoute(trailToSearch);
+                    });
+                }
             },
-            'paint': {
-                'line-color': '#c0273d',
-                'line-width': 5
+            error: (error) => {
+                console.log("Error connecting the server");
+                console.log(error);
+                // window.location = "/error";
             }
         });
     });
-
 });
+
+mapboxgl.accessToken = mapboxToken;
