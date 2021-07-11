@@ -28,7 +28,8 @@ $(document).ready(() => {
                     container: 'map',
                     style: 'mapbox://styles/mapbox/outdoors-v11',
                     center: trailPoint,
-                    zoom: 15
+                    zoom: 15,
+                    minZoom: 11
                 });
 
                 if (id <= 21) {
@@ -63,7 +64,41 @@ $(document).ready(() => {
                     map.on('load', () =>{
                         let trailToSearch = coordinates.join(';');
                         console.log(trailToSearch);
-                        getMatch(trailToSearch);
+                        let url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + trailToSearch +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
+                        let request = new XMLHttpRequest();
+                        request.responseType = 'json';
+                        request.open('GET', url, true);
+                        request.onload  = () => {
+                            let jsonResponse = request.response;
+                            console.log(jsonResponse);
+                            let route = jsonResponse.routes[0].geometry.coordinates;
+                            // add the route to the map
+                            map.addLayer({
+                                "id": "route",
+                                "type": "line",
+                                "source": {
+                                    "type": "geojson",
+                                    "data": {
+                                        "type": "Feature",
+                                        "properties": {},
+                                        "geometry": {
+                                            type: 'LineString',
+                                            coordinates: route
+                                        }
+                                    }
+                                },
+                                "layout": {
+                                    "line-join": "round",
+                                    "line-cap": "round"
+                                },
+                                "paint": {
+                                    "line-color": "#048d3b",
+                                    "line-width": 4,
+                                    "line-opacity": 0.8
+                                }
+                            });
+                        };
+                        request.send();
                     });
                 }
             },
@@ -126,34 +161,28 @@ function getMatch(e) {
 
 // adds the route as a layer on the map
 function addRoute (coordinates) {
-    // check if the route is already loaded
-    if (map.getSource('route')) {
-        map.removeLayer('route')
-        map.removeSource('route')
-    } else {
-        map.addLayer({
-            "id": "route",
-            "type": "line",
-            "source": {
-                "type": "geojson",
-                "data": {
-                    "type": "Feature",
-                    "properties": {},
-                    "geometry": {
-                        type: 'LineString',
-                        coordinates: coordinates
-                    }
+    map.addLayer({
+        "id": "route",
+        "type": "line",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    type: 'LineString',
+                    coordinates: coordinates
                 }
-            },
-            "layout": {
-                "line-join": "round",
-                "line-cap": "round"
-            },
-            "paint": {
-                "line-color": "#048d3b",
-                "line-width": 4,
-                "line-opacity": 0.8
             }
-        });
-    }
+        },
+        "layout": {
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#048d3b",
+            "line-width": 4,
+            "line-opacity": 0.8
+        }
+    });
 }
