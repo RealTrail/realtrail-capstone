@@ -72,13 +72,11 @@ public class EventController {
         }
     }
 
-
     @PostMapping("/events/{id}/edit")
     public String updateEvent(@PathVariable long id, @ModelAttribute Event event,
                               @RequestParam(name = "eventDate") String eventDate,
                               @RequestParam(name = "eventMeetTime", required = false) String eventMeetTime,
-                              @RequestParam(name = "eventTime", required = false) String eventTime,
-                              Model model)
+                              @RequestParam(name = "eventTime", required = false) String eventTime)
             throws ParseException
     {
         Event eventFromDb = eventsDao.getById(id);
@@ -86,20 +84,16 @@ public class EventController {
         SimpleDateFormat formatterEdit = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = formatterEdit.parse(eventDate);
         LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
         event.setDate(localDate);
         event.setTime(LocalTime.parse(eventTime));
         event.setMeetTime(LocalTime.parse(eventMeetTime));
         event.setOwner(eventFromDb.getOwner());
         event.setTrail(eventFromDb.getTrail());
-
-
-        System.out.println(newDate);
-
         event.setId(id);
+
         eventsDao.save(event);
         return "redirect:/events/" + id;
-//                "events/showEvent" + id;
-
     }
 
     @PostMapping("/create")
@@ -204,25 +198,11 @@ public class EventController {
         }
     }
 
-//    @PostMapping("/events/{id}/edit")
-//    public String updateEvent(@PathVariable long id, @ModelAttribute Event event, Model model) {
-//        event.setId(id);
-//        eventsDao.save(event);
-//        return "redirect:/events/" + id;
-//    }
-
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {
         eventsDao.deleteById(id);
         return "redirect:/profile";
     }
-
-//    @GetMapping("/search")
-//    public String searchByName(Model model, @RequestParam(name = "term") String term){
-//        List<Event> events = eventsDao.searchByName(term);
-//        model.addAttribute("events", events);
-//        return "events/showAllEvents";
-//    }
 
     @PostMapping("/events/{id}/join")
     public String joinEvent(@PathVariable long id) {
