@@ -105,7 +105,6 @@ public class ProfileController {
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
-            // pass the user to view/showProfile.html
             model.addAttribute("user", user);
             return "users/showProfile";
         } else {

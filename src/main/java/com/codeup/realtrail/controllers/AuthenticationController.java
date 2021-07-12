@@ -5,10 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AuthenticationController {
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
+    public String showLoginForm(HttpServletRequest request, Model model) {
+        String referrer = request.getHeader("referer");
+        System.out.println("referrer = " + referrer);
+
+        request.getSession().setAttribute("url_prior_login", referrer);
         model.addAttribute("user", new User());
         return "users/signup-login";
     }
