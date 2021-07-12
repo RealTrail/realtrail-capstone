@@ -109,6 +109,17 @@ function closeNav() {
 $(document).ready(function () {
     // let trails = [];
 
+    $("#search").click((e) => {
+        e.preventDefault();
+        let keyWord = $("#keyWord").val();
+        if (keyWord !== "") {
+            $.ajax({
+                type: "GET",
+                url: "/"
+            })
+        }
+    });
+
     $("#difficultyLevel").on("change", function() {
         $(".slick-slide").each(function (i){
             var diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
