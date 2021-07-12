@@ -904,19 +904,19 @@ small {
     color: #555;
 }
 
-.btn {
-    display: inline-block;
-    padding: 15px 25px;
-    border-radius: 23px;
-    text-decoration: none;
-    color: white;
-    white-space: nowrap;
-    line-height: 1em;
-    background: #ff4757;
-    border: 0;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
+/*.btn {*/
+/*    display: inline-block;*/
+/*    padding: 15px 25px;*/
+/*    border-radius: 23px;*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*    white-space: nowrap;*/
+/*    line-height: 1em;*/
+/*    background: #ff4757;*/
+/*    border: 0;*/
+/*    cursor: pointer;*/
+/*    transition: transform 0.2s;*/
+/*}*/
 
 img#profileImage{
     position: absolute;
