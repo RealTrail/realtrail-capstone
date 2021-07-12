@@ -46,7 +46,7 @@ body{
 }
 
 p{
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
@@ -1464,7 +1464,7 @@ input[type="tel" i] {
 
 p.errorMessage {
     width: 182px;
-    color: red;
+    color: #fde995;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
