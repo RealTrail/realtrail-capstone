@@ -2170,10 +2170,10 @@ div.header h4{
     background: #102d3e;
     display: block;
     position: absolute;
-    top: 100%;
+    top: 99%;
     left: 50%;
     right: 0;
-    height: 1000px;
+    height:13000px;
     width: 3000px;
     z-index: 2;
     margin-left: -1500px;
@@ -2252,9 +2252,9 @@ div.header h4{
 }
 
 .cloud1 {
-    top: 5%;
+    top: 52%;
     left: -15%;
-    transform: scale(2);
+    transform: scale(5);
     animation-delay: 1s;
     animation-duration: 129s;
 }
