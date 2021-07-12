@@ -1,7 +1,7 @@
 "use strict";
 
 $(document).ready(() => {
-
+    let trail = {};
     let existingTrails = $("#trailOptions option").map((index, element) => element.text);
     console.log(existingTrails);
 
@@ -80,7 +80,6 @@ $(document).ready(() => {
         });
     });
 
-    let trail = {};
     // user chooses to customize trail
     $("#trailOption2").on("click", () => {
         $("#map").addClass("map");
@@ -95,8 +94,10 @@ $(document).ready(() => {
         $(".mask2").addClass("active2");
     });
 
+
     // click upload images to upload images
     $("#images").click(() => uploadImages());
+
 
     $("#createTrail").click((e) => {
         e.preventDefault();
@@ -133,7 +134,6 @@ $(document).ready(() => {
             $("p.trailDetails").css("display: none");
         }
 
-
         // get the trail info typed in create trail modal form
         trail.name = formatTrailName($("#trailName").val());
         trail.length = parseFloat($("#trailLength").val());
@@ -141,12 +141,22 @@ $(document).ready(() => {
         trail.type = $("input[name='trailType']:checked").val();
         trail.trailDetails = $("#trailDetails").val();
 
+        // check if trail images uploaded
         if ($("#hidden").val() !== undefined && $("#hidden").val() !== "") {
+            // get uploaded trail images
             let images = $("#hidden").val().split(" ");
             console.log(images);
             trail.trailImages = images;
-        } else {
+        } else {  // set default trail image
             trail.trailImages = ['https://cdn.filestackcontent.com/jIg7ZLZtTQiX0kNbmvxj'];
+        }
+
+        // check if the trail already exist in the database
+        if (isExist(trail.name, existingTrails)) {
+            trail = {};
+            $("p.trailExist").text("Trail already exists!")
+        } else {
+            $("p.trailExist").css("display: none");
         }
 
         console.log(trail);
@@ -174,16 +184,9 @@ $(document).ready(() => {
                     console.log(response);
                     $("#trailId").val(response.id);
 
-                    if (!isExist(response.name, existingTrails)) {
-                        // update the existingTrails after creating a trail successfully
-                        existingTrails.push(response.name);
-                        console.log(existingTrails);
-                    }
                     console.log(existingTrails);
 
                     closeModalTwo();
-
-                    console.log($("#trailId").val());
 
                     // Add the Draw control to your map
                     map.addControl(draw);
@@ -201,7 +204,7 @@ $(document).ready(() => {
                 },
                 error: (error) => {
                     console.log("Error: ", error);
-                    // window.location = "/error";
+                    window.location = "/error";
                 }
             });
         }

@@ -29,10 +29,10 @@ import java.util.List;
 public class EventController {
     private EventsRepository eventsDao;
     private TrailsRepository trailsDao;
+    private UsersRepository usersDao;
     private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
-    private EventParticipantsRepository participantsDao;
     private EventCommentsRepository eventCommentsDao;
 
     //Importing File Stack Api Key
@@ -43,13 +43,13 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventParticipantsRepository participantsDao, EventCommentsRepository eventCommentsDao) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, UsersRepository usersDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventCommentsRepository eventCommentsDao) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
+        this.usersDao = usersDao;
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
-        this.participantsDao = participantsDao;
         this.eventCommentsDao = eventCommentsDao;
     }
 
@@ -235,9 +235,24 @@ public class EventController {
 //Cancel
     @PostMapping("/events/{id}/cancel")
     public String cancelEvent (@PathVariable long id){
-        participantsDao.deleteById(id);
+        User user = userService.getLoggedInUser();
+        Event event = eventsDao.getById(id);
+        List<User> participants = eventsDao.getById(id).getParticipants();
+        List<Event> events = user.getEvents();
+
+        // remove participant form event
+        participants.remove(user);
+        event.setParticipants(participants);
+        eventsDao.save(event);
+
+        // remove event from participant
+        events.remove(event);
+        user.setEvents(events);
+        usersDao.save(user);
+
         return "redirect:/profile";
     }
+
     @PostMapping("/events/{id}/comment/{cid}/delete")
     public String deleteEventComment(@PathVariable Long id, @PathVariable Long cid) {
         User user =  userService.getLoggedInUser();

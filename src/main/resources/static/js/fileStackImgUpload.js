@@ -19,6 +19,7 @@
 
              $("#profileImage").attr("src", results.filesUploaded[0].url); // display the new image on web page
              $("#profileImageUrl").val(results.filesUploaded[0].url); // save the new image url to a hidden input
+             $("#profileImg").val(results.filesUploaded[0].url);  // save the new image url to a hidden input in /profile/settings form
 
              let profileImageObj = {
                  profileImageUrl: $("#profileImageUrl").val()
