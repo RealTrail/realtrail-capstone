@@ -105,7 +105,11 @@ public class ProfileController {
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
+            List<Event> createdEvents = user.getCreatedEvents();
+            List<Event> events = user.getEvents();
             model.addAttribute("user", user);
+            model.addAttribute("createdEvents", createdEvents);
+            model.addAttribute("events", events);
             return "users/showProfile";
         } else {
             return "redirect:/login";
