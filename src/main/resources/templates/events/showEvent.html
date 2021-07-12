@@ -28,15 +28,18 @@
                 </div>
             </div>
         </div>
-        <div th:if="${event.eventComments != null}">Comments:
-            <div th:each="comment : ${event.eventComments}">
-                <h4 th:text="${comment.content}"></h4>
-                <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
-                    <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
-                          method="post">
-                        <button type="submit">Delete</button>
-                    </form>
-                </div>
+        <div th:if="${event.eventComments != null}" th:each="comment : ${event.eventComments}">
+            Comments:
+            <div>
+                <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
+                <span th:text="${comment.owner.username}"></span>
+            </div>
+            <p th:text="${comment.content}"></p>
+            <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
+                <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
+                      method="post">
+                    <button type="submit">Delete</button>
+                </form>
             </div>
         </div>
         <div sec:authorize="isAuthenticated()">

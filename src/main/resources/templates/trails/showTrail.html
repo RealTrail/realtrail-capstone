@@ -28,6 +28,7 @@
         </div>
 
         <div th:if="${!trail.trailComments.isEmpty()}" th:each="comment : ${trail.trailComments}">
+            Comments:
             <div>
                 <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
                 <span th:text="${comment.owner.username}"></span>
