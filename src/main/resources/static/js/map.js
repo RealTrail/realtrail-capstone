@@ -80,6 +80,7 @@ $(document).ready(() => {
         });
     });
 
+    let trail = {};
     // user chooses to customize trail
     $("#trailOption2").on("click", () => {
         $("#map").addClass("map");
@@ -92,105 +93,118 @@ $(document).ready(() => {
         $("#trailOptions").addClass("hidden");
         $("#trailLocation").removeClass("hidden");
         $(".mask2").addClass("active2");
+    });
 
-        // click upload images to upload images
-        $("#images").click(() => uploadImages());
+    // click upload images to upload images
+    $("#images").click(() => uploadImages());
 
-        $("#createTrail").click((e) => {
-            e.preventDefault();
+    $("#createTrail").click((e) => {
+        e.preventDefault();
 
-            // check if the user has entered info in the inputs
-            if ($("#trailName").val() === undefined) {
-                $("p.trailName").text("Name cannot be empty!");
-            } else {
-                $("p.trailName").css("display: none");
-            }
-            if ($("#trailLength").val() === undefined) {
-                $("p.trailLength").text("Length cannot be empty!");
-            } else {
-                $("p.trailLength").css("display: none");
-            }
-            if ($("input[name='difficultyLevel']:checked").val() === undefined) {
-                $("p.difficultyLevel").text("Difficulty level cannot be unchecked!");
-            } else {
-                $("p.difficultyLevel").css("display: none");
-            }
-            if ($("input[name='trailType']:checked").val() === undefined) {
-                $("p.trailType").text("Type cannot be unchecked!");
-            } else {
-                $("p.trailType").css("display: none");
-            }
-            if ($("#trailDetails").val() === undefined) {
-                $("p.trailDetails").text("Trail details cannot be empty!");
-            } else {
-                $("p.trailDetails").css("display: none");
-            }
+        // check if the user has entered info in the inputs
+        if ($("#trailName").val() === "") {
+            $("p.trailName").text("Name cannot be empty!");
+            trail = {};
+        } else {
+            $("p.trailName").css("display: none");
+        }
+        if ($("#trailLength").val() === "") {
+            $("p.trailLength").text("Length cannot be empty!");
+            trail = {};
+        } else {
+            $("p.trailLength").css("display: none");
+        }
+        if ($("input[name='difficultyLevel']:checked").val() === undefined) {
+            $("p.difficultyLevel").text("Difficulty level cannot be unchecked!");
+            trail = {};
+        } else {
+            $("p.difficultyLevel").css("display: none");
+        }
+        if ($("input[name='trailType']:checked").val() === undefined) {
+            $("p.trailType").text("Type cannot be unchecked!");
+            trail = {};
+        } else {
+            $("p.trailType").css("display: none");
+        }
+        if ($("#trailDetails").val() === "") {
+            $("p.trailDetails").text("Trail details cannot be empty!");
+            trail = {};
+        } else {
+            $("p.trailDetails").css("display: none");
+        }
 
-            let trail = {};
 
-            // get the trail info typed in create trail modal form
-            trail.name = formatTrailName($("#trailName").val());
-            trail.length = parseFloat($("#trailLength").val());
-            trail.difficultyLevel = $("input[name='difficultyLevel']:checked").val();
-            trail.type = $("input[name='trailType']:checked").val();
-            trail.trailDetails = $("#trailDetails").val();
+        // get the trail info typed in create trail modal form
+        trail.name = formatTrailName($("#trailName").val());
+        trail.length = parseFloat($("#trailLength").val());
+        trail.difficultyLevel = $("input[name='difficultyLevel']:checked").val();
+        trail.type = $("input[name='trailType']:checked").val();
+        trail.trailDetails = $("#trailDetails").val();
 
-            if ($("#hidden").val() !== undefined && $("#hidden").val() !== "") {
-                let images = $("#hidden").val().split(" ");
-                console.log(images);
-                trail.trailImages = images;
-            } else {
-                trail.trailImages = ['https://cdn.filestackcontent.com/jIg7ZLZtTQiX0kNbmvxj'];
-            }
+        if ($("#hidden").val() !== undefined && $("#hidden").val() !== "") {
+            let images = $("#hidden").val().split(" ");
+            console.log(images);
+            trail.trailImages = images;
+        } else {
+            trail.trailImages = ['https://cdn.filestackcontent.com/jIg7ZLZtTQiX0kNbmvxj'];
+        }
 
-            console.log(trail);
+        console.log(trail);
 
-            // check if the trail already exist in the database
-            if (isExist(trail.name, existingTrails)) {
-                $("p.trailExist").text("Trail already exists!")
-            } else {
-                $("p.trailExist").css("display: none");
-            }
+        // check if the trail already exist in the database
+        if (isExist(trail.name, existingTrails)) {
+            $("p.trailExist").text("Trail already exists!");
+            trail = {};
+        } else {
+            $("p.trailExist").css("display: none");
+        }
 
-            if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails && (!isExist(trail.name, existingTrails))) {
+        if (trail.name && trail.length && trail.difficultyLevel && trail.type && trail.trailDetails && (!isExist(trail.name, existingTrails))) {
 
-                // do ajax post to save the trail in db
-                $.ajax({
-                    url: "/trails/create",
-                    type: "POST",
-                    data: JSON.stringify(trail),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    timeout: 600000,
-                    success: (response) => {
-                        console.log("trail saved!");
-                        console.log(response);
-                        $("#trailId").val(response.id);
-                        closeModalTwo();
+            // do ajax post to save the trail in db
+            $.ajax({
+                url: "/trails/create",
+                type: "POST",
+                data: JSON.stringify(trail),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                timeout: 600000,
+                success: (response) => {
+                    console.log("trail saved!");
+                    console.log(response);
+                    $("#trailId").val(response.id);
 
-                        console.log($("#trailId").val());
-
-                        // Add the Draw control to your map
-                        map.addControl(draw);
-
-                        // add create, update, or delete actions
-                        map.on('draw.create', updateRoute);
-                        map.on('draw.update', updateRoute);
-                        map.on('draw.delete', updateRoute);
-
-                        map.on('click', (e) => {
-                            console.log(e.lngLat);
-                            $("#trailPoint").val(e.lngLat.lng + "," + e.lngLat.lat);
-                            console.log($("#trailPoint").val());
-                        });
-                    },
-                    error: (error) => {
-                        console.log("Error: ", error);
-                        // window.location = "/error";
+                    if (!isExist(response.name, existingTrails)) {
+                        // update the existingTrails after creating a trail successfully
+                        existingTrails.push(response.name);
+                        console.log(existingTrails);
                     }
-                });
-            }
-        });
+                    console.log(existingTrails);
+
+                    closeModalTwo();
+
+                    console.log($("#trailId").val());
+
+                    // Add the Draw control to your map
+                    map.addControl(draw);
+
+                    // add create, update, or delete actions
+                    map.on('draw.create', updateRoute);
+                    map.on('draw.update', updateRoute);
+                    map.on('draw.delete', updateRoute);
+
+                    map.on('click', (e) => {
+                        console.log(e.lngLat);
+                        $("#trailPoint").val(e.lngLat.lng + "," + e.lngLat.lat);
+                        console.log($("#trailPoint").val());
+                    });
+                },
+                error: (error) => {
+                    console.log("Error: ", error);
+                    // window.location = "/error";
+                }
+            });
+        }
     });
 });
 
