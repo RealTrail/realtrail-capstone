@@ -19,7 +19,6 @@
             <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
                 <h2>Public Profile</h2>
                 <div>
-                    <input type="hidden" id="originalImage" th:value="${user.profileImageUrl}">
                     <input type="hidden" id="profileImg" name="profileImageUrl" th:field="*{profileImageUrl}">
 
                     <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
