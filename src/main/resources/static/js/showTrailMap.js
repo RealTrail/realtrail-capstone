@@ -116,27 +116,27 @@ $(document).ready(() => {
             console.log(rating);
             $(this).parent().children().each((element) => {
                 if (element < rating) {
-                    $(this).addClass("checked");
+                    $(this).addClass("added");
                 } else {
-                    $(this).removeClass("checked");
+                    $(this).removeClass("added");
                 }
             });
         },
         () => {
-            $(this).parent().children().each((element) => $(this).removeClass("checked"));
+            $(this).parent().children().each((element) => $(this).removeClass("added"));
         });
 
     $("#stars .star").click(() => {
         let rating = Number($(this).attr("data-value"));
         console.log(rating);
         for (let i = 0; i < 5; i++) {
-            $(this).parent().children().eq(i).removeClass('checked');
+            $(this).parent().children().eq(i).removeClass('added');
         }
 
         for (let i = 0; i < rating; i++) {
-            $(this).parent().children().eq(i).addClass('checked');
+            $(this).parent().children().eq(i).addClass('added');
         }
-        let ratingValue = parseInt($("#stars > .star.checked").last().data("value"));
+        let ratingValue = parseInt($("#stars > .star.added").last().data("value"));
         $("#rating").val(ratingValue);
     });
 });
