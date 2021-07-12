@@ -3,7 +3,7 @@ $(".slider")
         infinite: true,
         slidesToShow: 6,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true,
         autoplay: false,
         responsive: [
             {
@@ -29,6 +29,7 @@ $(".slider")
             },
             {
                 breakpoint: 600,
+                arrows:false,
                 settings: "unslick"
             }
 
