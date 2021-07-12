@@ -42,7 +42,7 @@
                 <div th:if="${param.logout}" style="color:#7db6fc; margin-bottom:1rem">
                     You have been logged out.
                 </div>
-                <input type="hidden" th:value="${#request.getHeader('referer')}"></input>
+                <input type="hidden" name="url_prior_login" th:value="${#request.getHeader('referer')}">
 
                 <input type="submit" class="btn btn-light" value="Login" name="login">
             </form>
