@@ -103,23 +103,33 @@ function closeNav() {
 // });
 
 
-// ******************** Trail Search ***************
 
-// Filter by difficulty level
 $(document).ready(function () {
-    // let trails = [];
 
+
+    // search
     $("#search").click((e) => {
         e.preventDefault();
         let keyWord = $("#keyWord").val();
         if (keyWord !== "") {
             $.ajax({
                 type: "GET",
-                url: "/"
-            })
+                url: "/search-trail?keyword=" + keyWord,
+                dataType: "json",
+                processData: false, // avoid the data being parsed to query string params
+                success: (response) => {
+                    console.log(response);
+                },
+                error: (error) => {
+                    console.log("Error connecting the server");
+                    console.log(error);
+                    // window.location = "/error";
+                }
+            });
         }
     });
 
+    // Filter by difficulty level
     $("#difficultyLevel").on("change", function() {
         $(".slick-slide").each(function (i){
             var diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
@@ -131,6 +141,7 @@ $(document).ready(function () {
         })
     })
 
+    // Filter by type
     $("#type").on("change", function() {
         $(".slick-slide").each(function (i){
             var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();

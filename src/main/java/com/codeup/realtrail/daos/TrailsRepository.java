@@ -22,4 +22,7 @@ public interface TrailsRepository extends JpaRepository<Trail, Long> {
     List<String> findByDifficultyLevel();
 
     List<Trail> findAllByDifficultyLevelAndAndTypeAndName(String difficultyLevel, String type, String name);
+
+    @Query("FROM Trail t WHERE t.name LIKE %:keyword%")
+    List<Trail> findAllByKeyword(@Param("keyword") String keyword);
 }

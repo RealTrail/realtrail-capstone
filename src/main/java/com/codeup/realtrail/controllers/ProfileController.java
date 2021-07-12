@@ -84,7 +84,7 @@ public class ProfileController {
     }
 
     // set up ajax post request response
-    @RequestMapping(value = "/profile/image", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/profile/image")
     public @ResponseBody ResponseEntity<?> uploadProfileImage(@RequestBody ProfileImageUpdateRequest profileImageUpdateRequest) {
         String profileImageUrl = profileImageUpdateRequest.getProfileImageUrl();
 
