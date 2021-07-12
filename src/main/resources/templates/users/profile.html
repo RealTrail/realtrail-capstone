@@ -62,10 +62,10 @@
     <a href="/password/reset" class="btn">Reset Password</a>
 
 
-    <div th:if="${user.createdEvents == null}">
+    <div th:if="${user.createdEvents.isEmpty()}">
         <h2>You have not created any events. <a href="/create">Create one now</a></h2>
     </div>
-    <div th:if="${user.createdEvents != null}">
+    <div th:if="${!user.createdEvents.isEmpty()}">
         <h2>You have created these events</h2>
         <div th:each="event : ${user.createdEvents}" id="createdEvents">
             <h3 th:text="${event.name}"></h3>
