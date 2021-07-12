@@ -7,7 +7,7 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
-    <h1>Here is your Profile</h1>
+    <h1><span th:text="${user.username}"></span>'s Profile</h1>
     <fieldset>
         <legend>
             <h3>Personal Details</h3>
@@ -58,10 +58,8 @@
             </tr>
         </table>
     </fieldset>
-    <a href="/profile/settings" class="btn">Edit</a>
+    <a class="btn" th:href="@{/profile/{id}/edit(id=${user.id})}">Edit</a>
     <a href="/password/reset" class="btn">Reset Password</a>
-
-
 
     <div th:if="${createdEvents == null}">
         <h2>You have not created any events. <a href="/create">Create one now</a></h2>
@@ -95,7 +93,5 @@
 </main>
 
 <footer th:replace="fragments/footer :: footer"></footer>
-<script src="/js/login.js"></script>
-<script src="/js/navbar.js"></script>
 </body>
 </html>

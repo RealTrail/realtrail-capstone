@@ -51,7 +51,7 @@
         </fieldset>
         <button type="submit" class="btn" id="createProfile">Complete</button>
     </form>
-    <a th:href="${'/profile/' + user.id}">Close</a>
+    <a href="/users">Close</a>
 </main>
 
 <footer th:replace="fragments/footer :: footer"></footer>
@@ -64,6 +64,5 @@
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
 <script src="/js/login.js"></script>
-<script src="/js/navbar.js"></script>
 </body>
 </html>
