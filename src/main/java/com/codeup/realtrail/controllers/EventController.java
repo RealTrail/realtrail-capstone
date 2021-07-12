@@ -238,6 +238,7 @@ public class EventController {
         participantsDao.deleteById(id);
         return "redirect:/profile";
     }
+
     @PostMapping("/events/{id}/comment/{cid}/delete")
     public String deleteEventComment(@PathVariable Long id, @PathVariable Long cid) {
         User user =  userService.getLoggedInUser();
