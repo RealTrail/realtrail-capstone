@@ -235,7 +235,7 @@ public class EventController {
 //Cancel
     @PostMapping("/events/{id}/cancel")
     public String cancelEvent (@PathVariable long id){
-        participantsDao.deleteById(id);
+        eventsDao.deleteById(id);
         return "redirect:/profile";
     }
     @PostMapping("/events/{id}/comment/{cid}/delete")
