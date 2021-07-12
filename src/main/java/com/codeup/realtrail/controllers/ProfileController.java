@@ -73,6 +73,11 @@ public class ProfileController {
         user.setUsername(loggedInUser.getUsername());
         user.setPassword(loggedInUser.getPassword());
 
+        // if user doesn't change profile image, set profile image from db back to user
+        if (user.getProfileImageUrl().isEmpty()) {
+            user.setProfileImageUrl(loggedInUser.getProfileImageUrl());
+        }
+
         if (loggedInUser.isAdmin()) {
             user.setAdmin(true);
         }

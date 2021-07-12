@@ -1,7 +1,7 @@
 "use strict";
 
 $(document).ready(() => {
-
+    let trail = {};
     let existingTrails = $("#trailOptions option").map((index, element) => element.text);
     console.log(existingTrails);
 
@@ -93,6 +93,11 @@ $(document).ready(() => {
         $("#trailLocation").removeClass("hidden");
         $(".mask2").addClass("active2");
 
+        // check if trail exists (data from the creating trail form)
+        if (trail) {
+            trail = {};
+        }
+
         // click upload images to upload images
         $("#images").click(() => uploadImages());
 
@@ -100,33 +105,36 @@ $(document).ready(() => {
             e.preventDefault();
 
             // check if the user has entered info in the inputs
-            if ($("#trailName").val() === undefined) {
+            if ($("#trailName").val() === "") {
+                trail = {};
                 $("p.trailName").text("Name cannot be empty!");
             } else {
                 $("p.trailName").css("display: none");
             }
-            if ($("#trailLength").val() === undefined) {
+            if ($("#trailLength").val() === "") {
+                trail = {};
                 $("p.trailLength").text("Length cannot be empty!");
             } else {
                 $("p.trailLength").css("display: none");
             }
             if ($("input[name='difficultyLevel']:checked").val() === undefined) {
+                trail = {};
                 $("p.difficultyLevel").text("Difficulty level cannot be unchecked!");
             } else {
                 $("p.difficultyLevel").css("display: none");
             }
             if ($("input[name='trailType']:checked").val() === undefined) {
+                trail = {};
                 $("p.trailType").text("Type cannot be unchecked!");
             } else {
                 $("p.trailType").css("display: none");
             }
-            if ($("#trailDetails").val() === undefined) {
+            if ($("#trailDetails").val() === "") {
+                trail = {};
                 $("p.trailDetails").text("Trail details cannot be empty!");
             } else {
                 $("p.trailDetails").css("display: none");
             }
-
-            let trail = {};
 
             // get the trail info typed in create trail modal form
             trail.name = formatTrailName($("#trailName").val());
@@ -147,6 +155,7 @@ $(document).ready(() => {
 
             // check if the trail already exist in the database
             if (isExist(trail.name, existingTrails)) {
+                trail = {};
                 $("p.trailExist").text("Trail already exists!")
             } else {
                 $("p.trailExist").css("display: none");
