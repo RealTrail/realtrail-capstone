@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
     <title>Edit Event</title>
 </head>
@@ -7,7 +7,6 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
     <h2>Edit Event Details</h2>
-    <!--    <div sec:authorize="isAuthenticated()">-->
     <fieldset>
         <form th:action="@{/events/{id}/edit/(id=${event.id})}" th:object="${event}" th:method="POST">
             <div th:field="*{id}">Event Id</div>
@@ -35,14 +34,14 @@
                 <label for="eventDetails">Event Details</label>
                 <input id="eventDetails" type="text" name="eventDetails" th:field="*{eventDetails}" />
             </div>
-
             <button>Submit Edits</button>
         </form>
-            <a href="/events/${event.id}/delete">
-                <button class="btn btn-danger">Delete Event</button>
-            </a>
     </fieldset>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
+
+<script type="text/javascript" src="/js/sticky.js"></script>
+<script src="/js/login.js"></script>
+<script src="/js/navbar.js"></script>
 </body>
 </html>

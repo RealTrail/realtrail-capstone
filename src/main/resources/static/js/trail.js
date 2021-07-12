@@ -1,35 +1,37 @@
 $(".slider")
     .slick({
+        infinite: true,
         slidesToShow: 6,
         slidesToScroll: 1,
-        arrows: true,
+        arrows: false,
+        autoplay: false,
         responsive: [
             {
-                breakpoint: 1665,
+                breakpoint: 1800,
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: false
-                }
-            },
-            {
-                breakpoint: 1000,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 579,
-                settings: {
-                    slidesToShow: 1,
                     slidesToScroll: 1
                 }
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1008,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: "unslick"
             }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
+
         ]
     })
     .on("setPosition", function () {
@@ -82,7 +84,7 @@ function closeNav() {
 
 // Click function for show the Modal
 
-$("#myBtn").on("click", function(){
+$("#myBtn, #myBtnM").on("click", function(){
     $(".mask").addClass("active");
 });
 
@@ -103,6 +105,7 @@ $(document).keyup(function(e) {
         closeModal();
     }
 });
+
 
 // ******************** Trail Search ***************
 

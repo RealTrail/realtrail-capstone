@@ -9,27 +9,26 @@
     <div th:if="${param.joined}">Thank you for joining the event!</div>
     <div th:if="${param.alreadyjoined}">You have already joined the event!</div>
     <div th:if="${event == null}">
-        Event not found.
+        No event found. <a href="/create">Create one</a>
     </div>
 
     <div th:if="${event}">
-        <div th:text="${eventId}">ID</div>
-        <div>Event name:<h3 th:text="${event.name}"></h3></div>
-        <div>Event coordinator:<h3 th:text="${event.owner.username}"></h3></div>
-        <div>date:<h4 th:text="${event.date}"></h4></div>
-        <div>time:<h4 th:text="${event.time}"></h4></div>
-        <div>Event details:<h4 th:text="${event.eventDetails}"></h4></div>
-        <div>trail:<a th:href="${'/events/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
-        <div>meet location:<h4 th:text="${event.meetLocation}"></h4></div>
-        <div>meet time:<h4 th:text="${event.meetTime}"></h4></div>
-        <div th:if="${event.owner.id == user.id}">
-            <div>participants:
+        <h3 th:text="${event.name}"></h3>
+        <p th:text="${'Event coordinator: ' + event.owner.username}"></p>
+        <h4 th:text="${'date: ' + event.date}"></h4>
+        <h4 th:text="${'time: ' + event.time}"></h4>
+        <h4 th:text="${event.eventDetails}"></h4>
+        <div>Trail:<a th:href="${'/trails/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
+        <div>Meet location:<h4 th:text="${event.meetLocation}"></h4></div>
+        <div>Meet time:<h4 th:text="${event.meetTime}"></h4></div>
+        <div th:if="${event.owner.id == user.id && event.participants != null}">
+            <div>Participants:
                 <div th:each="participant : ${event.participants}">
-                    <h4 th:text="${participant.username}"></h4>
+                    <p th:text="${participant.username}"></p>
                 </div>
             </div>
         </div>
-        <div>Comments:
+        <div th:if="${event.eventComments != null}">Comments:
             <div th:each="comment : ${event.eventComments}">
                 <h4 th:text="${comment.content}"></h4>
                 <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
@@ -40,21 +39,17 @@
                 </div>
             </div>
         </div>
-
         <div sec:authorize="isAuthenticated()">
             <form th:action="@{/events/{id}/comment(id=${event.id})}" th:object="${eventComment}" th:method="POST">
                 <textarea th:name="eventComment" id="" cols="30" rows="10" th:field="*{content}"></textarea>
-                <button type="submit">Submit Comment</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
-
     </div>
-
     <div th:if="${event.owner.id == user.id}">
         <div>
             <a th:href="${'/events/'+ event.id + '/edit'}">Edit Event</a>
         </div>
-
         <form th:action="@{|/events/{id}/delete|}" method="POST">
             <h2>Click the delete button to delete your event</h2>
             <button th:type="submit">delete</button>
@@ -69,5 +64,7 @@
     </div>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
+<script src="/js/login.js"></script>
+<script src="/js/navbar.js"></script>
 </body>
 </html>

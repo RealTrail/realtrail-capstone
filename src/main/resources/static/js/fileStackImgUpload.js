@@ -63,13 +63,14 @@
              console.log(results);
              let images = "";
              for (let image of results.filesUploaded) {
-                 images = images + image.url + ", ";
+                 images = images + image.url + " ";
              }
-             $("#hidden").val(images);
+             $("#hidden").val(images.substring(0, images.length - 1));
              $(".fa-check").toggleClass("hidden");
          },
          onFileUploadFailed: (response) => {
              console.log(response);
+             wiindow.location = "/error";
          }
      }
 
@@ -81,7 +82,7 @@
 
  // https://cdn.filestackcontent.com/zPduwMuWROCS01EDdRV1
 
- // https://cdn.filestackcontent.com/mlddTvwS1GFVI0STXIfa
+ //
 
  // https://cdn.filestackcontent.com/B3Da08QOR1mpSwEmTp8p
 

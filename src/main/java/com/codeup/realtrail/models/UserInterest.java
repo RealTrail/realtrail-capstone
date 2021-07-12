@@ -17,7 +17,6 @@ public class UserInterest {
     @Column(nullable = false, length = 100)
     private String interest;
 
-    @JsonBackReference
     @ManyToMany(mappedBy = "interests")
     private List<User> users;
 

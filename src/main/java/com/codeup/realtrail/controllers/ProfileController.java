@@ -105,12 +105,8 @@ public class ProfileController {
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
-            List<Event> createdEvents = user.getCreatedEvents();
-            List<Event> joinedEvents = user.getEvents();
             // pass the user to view/showProfile.html
             model.addAttribute("user", user);
-            model.addAttribute("events", joinedEvents);
-            model.addAttribute("createdEvents", createdEvents);
             return "users/showProfile";
         } else {
             return "redirect:/login";
@@ -118,7 +114,7 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/{id}/edit")
-    public String getAdminEditProfileForm(@PathVariable long id, Model model, Principal principal) {
+    public String getAdminEditProfileForm(@PathVariable long id, Model model) {
         User user = usersDao.getById(id);
         // pass the user to create profile form to show prepopulated data in the form
         model.addAttribute("user", user);

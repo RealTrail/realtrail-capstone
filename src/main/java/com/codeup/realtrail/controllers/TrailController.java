@@ -4,7 +4,6 @@ import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.PictureURLsRepository;
 import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
-import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,8 +26,8 @@ public class TrailController{
     // importing mapbox token
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
-    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
 
+    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
         this.trailsDao = trailsDao;
         this.trailCommentsDao = trailCommentsDao;
         this.pictureURLSDao = pictureURLSDao;
@@ -37,34 +37,38 @@ public class TrailController{
 
     // showTrail.html- shows individual trail with all trail details
     @GetMapping("/trails/{id}")
-    public String individualTrailPage(@PathVariable Long id, Model model){
+    public String individualTrailPage(@PathVariable Long id, Model model, Principal principal){
         Trail trail = trailsDao.getById(id);
-        List<MapPoint> coordinates = mapPointsDao.findAllByTrail(trail);
-        TrailComment trailComment = new TrailComment();
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
-        model.addAttribute("trailComment", trailComment);
-        model.addAttribute("coordinates", coordinates);
+        model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
-        model.addAttribute("loggedInUser",userService.getLoggedInUser());
+        if (!trail.getTrailComments().isEmpty()) {
+            long total = 0L;
+            for (TrailComment comment : trail.getTrailComments()) {
+                total += comment.getRating();
+            }
+            float average = (float) total / trail.getTrailComments().size();
+            trail.setRating(average);
+            model.addAttribute("average", average);
+        }
+        if (principal != null) {
+            model.addAttribute("loggedInUser",userService.getLoggedInUser());
+        }
         return "trails/showTrail";
     }
 
     @PostMapping("/trails/create")
     @ResponseBody
     public Trail createTrail(@Valid @RequestBody Trail trail) {
-        System.out.println("trail.getTrailImages() = " + trail.getTrailImages());
         Trail trailSaved;
-        if (trail.getTrailImages() == null) {
-            trailSaved = trailsDao.save(trail);
-        } else {
-            trailSaved = trailsDao.save(trail);
-            for (PictureURL url : trail.getTrailImages()) {
-                url.setTrail(trailSaved);
-                pictureURLSDao.save(url);
-            }
+        trailSaved = trailsDao.save(trail);
+        for (PictureURL url : trail.getTrailImages()) {
+            url.setTrail(trailSaved);
+            pictureURLSDao.save(url);
         }
+
         return trailSaved;
     }
 

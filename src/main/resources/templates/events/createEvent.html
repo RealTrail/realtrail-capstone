@@ -15,8 +15,10 @@
                 <h2>Event Details</h2>
                 <div>
                     <label for="name">Event Name</label>
-                    <input name="name" id="name" th:field="*{name}" />
+                    <input name="name" id="name" th:field="*{name}"/>
+                    <p>Event name has to be longer than 6 characters.</p>
                 </div>
+                <p class="errorMessage" th:text="${message}"></p>
                 <div>
                     <label for="eventDate">Date</label>
                     <input type="date" name="eventDate" id="eventDate" />
@@ -45,22 +47,24 @@
                     </div>
                     <div>
                         <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
-                        <label for="trailOption2">Customize your biking trail</label>
+                        <label for="trailOption2">Customize your hiking trail</label>
                     </div>
                 </div>
                 <div>
-                    <select id="trailOptions" name="trailOptions">
+                    <select id="trailOptions" name="trailOptions" class="hidden">
                         <option value="">Nothing selected</option>
                         <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}" th:name="${trail.longitude + ' ' + trail.latitude}"></option>
                     </select>
                 </div>
-                <div id="trailLocation">
+                <div id="trailLocation" class="hidden">
                     <label for="searchedName"></label>
                     <input type="text" id="searchedName" name="mapSearch">
-                    <input type="hidden" id="trailId" style="display: none">
+                    <input type="hidden" id="trailId" name="createdTrailId">
+                    <input type="hidden" id="trailPoint" name="trailPoint">
+                    <input type="hidden" id="createdCoordinates" name="createdCoordinates">
                     <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
                 </div>
-                <div id="map" style="height: 900px"></div>
+                <div id="map"></div>
                 <button type="submit" id="createEvent">Submit</button>
             </form>
         </div>
@@ -76,7 +80,8 @@
         <!-- Modal content -->
         <div class="modal-content2">
             <div class="modal-header2">
-                <h2 class="type1">Customize Your Own Trail</h2>
+                <h2 class="type1">Customize Your Hiking Trail</h2>
+                <p class="errorMessage trailExist"></p>
             </div>
             <div class="modal-body2">
                 <form action="/trails/create" method="POST">
@@ -133,8 +138,8 @@
                     <p class="errorMessage trailDetails"></p>
                     <div>
                         <button type="button" id="images">Upload images</button>
+                        <i id="imagesUploadHint" class="fa fa-check hidden" style="color:green"></i>
                         <input type="hidden" id="hidden" name="images" />
-                        <div id="imagesUploadHint"><i class="fa fa-check hidden" style="color:green"></i></div>
                     </div>
                     <button type="submit" id="createTrail">Submit</button>
                 </form>
