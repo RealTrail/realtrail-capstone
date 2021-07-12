@@ -41,14 +41,6 @@
                 <input type="text" name="state" id="state" placeholder="TX" th:field="*{state}"/>
             </div>
 
-            <label>Gender</label>
-            <div class="gender">
-                <input type="radio" id="male" name="gender" value="M" th:field="*{gender}"/>
-                <label for="male" class="radio">Male</label>
-                <input type="radio" id="female" name="gender" value="F" th:field="*{gender}"/>
-                <label for="female" class="radio">Female</label>
-            </div>
-
             <label>Interests</label>
             <div th:each="interest : ${interests}">
                 <label th:class="${'interest' + interest.id}">
