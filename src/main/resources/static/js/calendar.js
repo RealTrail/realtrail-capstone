@@ -23,7 +23,7 @@
             "start": time.val(),
             // "meetTime": meetTime.val(),
             "date": date.val(),
-            "url": "http://localhost:8080/events/"+ ID.val()
+            "url": "http://realtrail.quest/events/"+ ID.val()
         };
         displayBucket.push(eventDisplay);
     })
