@@ -121,19 +121,19 @@
             <div class="slider-container" >
                 <div class="slider">
                     <div th:each="trail : ${trails}">
-                        <a th:href="${'/trails/' + trail.id}">
-                            <div class="slide-wrap">
-                                <div class="image">
-                                    <img class="image" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
-                                </div>
-                                <div class="header">
-                                    <h3 th:text="${trail.name}"></h3>
-                                    <h4 th:text="${'Difficulty Level:  ' + trail.difficultyLevel}"></h4>
-                                    <h4 th:text="${'Trail length (miles):  ' + trail.length}"></h4>
-                                    <h4 th:text="${'Trail route type:  ' + trail.type}"></h4>
-                                </div>
-                            </div>
-                        </a>
+<!--                        <a th:href="${'/trails/' + trail.id}">-->
+<!--                            <div class="slide-wrap">-->
+<!--                                <div class="image">-->
+<!--                                    <img class="image" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">-->
+<!--                                </div>-->
+<!--                                <div class="header">-->
+<!--                                    <h3 th:text="${trail.name}"></h3>-->
+<!--                                    <h4 th:text="${'Difficulty Level:  ' + trail.difficultyLevel}"></h4>-->
+<!--                                    <h4 th:text="${'Trail length (miles):  ' + trail.length}"></h4>-->
+<!--                                    <h4 th:text="${'Trail route type:  ' + trail.type}"></h4>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </a>-->
                     </div>
                 </div>
             </div>

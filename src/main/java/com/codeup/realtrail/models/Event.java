@@ -3,6 +3,7 @@ package com.codeup.realtrail.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +28,7 @@ public class Event {
     private LocalDate date;
 
     @Column(length = 6)
+    @DateTimeFormat(pattern = "HH:mm a")
 //    @NotBlank(message = "Events must have a time")
     private LocalTime time;
 
@@ -45,6 +47,7 @@ public class Event {
     private String meetLocation;
 
     @Column(length = 12)
+    @DateTimeFormat(pattern = "HH:mm a")
 //    @NotBlank(message = "Events must have a meet time")
     private LocalTime meetTime;
 

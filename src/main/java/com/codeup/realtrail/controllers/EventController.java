@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -56,17 +58,48 @@ public class EventController {
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
             // get all the trails and mapPoints
-            List<Trail> trailList = trailsDao.findAll();
-            List<MapPoint> mapPointList = mapPointsDao.findAll();
+
             model.addAttribute("event", new Event());
-            model.addAttribute("trails", trailList);
-            model.addAttribute("mapPoints", mapPointList);
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);
+            List<Trail> trailList = trailsDao.findAll();
+            List<MapPoint> mapPointList = mapPointsDao.findAll();
+            model.addAttribute("trails", trailList);
+            model.addAttribute("mapPoints", mapPointList);
             return "events/createEvent";
         } else {
             return "redirect:/login";
         }
+    }
+
+
+    @PostMapping("/events/{id}/edit")
+    public String updateEvent(@PathVariable long id, @ModelAttribute Event event,
+                              @RequestParam(name = "eventDate") String eventDate,
+                              @RequestParam(name = "eventMeetTime", required = false) String eventMeetTime,
+                              @RequestParam(name = "eventTime", required = false) String eventTime,
+                              Model model)
+            throws ParseException
+    {
+        Event eventFromDb = eventsDao.getById(id);
+
+        SimpleDateFormat formatterEdit = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate = formatterEdit.parse(eventDate);
+        LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        event.setDate(localDate);
+        event.setTime(LocalTime.parse(eventTime));
+        event.setMeetTime(LocalTime.parse(eventMeetTime));
+        event.setOwner(eventFromDb.getOwner());
+        event.setTrail(eventFromDb.getTrail());
+
+
+        System.out.println(newDate);
+
+        event.setId(id);
+        eventsDao.save(event);
+        return "redirect:/events/" + id;
+//                "events/showEvent" + id;
+
     }
 
     @PostMapping("/create")
@@ -171,12 +204,12 @@ public class EventController {
         }
     }
 
-    @PostMapping("/events/{id}/edit")
-    public String updateEvent(@ModelAttribute Event event, Model model) {
-        eventsDao.save(event);
-        return "events/showEvent";
-    }
-
+//    @PostMapping("/events/{id}/edit")
+//    public String updateEvent(@PathVariable long id, @ModelAttribute Event event, Model model) {
+//        event.setId(id);
+//        eventsDao.save(event);
+//        return "redirect:/events/" + id;
+//    }
 
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {
