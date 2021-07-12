@@ -42,22 +42,18 @@
                 </form>
             </div>
         </div>
-
         <div sec:authorize="isAuthenticated()">
             <form th:action="@{/events/{id}/comment(id=${event.id})}" th:object="${eventComment}" th:method="POST">
                 <textarea th:name="eventComment" id="" cols="30" rows="10" th:field="*{content}"></textarea>
                 <button type="submit">Submit</button>
             </form>
         </div>
-
     </div>
-
     <div th:if="${event.owner.id == user.id}">
         <div>
-            <a th:href="${'/events/'+ event.id + '/edit'}">Update</a>
+            <a th:href="${'/events/'+ event.id + '/edit'}">Edit Event</a>
         </div>
-
-        <form th:action="@{|/events/{id}/delete|}" method="POST">
+        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="POST">
             <h2>Click the delete button to delete your event</h2>
             <button th:type="submit">delete</button>
         </form>

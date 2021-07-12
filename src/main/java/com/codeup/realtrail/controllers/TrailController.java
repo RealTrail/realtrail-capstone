@@ -6,9 +6,7 @@ import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
-
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Controller
 public class TrailController{
@@ -75,7 +72,6 @@ public class TrailController{
         return trailSaved;
     }
 
-
     @PostMapping("/trails/{id}/comment")
     public String saveTrailComment(@PathVariable long id, @ModelAttribute TrailComment trailComment){
         User user = userService.getLoggedInUser();
@@ -105,12 +101,6 @@ public class TrailController{
         return "home";
     }
 
-
-//    @GetMapping("/searchCat")
-//    public
-
-
-
     @PostMapping("/trails/{id}/comment/{cid}/delete")
     public String deleteTrailComment(@PathVariable Long id, @PathVariable Long cid) {
         User user =  userService.getLoggedInUser();
@@ -120,7 +110,5 @@ public class TrailController{
         }
         return "redirect:/trails/" + id;
     }
-
-
 }
 
