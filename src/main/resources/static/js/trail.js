@@ -53,11 +53,6 @@ function resizeSlider() {
         .css("height", slickHeight + "px");
 }
 
-function toggleShow () {
-    var el = document.getElementById("box");
-    el.classList.toggle("show");
-}
-
 
 $("body, #mainContainer").on("scroll", function() {
     $("body, #mainContainer").scrollTop($(this).scrollTop());
