@@ -20,18 +20,16 @@ public class TrailController{
     private TrailsRepository trailsDao;
     private TrailCommentsRepository trailCommentsDao;
     private PictureURLsRepository pictureURLSDao;
-    private MapPointsRepository mapPointsDao;
     private UserService userService;
 
     // importing mapbox token
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
+    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, UserService userService) {
         this.trailsDao = trailsDao;
         this.trailCommentsDao = trailCommentsDao;
         this.pictureURLSDao = pictureURLSDao;
-        this.mapPointsDao = mapPointsDao;
         this.userService = userService;
     }
 
@@ -39,8 +37,10 @@ public class TrailController{
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model, Principal principal){
         Trail trail = trailsDao.getById(id);
+        List<TrailComment> trailComments = trailCommentsDao.getAllByTrailId(id);
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
+        model.addAttribute("trailComments", trailComments);
         model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
@@ -54,7 +54,7 @@ public class TrailController{
             model.addAttribute("average", average);
         }
         if (principal != null) {
-            model.addAttribute("loggedInUser",userService.getLoggedInUser());
+            model.addAttribute("loggedInUser", userService.getLoggedInUser());
         }
         return "trails/showTrail";
     }
