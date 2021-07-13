@@ -82,43 +82,6 @@ function closeNav() {
 
 $(document).ready(function () {
 
-    // get the array of trail
-    // let trailArr = JSON.parse(trails);
-    // console.log(trailArr);
-    // $("div.slick-slide > a").each(() => {
-    //     console.log($(this).attr('href'));
-    // });
-    //
-    // $("div.slick-slide").find(".image > img").each(() => {
-    //     console.log($(this).attr('src'));
-    // })
-
-    let trails = [];
-    // let trailIds =[], trailImages = [], trailNames = [], diffLevels = [], trailLengths =[], trailTypes = [];
-    // $(".trailId").each(() => {
-    //     trailIds.push($(this).attr("href"));
-    // });
-    // $(".trailImage").each(() => trailImages.push($(this).attr("src")));
-    // $(".trailName").each(() => trailNames.push($(this).text()));
-    // $(".diffLevel").each(() => diffLevels.push($(this).text().split(":")[1].trim()));
-    // $(".trailLength").each(() => trailLengths.push($(this).text().split(":")[1].trim()));
-    // $(".trailType").each(() => trailTypes.push($(this).text().split(":")[1].trim()));
-    //
-    // for (let i = 0; i < trailIds.length; i++) {
-    //     let trail = {
-    //         id: trailIds[i],
-    //         image: trailImages[i],
-    //         name: trailNames[i],
-    //         difficultyLevel: diffLevels[i],
-    //         length: trailLengths[i],
-    //         type: trailTypes[i]
-    //     }
-    //     trails.push(trail);
-    // }
-
-
-
-
     // $(".slider > div").each(() => {
     //     // grab all the trail info form trail card
     //     let hrefArr = $(this).find("a").attr("href").split("/");
@@ -145,55 +108,55 @@ $(document).ready(function () {
 
 
     // search
-    // $("#search").click((e) => {
-    //     e.preventDefault();
-    //     let keyword = $("#keyword").val();
-    //     console.log(keyword);
-    //     if (keyword !== "") {
-    //         $.ajax({
-    //             type: "GET",
-    //             url: "/search-trail?keyword=" + keyword,
-    //             dataType: "json",
-    //             success: (trailArr) => {
-    //                 console.log(trailArr);
-    //                 if (trailArr.length === 0) {
-    //                     $(".slider-container .slider").html(`<h2>Nothing found. Search for another trail?</h2>`);
-    //                 } else {
-    //                     for (let trail of trailArr) {
-    //                         $(".slider-container .slider").html(
-    //                             `<div>
-    //                                 <a href=${'/trails/' + trail.id}>
-    //                                     <div class="slide-wrap">
-    //                                         <div class="image">
-    //                                             <img class="image" src=${trail.trailImages[0].pictureUrl} alt="trail image">
-    //                                         </div>
-    //                                         <div class="header">
-    //                                             <h3>${trail.name}</h3>
-    //                                             <h4>${'Difficulty Level:  ' + trail.difficultyLevel}</h4>
-    //                                             <h4>${'Trail length (miles):  ' + trail.length}</h4>
-    //                                             <h4>${'Trail route type:  ' + trail.type}</h4>
-    //                                         </div>
-    //                                     </div>
-    //                                 </a>
-    //                             </div>`
-    //                         );
-    //                     }
-    //                 }
-    //             },
-    //             error: (error) => {
-    //                 console.log("Error connecting the server");
-    //                 console.log(error);
-    //                 // window.location = "/error";
-    //             }
-    //         });
-    //     }
-    // });
+    $("#search").click((e) => {
+        e.preventDefault();
+        let keyword = $("#keyword").val();
+        console.log(keyword);
+        if (keyword !== "") {
+            $.ajax({
+                type: "GET",
+                url: "/search-trail?keyword=" + keyword,
+                dataType: "json",
+                success: (trailArr) => {
+                    console.log(trailArr);
+                    if (trailArr.length === 0) {
+                        $(".slider-container .slider").html(`<h2>Nothing found. Search for another trail?</h2>`);
+                    } else {
+                        for (let trail of trailArr) {
+                            $(".slider-container .slider").html(
+                                `<div>
+                                    <a href=${'/trails/' + trail.id}>
+                                        <div class="slide-wrap">
+                                            <div class="image">
+                                                <img class="image" src=${trail.trailImages[0].pictureUrl} alt="trail image">
+                                            </div>
+                                            <div class="header">
+                                                <h3>${trail.name}</h3>
+                                                <h4>${'Difficulty Level:  ' + trail.difficultyLevel}</h4>
+                                                <h4>${'Trail length (miles):  ' + trail.length}</h4>
+                                                <h4>${'Trail route type:  ' + trail.type}</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>`
+                            );
+                        }
+                    }
+                },
+                error: (error) => {
+                    console.log("Error connecting the server");
+                    console.log(error);
+                    // window.location = "/error";
+                }
+            });
+        }
+    });
 
     // Filter by difficulty level
 
     $("#difficultyLevel").on("change", function() {
         let diffLevel = $("#difficultyLevel").find(":selected").val();
-        if ($("type").find(":selected").val() === null) {
+        if ($("type").find(":selected").val() === "") {
             $.ajax({
                 type: "GET",
                 url: "/trails/filter?difficultyLevel=" + diffLevel,
@@ -215,7 +178,7 @@ $(document).ready(function () {
     // Filter by type
     $("#type").on("change", () => {
         let type = $("type").find(":selected").val();
-        if ($("#difficultyLevel").find(":selected").val() === null) {
+        if ($("#difficultyLevel").find(":selected").val() === "") {
             $.ajax({
                 type: "GET",
                 url: "/trails/filter?type=" + type,

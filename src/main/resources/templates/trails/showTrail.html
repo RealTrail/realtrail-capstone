@@ -6,55 +6,175 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<main style="margin-top: 5rem">
-    <div th:if="${trail == null}">
+
+<style>
+    .trail-header {
+        font-size: 1.2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-end;
+        height: 20rem;
+        width: 100%;
+        position:relative;
+        top: -14px;
+        background-color: rgba(225,225,225,1);
+        margin-top: 5rem;
+    }
+
+    .trail-header > img {
+        position: absolute;
+        left: 4rem;
+        bottom: -25px;
+        width: 15rem;
+        clip-path: circle(40%);
+        overflow: hidden;
+    }
+
+    .trail-header > h1 {
+        padding-left: 5rem;
+    }
+
+    .trail-header > div:nth-child(3) {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .trail-info {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 4rem 0 4rem;
+    }
+
+    .trail-info > thead {
+        padding-right: 2rem;
+        flex: 1;
+    }
+
+    .trail-info > tbody {
+        flex: 2;
+    }
+
+    .trail-map {
+        margin: 0 4rem 0 4rem;
+    }
+    .mapboxgl-ctrl-bottom-right {
+        right: 0;
+        bottom: 0;
+        visibility: hidden;
+    }
+
+    .trail-images {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 3rem;
+    }
+    .trail-image  {
+        flex: 1 0 24rem;
+        margin: 1rem;
+        box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+    .trail-image > img {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: transform 400ms ease-out;
+        filter: contrast(135%) brightness(90%)saturate(130%);
+    }
+
+    img:hover {
+        transform: scale(1.15);
+    }
+
+    .trail-comments {
+        margin: 0 4rem 2rem 4rem;
+    }
+
+
+</style>
+<main>
+    <div class="trail-header" th:if="${trail == null}">
         <h1>Trail not found.</h1>
     </div>
     <div th:if="${trail != null}">
-        <h1 th:text="${trail.name}"></h1>
-        <h4 th:text="${trail.difficultyLevel}"></h4>
-        <div th:if="${trail.rating != 0}">
-            <h4 th:text="${'rating: ' + trail.rating}"></h4>
+        <div class="trail-header">
+            <img th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
+            <h1 th:text="${trail.name}"></h1>
+            <div th:if="${trail.rating != 0}" th:text="${'rating: ' + trail.rating}"></div>
+            <div th:if="${trail.rating == 0}">No rating available</div>
         </div>
-        <div th:if="${trail.rating == 0}">
-            <h4>No rating available</h4>
-        </div>
-        <h4 th:text="${'length: ' + trail.length + 'miles'}"></h4>
-        <h4 th:text="${'elevation change: ' +  trail.elevation}"></h4>
-        <h4 th:text="${'route type: ' +  trail.type}"></h4>
-        <h4 th:text="${trail.trailDetails}"></h4>
-        <div>
-            <img th:each="image : ${trail.trailImages}" th:src="${image.pictureUrl}" alt="trail image">
+        <table class="trail-info">
+            <thead>
+                <tr>
+                    <td>Difficulty Level</td>
+                    <td th:text="${trail.difficultyLevel}"></td>
+                </tr>
+                <tr>
+                    <td>Length</td>
+                    <td th:text="${trail.length + 'miles'}"></td>
+                </tr>
+                <tr>
+                    <td>Elevation change</td>
+                    <td th:text="${trail.elevation}"></td>
+                </tr>
+                <tr>
+                    <td>Route Type</td>
+                    <td th:text="${trail.type}"></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr><td th:text="${trail.trailDetails}"></td></tr>
+                <tr><td th:if="${trail.mapPoints.isEmpty() || trail.longitude == 0 || trail.latitude == 0}">No map available</td></tr>
+                <tr><td th:if="${!trail.mapPoints.isEmpty() && trail.longitude != 0 && trail.latitude != 0}">
+                    <button class="btn" id="getMap">Get trail map</button>
+                </td></tr>
+            </tbody>
+        </table>
+
+        <input type="hidden" id="trailId" th:value="${trail.id}">
+        <input type="hidden" id="trailLocation" th:value="${trail.longitude + ',' + trail.latitude}">
+        <div id="map" class="trail-map"></div>
+
+        <div class="trail-images">
+            <div class="trail-image" th:each="image : ${trail.trailImages}">
+                <img th:src="${image.pictureUrl}" alt="trail image">
+            </div>
         </div>
         <input type="hidden" id="commentsNumber" th:value="${trailComments.size()}">
-        <br>
-        <div th:if="${!trailComments.isEmpty()}" th:each="comment : ${trailComments}">
-            <div>
-                <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
-                <span th:text="${comment.owner.username}"></span>
-            </div>
-            <div class="starRating">
-                <input type="hidden" class="userRating" th:value="${comment.rating}">
-                <div class="stars">
-                    <i class="fa fa-star star"></i>
-                    <i class="fa fa-star star"></i>
-                    <i class="fa fa-star star"></i>
-                    <i class="fa fa-star star"></i>
-                    <i class="fa fa-star star"></i>
+
+        <div class="trail-comments">
+            <h3>Comments</h3>
+            <div class="trail-comment" th:if="${!trailComments.isEmpty()}" th:each="comment : ${trailComments}">
+                <div>
+                    <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
+                    <span th:text="${comment.owner.username}"></span>
                 </div>
-                <span th:text="${comment.date}"></span>
-            </div>
-            <p th:text="${comment.content}"></p>
-            <div sec:authorize="isAuthenticated()">
-                <div th:if="${loggedInUser.isAdmin() || loggedInUser.id == comment.owner.id}">
-                    <form th:action="@{/trails/{id}/comment/{cid}/delete(id=${trail.id},cid=${comment.id})}" method="post">
-                        <button type="submit">Delete</button>
-                    </form>
+                <div class="starRating">
+                    <input type="hidden" class="userRating" th:value="${comment.rating}">
+                    <div class="stars">
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                        <i class="fa fa-star star"></i>
+                    </div>
+                    <span th:text="${comment.date}"></span>
+                </div>
+                <p th:text="${comment.content}"></p>
+                <div sec:authorize="isAuthenticated()">
+                    <div th:if="${loggedInUser.isAdmin() || loggedInUser.id == comment.owner.id}">
+                        <form th:action="@{/trails/{id}/comment/{cid}/delete(id=${trail.id},cid=${comment.id})}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 
     <div sec:authorize="isAuthenticated()">
         <form class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:method="POST">
@@ -87,16 +207,6 @@
             <textarea name="content" cols="20" rows="10"></textarea>
             <button type="submit">Submit</button>
         </form>
-    </div>
-
-    <div th:if="${trail.mapPoints.isEmpty() || trail.longitude == 0 || trail.latitude == 0}">
-        No map available.
-    </div>
-    <div th:if="${!trail.mapPoints.isEmpty() && trail.longitude != 0 && trail.latitude != 0}">
-        <input type="hidden" id="trailId" th:value="${trail.id}">
-        <input type="hidden" id="trailLocation" th:value="${trail.longitude + ',' + trail.latitude}">
-        <button class="btn" id="getMap">Get trail map</button>
-        <div id="map"></div>
     </div>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
