@@ -2,37 +2,55 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head :: head">
     <title>All Users</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: #e5e5e5;
+        }
+        /*  Define the background color for all the ODD background rows  */
+        .allUsers tr:nth-child(odd){
+            background: #f49068;
+        }
+        /*  Define the background color for all the EVEN background rows  */
+        .allUsers tr:nth-child(even){
+            background: #f3cdb8;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
-    <h1 style="margin-top: 5rem">All Users</h1>
-        
-    <table th:each="user : ${users}">
-        <tr>
-            <th><img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image"></th>
-        </tr>
-        <tr>
-            <th>Username</th>
-            <td><a th:href="@{profile/{id}(id=${user.id})}"><span th:text="${user.username}"></span></a></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td th:text="${user.email}"></td>
-        </tr>
-        <tr>
-            <td th:if="${loggedInUser.isAdmin()}">
-                <a th:href="${'/profile/' + user.id + '/edit'}">Edit</a>
-            </td>
-            <td th:if="${loggedInUser.isAdmin()}">
-                <form th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-    </table>
+    <div class= "all-users-view" style="height: 500px; width: 100%; background-color: #f1713f;">
+        <h1 class="all-users-heading" style="margin-top: 5rem; text-align: center;">All Users</h1>
+        <div class="all-users-table" style="width: 100%; margin: auto; position: absolute; background-color: #f3d6b8;">
+        <table style="width:60%; border-collapse:collapse;" th:each="user : ${users}">
+            <tr class="all-users-profile" style="float: left; background: #f49068; clip-path: circle(40%);">
+                <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
+            </tr>
+            <tr class="all-users-tr" style="background: #f3d6b8">
+                <th class="all-users-th">Username</th>
+                <td class="all-users-td" style="padding:7px; border:#f1713f 1px solid;"><a th:href="@{profile/{id}(id=${user.id})}"><span th:text="${user.username}"></span></a></td>
+            </tr>
+            <tr class="all-users-tr" style="background: #f3cdb8">
+                <th class="all-users-th">Email</th>
+                <td class="all-users-td" style="padding:7px; border:#f49068 1px solid;" th:text="${user.email}"></td>
+            </tr>
+            <tr class="all-users-tr" style="background: #f3d6b8">
+                <td class="all-users-td" style="padding:7px; border:#f49068 1px solid;" th:if="${loggedInUser.isAdmin()}">
+                    <a class="anchor-admin-edit" th:href="${'/profile/' + user.id + '/edit'}">Edit User Profile</a>
+                </td>
+                <td class="all-users-td" style="padding:7px; border:#f1713f 1px solid;" th:if="${loggedInUser.isAdmin()}">
+                    <form class="button-admin-delete" th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
+                        <button class="button-admin-delete" type="submit">Delete this User</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+
 </main>
-<footer th:replace="fragments/footer :: footer"></footer>
+<!--<footer th:replace="fragments/footer :: footer"></footer>-->
 <script src="/js/login.js"></script>
 <script src="/js/navbar.js"></script>
 <script  src="/js/modal.js"></script>
