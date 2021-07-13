@@ -34,7 +34,6 @@
                 <span th:text="${comment.owner.username}"></span>
             </div>
             <div class="starRating">
-                <div th:text="${comment.rating}"></div>
                 <input type="hidden" class="userRating" th:value="${comment.rating}">
                 <div class="stars">
                     <i class="fa fa-star star"></i>
@@ -54,12 +53,11 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 
     <div sec:authorize="isAuthenticated()">
-        <form class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:object="${trailComment}" th:method="POST">
+        <form class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:method="POST">
             <input type="checkbox" class="star-input" id="1" data-value="1"/>
             <label class="star-input-label" for="1">1
                 <i class="fa fa-star"></i>
@@ -85,8 +83,8 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star orange"></i>
             </label>
-            <input type="hidden" id="rating" th:field="*{rating}">
-            <textarea th:name="comment" cols="20" rows="10" th:field="*{content}"></textarea>
+            <input type="hidden" id="rating" name="rating">
+            <textarea name="content" cols="20" rows="10"></textarea>
             <button type="submit">Submit</button>
         </form>
     </div>

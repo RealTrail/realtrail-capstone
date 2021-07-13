@@ -98,7 +98,7 @@ $(document).ready(() => {
     // click upload images to upload images
     $("#images").click(() => uploadImages());
 
-
+    // click create trail to create a new trail
     $("#createTrail").click((e) => {
         e.preventDefault();
 
@@ -148,7 +148,7 @@ $(document).ready(() => {
             console.log(images);
             trail.trailImages = images;
         } else {  // set default trail image
-            trail.trailImages = ['https://cdn.filestackcontent.com/jIg7ZLZtTQiX0kNbmvxj'];
+            trail.trailImages = ['https://cdn.filestackcontent.com/Axfq5ASWmn6RlEO7Sh1w'];
         }
 
         // check if the trail already exist in the database

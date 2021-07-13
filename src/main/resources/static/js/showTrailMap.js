@@ -138,26 +138,17 @@ $(document).ready(() => {
         prevStars.removeClass('hovered');
     });
 
-    // $('.star-input-label').hover(() => {
-    //     let prevStars = $(this).prevAll();
-    //     prevStars.addClass('hovered');
-    // }, () => {
-    //     let prevStars = $(this).prevAll();
-    //     prevStars.removeClass('hovered');
-    // });
 
     let commentsLength = $("#commentsNumber").val();
-    console.log(commentsLength);
 
     for (let i = 0; i < commentsLength; i++) {
         let rating = $(".userRating").eq(i).val();
-        for (let j = 0; j <= rating - 1; j++) {
-            $(".starRating").eq(i).$(".star").eq(j).css('color', 'orange');
-            console.log(i, j, rating);
+        for (let j = 0; j <= 4; j++) {
+            if (j <= rating - 1) {
+                $(".star").eq(5 * i + j).css('color', 'orange');
+            }
         }
     }
-
-
 });
 
 mapboxgl.accessToken = mapboxToken;

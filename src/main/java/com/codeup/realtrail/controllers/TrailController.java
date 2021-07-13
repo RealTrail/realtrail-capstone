@@ -41,7 +41,7 @@ public class TrailController{
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
         model.addAttribute("trailComments", trailComments);
-        model.addAttribute("trailComment", new TrailComment());
+//        model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
         if (!trail.getTrailComments().isEmpty()) {
@@ -72,18 +72,6 @@ public class TrailController{
         return trailSaved;
     }
 
-    @PostMapping("/trails/{id}/comment")
-    public String saveTrailComment(@PathVariable long id, @ModelAttribute TrailComment trailComment){
-        User user = userService.getLoggedInUser();
-        Trail trail = trailsDao.getById(id);
-        LocalDateTime date = LocalDateTime.now();
-        trailComment.setDate(date);
-        trailComment.setTrail(trail);
-        trailComment.setOwner(user);
-        trailCommentsDao.save(trailComment);
-        return "redirect:/trails/" + id;
-    }
-
     @GetMapping("/search-trail")
     public String getSearchedTrail(@RequestParam (value="keyword", required = false) String name, Model model) {
         Trail trail = trailsDao.findByKeyword("%" + name + "%");
@@ -99,6 +87,18 @@ public class TrailController{
         List<String> filterLevel = trailsDao.findByDifficultyLevel();
         model.addAttribute("trails", filterLevel);
         return "home";
+    }
+
+    @PostMapping("/trails/{id}/comment")
+    public String saveTrailComment(@PathVariable long id,
+                                   @RequestParam(name = "rating") String rating,
+                                   @RequestParam(name = "content") String content){
+        User user = userService.getLoggedInUser();
+        Trail trail = trailsDao.getById(id);
+        LocalDateTime date = LocalDateTime.now();
+        TrailComment trailComment = new TrailComment(date, Integer.parseInt(rating), content, user, trail);
+        trailCommentsDao.save(trailComment);
+        return "redirect:/trails/" + id;
     }
 
     @PostMapping("/trails/{id}/comment/{cid}/delete")
