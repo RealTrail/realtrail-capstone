@@ -13,25 +13,23 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class TrailController{
     private TrailsRepository trailsDao;
     private TrailCommentsRepository trailCommentsDao;
     private PictureURLsRepository pictureURLSDao;
-    private MapPointsRepository mapPointsDao;
     private UserService userService;
 
     // importing mapbox token
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
+    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, UserService userService) {
         this.trailsDao = trailsDao;
         this.trailCommentsDao = trailCommentsDao;
         this.pictureURLSDao = pictureURLSDao;
-        this.mapPointsDao = mapPointsDao;
         this.userService = userService;
     }
 
@@ -39,9 +37,11 @@ public class TrailController{
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model, Principal principal){
         Trail trail = trailsDao.getById(id);
+        List<TrailComment> trailComments = trailCommentsDao.getAllByTrailId(id);
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
-        model.addAttribute("trailComment", new TrailComment());
+        model.addAttribute("trailComments", trailComments);
+//        model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
         if (!trail.getTrailComments().isEmpty()) {
@@ -54,7 +54,7 @@ public class TrailController{
             model.addAttribute("average", average);
         }
         if (principal != null) {
-            model.addAttribute("loggedInUser",userService.getLoggedInUser());
+            model.addAttribute("loggedInUser", userService.getLoggedInUser());
         }
         return "trails/showTrail";
     }
@@ -72,31 +72,51 @@ public class TrailController{
         return trailSaved;
     }
 
+    @GetMapping("/trails/search")
+    @ResponseBody
+    public List<Trail> getSearchedTrail(@RequestParam(name = "keyword", required = false) String keyword) {
+        List<Trail> trails = trailsDao.findByName(keyword);
+
+        if (trails.isEmpty()) {
+            Set<Trail> trailSet = new HashSet<>();
+            List<String> keywords = Arrays.asList(keyword.split(" "));
+            for (String string : keywords) {
+                System.out.println("string = " + string);
+                trailSet.addAll(trailsDao.findByName(string));  // combine the trails found together without duplicates
+            }
+            List<Trail> trailList = new ArrayList<>(trailSet);
+            trailList.sort(new Comparator<Trail>() {
+                @Override
+                public int compare(Trail trail1, Trail trail2) {
+                    String name1 = trail1.getName();
+                    String name2 = trail2.getName();
+                    return name1.compareToIgnoreCase(name2);
+                }
+            });
+            return trailList;
+        } else {
+            return trails;
+        }
+    }
+
+//    @GetMapping("/trails/filter")
+//    @ResponseBody
+//    public List<Trail> filterDifficultyLevel(@RequestParam(name = "difficultyLevel") String diffLevel) {
+//        List<Trail> trails = trailsDao.findByDifficultyLevel();
+//        model.addAttribute("trails", filterLevel);
+//        return "home";
+//    }
+
     @PostMapping("/trails/{id}/comment")
-    public String saveTrailComment(@PathVariable long id, @ModelAttribute TrailComment trailComment){
+    public String saveTrailComment(@PathVariable long id,
+                                   @RequestParam(name = "rating") String rating,
+                                   @RequestParam(name = "content") String content){
         User user = userService.getLoggedInUser();
         Trail trail = trailsDao.getById(id);
         LocalDateTime date = LocalDateTime.now();
-        trailComment.setDate(date);
-        trailComment.setTrail(trail);
-        trailComment.setOwner(user);
+        TrailComment trailComment = new TrailComment(date, Integer.parseInt(rating), content, user, trail);
         trailCommentsDao.save(trailComment);
         return "redirect:/trails/" + id;
-    }
-
-    @GetMapping("/search-trail?keyword={keyword}")
-    @ResponseBody
-    public Trail getSearchedTrail(@RequestParam(name = "keyWord") String keyWord) {
-//        String keyWord = trailSearchRequestBody.getKeyWord();
-        Trail trail = trailsDao.findByKeyword("%" + keyWord + "%");
-        return trail;
-    }
-
-    @GetMapping("/filter/difficulty-level")
-    public String filterDifficultyLevel(Model model) {
-        List<String> filterLevel = trailsDao.findByDifficultyLevel();
-        model.addAttribute("trails", filterLevel);
-        return "home";
     }
 
     @PostMapping("/trails/{id}/comment/{cid}/delete")

@@ -61,10 +61,10 @@
     <a href="/profile/settings">Edit</a>
     <a href="/password/reset">Reset Password</a>
 
-    <div th:if="${createdEvents == null}">
+    <div th:if="${createdEvents.isEmpty()}">
         <h2>You have not created any events. <a href="/create">Create one now</a></h2>
     </div>
-    <div th:if="${createdEvents != null}">
+    <div th:if="${!createdEvents.isEmpty()}">
         <h2>You have created these events</h2>
         <div th:each="event : ${createdEvents}" id="createdEvents">
             <a th:href="@{events/{id}(id=${event.id})}">
@@ -78,10 +78,10 @@
         </div>
     </div>
 
-    <div th:if="${events == null}">
+    <div th:if="${events.isEmpty()}">
         <h2>You have not joined any events. <a href="/events">Want to join now?</a></h2>
     </div>
-    <div th:if="${events != null}">
+    <div th:if="${!events.isEmpty()}">
         <h2>You have joined these events</h2>
         <div th:each="event : ${events}" id="joinedEvents">
             <a th:href="@{events/{id}(id=${event.id})}">
@@ -97,8 +97,8 @@
 </main>
 
 <footer th:replace="fragments/footer :: footer"></footer>
-<script src="/js/login.js"></script>
 <script src="/js/navbar.js"></script>
-<script  src="/js/modal.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>

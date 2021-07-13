@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
     <title>Home Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -107,14 +106,14 @@
             <div class="trail-form">
                 <form th:action="@{/search-trail}" method="get">
                     <div class="container">
-                        <label for="keyWord"></label>
-                        <input type="text" id="keyWord" name="keyword" placeholder="Search Trails..." class="search__box">
+                        <label for="keyword"></label>
+                        <input type="text" id="keyword" name="keyword" placeholder="Search Trails..." class="search__box">
                         <button type="submit" id="search" class="search__icon"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
                 <div class="filter" style="margin-top:21rem; margin-left:17rem; position:absolute; z-index:1000">
                     <label for="difficultyLevel"></label>
-                    <select id="difficultyLevel" name="difficulty_level">
+                    <select id="difficultyLevel" name="difficultyLevel">
                         <option th:value="null">Filter by Difficulty-Level</option>
                         <option th:value="Easy">Easy</option>
                         <option th:value="Moderate">Moderate</option>
@@ -136,16 +135,16 @@
             <div class="slider-container" >
                 <div class="slider">
                     <div th:each="trail : ${trails}">
-                        <a th:href="${'/trails/' + trail.id}">
+                        <a class="trailId" th:href="${'/trails/' + trail.id}">
                             <div class="slide-wrap">
                                 <div class="image">
-                                    <img class="image" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
+                                    <img class="image trailImage" th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
                                 </div>
                                 <div class="header">
-                                    <h3 th:text="${trail.name}"></h3>
-                                    <h4 th:text="${'Difficulty Level:  ' + trail.difficultyLevel}"></h4>
-                                    <h4 th:text="${'Trail length (miles):  ' + trail.length}"></h4>
-                                    <h4 th:text="${'Trail route type:  ' + trail.type}"></h4>
+                                    <h3 class="trailName" th:text="${trail.name}"></h3>
+                                    <h4 class="diffLevel" th:text="${'Difficulty Level:  ' + trail.difficultyLevel}"></h4>
+                                    <h4 class="trailLength" th:text="${'Trail length (miles):  ' + trail.length}"></h4>
+                                    <h4 class="trailType" th:text="${'Trail route type:  ' + trail.type}"></h4>
                                 </div>
                             </div>
                         </a>
@@ -164,11 +163,12 @@
 <!-- partial -->
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js'></script>
-<script src="/js/trail.js"></script>
+
 <!--<script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>-->
 <script src="/js/calendar.js"></script>
-<script  src="/js/modal.js"></script>
-
-
+<script src="/js/navbar.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
+<script src="/js/trail.js"></script>
 </body>
 </html>

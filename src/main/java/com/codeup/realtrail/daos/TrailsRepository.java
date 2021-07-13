@@ -1,6 +1,7 @@
 package com.codeup.realtrail.daos;
 
 import com.codeup.realtrail.models.Trail;
+import com.codeup.realtrail.models.TrailComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,17 +13,15 @@ import java.util.List;
 public interface TrailsRepository extends JpaRepository<Trail, Long> {
     Trail findTrailByName(String name);
     Trail findById(long id);
-    List<Trail> findAllByDifficultyLevel(String level);
-    List<Trail> findAllByType(String routeType);
 
-    @Query("FROM Trail t WHERE t.name LIKE %:keyword%")
-    Trail findByKeyword(@Param("keyword") String keyword);
+    @Query("SELECT t FROM Trail t WHERE t.name LIKE %:keyword%")
+    List<Trail> findByName(@Param("keyword") String keyword);
 
-    @Query("SELECT DISTINCT difficultyLevel FROM Trail")
-    List<String> findByDifficultyLevel();
+    @Query("SELECT t FROM Trail t WHERE t.difficultyLevel = :diffLevel")
+    List<Trail> findByDifficultyLevel(String diffLevel);
 
     List<Trail> findAllByDifficultyLevelAndAndTypeAndName(String difficultyLevel, String type, String name);
 
-    @Query("FROM Trail t WHERE t.name LIKE %:keyword%")
-    List<Trail> findAllByKeyword(@Param("keyword") String keyword);
+//    @Query("FROM Trail t WHERE t.name LIKE %:keyword%")
+//    List<Trail> findAllByKeyword(@Param("keyword") String keyword);
 }

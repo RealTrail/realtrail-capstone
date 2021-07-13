@@ -8,6 +8,7 @@ $(document).ready(() => {
 
     let coordinates = [];
 
+    // get trail map
     $("#getMap").click(() =>{
         // get the coordinates from db
         $.ajax({
@@ -32,7 +33,8 @@ $(document).ready(() => {
                     minZoom: 11
                 });
 
-                if (id <= 21) {
+
+                if (id <= 21) {  // existing trails form db
                     // show the trail route
                     map.on('load', () => {
                         map.addSource('route', {
@@ -60,10 +62,12 @@ $(document).ready(() => {
                             }
                         });
                     });
-                } else {
-                    map.on('load', () =>{
+                } else {  // trails created by users
+                    map.on('load', () => {
                         let trailToSearch = coordinates.join(';');
                         console.log(trailToSearch);
+
+                        // make a directions request
                         let url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + trailToSearch +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
                         let request = new XMLHttpRequest();
                         request.responseType = 'json';
@@ -110,79 +114,42 @@ $(document).ready(() => {
         });
     });
 
-    $(".star").hover(
-        () => {
-            let rating = parseInt($(this).attr("data-value"), 10);
-            console.log(rating);
-            $(this).parent().children().each((element) => {
-                if (element < rating) {
-                    $(this).addClass("added");
-                } else {
-                    $(this).removeClass("added");
-                }
-            });
-        },
-        () => {
-            $(this).parent().children().each((element) => $(this).removeClass("added"));
-        });
 
-    $("#stars .star").click(() => {
-        let rating = Number($(this).attr("data-value"));
+    // click to add rating
+    $('.star-input').click(function() {
+        $(this).parent()[0].reset();
+        var prevStars = $(this).prevAll();
+        var nextStars = $(this).nextAll();
+        prevStars.attr('checked',true);
+        nextStars.attr('checked',false);
+        $(this).attr('checked',true);
+
+        let rating = $(this).attr("data-value");
         console.log(rating);
-        for (let i = 0; i < 5; i++) {
-            $(this).parent().children().eq(i).removeClass('added');
-        }
-
-        for (let i = 0; i < rating; i++) {
-            $(this).parent().children().eq(i).addClass('added');
-        }
-        let ratingValue = parseInt($("#stars > .star.added").last().data("value"));
-        $("#rating").val(ratingValue);
+        $("#rating").val(rating);
     });
+
+    $('.star-input-label').on('mouseover',function() {
+        var prevStars = $(this).prevAll();
+        prevStars.addClass('hovered');
+    });
+    $('.star-input-label').on('mouseout',function(){
+        var prevStars = $(this).prevAll();
+        prevStars.removeClass('hovered');
+    });
+
+
+    let commentsLength = $("#commentsNumber").val();
+
+    for (let i = 0; i < commentsLength; i++) {
+        let rating = $(".userRating").eq(i).val();
+        for (let j = 0; j <= 4; j++) {
+            if (j <= rating - 1) {
+                $(".star").eq(5 * i + j).css('color', 'orange');
+            }
+        }
+    }
 });
 
 mapboxgl.accessToken = mapboxToken;
 
-// make a directions request
-function getMatch(e) {
-    let url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxToken;
-    let request = new XMLHttpRequest();
-    request.responseType = 'json';
-    request.open('GET', url, true);
-    request.onload  = () => {
-        let jsonResponse = request.response;
-        console.log(jsonResponse);
-        let route = jsonResponse.routes[0].geometry.coordinates;
-        // add the route to the map
-        addRoute(route);
-    };
-    request.send();
-}
-
-// adds the route as a layer on the map
-function addRoute (coordinates) {
-    map.addLayer({
-        "id": "route",
-        "type": "line",
-        "source": {
-            "type": "geojson",
-            "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                    type: 'LineString',
-                    coordinates: coordinates
-                }
-            }
-        },
-        "layout": {
-            "line-join": "round",
-            "line-cap": "round"
-        },
-        "paint": {
-            "line-color": "#048d3b",
-            "line-width": 4,
-            "line-opacity": 0.8
-        }
-    });
-}
