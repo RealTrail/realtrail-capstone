@@ -2,14 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
     <title>Edit Event</title>
+
 </head>
 <body>
+<style>
+    body {background-color: powderblue;}
+    h2   {color: blue;}
+    main {margin-top:7rem;}
+    label {color: red;font-weight: bold}
+    button {background-color: red; color: #e5e5e5}
+</style>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
     <h2>Edit Event Details</h2>
     <fieldset>
         <form th:action="@{/events/{id}/edit/(id=${event.id})}" th:object="${event}" th:method="POST">
-            <div th:field="*{id}">Event Id</div>
+<!--            <div th:field="*{id}">Event Id</div>-->
             <div>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" th:field="*{name}"/>
