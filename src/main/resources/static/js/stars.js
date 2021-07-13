@@ -1,17 +1,10 @@
-$('.star-input').click(function() {
-    $(this).parent()[0].reset();
-    var prevStars = $(this).prevAll();
-    var nextStars = $(this).nextAll();
-    prevStars.attr('checked',true);
-    nextStars.attr('checked',false);
-    $(this).attr('checked',true);
-});
+"use strict";
 
-$('.star-input-label').on('mouseover',function() {
-    var prevStars = $(this).prevAll();
-    prevStars.addClass('hovered');
+
+$(document).ready(() => {
+
+
+
+
+
 });
-$('.star-input-label').on('mouseout',function(){
-    var prevStars = $(this).prevAll();
-    prevStars.removeClass('hovered');
-})

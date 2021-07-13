@@ -2,47 +2,228 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
     <title>Edit Event</title>
+
 </head>
 <body>
+<style>
+    input[type="tel" i] {
+        padding: 8px;
+        border: 0;
+        border-radius: 5px;
+    }
+    input{
+
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+    input:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+
+
+    textarea{
+        width: 80%;
+        padding: 8px;
+        border: 0;
+        border-radius: 5px;
+        height: 50px;
+        overflow: hidden;
+
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+    }
+
+    textarea:hover{
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    select{
+        padding: 8px;
+        border: 0;
+        border-radius: 5px;
+    }
+
+    .form__wrapperpassedit {
+        max-width: 1080px;
+        margin: 0 auto;
+        position: relative;
+        top:200px;
+        text-align: left;
+    }
+
+    .form__bodypassedit {
+        position: relative;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: 0;
+        padding: 20px 0;
+        transition: 0.5s;
+        display: flex;
+        pointer-events: none;
+        z-index: 1;
+        justify-content: flex-start;
+        align-items: stretch;
+        z-index: 2;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .form__bodypassedit form {
+        pointer-events: all;
+        margin: 20px 0;
+        transition: opacity 0.3s;
+    }
+    .form__bodypassedit form h2 {
+        margin-top: 0;
+        color: white;
+        font-size: 3em;
+    }
+    .form__bodypassedit form .input-field {
+        margin-bottom: 10px;
+
+
+    }
+    .form__bodypassedit form label {
+        display: block;
+        color: white;
+        line-height: 2em;
+        /* font-weight: 300; */
+
+
+    }
+    .form__bodypassedit form input[type=text], .form__bodypassedit form input[type=password], .form__bodypassedit form input[type=email], .form__bodypassedit form input[type=date], .form__bodypassedit form input[type=time], .form__bodypassedit form input[name=name] {
+        padding: 8px;
+        border: 0;
+        border-radius: 5px;
+        width: 80%;
+    }
+
+    .form__backgroundedit {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        bottom: 0;
+        margin: 0 auto;
+        height: 886px;
+        width: 80vw;
+        max-width: 80%;
+        max-width: 580px;
+        background-color: rgba(46, 54, 66, 0.4);
+        /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+        transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+        border-radius: 20px;
+
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        border-top-right-radius: 50px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        /* text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+        border-right-style: 11px solid ; */
+        box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+        border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+        /*border-top: 3px solid rgba(245, 240, 240, 1.9);*/
+        border: 1.5px outset rgba(255, 255, 255, 0.3);
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        pointer-events: none;
+        z-index: 1;
+
+
+    }
+
+    .form__backgroundc2 {
+        position: absolute;
+        top: 80px;
+        left: 0;
+
+        bottom: 0;
+        margin: 0 auto;
+        height: 886px;
+        width: 80vw;
+        max-width: 80%;
+        max-width: 580px;
+        background-color: rgba(255, 255, 255, 0.9);
+        /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+        transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+        border-radius: 20px;
+
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        border-top-right-radius: 50px;
+        /* text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+        border-right-style: 11px solid ; */
+        box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+        border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+        /*border-top: 3px solid rgba(245, 240, 240, 1.9);*/
+        border: 1.5px outset rgba(255, 255, 255, 0.3);
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        z-index: -2;
+
+
+
+    }
+
+</style>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
     <h2>Edit Event Details</h2>
-    <fieldset>
+        <div class=".form__wrapperpassedit">
+            <div class="form__bodypassedit">
         <form th:action="@{/events/{id}/edit/(id=${event.id})}" th:object="${event}" th:method="POST">
-            <div th:field="*{id}">Event Id</div>
+<!--            <div th:field="*{id}">Event Id</div>-->
             <div>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" th:field="*{name}"/>
             </div>
+            <br>
             <div>
                 <label for="date">Date</label>
                 <input type="text" name="eventDate" id="date" th:value="*{date}" />
             </div>
+            <br>
             <div>
                 <label for="time">Time</label>
                 <input type="time" name="eventTime" id="time" th:value="*{time}"/>
             </div>
+            <br>
             <div>
                 <label for="meetLocation">Meet Location</label>
                 <input type="text" id="meetLocation" name="meetLocation" th:field="*{meetLocation}" />
             </div>
+            <br>
             <div>
                 <label for="meetTime">Meet Time</label>
                 <input type="time" name="eventMeetTime" id="meetTime"  th:value="*{meetTime}"/>
             </div>
+            <br>
             <div>
                 <label for="eventDetails">Event Details</label>
                 <input id="eventDetails" type="text" name="eventDetails" th:field="*{eventDetails}" />
             </div>
+            <br>
             <button>Submit Edits</button>
+        </div>
+            </div>
         </form>
-    </fieldset>
+        <div class="form__backgroundc"></div>
+        <div class="form__backgroundc2"></div>
+
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 
 <script type="text/javascript" src="/js/sticky.js"></script>
-<script src="/js/login.js"></script>
 <script src="/js/navbar.js"></script>
-<script  src="/js/modal.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>
