@@ -9,8 +9,8 @@
     body {background-color: powderblue;}
     h2   {color: blue;}
     main {margin-top:7rem;}
-    label {color: red;font-weight: bold}
-    button {background-color: red; color: #e5e5e5}
+    label {color: red;font-weight: bold; text-align: justify}
+    button {background-color: red; color: #e5e5e5;font-weight: bold}
 </style>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
@@ -22,26 +22,32 @@
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" th:field="*{name}"/>
             </div>
+            <br>
             <div>
                 <label for="date">Date</label>
                 <input type="text" name="eventDate" id="date" th:value="*{date}" />
             </div>
+            <br>
             <div>
                 <label for="time">Time</label>
                 <input type="time" name="eventTime" id="time" th:value="*{time}"/>
             </div>
+            <br>
             <div>
                 <label for="meetLocation">Meet Location</label>
                 <input type="text" id="meetLocation" name="meetLocation" th:field="*{meetLocation}" />
             </div>
+            <br>
             <div>
                 <label for="meetTime">Meet Time</label>
                 <input type="time" name="eventMeetTime" id="meetTime"  th:value="*{meetTime}"/>
             </div>
+            <br>
             <div>
                 <label for="eventDetails">Event Details</label>
                 <input id="eventDetails" type="text" name="eventDetails" th:field="*{eventDetails}" />
             </div>
+            <br>
             <button>Submit Edits</button>
         </form>
     </fieldset>
