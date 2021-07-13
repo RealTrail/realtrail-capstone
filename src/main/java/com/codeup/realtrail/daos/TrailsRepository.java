@@ -17,11 +17,13 @@ public interface TrailsRepository extends JpaRepository<Trail, Long> {
     @Query("SELECT t FROM Trail t WHERE t.name LIKE %:keyword%")
     List<Trail> findByName(@Param("keyword") String keyword);
 
-    @Query("SELECT t FROM Trail t WHERE t.difficultyLevel = :diffLevel")
+    @Query("SELECT t FROM Trail t WHERE t.difficultyLevel = ?1")
     List<Trail> findByDifficultyLevel(String diffLevel);
 
-    List<Trail> findAllByDifficultyLevelAndAndTypeAndName(String difficultyLevel, String type, String name);
+    @Query("SELECT t FROM Trail t WHERE t.type = ?1")
+    List<Trail> findByType(String type);
 
-//    @Query("FROM Trail t WHERE t.name LIKE %:keyword%")
-//    List<Trail> findAllByKeyword(@Param("keyword") String keyword);
+    @Query("SELECT t FROM Trail t WHERE t.difficultyLevel = ?1 AND t.type = ?2")
+    List<Trail> findByDifficultyLevelAndType(String difficultyLevel, String type);
+
 }

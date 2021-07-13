@@ -119,66 +119,89 @@ $(document).ready(function () {
 
 
 
-    $(".slider > div").each(() => {
-        // grab all the trail info form trail card
-        let hrefArr = $(this).find("a").attr("href").split("/");
-        let imageUrl = $(this).find(".image > img").attr("src");
-        let name = $(this).find(".header >  *:nth-child(1)").text();
-        let diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
-        let length = $(this).find(".header > *:nth-child(3)").text().split(":")[1].trim();
-        let type = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
-
-        let trail = {
-
-            imageUrl: imageUrl,
-            name: name,
-            difficultyLevel: diffLevel,
-            length: length,
-            type: type
-        };
-
-        console.log(trail);
-        trails.push(trail);
-    });
-    console.log(trails);
+    // $(".slider > div").each(() => {
+    //     // grab all the trail info form trail card
+    //     let hrefArr = $(this).find("a").attr("href").split("/");
+    //     let imageUrl = $(this).find(".image > img").attr("src");
+    //     let name = $(this).find(".header >  *:nth-child(1)").text();
+    //     let diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
+    //     let length = $(this).find(".header > *:nth-child(3)").text().split(":")[1].trim();
+    //     let type = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
+    //
+    //     let trail = {
+    //
+    //         imageUrl: imageUrl,
+    //         name: name,
+    //         difficultyLevel: diffLevel,
+    //         length: length,
+    //         type: type
+    //     };
+    //
+    //     console.log(trail);
+    //     trails.push(trail);
+    // });
+    // console.log(trails);
 
 
 
     // search
-    $("#search").click((e) => {
-        e.preventDefault();
-        let keyword = $("#keyword").val();
-        console.log(keyword);
-        if (keyword !== "") {
+    // $("#search").click((e) => {
+    //     e.preventDefault();
+    //     let keyword = $("#keyword").val();
+    //     console.log(keyword);
+    //     if (keyword !== "") {
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "/search-trail?keyword=" + keyword,
+    //             dataType: "json",
+    //             success: (trailArr) => {
+    //                 console.log(trailArr);
+    //                 if (trailArr.length === 0) {
+    //                     $(".slider-container .slider").html(`<h2>Nothing found. Search for another trail?</h2>`);
+    //                 } else {
+    //                     for (let trail of trailArr) {
+    //                         $(".slider-container .slider").html(
+    //                             `<div>
+    //                                 <a href=${'/trails/' + trail.id}>
+    //                                     <div class="slide-wrap">
+    //                                         <div class="image">
+    //                                             <img class="image" src=${trail.trailImages[0].pictureUrl} alt="trail image">
+    //                                         </div>
+    //                                         <div class="header">
+    //                                             <h3>${trail.name}</h3>
+    //                                             <h4>${'Difficulty Level:  ' + trail.difficultyLevel}</h4>
+    //                                             <h4>${'Trail length (miles):  ' + trail.length}</h4>
+    //                                             <h4>${'Trail route type:  ' + trail.type}</h4>
+    //                                         </div>
+    //                                     </div>
+    //                                 </a>
+    //                             </div>`
+    //                         );
+    //                     }
+    //                 }
+    //             },
+    //             error: (error) => {
+    //                 console.log("Error connecting the server");
+    //                 console.log(error);
+    //                 // window.location = "/error";
+    //             }
+    //         });
+    //     }
+    // });
+
+    // Filter by difficulty level
+
+    $("#difficultyLevel").on("change", function() {
+        let diffLevel = $("#difficultyLevel").find(":selected").val();
+        if ($("type").find(":selected").val() === null) {
             $.ajax({
                 type: "GET",
-                url: "/trails/search?keyword=" + keyword,
+                url: "/trails/filter?difficultyLevel=" + diffLevel,
                 dataType: "json",
                 success: (trailArr) => {
                     console.log(trailArr);
-                    // if (trailArr.length === 0) {
-                    //     $(".slider-container .slider").html(`<h2>Nothing found. Search for another trail?</h2>`);
-                    // } else {
-                    //     for (let trail of trailArr) {
-                    //         $(".slider-container .slider").html(
-                    //             `<div>
-                    //                 <a href=${'/trails/' + trail.id}>
-                    //                     <div class="slide-wrap">
-                    //                         <div class="image">
-                    //                             <img class="image" src=${trail.trailImages[0].pictureUrl} alt="trail image">
-                    //                         </div>
-                    //                         <div class="header">
-                    //                             <h3>${trail.name}</h3>
-                    //                             <h4>${'Difficulty Level:  ' + trail.difficultyLevel}</h4>
-                    //                             <h4>${'Trail length (miles):  ' + trail.length}</h4>
-                    //                             <h4>${'Trail route type:  ' + trail.type}</h4>
-                    //                         </div>
-                    //                     </div>
-                    //                 </a>
-                    //             </div>`
-                    //         );
-                    //     }
-                    // }
+
+
                 },
                 error: (error) => {
                     console.log("Error connecting the server");
@@ -189,43 +212,71 @@ $(document).ready(function () {
         }
     });
 
-    // Filter by difficulty level
-    if ($("type").find(":selected").val() === null) {
-        $("#difficultyLevel").on("change", function() {
-            let diffLevel = $("#difficultyLevel").find("")
-
-            // for (let i = 0; i < trails.length; i++) {
-            //     if (trail.difficultyLevel)
-            // }
-
-
-            // $(".slick-slide").each(() => {
-            //     let diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
-            //     console.log(diffLevel);
-
-
-            // if ($("#difficultyLevel :selected").text() !== diffLevel){
-            //     $(this).hide()
-            // } else {
-            //     $(this).show()
-            // }
-            // })
-        });
-    }
-
-
     // Filter by type
-    $("#type").on("change", function() {
-        $(".slick-slide").each(function (i){
-            var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
-            console.log(routeType);
-            if ($("#type :selected").text() !== routeType){
-                $(this).hide()
-            } else {
-                $(this).show()
-            }
-        })
+    $("#type").on("change", () => {
+        let type = $("type").find(":selected").val();
+        if ($("#difficultyLevel").find(":selected").val() === null) {
+            $.ajax({
+                type: "GET",
+                url: "/trails/filter?type=" + type,
+                dataType: "json",
+                success: (trailArr) => {
+                    console.log(trailArr);
+
+
+                },
+                error: (error) => {
+                    console.log("Error connecting the server");
+                    console.log(error);
+                    // window.location = "/error";
+                }
+            });
+        } else {
+            let diffLevel = $("#difficultyLevel").find(":selected").val();
+            $.ajax({
+                type: "GET",
+                url: "/trails/filter?difficultyLevel=" + diffLevel + "&type=" + type,
+                dataType: "json",
+                success: (trailArr) => {
+                    console.log(trailArr);
+
+
+                },
+                error: (error) => {
+                    console.log("Error connecting the server");
+                    console.log(error);
+                    // window.location = "/error";
+                }
+            });
+        }
     })
+
+
+
+    // $("#difficultyLevel").on("change", function() {
+        // $(".slick-slide").each(() => {
+        //     let diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
+        //     console.log(diffLevel);
+        // if ($("#difficultyLevel :selected").text() !== diffLevel){
+        //     $(this).hide()
+        // } else {
+        //     $(this).show()
+        // }
+        // })
+    // }
+
+
+    // $("#type").on("change", function() {
+    //     $(".slick-slide").each(function (i){
+    //         var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
+    //         console.log(routeType);
+    //         if ($("#type :selected").text() !== routeType){
+    //             $(this).hide()
+    //         } else {
+    //             $(this).show()
+    //         }
+    //     })
+    // })
 
 });
 

@@ -72,7 +72,7 @@ public class TrailController{
         return trailSaved;
     }
 
-    @GetMapping("/trails/search")
+    @GetMapping("/search-trail")
     @ResponseBody
     public List<Trail> getSearchedTrail(@RequestParam(name = "keyword", required = false) String keyword) {
         List<Trail> trails = trailsDao.findByName(keyword);
@@ -99,13 +99,28 @@ public class TrailController{
         }
     }
 
-//    @GetMapping("/trails/filter")
-//    @ResponseBody
-//    public List<Trail> filterDifficultyLevel(@RequestParam(name = "difficultyLevel") String diffLevel) {
-//        List<Trail> trails = trailsDao.findByDifficultyLevel();
-//        model.addAttribute("trails", filterLevel);
-//        return "home";
-//    }
+    @GetMapping("/trails/filter")
+    @ResponseBody
+    public List<Trail> filterDifficultyLevelOrType(
+            @RequestParam(name = "difficultyLevel", required = false) String diffLevel,
+            @RequestParam(name = "type", required = false) String type) {
+        List<Trail> trails = null;
+        if (type == null) {
+            trails = trailsDao.findByDifficultyLevel(diffLevel);
+        } else if (diffLevel == null) {
+            trails = trailsDao.findByType(type);
+        } else {
+            trails = trailsDao.findByDifficultyLevelAndType(diffLevel, type);
+        }
+
+        trails.sort((trail1, trail2) -> {
+            String name1 = trail1.getName();
+            String name2 = trail2.getName();
+            return name1.compareToIgnoreCase(name2);
+        });
+        return trails;
+    }
+
 
     @PostMapping("/trails/{id}/comment")
     public String saveTrailComment(@PathVariable long id,
