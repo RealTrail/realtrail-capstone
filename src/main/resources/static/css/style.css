@@ -1039,15 +1039,6 @@ input[type="tel" i] {
 
 }
 
-.gender{
-    display: inline-flex;
-    align-items: baseline;
-    position: relative;
-    left: 15px;
-    top: -14px;
-
-}
-
 .closing {
     font-size: 1.6rem;
     font-weight: bold;
@@ -2539,6 +2530,9 @@ div.header h4{
 
 
 .rating-widget {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     margin: 0 4rem 3rem 4rem;
     transition:.25s ease-in-out;
 }
@@ -2568,12 +2562,12 @@ div.header h4{
     padding: 8px 2px;
     text-indent: -5000px;
     line-height: 0;
-    color: #dcdcdc;
+    color: #b9b9b9;
     position: relative;
     cursor: pointer;
 }
 .rating-widget .star-input-label:hover, .rating-widget .star-input-label.hovered {
-    color: #a7a7a7;
+    color: #ffc46f;
 }
 .rating-widget .star-input-label i {
     display: block;

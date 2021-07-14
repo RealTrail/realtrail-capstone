@@ -21,15 +21,33 @@
     footer{
         margin-top: 125px;
     }
-    .closing{position: absolute;top:32px;right:32px;}
+
+    #admin-edit-profile-form {
+        position: relative;
+    }
+
+    #admin-edit-profile-form .admin-close {
+        font-size: 1.6rem;
+        font-weight: bold;
+        position: absolute;
+        top: -36px;
+        right: -133px;
+    }
 </style>
 
 <main>
 
     <div class="form__wrapperpasspp">
         <div class="form__bodypasspp">
-            <form th:action="@{/profile/{id}/edit(id=${user.id})}" th:method="POST" th:object="${user}" style="position: relative">
-                <div><a href="/users" class="closing">X</a></div>
+
+            <form action="/profile/image" method="POST">
+                <img class="pulse" th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
+                <input type="hidden" id="profileImageUrl" name="profileImageUrl">
+                <button type="submit" class="btnUpload" id="upload">Upload profile image</button>
+            </form>
+
+            <form id="admin-edit-profile-form" th:action="@{/profile/{id}/edit(id=${user.id})}" th:method="POST" th:object="${user}">
+                <div><a href="/profile" class="closing">X</a></div>
                 <h2>Public Profile</h2>
                 <div>
                     <label for="firstName">First Name</label>

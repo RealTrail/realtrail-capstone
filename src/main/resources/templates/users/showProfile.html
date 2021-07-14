@@ -26,6 +26,19 @@
         clip-path: circle(40%);
         overflow: hidden;
     }
+
+    .profile-info {
+        margin: .5rem 4rem .5rem 4rem;
+    }
+
+    .profile > tr {
+        padding: .5rem 0;
+    }
+
+    .profile-info th {
+        text-align: start;
+    }
+
 </style>
 <main>
     <div class="profile-header">
@@ -36,10 +49,10 @@
         </div>
     </div>
 
-    <table>
+    <table class="profile-info">
         <tr th:if="${user.firstName == null || user.lastName == null}">
         <th>Name</th>
-        <td>"No name available"</td>
+        <td>No name available</td>
     </tr>
         <tr th:if="${user.firstName != null && user.lastName != null}">
             <th>Name</th>
@@ -82,10 +95,14 @@
                 <i class="fa fad fa-biking"></i>
             </td>
         </tr>
+        <tr>
+            <td><a class="btn-submit" href="/profile/settings">Edit</a></td>
+            <td><a class="btn-submit" href="/password/reset">Reset Password</a></td>
+        </tr>
     </table>
 
-    <a href="/profile/settings">Edit</a>
-    <a href="/password/reset">Reset Password</a>
+
+
 
     <div th:if="${createdEvents.isEmpty()}">
         <h2>You have not created any events. <a href="/create">Create one now</a></h2>
@@ -103,6 +120,8 @@
             </form>
         </div>
     </div>
+
+
 
     <div th:if="${events.isEmpty()}">
         <h2>You have not joined any events. <a href="/events">Want to join now?</a></h2>
