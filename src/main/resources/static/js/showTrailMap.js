@@ -23,7 +23,7 @@ $(document).ready(() => {
                 }
                 console.log(coordinates);
 
-                $("#map").addClass("map");
+                $("#map").css("height", "700px");
                 // show the map around the location
                 let map = new mapboxgl.Map({
                     container: 'map',
