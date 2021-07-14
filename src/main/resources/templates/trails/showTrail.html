@@ -7,93 +7,6 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<style>
-    .trail-header {
-        font-size: 1.2rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: flex-end;
-        height: 20rem;
-        width: 100%;
-        position:relative;
-        top: -14px;
-        background-color: rgba(225,225,225,1);
-        margin-top: 5rem;
-    }
-
-    .trail-header > img {
-        position: absolute;
-        left: 4rem;
-        bottom: -25px;
-        width: 15rem;
-        clip-path: circle(40%);
-        overflow: hidden;
-    }
-
-    .trail-header > h1 {
-        padding-left: 5rem;
-    }
-
-    .trail-header > div:nth-child(3) {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-    }
-
-    .trail-info {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 4rem 0 4rem;
-    }
-
-    .trail-info > thead {
-        padding-right: 2rem;
-        flex: 1;
-    }
-
-    .trail-info > tbody {
-        flex: 2;
-    }
-
-    .trail-map {
-        margin: 0 4rem 0 4rem;
-    }
-    .mapboxgl-ctrl-bottom-right {
-        right: 0;
-        bottom: 0;
-        visibility: hidden;
-    }
-
-    .trail-images {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 3rem;
-    }
-    .trail-image  {
-        flex: 1 0 24rem;
-        margin: 1rem;
-        box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-    }
-    .trail-image > img {
-        display: block;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        transition: transform 400ms ease-out;
-        filter: contrast(135%) brightness(90%)saturate(130%);
-    }
-
-    img:hover {
-        transform: scale(1.15);
-    }
-
-    .trail-comments {
-        margin: 0 4rem 2rem 4rem;
-    }
-
-
-</style>
 <main>
     <div class="trail-header" th:if="${trail == null}">
         <h1>Trail not found.</h1>
@@ -129,7 +42,7 @@
                 <tr><td th:text="${trail.trailDetails}"></td></tr>
                 <tr><td th:if="${trail.mapPoints.isEmpty() || trail.longitude == 0 || trail.latitude == 0}">No map available</td></tr>
                 <tr><td th:if="${!trail.mapPoints.isEmpty() && trail.longitude != 0 && trail.latitude != 0}">
-                    <button class="btn" id="getMap">Get trail map</button>
+                    <button class="btn" id="getMap">Get map</button>
                 </td></tr>
             </tbody>
         </table>
@@ -145,39 +58,39 @@
         </div>
         <input type="hidden" id="commentsNumber" th:value="${trailComments.size()}">
 
-        <div class="trail-comments">
-            <h3>Comments</h3>
-            <div class="trail-comment" th:if="${!trailComments.isEmpty()}" th:each="comment : ${trailComments}">
-                <div>
-                    <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
-                    <span th:text="${comment.owner.username}"></span>
-                </div>
-                <div class="starRating">
-                    <input type="hidden" class="userRating" th:value="${comment.rating}">
-                    <div class="stars">
-                        <i class="fa fa-star star"></i>
-                        <i class="fa fa-star star"></i>
-                        <i class="fa fa-star star"></i>
-                        <i class="fa fa-star star"></i>
-                        <i class="fa fa-star star"></i>
-                    </div>
-                    <span th:text="${comment.date}"></span>
-                </div>
-                <p th:text="${comment.content}"></p>
-                <div sec:authorize="isAuthenticated()">
-                    <div th:if="${loggedInUser.isAdmin() || loggedInUser.id == comment.owner.id}">
+        <h3 th:if="${!trailComments.isEmpty()}" class="comments-header">Comments</h3>
+        <table th:if="${!trailComments.isEmpty()}" class="trail-comments">
+            <tbody class="trail-comment" th:each="comment : ${trailComments}">
+                <tr>
+                    <td><img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image"></td>
+                    <td class="starRating">
+                        <span th:text="${comment.owner.username}"></span>
+                        <input type="hidden" class="userRating" th:value="${comment.rating}">
+                        <div class="stars">
+                            <i class="fa fa-star star"></i>
+                            <i class="fa fa-star star"></i>
+                            <i class="fa fa-star star"></i>
+                            <i class="fa fa-star star"></i>
+                            <i class="fa fa-star star"></i>
+                        </div>
+                        <span th:text="${comment.date}"></span>
+                    </td>
+                </tr>
+                <tr><td th:text="${comment.content}"></td></tr>
+                <tr sec:authorize="isAuthenticated()">
+                    <td th:if="${loggedInUser.isAdmin() || loggedInUser.id == comment.owner.id}">
                         <form th:action="@{/trails/{id}/comment/{cid}/delete(id=${trail.id},cid=${comment.id})}" method="post">
-                            <button type="submit">Delete</button>
+                            <div><button class="btn-submit" type="submit">Delete</button></div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <div sec:authorize="isAuthenticated()">
-        <form class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:method="POST">
+
+    <form sec:authorize="isAuthenticated()" class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:method="POST">
+        <div>
             <input type="checkbox" class="star-input" id="1" data-value="1"/>
             <label class="star-input-label" for="1">1
                 <i class="fa fa-star"></i>
@@ -204,10 +117,10 @@
                 <i class="fa fa-star orange"></i>
             </label>
             <input type="hidden" id="rating" name="rating">
-            <textarea name="content" cols="20" rows="10"></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+        </div>
+        <textarea id="trail-content" name="content" cols="20" rows="2"></textarea>
+        <button class="btn-submit" type="submit">Submit</button>
+    </form>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 
