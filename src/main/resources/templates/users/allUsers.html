@@ -2,50 +2,85 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head :: head">
     <title>All Users</title>
-    <style>
-        body{
-            margin: 0;
-            background-color: #e5e5e5;
-        }
-        /*  Define the background color for all the ODD background rows  */
-        .allUsers tr:nth-child(odd){
-            background: #f49068;
-        }
-        /*  Define the background color for all the EVEN background rows  */
-        .allUsers tr:nth-child(even){
-            background: #f3cdb8;
-        }
-    </style>
+
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<style>
+/********************************** ALL USERS ADMIN PAGE ****************************/
+.all-users-view{
+    margin-top: 24px;
+    padding: 15px 0 0 0;
+    height: 81%;
+    width: 100%;
+    background-color: #786d6d;
+    z-index: 2;
+}
+.all-users-heading{
+    padding-top: 33px;
+    padding-left: 18px;
+}
+.heading h1{
+    color: #203232;
+    margin-bottom: 0px;
+}
+.username{
+    float: left;
+    padding: 15px;
+    /*position: relative;*/
+}
+.all-users-details{
+    /*padding-top: 15px;*/
+    height: 60%;
+    width: 100%;
+    border-radius: 24px;
+    background-color: orangered;
+    z-index: 2;
+}
+.details-card{
+    height: 9em;
+    /*padding: 3px;*/
+    margin: 6px 6px 0 3px;
+    background-color: orangered;
+    border-bottom: 3px solid #203232;
+    border-radius: 24px;
+    border-top: 3px solid #203232;
+}
+.edit-user-div{
+    align-items: center;
+    /*justify-content: center;*/
+    float: right;
+/}
+*
+*
+<</style>
 <main>
-    <div class= "all-users-view" style="height: 500px; width: 100%; background-color: #f1713f;">
-        <h1 class="all-users-heading" style="margin-top: 5rem; text-align: center;">All Users</h1>
-        <div class="all-users-table" style="width: 100%; margin: auto; position: absolute; background-color: #f3d6b8;">
-        <table style="width:60%; border-collapse:collapse;" th:each="user : ${users}">
-            <tr class="all-users-profile" style="float: left; background: #f49068; clip-path: circle(40%);">
+    <div class= "all-users-view">
+        <h1 class="all-users-heading">All Users</h1>
+        <div class="all-users-details">
+        <div class="details-card" th:each="user : ${users}">
+            <span class="all-users-profile" >
                 <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
-            </tr>
-            <tr class="all-users-tr" style="background: #f3d6b8">
-                <th class="all-users-th">Username</th>
-                <td class="all-users-td" style="padding:7px; border:#f1713f 1px solid;"><a th:href="@{profile/{id}(id=${user.id})}"><span th:text="${user.username}"></span></a></td>
-            </tr>
-            <tr class="all-users-tr" style="background: #f3cdb8">
-                <th class="all-users-th">Email</th>
-                <td class="all-users-td" style="padding:7px; border:#f49068 1px solid;" th:text="${user.email}"></td>
-            </tr>
-            <tr class="all-users-tr" style="background: #f3d6b8">
-                <td class="all-users-td" style="padding:7px; border:#f49068 1px solid;" th:if="${loggedInUser.isAdmin()}">
-                    <a class="anchor-admin-edit" th:href="${'/profile/' + user.id + '/edit'}">Edit User Profile</a>
-                </td>
-                <td class="all-users-td" style="padding:7px; border:#f1713f 1px solid;" th:if="${loggedInUser.isAdmin()}">
-                    <form class="button-admin-delete" th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
-                        <button class="button-admin-delete" type="submit">Delete this User</button>
+            </span>
+            <span class="username">
+                <label class="username-label">Username</label>
+                <span class="username-span"><a th:href="@{profile/{id}(id=${user.id})}"><span th:text="${user.username}"></span></a></span>
+            </span>
+            <span class="email-div">
+                <label class="email-label">Email</label>
+                <span class="email-span" th:text="${user.email}"></span>
+            </span>
+            <span class="edit-user-div">
+                <span class="admin-edit-span"th:if="${loggedInUser.isAdmin()}">
+                    <a class="admin-edit-anchor" th:href="${'/profile/' + user.id + '/edit'}">Edit User Profile</a>
+                </span>
+                <span class="delete-user-div" th:if="${loggedInUser.isAdmin()}">
+                    <form class="admin-delete-form" th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
+                        <button class="admin-delete-btn" type="submit">Delete this User</button>
                     </form>
-                </td>
-            </tr>
-        </table>
+                </span>
+            </span>
+        </div>
         </div>
     </div>
 
