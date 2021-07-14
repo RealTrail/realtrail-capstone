@@ -233,8 +233,8 @@ When you visit the missions, be careful. These are historic structures and the m
         15,
         141,
         'Loop',
-        -98.4886,
-        29.4166,
+        -98.4891111,
+        29.4286382,
         'History, River, Plaza, Cathedral, Tower, Alamo, parks, Rivercenter, King William
         This is a 15 mile long series of walkways that run along the San Antonio river, with shopping, dining and other attractions along the route. Walk on sidewalks at river-level & on west side of the River. The Walk ends at a wide stairs going up to old town square, Bexar County Courthouse, & San Fernando Cathedral. South on Soledad St. to Nueva St. & re-enter River Walk at the dam. Go to end & cross Guenther St. bridge. Pass thru King William homes & re-enter River Walk on east bank. Go to La Villita River Theatre. Through La Villita, Hemisfair Plaza, to Inst. of Texan Cultures & Tower. North to Commerce St., north on Alamo St. to The Alamo. Cross Alamo St. into River Center. Re-enter River Walk & north to footbridge. Right & back to bridge at dam. Right & north along east bank of river. Leave River Walk at Travis St. & follow to Travis Park. Diagonally across Park & follow Jefferson St. by war memorials & auditorium to Lexington. Left back to Sheraton'),
        (21, 'Leon Creek Greenway Trail',
