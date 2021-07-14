@@ -29,7 +29,7 @@
     <div class="form__wrapperpasspp">
         <div class="form__bodypasspp">
             <form th:action="@{/profile/{id}/edit(id=${user.id})}" th:method="POST" th:object="${user}" style="position: relative">
-
+                <div><a href="/users" class="closing">X</a></div>
                 <h2>Public Profile</h2>
                 <div>
                     <label for="firstName">First Name</label>
@@ -69,10 +69,7 @@
             </form>
         </div>
     </div>
-
-    <div class="form__backgroundpp">
-        <a href="/profile" class="closing">X</a>
-    </div>
+    <div class="form__backgroundpp"></div>
     <div class="form__backgroundpp1"></div>
 
     <svg class="profile" x="0" y="0" version="1.1" viewBox="0 0 2000 1944" xml:space="preserve">
