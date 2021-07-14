@@ -2476,7 +2476,11 @@ div.header h4{
     filter: contrast(135%) brightness(90%)saturate(130%);
 }
 
-img:hover {
+.trail-image > img:hover {
+    transform: scale(1.15);
+}
+
+.trail-comment img.profileImage:hover {
     transform: scale(1.15);
 }
 
