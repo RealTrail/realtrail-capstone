@@ -784,7 +784,12 @@ footer h1 {
 footer {
     background-color: #3c3b3b;
     padding: 3em 4em 2em;
+    position: absolute; /* Or fixed */
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
+
 footer .logo {
     color:#fff;
     font-size: 28px;
@@ -904,15 +909,15 @@ small {
     color: #555;
 }
 
-.profile-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #EFEFEF;
-    text-align: center;
-}
+/*.profile-footer {*/
+/*    position: absolute;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    left: 0;*/
+/*    padding: 1rem;*/
+/*    background-color: #EFEFEF;*/
+/*    text-align: center;*/
+/*}*/
 /*.complete .closing{*/
 /*    display: inline-block;*/
 /*    padding: 15px 25px;*/
