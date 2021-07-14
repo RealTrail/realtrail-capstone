@@ -5,13 +5,36 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<style>
+    .profile-header {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: flex-end;
+        height: 20rem;
+        width: 100%;
+        background-color: rgba(225,225,225,1);
+        margin-top: 5rem;
+    }
 
+    .profile-username {
+        margin-left: 2rem;
+    }
+
+    .profile-header > img.profileImage {
+        margin-left: 4rem;
+        width: 15rem;
+        clip-path: circle(40%);
+        overflow: hidden;
+    }
+</style>
 <main>
     <h1><span th:text="${user.username}"></span>'s Profile</h1>
     <div class="profile-header">
         <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
-        <h5>Username</h5>
-        <h1 th:text="${user.username}"></h1>
+        <div class="profile-username">
+            <div>Username</div>
+            <h1 th:text="${user.username}"></h1>
+        </div>
     </div>
     <table>
         <tr th:if="${user.firstName == null || user.lastName == null}">
