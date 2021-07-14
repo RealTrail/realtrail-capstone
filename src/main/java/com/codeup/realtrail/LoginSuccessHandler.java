@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Component
-public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
+public class LoginSuccessHandler implements AuthenticationSuccessHandler{
     private UserService userService;
 
     public LoginSuccessHandler(UserService userService) {
