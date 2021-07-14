@@ -904,7 +904,7 @@ small {
     color: #555;
 }
 
-/*.btn {*/
+/*.complete .closing{*/
 /*    display: inline-block;*/
 /*    padding: 15px 25px;*/
 /*    border-radius: 23px;*/
@@ -1029,6 +1029,19 @@ input[type="tel" i] {
     top: -14px;
 
 }
+
+.closing{
+    position: absolute;
+    margin-left: 400px;
+    top:200px;
+}
+
+.complete{
+    position:absolute;
+    bottom:20px;
+}
+
+
 
 /*FORM SIZE*/
 
