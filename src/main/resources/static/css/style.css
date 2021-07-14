@@ -938,8 +938,6 @@ img#profileImage{
 
 .btnUpload{
     display: inline-block;
-
-
     text-decoration: none;
     color: white;
     white-space: nowrap;
@@ -950,7 +948,6 @@ img#profileImage{
     transition: transform 0.2s;
     transition: all 1s ease-in-out;
     transform: scale(1.04);
-
     width: 200px;
     height: 200px;
     line-height: 200px;
@@ -961,7 +958,7 @@ img#profileImage{
 
     position: relative;
     margin: auto;
-    top: 57px;
+    top: 42px;
     right: 0px;
     bottom: 0;
     left: -308px
