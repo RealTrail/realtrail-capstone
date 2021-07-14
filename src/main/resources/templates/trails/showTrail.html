@@ -47,9 +47,11 @@
             </tbody>
         </table>
 
-        <input type="hidden" id="trailId" th:value="${trail.id}">
-        <input type="hidden" id="trailLocation" th:value="${trail.longitude + ',' + trail.latitude}">
-        <div id="map" class="trail-map"></div>
+        <div>
+            <input type="hidden" id="trailId" th:value="${trail.id}">
+            <input type="hidden" id="trailLocation" th:value="${trail.longitude + ',' + trail.latitude}">
+        </div>
+        <div id="trail-map" class="trail-map"></div>
 
         <div class="trail-images">
             <div class="trail-image" th:each="image : ${trail.trailImages}">

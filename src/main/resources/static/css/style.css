@@ -955,12 +955,8 @@ img#profileImage{
     
 }
 
-.btnUpload{
+.btnUpload {
     display: inline-block;
-<<<<<<< HEAD
-=======
-
->>>>>>> d9531893eb65c535d03ba4c45611ad5bb759f639
     text-decoration: none;
     color: white;
     white-space: nowrap;
@@ -978,16 +974,9 @@ img#profileImage{
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     opacity: 0;
-
     position: relative;
     margin: auto;
-<<<<<<< HEAD
-    top: 42px;
-=======
-    top: 27px;
->>>>>>> d9531893eb65c535d03ba4c45611ad5bb759f639
-    right: 0px;
-    bottom: 0;
+    top: 25px;
     left: -308px;
 }
 
