@@ -897,6 +897,8 @@ footer .row {
 }
 
 
+
+
 /********************************** PROFILE SETTINGS PAGE ***************************/
 
 @import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
@@ -1905,6 +1907,20 @@ select{
 
 
 /*}*/
+
+
+.mapboxgl-ctrl-group button {
+    width: 29px;
+    height: 129px;
+    display: block;
+    padding: 0;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+    position: reletive;
+}
 
 
 
