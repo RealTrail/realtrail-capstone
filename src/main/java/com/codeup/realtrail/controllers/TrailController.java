@@ -1,6 +1,5 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.PictureURLsRepository;
 import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;

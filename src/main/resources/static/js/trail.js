@@ -81,32 +81,6 @@ function closeNav() {
 
 
 $(document).ready(function () {
-
-    // $(".slider > div").each(() => {
-    //     // grab all the trail info form trail card
-    //     let hrefArr = $(this).find("a").attr("href").split("/");
-    //     let imageUrl = $(this).find(".image > img").attr("src");
-    //     let name = $(this).find(".header >  *:nth-child(1)").text();
-    //     let diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
-    //     let length = $(this).find(".header > *:nth-child(3)").text().split(":")[1].trim();
-    //     let type = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
-    //
-    //     let trail = {
-    //
-    //         imageUrl: imageUrl,
-    //         name: name,
-    //         difficultyLevel: diffLevel,
-    //         length: length,
-    //         type: type
-    //     };
-    //
-    //     console.log(trail);
-    //     trails.push(trail);
-    // });
-    // console.log(trails);
-
-
-
     // search
     $("#search").click((e) => {
         e.preventDefault();
