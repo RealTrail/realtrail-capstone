@@ -1902,6 +1902,20 @@ select{
 /*}*/
 
 
+.mapboxgl-ctrl-group button {
+    width: 29px;
+    height: 129px;
+    display: block;
+    padding: 0;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+    position: reletive;
+}
+
+
 
 /* ****************************** HOME PAGE ****************************** */
 
