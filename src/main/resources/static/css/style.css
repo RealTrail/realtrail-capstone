@@ -784,7 +784,7 @@ footer h1 {
 footer {
     /*background-color: #646464;*/
     padding: 3em 4em 2em;
-    position: fixed; /* Or fixed */
+    position: absolute; /* Or fixed */
     /*padding-bottom: 50px;*/
     right: 0;
     bottom: 0;
