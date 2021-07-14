@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head :: head">
+    <style>
+        .background-image{
+            background: url("/static/images/showEvents.png");
+        }
+    </style>
+
     <title>Show All Events</title>
 </head>
-<body>
+<body class="background-image">
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <main style="margin-top: 5rem">
         <div th:if="${noEventsFound}">
-            <h1>No events were found.</h1>
+            <h1 class="noEvent">No events were found.</h1>
         </div>
 
-        <h2>Review the list for trail events happening near you!</h2>
-        <div th:each="event : ${events}">
-            <a th:href="${'/events/' + event.id}">
-                <h3 th:text="${event.name}"></h3>
-                <p>by: <span th:text="${event.owner.username}"></span></p>
-                <p th:text="${'Date: ' + event.date}"></p>
-                <p th:text="${'Time: ' + event.time}"></p>
-                <p>
-                    Trail: <a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
-                </p>
-            </a>
-        </div>
+        <h2 class="review">Review the list for trail events happening near you!</h2>
+        <ul class="card-list">
+                <li th:each="event : ${events}" class="card">
+                    <a th:href="${'/events/' + event.id}" class="card-description">
+                        <h3 th:text="${event.name}"></h3>
+                        <p>by: <span th:text="${event.owner.username}"></span></p>
+                        <p th:text="${'Date: ' + event.date}"></p>
+                        <p th:text="${'Time: ' + event.time}"></p>
+                        <p>
+                            Trail: <a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
+                        </p>
+                        <hr>
+                    </a>
+            </li>
+        </ul>
     </main>
 
-    <footer th:replace="fragments/footer :: footer"></footer>
+    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>
     <script src="/js/navbar.js"></script>
     <script src="/js/modal.js"></script>
     <script src="/js/login.js"></script>
