@@ -2,36 +2,90 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/head :: head">
     <title>All Users</title>
+
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<style>
+/********************************** ALL USERS ADMIN PAGE ****************************/
+.all-users-view{
+    margin-top: 24px;
+    padding: 15px 0 0 0;
+    height: 81%;
+    width: 100%;
+    background-color: #786d6d;
+    z-index: 2;
+}
+.all-users-heading{
+    padding-top: 33px;
+    padding-left: 18px;
+}
+.heading h1{
+    color: #203232;
+    margin-bottom: 0px;
+}
+.username{
+    float: left;
+    padding: 15px;
+    /*position: relative;*/
+}
+.all-users-details{
+    /*padding-top: 15px;*/
+    height: 60%;
+    width: 100%;
+    border-radius: 24px;
+    background-color: orangered;
+    z-index: 2;
+}
+.details-card{
+    height: 9em;
+    /*padding: 3px;*/
+    margin: 6px 6px 0 3px;
+    background-color: orangered;
+    border-bottom: 3px solid #203232;
+    border-radius: 24px;
+    border-top: 3px solid #203232;
+}
+.edit-user-div{
+    align-items: center;
+    /*justify-content: center;*/
+    float: right;
+/}
+*
+*
+<</style>
 <main>
-    <h1 style="margin-top: 5rem">All Users</h1>
-        
-    <table th:each="user : ${users}">
-        <tr>
-            <th><img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image"></th>
-        </tr>
-        <tr>
-            <th>Username</th>
-            <td><a th:href="@{profile/{id}(id=${user.id})}"><span th:text="${user.username}"></span></a></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td th:text="${user.email}"></td>
-        </tr>
-        <tr>
-            <td th:if="${loggedInUser.isAdmin()}">
-                <a th:href="${'/profile/' + user.id + '/edit'}">Edit</a>
-            </td>
-            <td th:if="${loggedInUser.isAdmin()}">
-                <form th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-    </table>
+    <div class= "all-users-view">
+        <h1 class="all-users-heading">All Users</h1>
+        <div class="all-users-details">
+        <div class="details-card" th:each="user : ${users}">
+            <span class="all-users-profile" >
+                <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
+            </span>
+            <span class="username">
+                <label class="username-label">Username</label>
+                <span class="username-span"><a th:href="@{profile/{id}(id=${user.id})}"><span th:text="${user.username}"></span></a></span>
+            </span>
+            <span class="email-div">
+                <label class="email-label">Email</label>
+                <span class="email-span" th:text="${user.email}"></span>
+            </span>
+            <span class="edit-user-div">
+                <span class="admin-edit-span"th:if="${loggedInUser.isAdmin()}">
+                    <a class="admin-edit-anchor" th:href="${'/profile/' + user.id + '/edit'}">Edit User Profile</a>
+                </span>
+                <span class="delete-user-div" th:if="${loggedInUser.isAdmin()}">
+                    <form class="admin-delete-form" th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
+                        <button class="admin-delete-btn" type="submit">Delete this User</button>
+                    </form>
+                </span>
+            </span>
+        </div>
+        </div>
+    </div>
+
 </main>
+
 <footer th:replace="fragments/footer :: footer"></footer>
 <script src="/js/navbar.js"></script>
 <script src="/js/modal.js"></script>

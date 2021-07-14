@@ -5,6 +5,7 @@
 
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 <style>
     input[type="tel" i] {
         padding: 8px;
@@ -43,6 +44,13 @@
         padding: 8px;
         border: 0;
         border-radius: 5px;
+    }
+
+    #event-form-title {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 0;
     }
 
     .form__wrapperpassedit {
@@ -168,50 +176,48 @@
         z-index: -2;
     }
 </style>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<main>
 
-        <div class="form__wrapperpassedit">
-            <h2 style="color: red">Edit Event Details</h2>
-            <div class="form__bodypassedit">
-        <form th:action="@{/events/{id}/edit/(id=${event.id})}" th:object="${event}" th:method="POST">
-<!--            <div th:field="*{id}">Event Id</div>-->
-            <div>
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" th:field="*{name}"/>
-            </div>
-            <br>
-            <div>
-                <label for="date">Date</label>
-                <input type="text" name="eventDate" id="date" th:value="*{date}" />
-            </div>
-            <br>
-            <div>
-                <label for="time">Time</label>
-                <input type="time" name="eventTime" id="time" th:value="*{time}"/>
-            </div>
-            <br>
-            <div>
-                <label for="meetLocation">Meet Location</label>
-                <input type="text" id="meetLocation" name="meetLocation" th:field="*{meetLocation}" />
-            </div>
-            <br>
-            <div>
-                <label for="meetTime">Meet Time</label>
-                <input type="time" name="eventMeetTime" id="meetTime"  th:value="*{meetTime}"/>
-            </div>
-            <br>
-            <div>
-                <label for="eventDetails">Event Details</label>
-                <input id="eventDetails" type="text" name="eventDetails" th:field="*{eventDetails}" />
-            </div>
-            <br>
-            <button style="background-color: red; color: #f6f9fc; font-weight: bold">Submit Edits</button>
+<main>
+    <div class="form__wrapperpassedit">
+        <h2 id="event-form-title">Edit Event Details</h2>
+        <div class="form__bodypassedit">
+            <form th:action="@{/events/{id}/edit/(id=${event.id})}" th:object="${event}" th:method="POST">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" th:field="*{name}"/>
+                </div>
+                <br>
+                <div>
+                    <label for="date">Date</label>
+                    <input type="text" name="eventDate" id="date" th:value="*{date}" />
+                </div>
+                <br>
+                <div>
+                    <label for="time">Time</label>
+                    <input type="time" name="eventTime" id="time" th:value="*{time}"/>
+                </div>
+                <br>
+                <div>
+                    <label for="meetLocation">Meet Location</label>
+                    <input type="text" id="meetLocation" name="meetLocation" th:field="*{meetLocation}" />
+                </div>
+                <br>
+                <div>
+                    <label for="meetTime">Meet Time</label>
+                    <input type="time" name="eventMeetTime" id="meetTime"  th:value="*{meetTime}"/>
+                </div>
+                <br>
+                <div>
+                    <label for="eventDetails">Event Details</label>
+                    <textarea id="eventDetails" name="eventDetails" th:field="*{eventDetails}" cols="15" rows="4"></textarea>
+                </div>
+                <br>
+                <button class="btn btn-light" type="submit">Submit Edits</button>
+            </form>
         </div>
-            </div>
-        </form>
-        <div class="form__backgroundedit"></div>
-        <div class="form__backgroundedit2"></div>
+    </div>
+    <div class="form__backgroundedit"></div>
+    <div class="form__backgroundedit2"></div>
 
 </main>
 <!--<footer th:replace="fragments/footer :: footer"></footer>-->
