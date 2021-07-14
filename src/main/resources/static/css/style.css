@@ -927,13 +927,10 @@ img#profileImage{
     left: -615px;
     width: 200px;
     clip-path: circle(45%);
-
 }
-
 
 .btnUpload{
     display: inline-block;
-
 
     text-decoration: none;
     color: white;
@@ -956,10 +953,10 @@ img#profileImage{
 
     position: relative;
     margin: auto;
-    top: 57px;
+    top: 27px;
     right: 0px;
     bottom: 0;
-    left: -308px
+    left: -308px;
 }
 
 @media (max-width: 747px) {
@@ -1060,6 +1057,7 @@ input[type="tel" i] {
 
 
 }
+
 .form__wrapperpasspp {
     /* position: absolute;
     top: 200px;
@@ -1072,10 +1070,8 @@ input[type="tel" i] {
     position: relative;
     top:200px;
     text-align: left;
-
-
-
 }
+
 .form__options {
     padding: 160px 0;
     display: flex;
