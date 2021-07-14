@@ -39,14 +39,15 @@
                 <div th:if="${param.error}" style="color:red; margin-bottom:1rem">
                     Invalid Username and Password.
                 </div>
-                <div th:if="${param.logout}" style="color:red; margin-bottom:1rem">
+                <div th:if="${param.logout}" style="color:#7db6fc; margin-bottom:1rem">
                     You have been logged out.
                 </div>
+<!--                <input type="hidden" name="url_prior_login" th:value="${#request.getHeader('referer')}">-->
 
                 <input type="submit" class="btn btn-light" value="Login" name="login">
             </form>
 
-            <form action="/signup" method="POST" class="sign-up" th:object="${user}" name="myform">
+            <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}" name="myform">
                 <h2>Sign Up!</h2>
                 <div class="input-field">
                     <input type="text" id="username" name="username" th:field="*{username}">
@@ -127,7 +128,8 @@
 
 
 <script type="text/javascript" src="/js/sticky.js"></script>
-<script src="/js/login.js"></script>
 <script src="/js/navbar.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>

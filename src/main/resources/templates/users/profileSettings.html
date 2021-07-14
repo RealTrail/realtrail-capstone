@@ -6,6 +6,7 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
+
 <main>
     <div class=".form__wrapperpasspp">
         <div class="form__bodypasspp">
@@ -17,32 +18,32 @@
             </form>
 
             <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
+                <div><a href="/profile" class="closing">X</a></div>
                 <h2>Public Profile</h2>
                 <div>
-                    <input type="hidden" id="originalImage" th:value="${user.profileImageUrl}">
+                    <label for="firstName">First Name</label>
                     <input type="hidden" id="profileImg" name="profileImageUrl" th:field="*{profileImageUrl}">
 
                     <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
-                    <label for="firstName">First Name</label>
                 </div>
                 <div>
-                    <input type="text" name="lastName" id="lastName" th:field="*{lastName}">
                     <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" th:field="*{lastName}">
                 </div>
                 <div>
+                    <label for="phoneNumber">Phone Number</label>
                     <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="123-456-7890"
                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" th:field="*{phoneNumber}">
-                    <label for="phoneNumber">Phone Number</label>
                 </div>
                 <div>
-                    <input type="text" name="city" id="city" placeholder="San Antonio" th:field="*{city}"/>
                     <label for="city">City</label>
+                    <input type="text" name="city" id="city" placeholder="San Antonio" th:field="*{city}"/>
                 </div>
                 <div>
-                    <input type="text" name="state" id="state" placeholder="TX" th:field="*{state}"/>
                     <label for="state">State</label>
+                    <input type="text" name="state" id="state" placeholder="TX" th:field="*{state}"/>
                 </div>
-
+                <br>
                 <label>Interests</label>
                 <div th:each="interest : ${interests}">
                     <label th:class="${'interest' + interest.id}">
@@ -53,7 +54,7 @@
                 <br>
 
                 <button type="submit" class="btn" id="createProfile">Complete</button>
-                <div><a href="/profile" class="btn">Close</a></div>
+
             </form>
         </div>
     </div>
@@ -111,7 +112,7 @@
     </svg>
 </main>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer th:replace="fragments/footer :: footer" class="profile-footer"></footer>
 
 <script type="text/javascript" src="/js/sticky.js"></script>
 <script src="/js/login.js"></script>
@@ -121,6 +122,9 @@
     // assign fileStackApi to a variable
     const fileStackApi = [[${fileStackApi}]];
 </script>
+<script src="/js/navbar.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
 <script src="/js/fileStackImgUpload.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/header :: head">
+<head th:replace="fragments/head :: head">
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <title>Admin</title>
 </head>
@@ -41,14 +41,6 @@
                 <input type="text" name="state" id="state" placeholder="TX" th:field="*{state}"/>
             </div>
 
-            <label>Gender</label>
-            <div class="gender">
-                <input type="radio" id="male" name="gender" value="M" th:field="*{gender}"/>
-                <label for="male" class="radio">Male</label>
-                <input type="radio" id="female" name="gender" value="F" th:field="*{gender}"/>
-                <label for="female" class="radio">Female</label>
-            </div>
-
             <label>Interests</label>
             <div th:each="interest : ${interests}">
                 <label th:class="${'interest' + interest.id}">
@@ -59,7 +51,7 @@
         </fieldset>
         <button type="submit" class="btn" id="createProfile">Complete</button>
     </form>
-    <a th:href="${'/profile/' + user.id}">Close</a>
+    <a href="/users">Close</a>
 </main>
 
 <footer th:replace="fragments/footer :: footer"></footer>
@@ -71,7 +63,8 @@
     const fileStackApi = [[${fileStackApi}]];
 </script>
 <script src="/js/fileStackImgUpload.js"></script>
-<script src="/js/login.js"></script>
 <script src="/js/navbar.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>

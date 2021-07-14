@@ -1,47 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<!--<head th:replace="fragments/head :: head">-->
-  <title>Error Page</title>
-</head>
-<div class="grain"></div>
-<body>
-
-<!--<nav th:replace="fragments/navbar :: navbar"></nav>-->
-
-<div id="particles-js"></div>
-<div id="particles-js2"></div>
-<h1 class="bg"></h1>
-
-    <div class='cube'>
-        <div class='face front'><a href="/"><br>HOME</a></div>
-        <div class='face side'><a href="/logout" ><br>LOG<br>IN</a></div>
-        <div class='face top'><a href="/signup" ><br>SIGN<br>OUT</a></div>
-    </div>
-
-
-    <div class="cubes2"><p>Looks like you've wondered off the trail...</p></div>
-
-    <div class="cubeswire">
-
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_XcpUTy.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;"  loop  autoplay></lottie-player>
-
-    </div>
-
-    <div th:if="${param.error}">
-        <p>You cannot visit this page since you're not admin.</p>
-<!--    </div>-->
-
-<!--&lt;!&ndash;    <div th:if="${}">&ndash;&gt;-->
-<!--&lt;!&ndash;        <p th:text="${errorMessage}"></p>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;    if ajax request return an error&ndash;&gt;-->
-<!--    <div>-->
-        <p>Oops, error connecting the server!</p>
-    </div>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap');
 
@@ -274,17 +236,57 @@
             }
         }
     </style>
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <title>Error Page</title>
+</head>
+<div class="grain"></div>
+<body>
+<main>
 
-<script>
-    particlesJS.load('particles-js2', '/js/particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
-</script>
+    <div id="particles-js"></div>
+    <div id="particles-js2"></div>
+    <h1 class="bg"></h1>
+
+        <div class='cube'>
+            <div class='face front'><a href="/"><br>HOME</a></div>
+            <div class='face side'><a href="/login" ><br>LOG<br>IN</a></div>
+            <div class='face top'><a href="/logout" ><br>LOG<br>OUT</a></div>
+        </div>
+
+
+        <div class="cubes2"><p>Looks like you've wondered off the trail...</p></div>
+
+        <div class="cubeswire">
+
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_XcpUTy.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;"  loop  autoplay></lottie-player>
+
+        </div>
+
+        <div th:if="${param.error}">
+            <p>You cannot visit this page since you're not admin.</p>
+    <!--    </div>-->
+
+    <!--&lt;!&ndash;    <div th:if="${}">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <p th:text="${errorMessage}"></p>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;    if ajax request return an error&ndash;&gt;-->
+    <!--    <div>-->
+            <p>Oops, error connecting the server!</p>
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        particlesJS.load('particles-js2', '/js/particles.json', function() {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
 
 
 </main>
-
 
 </body>
 </html>

@@ -19,6 +19,7 @@
 
              $("#profileImage").attr("src", results.filesUploaded[0].url); // display the new image on web page
              $("#profileImageUrl").val(results.filesUploaded[0].url); // save the new image url to a hidden input
+             $("#profileImg").val(results.filesUploaded[0].url);  // save the new image url to a hidden input in /profile/settings form
 
              let profileImageObj = {
                  profileImageUrl: $("#profileImageUrl").val()
@@ -82,7 +83,7 @@
 
  // https://cdn.filestackcontent.com/zPduwMuWROCS01EDdRV1
 
- // https://cdn.filestackcontent.com/mlddTvwS1GFVI0STXIfa
+ //
 
  // https://cdn.filestackcontent.com/B3Da08QOR1mpSwEmTp8p
 

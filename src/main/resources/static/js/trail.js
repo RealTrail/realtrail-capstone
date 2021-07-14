@@ -3,7 +3,7 @@ $(".slider")
         infinite: true,
         slidesToShow: 6,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true,
         autoplay: false,
         responsive: [
             {
@@ -29,6 +29,7 @@ $(".slider")
             },
             {
                 breakpoint: 600,
+                arrows:false,
                 settings: "unslick"
             }
 
@@ -50,11 +51,6 @@ function resizeSlider() {
     $(".slick-track")
         .find(".slick-slide .slide-wrap")
         .css("height", slickHeight + "px");
-}
-
-function toggleShow () {
-    var el = document.getElementById("box");
-    el.classList.toggle("show");
 }
 
 
@@ -84,27 +80,27 @@ function closeNav() {
 
 // Click function for show the Modal
 
-$("#myBtn, #myBtnM").on("click", function(){
-    $(".mask").addClass("active");
-});
-
-// Function for close the Modal
-
-function closeModal(){
-    $(".mask").removeClass("active");
-}
-
-// Call the closeModal function on the clicks/keyboard
-
-$(".close, .mask").on("click", function(){
-    closeModal();
-});
-
-$(document).keyup(function(e) {
-    if (e.keyCode === 27) {
-        closeModal();
-    }
-});
+// $("#myBtn, #myBtnM").on("click", function(){
+//     $(".mask").addClass("active");
+// });
+//
+// // Function for close the Modal
+//
+// function closeModal(){
+//     $(".mask").removeClass("active");
+// }
+//
+// // Call the closeModal function on the clicks/keyboard
+//
+// $(".close, .mask").on("click", function(){
+//     closeModal();
+// });
+//
+// $(document).keyup(function(e) {
+//     if (e.keyCode === 27) {
+//         closeModal();
+//     }
+// });
 
 
 // ******************** Trail Search ***************

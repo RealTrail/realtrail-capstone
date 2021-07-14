@@ -73,8 +73,14 @@ public class ProfileController {
         user.setUsername(loggedInUser.getUsername());
         user.setPassword(loggedInUser.getPassword());
 
-        System.out.println("user.getEmail() = " + user.getEmail());
-        System.out.println("user.getPhoneNumber() = " + user.getPhoneNumber());
+        // if user doesn't change profile image, set profile image from db back to user
+        if (user.getProfileImageUrl().isEmpty()) {
+            user.setProfileImageUrl(loggedInUser.getProfileImageUrl());
+        }
+
+        if (loggedInUser.isAdmin()) {
+            user.setAdmin(true);
+        }
 
         usersDao.save(user);
         model.addAttribute("user", user);
@@ -105,8 +111,11 @@ public class ProfileController {
     public String getProfilePage(Model model, Principal principal) {
         if (principal != null) {
             User user = userService.getLoggedInUser();
-            // pass the user to view/showProfile.html
+            List<Event> createdEvents = user.getCreatedEvents();
+            List<Event> events = user.getEvents();
             model.addAttribute("user", user);
+            model.addAttribute("createdEvents", createdEvents);
+            model.addAttribute("events", events);
             return "users/showProfile";
         } else {
             return "redirect:/login";
@@ -115,18 +124,30 @@ public class ProfileController {
 
     @GetMapping("/profile/{id}/edit")
     public String getAdminEditProfileForm(@PathVariable long id, Model model) {
+        User loggedInUser = userService.getLoggedInUser();
         User user = usersDao.getById(id);
-        // pass the user to create profile form to show prepopulated data in the form
-        model.addAttribute("user", user);
-        model.addAttribute("interests", userInterestsDao.findAll());
-        model.addAttribute("fileStackApi", filestackApi);
-        model.addAttribute("postUrl", "/profile/" + id + "/edit");
-        return "users/adminProfile";
+        if (user.getId() != loggedInUser.getId()) {
+            // pass the user to create profile form to show prepopulated data in the form
+            model.addAttribute("user", user);
+            model.addAttribute("interests", userInterestsDao.findAll());
+            model.addAttribute("fileStackApi", filestackApi);
+            model.addAttribute("postUrl", "/profile/" + id + "/edit");
+            return "users/adminProfileForm";
+        } else {
+            return "redirect:/profile/settings";
+        }
     }
 
     @PostMapping("/profile/{id}/edit")
     public String editUsersProfile(@PathVariable long id, @ModelAttribute User user, Model model) {
+        User userFromDB =  usersDao.getById(id);
         user.setId(id);
+        user.setUsername(userFromDB.getUsername());
+        user.setEmail(userFromDB.getEmail());
+        user.setPassword(userFromDB.getPassword());
+        if (userFromDB.isAdmin()) {
+            user.setAdmin(true);
+        }
         usersDao.save(user);
         return "redirect:/profile/" + id;
     }
@@ -137,8 +158,11 @@ public class ProfileController {
         if (loggedInUser.isAdmin()) {
             // get the searched user
             User searchedUser = usersDao.getById(id);
+            List<Event> createdEvents = searchedUser.getCreatedEvents();
+            List<Event> events = searchedUser.getEvents();
             model.addAttribute("user", searchedUser);
-
+            model.addAttribute("createdEvents", createdEvents);
+            model.addAttribute("events", events);
             return "users/profile";
         } else {
             return "error";

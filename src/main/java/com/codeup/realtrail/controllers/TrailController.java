@@ -6,9 +6,7 @@ import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.UserService;
-
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,24 +15,21 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Controller
 public class TrailController{
     private TrailsRepository trailsDao;
     private TrailCommentsRepository trailCommentsDao;
     private PictureURLsRepository pictureURLSDao;
-    private MapPointsRepository mapPointsDao;
     private UserService userService;
 
     // importing mapbox token
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, MapPointsRepository mapPointsDao, UserService userService) {
+    public TrailController(TrailsRepository trailsDao, TrailCommentsRepository trailCommentsDao, PictureURLsRepository pictureURLSDao, UserService userService) {
         this.trailsDao = trailsDao;
         this.trailCommentsDao = trailCommentsDao;
         this.pictureURLSDao = pictureURLSDao;
-        this.mapPointsDao = mapPointsDao;
         this.userService = userService;
     }
 
@@ -42,9 +37,11 @@ public class TrailController{
     @GetMapping("/trails/{id}")
     public String individualTrailPage(@PathVariable Long id, Model model, Principal principal){
         Trail trail = trailsDao.getById(id);
+        List<TrailComment> trailComments = trailCommentsDao.getAllByTrailId(id);
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
-        model.addAttribute("trailComment", new TrailComment());
+        model.addAttribute("trailComments", trailComments);
+//        model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
         if (!trail.getTrailComments().isEmpty()) {
@@ -57,7 +54,7 @@ public class TrailController{
             model.addAttribute("average", average);
         }
         if (principal != null) {
-            model.addAttribute("loggedInUser",userService.getLoggedInUser());
+            model.addAttribute("loggedInUser", userService.getLoggedInUser());
         }
         return "trails/showTrail";
     }
@@ -73,19 +70,6 @@ public class TrailController{
         }
 
         return trailSaved;
-    }
-
-
-    @PostMapping("/trails/{id}/comment")
-    public String saveTrailComment(@PathVariable long id, @ModelAttribute TrailComment trailComment){
-        User user = userService.getLoggedInUser();
-        Trail trail = trailsDao.getById(id);
-        LocalDateTime date = LocalDateTime.now();
-        trailComment.setDate(date);
-        trailComment.setTrail(trail);
-        trailComment.setOwner(user);
-        trailCommentsDao.save(trailComment);
-        return "redirect:/trails/" + id;
     }
 
     @GetMapping("/search-trail")
@@ -105,11 +89,17 @@ public class TrailController{
         return "home";
     }
 
-
-//    @GetMapping("/searchCat")
-//    public
-
-
+    @PostMapping("/trails/{id}/comment")
+    public String saveTrailComment(@PathVariable long id,
+                                   @RequestParam(name = "rating") String rating,
+                                   @RequestParam(name = "content") String content){
+        User user = userService.getLoggedInUser();
+        Trail trail = trailsDao.getById(id);
+        LocalDateTime date = LocalDateTime.now();
+        TrailComment trailComment = new TrailComment(date, Integer.parseInt(rating), content, user, trail);
+        trailCommentsDao.save(trailComment);
+        return "redirect:/trails/" + id;
+    }
 
     @PostMapping("/trails/{id}/comment/{cid}/delete")
     public String deleteTrailComment(@PathVariable Long id, @PathVariable Long cid) {
@@ -120,7 +110,5 @@ public class TrailController{
         }
         return "redirect:/trails/" + id;
     }
-
-
 }
 

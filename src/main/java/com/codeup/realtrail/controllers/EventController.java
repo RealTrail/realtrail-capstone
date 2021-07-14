@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,10 +29,10 @@ import java.util.List;
 public class EventController {
     private EventsRepository eventsDao;
     private TrailsRepository trailsDao;
+    private UsersRepository usersDao;
     private MapPointsRepository mapPointsDao;
     private final EmailService emailService;
     private UserService userService;
-    private EventParticipantsRepository participantsDao;
     private EventCommentsRepository eventCommentsDao;
 
     //Importing File Stack Api Key
@@ -41,14 +43,34 @@ public class EventController {
     @Value("pk.eyJ1Ijoia2FjaGlrYWNoaWN1aSIsImEiOiJja25hanJ6ZnMwcHpnMnZtbDZ1MGh5dms1In0.JAsEFoNV2QP1XXVWXlfQxA")
     private String mapboxToken;
 
-    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventParticipantsRepository participantsDao, EventCommentsRepository eventCommentsDao) {
+    public EventController(EventsRepository eventsDao, TrailsRepository trailsDao, UsersRepository usersDao, MapPointsRepository mapPointsDao, EmailService emailService, UserService userService, EventCommentsRepository eventCommentsDao) {
         this.eventsDao = eventsDao;
         this.trailsDao = trailsDao;
+        this.usersDao = usersDao;
         this.mapPointsDao = mapPointsDao;
         this.emailService = emailService;
         this.userService = userService;
-        this.participantsDao = participantsDao;
         this.eventCommentsDao = eventCommentsDao;
+    }
+
+    @GetMapping("/events")
+    public String eventsPage(Model model) {
+        List<Event> eventsList = eventsDao.findAll();
+        model.addAttribute("noEventsFound", eventsList.size() == 0);
+        model.addAttribute("events", eventsList);
+        return "events/showAllEvents";
+    }
+
+    // showEvent.html page
+    @GetMapping("/events/{id}")
+    public String individualEventPage(@PathVariable Long id, Model model) {
+        User user = userService.getLoggedInUser();
+        Event event = eventsDao.getById(id);
+        model.addAttribute("event", event);
+        model.addAttribute("user", user);
+        model.addAttribute("eventComment",new EventComment());
+        model.addAttribute("postUrl", "/events/" + id + "/comment");
+        return "events/showEvent";
     }
 
     // Create Event
@@ -56,13 +78,14 @@ public class EventController {
     public String showCreateEventPage(Model model, Principal principal) {
         if (principal != null) {
             // get all the trails and mapPoints
-            List<Trail> trailList = trailsDao.findAll();
-            List<MapPoint> mapPointList = mapPointsDao.findAll();
+
             model.addAttribute("event", new Event());
-            model.addAttribute("trails", trailList);
-            model.addAttribute("mapPoints", mapPointList);
             model.addAttribute("fileStackApi", filestackApi);
             model.addAttribute("mapboxToken", mapboxToken);
+            List<Trail> trailList = trailsDao.findAll();
+            List<MapPoint> mapPointList = mapPointsDao.findAll();
+            model.addAttribute("trails", trailList);
+            model.addAttribute("mapPoints", mapPointList);
             return "events/createEvent";
         } else {
             return "redirect:/login";
@@ -132,26 +155,6 @@ public class EventController {
         }
     }
 
-    @GetMapping("/events")
-    public String eventsPage(Model model) {
-        List<Event> eventsList = eventsDao.findAll();
-        model.addAttribute("noEventsFound", eventsList.size() == 0);
-        model.addAttribute("events", eventsList);
-        return "events/showAllEvents";
-    }
-
-    // showEvent.html page
-    @GetMapping("/events/{id}")
-    public String individualEventPage(@PathVariable Long id, Model model) {
-        User user = userService.getLoggedInUser();
-        Event event = eventsDao.getById(id);
-        model.addAttribute("event", event);
-        model.addAttribute("user", user);
-        model.addAttribute("eventComment",new EventComment());
-        model.addAttribute("postUrl", "/events/" + id + "/comment");
-        return "events/showEvent";
-    }
-
     @GetMapping("/events/{id}/edit")
     public String showEditEvent(@PathVariable long id, Model model, Principal principal) {
         String errorMessage;
@@ -172,24 +175,34 @@ public class EventController {
     }
 
     @PostMapping("/events/{id}/edit")
-    public String updateEvent(@ModelAttribute Event event, Model model) {
-        eventsDao.save(event);
-        return "events/showEvent";
-    }
+    public String updateEvent(@PathVariable long id, @ModelAttribute Event event,
+                              @RequestParam(name = "eventDate") String eventDate,
+                              @RequestParam(name = "eventMeetTime", required = false) String eventMeetTime,
+                              @RequestParam(name = "eventTime", required = false) String eventTime)
+            throws ParseException
+    {
+        Event eventFromDb = eventsDao.getById(id);
 
+        SimpleDateFormat formatterEdit = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate = formatterEdit.parse(eventDate);
+        LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        event.setDate(localDate);
+        event.setTime(LocalTime.parse(eventTime));
+        event.setMeetTime(LocalTime.parse(eventMeetTime));
+        event.setOwner(eventFromDb.getOwner());
+        event.setTrail(eventFromDb.getTrail());
+        event.setId(id);
+
+        eventsDao.save(event);
+        return "redirect:/events/" + id;
+    }
 
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable long id) {
         eventsDao.deleteById(id);
         return "redirect:/profile";
     }
-
-//    @GetMapping("/search")
-//    public String searchByName(Model model, @RequestParam(name = "term") String term){
-//        List<Event> events = eventsDao.searchByName(term);
-//        model.addAttribute("events", events);
-//        return "events/showAllEvents";
-//    }
 
     @PostMapping("/events/{id}/join")
     public String joinEvent(@PathVariable long id) {
@@ -208,13 +221,11 @@ public class EventController {
     }
 
     @PostMapping("/events/{id}/comment")
-    public String saveEventComment(@PathVariable long id, @ModelAttribute EventComment eventComment){
+    public String saveEventComment(@PathVariable long id, @RequestParam(name = "eventComment") String content){
         User user = userService.getLoggedInUser();
         Event event = eventsDao.getById(id);
         LocalDateTime date = LocalDateTime.now();
-        eventComment.setDate(date);
-        eventComment.setEvent(event);
-        eventComment.setOwner(user);
+        EventComment eventComment = new EventComment(date, content, event, user);
         eventCommentsDao.save(eventComment);
 
         return "redirect:/events/" + id;
@@ -222,9 +233,24 @@ public class EventController {
 //Cancel
     @PostMapping("/events/{id}/cancel")
     public String cancelEvent (@PathVariable long id){
-        participantsDao.deleteById(id);
+        User user = userService.getLoggedInUser();
+        Event event = eventsDao.getById(id);
+        List<User> participants = eventsDao.getById(id).getParticipants();
+        List<Event> events = user.getEvents();
+
+        // remove participant form event
+        participants.remove(user);
+        event.setParticipants(participants);
+        eventsDao.save(event);
+
+        // remove event from participant
+        events.remove(event);
+        user.setEvents(events);
+        usersDao.save(user);
+
         return "redirect:/profile";
     }
+
     @PostMapping("/events/{id}/comment/{cid}/delete")
     public String deleteEventComment(@PathVariable Long id, @PathVariable Long cid) {
         User user =  userService.getLoggedInUser();

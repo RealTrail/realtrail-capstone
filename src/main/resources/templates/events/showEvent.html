@@ -21,40 +21,40 @@
         <div>Trail:<a th:href="${'/trails/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></div>
         <div>Meet location:<h4 th:text="${event.meetLocation}"></h4></div>
         <div>Meet time:<h4 th:text="${event.meetTime}"></h4></div>
-        <div th:if="${event.owner.id == user.id && event.participants != null}">
+        <div th:if="${event.owner.id == user.id && !event.participants.isEmpty()}">
             <div>Participants:
                 <div th:each="participant : ${event.participants}">
                     <p th:text="${participant.username}"></p>
                 </div>
             </div>
         </div>
-        <div th:if="${event.eventComments != null}">Comments:
-            <div th:each="comment : ${event.eventComments}">
-                <h4 th:text="${comment.content}"></h4>
-                <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
-                    <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
-                          method="post">
-                        <button type="submit">Delete</button>
-                    </form>
-                </div>
+        <br>
+        <div th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}">
+            <div>
+                <img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image">
+                <span th:text="${comment.owner.username}"></span>
+                <span th:text="${comment.date}"></span>
+            </div>
+            <p th:text="${comment.content}"></p>
+            <div th:if="${user.isAdmin() || user.id == comment.owner.id}">
+                <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
+                      method="post">
+                    <button type="submit">Delete</button>
+                </form>
             </div>
         </div>
-
         <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/events/{id}/comment(id=${event.id})}" th:object="${eventComment}" th:method="POST">
-                <textarea th:name="eventComment" id="" cols="30" rows="10" th:field="*{content}"></textarea>
+            <form th:action="@{/events/{id}/comment(id=${event.id})}" th:method="POST">
+                <textarea name="eventComment" id="" cols="30" rows="10"></textarea>
                 <button type="submit">Submit</button>
             </form>
         </div>
-
     </div>
-
     <div th:if="${event.owner.id == user.id}">
         <div>
-            <a th:href="${'/events/'+ event.id + '/edit'}">Update</a>
+            <a th:href="${'/events/'+ event.id + '/edit'}">Edit Event</a>
         </div>
-
-        <form th:action="@{|/events/{id}/delete|}" method="POST">
+        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="POST">
             <h2>Click the delete button to delete your event</h2>
             <button th:type="submit">delete</button>
         </form>
@@ -68,7 +68,8 @@
     </div>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
-<script src="/js/login.js"></script>
 <script src="/js/navbar.js"></script>
+<script src="/js/modal.js"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>
