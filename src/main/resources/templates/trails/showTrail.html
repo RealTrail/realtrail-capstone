@@ -107,30 +107,30 @@
         </div>
         <table class="trail-info">
             <thead>
-            <tr>
-                <td>Difficulty Level</td>
-                <td th:text="${trail.difficultyLevel}"></td>
-            </tr>
-            <tr>
-                <td>Length</td>
-                <td th:text="${trail.length + 'miles'}"></td>
-            </tr>
-            <tr>
-                <td>Elevation change</td>
-                <td th:text="${trail.elevation}"></td>
-            </tr>
-            <tr>
-                <td>Route Type</td>
-                <td th:text="${trail.type}"></td>
-            </tr>
+                <tr>
+                    <td>Difficulty Level</td>
+                    <td th:text="${trail.difficultyLevel}"></td>
+                </tr>
+                <tr>
+                    <td>Length</td>
+                    <td th:text="${trail.length + 'miles'}"></td>
+                </tr>
+                <tr>
+                    <td>Elevation change</td>
+                    <td th:text="${trail.elevation}"></td>
+                </tr>
+                <tr>
+                    <td>Route Type</td>
+                    <td th:text="${trail.type}"></td>
+                </tr>
             </thead>
 
             <tbody>
-            <tr><td th:text="${trail.trailDetails}"></td></tr>
-            <tr><td th:if="${trail.mapPoints.isEmpty() || trail.longitude == 0 || trail.latitude == 0}">No map available</td></tr>
-            <tr><td th:if="${!trail.mapPoints.isEmpty() && trail.longitude != 0 && trail.latitude != 0}">
-                <button class="btn" id="getMap">Get trail map</button>
-            </td></tr>
+                <tr><td th:text="${trail.trailDetails}"></td></tr>
+                <tr><td th:if="${trail.mapPoints.isEmpty() || trail.longitude == 0 || trail.latitude == 0}">No map available</td></tr>
+                <tr><td th:if="${!trail.mapPoints.isEmpty() && trail.longitude != 0 && trail.latitude != 0}">
+                    <button class="btn" id="getMap">Get trail map</button>
+                </td></tr>
             </tbody>
         </table>
 
