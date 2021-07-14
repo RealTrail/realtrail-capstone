@@ -30,7 +30,6 @@
         border-radius: 5px;
         height: 50px;
         overflow: hidden;
-
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
@@ -48,26 +47,29 @@
 
     .form__wrapperpassedit {
         max-width: 1080px;
-        margin: 0 auto;
-        position: relative;
-        top:200px;
-        text-align: left;
+        position: absolute;
+        text-align: center;
+        top: 12%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+
     }
 
     .form__bodypassedit {
-        position: relative;
-        top: -20px;
-        left: -20px;
-        right: -20px;
-        bottom: 0;
-        padding: 20px 0;
+        /*position: relative;*/
+        /*top: -175px;*/
+        /*left: 100px;*/
+        /*right: -20px;*/
+        /*bottom: 0;*/
+        padding: 5px 0;
         transition: 0.5s;
         display: flex;
         pointer-events: none;
         z-index: 1;
-        justify-content: flex-start;
-        align-items: stretch;
-        z-index: 2;
+        justify-content: center;
+        align-items: center;
         flex-direction: row;
         flex-wrap: nowrap;
     }
@@ -104,19 +106,19 @@
 
     .form__backgroundedit {
         position: absolute;
-        top: 80px;
+        top: 0;
         left: 0;
         bottom: 0;
-        margin: 0 auto;
-        height: 886px;
+        right: 0;
+        margin: auto;
+        height: 800px;
         width: 80vw;
-        max-width: 80%;
+        /*max-width: 80%;*/
         max-width: 580px;
         background-color: rgba(46, 54, 66, 0.4);
         /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
         transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
         border-radius: 20px;
-
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
         border-top-right-radius: 50px;
@@ -133,19 +135,16 @@
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000;
         pointer-events: none;
-        z-index: 1;
-
-
+        z-index: -1;
     }
-
-    .form__backgroundc2 {
+    .form__backgroundedit2 {
         position: absolute;
-        top: 80px;
+        top: 0;
         left: 0;
-
         bottom: 0;
-        margin: 0 auto;
-        height: 886px;
+        right: 0;
+        margin: auto;
+        height: 800px;
         width: 80vw;
         max-width: 80%;
         max-width: 580px;
@@ -153,7 +152,6 @@
         /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
         transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
         border-radius: 20px;
-
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
         border-top-right-radius: 50px;
@@ -168,16 +166,13 @@
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000;
         z-index: -2;
-
-
-
     }
-
 </style>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
-    <h2>Edit Event Details</h2>
-        <div class=".form__wrapperpassedit">
+
+        <div class="form__wrapperpassedit">
+            <h2 style="color: red">Edit Event Details</h2>
             <div class="form__bodypassedit">
         <form th:action="@{/events/{id}/edit/(id=${event.id})}" th:object="${event}" th:method="POST">
 <!--            <div th:field="*{id}">Event Id</div>-->
@@ -211,15 +206,15 @@
                 <input id="eventDetails" type="text" name="eventDetails" th:field="*{eventDetails}" />
             </div>
             <br>
-            <button>Submit Edits</button>
+            <button style="background-color: red; color: #f6f9fc; font-weight: bold">Submit Edits</button>
         </div>
             </div>
         </form>
-        <div class="form__backgroundc"></div>
-        <div class="form__backgroundc2"></div>
+        <div class="form__backgroundedit"></div>
+        <div class="form__backgroundedit2"></div>
 
 </main>
-<footer th:replace="fragments/footer :: footer"></footer>
+<!--<footer th:replace="fragments/footer :: footer"></footer>-->
 
 <script type="text/javascript" src="/js/sticky.js"></script>
 <script src="/js/navbar.js"></script>

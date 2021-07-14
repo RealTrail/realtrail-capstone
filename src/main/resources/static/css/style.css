@@ -2349,7 +2349,7 @@ div.header h4{
 
 /* ****************************** SHOW PROFILE PAGE ****************************** */
 .profileImage {
-    width: 4rem;
+    width: 6rem;
     clip-path: circle(45%);
 }
 
