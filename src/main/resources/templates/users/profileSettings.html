@@ -24,7 +24,7 @@
             </form>
 
             <form th:action="@{/profile/settings}" th:method="POST" th:object="${user}">
-                <div><a href="/profile" class="btn closing">Close</a></div>
+                <div><a href="/profile" class="closing">X</a></div>
                 <h2>Public Profile</h2>
                 <div>
                     <label for="firstName">First Name</label>
@@ -59,7 +59,7 @@
 
                 <br>
 
-                <button type="submit" class="btn complete" id="createProfile">Complete</button>
+                <button type="submit" class="btn" id="createProfile">Complete</button>
 
             </form>
         </div>

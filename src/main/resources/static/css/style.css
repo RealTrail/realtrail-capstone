@@ -1004,7 +1004,7 @@ img#profileImage{
 
 #createProfile{
     position: relative;
-    left: 109px;
+    left: 250px;
 }
 
 input[type="tel" i] {
@@ -1027,15 +1027,13 @@ input[type="tel" i] {
 
 }
 
-.closing{
+.closing {
+    font-size: 1.6rem;
+    font-weight: bold;
     position: absolute;
     margin-left: 400px;
-    top:200px;
-}
-
-.complete{
-    position:absolute;
-    bottom:20px;
+    top: 235px;
+    cursor: pointer;
 }
 
 
