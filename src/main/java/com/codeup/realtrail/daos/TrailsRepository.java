@@ -1,6 +1,7 @@
 package com.codeup.realtrail.daos;
 
 import com.codeup.realtrail.models.Trail;
+import com.codeup.realtrail.models.TrailComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

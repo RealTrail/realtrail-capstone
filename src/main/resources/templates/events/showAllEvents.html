@@ -3,29 +3,113 @@
 <head th:replace="fragments/head :: head">
     <title>Show All Events</title>
 </head>
-<body>
+<body class="background-image">
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
+    @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
+
+    :root {
+        font-family: "Nunito", sans-serif;
+        /* font-family: 'Poppins', sans-serif; */
+    }
+
+    * {
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-size: 16px;
+    }
+
+
+    body {
+        background: url(/images/showEvents.png) no-repeat center center fixed;
+        background-size: 100% 100%;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
+    .card-list {
+        display: block;
+        margin: 1rem auto;
+        padding: 0;
+        font-size: 0;
+        text-align: center;
+        list-style: none;
+    }
+
+    .card {
+        display: inline-block;
+        width: 90%;
+        max-width: 20rem;
+        margin: 1rem;
+        font-size: 1rem;
+        text-decoration: none;
+        overflow: hidden;
+        box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+        transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+        border-radius: 10px;
+        background-color: white;
+        background-image: linear-gradient(to right, #dedede, #f49169, #c42a3e);
+    }
+
+    .card:hover {
+        transform: translateY(-0.5rem) scale(1.0125);
+        box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+    }
+
+    .card-description {
+        display: block;
+        padding: 1em 0.5em;
+        color: #515151;
+        text-decoration: none;
+        text-align: left;
+    }
+
+    .card-description > h3 {
+        margin: 0 0 0.5em;
+    }
+
+    .card-description > p {
+        margin: 0;
+    }
+
+    .review{
+        text-align: center;
+    }
+
+</style>
+
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <main style="margin-top: 5rem">
         <div th:if="${noEventsFound}">
-            <h1>No events were found.</h1>
+            <h1 class="noEvent">No events were found.</h1>
         </div>
 
-        <h2>Review the list for trail events happening near you!</h2>
-        <div th:each="event : ${events}">
-            <a th:href="${'/events/' + event.id}">
-                <h3 th:text="${event.name}"></h3>
-                <p>by: <span th:text="${event.owner.username}"></span></p>
-                <p th:text="${'Date: ' + event.date}"></p>
-                <p th:text="${'Time: ' + event.time}"></p>
-                <p>
-                    Trail: <a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
-                </p>
-            </a>
-        </div>
+        <h2 class="review">Review the list for trail events happening near you!</h2>
+        <ul class="card-list">
+                <li th:each="event : ${events}" class="card">
+                    <a th:href="${'/events/' + event.id}" class="card-description">
+                        <h3 th:text="${event.name}"></h3>
+                        <p>by: <span th:text="${event.owner.username}"></span></p>
+                        <p th:text="${'Date: ' + event.date}"></p>
+                        <p th:text="${'Time: ' + event.time}"></p>
+                        <p>
+                            Trail: <a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
+                        </p>
+                        <hr>
+                    </a>
+            </li>
+        </ul>
     </main>
 
-    <footer th:replace="fragments/footer :: footer"></footer>
+    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>
     <script src="/js/navbar.js"></script>
     <script src="/js/modal.js"></script>
     <script src="/js/login.js"></script>
