@@ -957,7 +957,10 @@ img#profileImage{
 
 .btnUpload{
     display: inline-block;
+<<<<<<< HEAD
+=======
 
+>>>>>>> d9531893eb65c535d03ba4c45611ad5bb759f639
     text-decoration: none;
     color: white;
     white-space: nowrap;
@@ -968,7 +971,6 @@ img#profileImage{
     transition: transform 0.2s;
     transition: all 1s ease-in-out;
     transform: scale(1.04);
-
     width: 200px;
     height: 200px;
     line-height: 200px;
@@ -979,7 +981,11 @@ img#profileImage{
 
     position: relative;
     margin: auto;
+<<<<<<< HEAD
+    top: 42px;
+=======
     top: 27px;
+>>>>>>> d9531893eb65c535d03ba4c45611ad5bb759f639
     right: 0px;
     bottom: 0;
     left: -308px;
