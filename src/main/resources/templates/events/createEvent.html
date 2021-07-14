@@ -8,15 +8,15 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main style="margin: 4rem">
+
     <div class=".form__wrapperpassc">
         <div class="form__bodypassc">
             <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
                 <h2>Event Details</h2>
                 <div>
                     <label for="name">Event Name</label>
-                    <input name="name" id="name" th:field="*{name}"/>
-                    <p>Event name has to be longer than 6 characters.</p>
+                    <input name="name" id="name" th:field="*{name}"placeholder="longer than 6 characters"/>
+
                 </div>
                 <p class="errorMessage" th:text="${message}"></p>
                 <div>
@@ -40,6 +40,7 @@
                     <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
                 </div>
                 <div>
+                    <br>
                     <h2>Choose your trail</h2>
                     <div>
                         <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
@@ -64,7 +65,9 @@
                     <input type="hidden" id="createdCoordinates" name="createdCoordinates">
                     <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
                 </div>
-                <div id="map"></div>
+
+
+
                 <button type="submit" id="createEvent">Submit</button>
             </form>
         </div>
@@ -73,6 +76,10 @@
 
     <div class="form__backgroundc"></div>
     <div class="form__backgroundc2"></div>
+<div id="map"></div>
+    <style>
+        body { margin: 0; padding: 0; }
+    </style>
 
     <div class="mask2" role="dialog"></div>
     <div class="modal2" role="alert">
@@ -161,6 +168,7 @@
             </div>
         </div>
         <a class="close" role="button"></a>
+
     </div>
 </main>
 

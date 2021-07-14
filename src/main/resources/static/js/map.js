@@ -9,7 +9,7 @@ $(document).ready(() => {
     $("#trailOption1").on("click", () => {
         $("#trailLocation").addClass("hidden");
         $("#trailOptions").removeClass("hidden");
-        $("#map").addClass("map");
+        // $("#map").addClass("map");
         $("#trailOptions").on('change', () => {
             // get the trail id and location
             let selectedTrailId = $("select#trailOptions").find(":selected").val();
@@ -252,6 +252,7 @@ function showMap(trailPoint) {
         zoom: 15
     });
 }
+map.addControl(new mapboxgl.FullscreenControl());
 
 // set up drawOptions
 function drawStyles() {
