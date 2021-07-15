@@ -2497,6 +2497,66 @@ div.header h4{
     clip-path: circle(45%);
 }
 
+.profile-header {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: flex-end;
+    height: 20rem;
+    width: 100%;
+    background-color: rgba(225,225,225,1);
+    margin-top: 5rem;
+}
+
+.profile-username {
+    margin-left: 2rem;
+}
+
+.profile-header > img.profileImage {
+    margin-left: 4rem;
+    width: 15rem;
+    clip-path: circle(40%);
+    overflow: hidden;
+}
+
+.profile-info {
+    margin: .5rem 4rem .5rem 4rem;
+}
+
+.profile-info tr {
+    padding: .5rem 0;
+    line-height: 2rem;
+}
+
+.profile-info th {
+    text-align: start;
+}
+
+.events-container {
+    margin: 0 4rem 2rem 4rem;
+}
+
+.events-container > table {
+    width: 100%;
+}
+
+.events-container > table > .events {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem 0;
+    line-height: 2rem;
+    justify-content: space-between;
+}
+
+.events-container > table > tbody.events:nth-child(even) {
+    background: #d3dade;
+}
+
+@media (min-width: 768px) {
+    .events-container > table > .events {
+        flex-direction: row;
+    }
+}
+
 /* ****************************** SHOW TRAIL PAGE ****************************** */
 
 

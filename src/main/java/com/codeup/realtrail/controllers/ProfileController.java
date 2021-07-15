@@ -152,6 +152,7 @@ public class ProfileController {
             List<Event> createdEvents = searchedUser.getCreatedEvents();
             List<Event> events = searchedUser.getEvents();
             model.addAttribute("user", searchedUser);
+            model.addAttribute("loggedInUser", loggedInUser);
             model.addAttribute("createdEvents", createdEvents);
             model.addAttribute("events", events);
             return "users/profile";

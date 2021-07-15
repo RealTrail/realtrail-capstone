@@ -5,41 +5,7 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<style>
-    .profile-header {
-        font-size: 1.2rem;
-        display: flex;
-        align-items: flex-end;
-        height: 20rem;
-        width: 100%;
-        background-color: rgba(225,225,225,1);
-        margin-top: 5rem;
-    }
 
-    .profile-username {
-        margin-left: 2rem;
-    }
-
-    .profile-header > img.profileImage {
-        margin-left: 4rem;
-        width: 15rem;
-        clip-path: circle(40%);
-        overflow: hidden;
-    }
-
-    .profile-info {
-        margin: .5rem 4rem .5rem 4rem;
-    }
-
-    .profile-info > tr {
-        padding: .5rem 0;
-    }
-
-    .profile-info th {
-        text-align: start;
-    }
-
-</style>
 <main>
     <h1><span th:text="${user.username}"></span>'s Profile</h1>
     <div class="profile-header">
@@ -95,43 +61,59 @@
                 <i class="fa fad fa-biking"></i>
             </td>
         </tr>
+        <tr>
+            <td><a class="btn-submit" th:href="@{/profile/{id}/edit(id=${user.id})}">Edit</a></td>
+            <td>
+                <a class="btn-submit" th:if="loggedInUser.id == user.id" href="/password/reset">Reset Password</a>
+                <a class="btn-submit" th:if="loggedInUser.id != user.id" href="/password/reset-admin">Reset Password</a>
+            </td>
+        </tr>
     </table>
 
-    <a class="btn" th:href="@{/profile/{id}/edit(id=${user.id})}">Edit</a>
-    <a href="/password/reset" class="btn">Reset Password</a>
-
-    <div th:if="${createdEvents.isEmpty()}">
+    <div th:if="${createdEvents.isEmpty() && loggedInUser.id == user.id}" class="events-container">
         <h2>You have not created any events. <a href="/create">Create one now</a></h2>
     </div>
-    <div th:if="${!createdEvents.isEmpty()}">
+    <div th:if="${!createdEvents.isEmpty()}" class="events-container">
         <h2>You have created these events</h2>
-        <div th:each="event : ${createdEvents}" id="createdEvents">
-            <a th:href="@{events/{id}(id=${event.id})}">
-            <h3 th:text="${event.name}"></h3>
-            <h3 th:text="${event.date}"></h3>
-            <h3 th:text="${event.time}"></h3>
-            </a>
-            <form th:action="@{/events/{id}/delete(id=${event.id})}" th:method="POST">
-                <button th:type="submit" class="btn">Delete</button>
-            </form>
-        </div>
+        <table>
+            <tbody th:each="event : ${createdEvents}" class="events">
+                <tr class="event">
+                    <td><a th:href="@{events/{id}(id=${event.id})}"><span th:text="${event.name}"></span></a></td>
+                </tr>
+            <tr>
+                <td th:text="${event.date}"></td>
+                <td th:text="${event.time}"></td>
+            </tr>
+            <tr><td>
+                <form th:action="@{/events/{id}/delete(id=${event.id})}" th:method="POST">
+                    <button th:type="submit" class="btn">Delete</button>
+                </form>
+            </td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <div th:if="${events.isEmpty()}">
+    <div th:if="${events.isEmpty() && loggedInUser.id == user.id}" class="events-container">
         <h2>You have not joined any events. <a href="/events">Want to join now?</a></h2>
     </div>
-    <div th:if="${!events.isEmpty()}">
+    <div th:if="${!events.isEmpty()}" class="events-container">
         <h2>You have joined these events</h2>
-        <div th:each="event : ${events}" id="joinedEvents">
-            <a th:href="@{events/{id}(id=${event.id})}">
-            <h3 th:text="${event.name}"></h3>
-            <h3 th:text="${event.date}"></h3>
-            <h3 th:text="${event.time}"></h3>
-            </a>
-            <form th:action="@{/events/{id}/cancel(id=${event.id})}" th:method="POST">
-                <button th:type="submit" class="btn">Cancel</button>
-            </form>
-        </div>
+        <table>
+            <tbody th:each="event : ${events}" class="events">
+                <tr class="event">
+                    <td><a th:href="@{events/{id}(id=${event.id})}"><span th:text="${event.name}"></span></a></td>
+                </tr>
+                <tr>
+                    <td th:text="${event.date}"></td>
+                    <td th:text="${event.time}"></td>
+                </tr>
+                <tr><td>
+                    <form th:action="@{/events/{id}/cancel(id=${event.id})}" th:method="POST">
+                        <button th:type="submit" class="btn">Cancel</button>
+                    </form>
+                </td></tr>
+            </tbody>
+        </table>
     </div>
 </main>
 
