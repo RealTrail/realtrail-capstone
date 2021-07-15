@@ -1,12 +1,9 @@
 package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.daos.EventsRepository;
-import com.codeup.realtrail.models.AjaxResponseBody;
+import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.daos.UserInterestRepository;
 import com.codeup.realtrail.daos.UsersRepository;
-import com.codeup.realtrail.models.Event;
-import com.codeup.realtrail.models.ProfileImageUpdateRequest;
-import com.codeup.realtrail.models.User;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -23,18 +20,15 @@ public class ProfileController {
     private UsersRepository usersDao;
     private UserInterestRepository userInterestsDao;
     private UserService userService;
-    private EventsRepository eventsDao;
-
 
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
     private String  filestackApi;
 
-    public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao, UserService userService, EventsRepository eventsDao) {
+    public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao, UserService userService) {
         this.usersDao = usersDao;
         this.userInterestsDao = userInterestsDao;
         this.userService = userService;
-        this.eventsDao = eventsDao;
     }
 
     @GetMapping("/profile/settings")
@@ -122,24 +116,30 @@ public class ProfileController {
         }
     }
 
+    // set up ajax post request response
+    @RequestMapping(value = "/profile/image-upload", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public User adminUploadUserProfileImage(
+            @RequestBody AdminUploadUserProfileImageRequest adminUploadUserProfileImageRequest) {
+        long id = adminUploadUserProfileImageRequest.getId();
+        String profileImageUrl = adminUploadUserProfileImageRequest.getProfileImageUrl();
+        User user = usersDao.getById(id);
+        user.setProfileImageUrl(profileImageUrl);
+        return usersDao.save(user);
+    }
+
     @GetMapping("/profile/{id}/edit")
     public String getAdminEditProfileForm(@PathVariable long id, Model model) {
-        User loggedInUser = userService.getLoggedInUser();
         User user = usersDao.getById(id);
-        if (user.getId() != loggedInUser.getId()) {
-            // pass the user to create profile form to show prepopulated data in the form
-            model.addAttribute("user", user);
-            model.addAttribute("interests", userInterestsDao.findAll());
-            model.addAttribute("fileStackApi", filestackApi);
-            model.addAttribute("postUrl", "/profile/" + id + "/edit");
-            return "users/adminProfileForm";
-        } else {
-            return "redirect:/profile/settings";
-        }
+        // pass the user to create profile form to show prepopulated data in the form
+        model.addAttribute("user", user);
+        model.addAttribute("interests", userInterestsDao.findAll());
+        model.addAttribute("fileStackApi", filestackApi);
+        model.addAttribute("postUrl", "/profile/" + id + "/edit");
+        return "users/adminProfileForm";
     }
 
     @PostMapping("/profile/{id}/edit")
-    public String editUsersProfile(@PathVariable long id, @ModelAttribute User user, Model model) {
+    public String editUsersProfile(@PathVariable long id, @ModelAttribute User user) {
         User userFromDB =  usersDao.getById(id);
         user.setId(id);
         user.setUsername(userFromDB.getUsername());
