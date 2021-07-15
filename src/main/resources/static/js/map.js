@@ -233,6 +233,14 @@ let map = new mapboxgl.Map({
     center: [-98.491142, 29.424349],
     zoom: 17
 });
+let mapEl = document.getElementById('map');
+
+// Change Dimensions
+mapEl.style.width = '100vw';
+mapEl.style.height = '100vh';
+
+// Fix the map display
+map.resize();
 
 // initialize draw
 let draw = new MapboxDraw({
