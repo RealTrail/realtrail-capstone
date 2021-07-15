@@ -34,6 +34,7 @@
     box-sizing: border-box;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
+
 }
 
 body{
@@ -1732,6 +1733,27 @@ small {
 
 /************************************ CREATE EVENT **********************/
 
+
+.tooltip{
+    position:absolute;
+    left:-2vw;
+    top:1vh;
+
+}
+
+
+#mapSearch{
+    position:relative;
+    top:-33.4px;
+    left:206px;
+    height:34px;
+
+    border-radius:10px;
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    border-top: 3px solid rgba(245, 240, 240, 1.9);
+    border: 2px outset rgba(255, 255, 255, 0.3);
+}
+
 input[type="tel" i] {
     padding: 8px;
     border: 0;
@@ -1908,6 +1930,126 @@ select{
     background-color: transparent;
     cursor: pointer;
     position: reletive;
+}
+
+.form__bodypassCE {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    display: flex;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    background-color:rgb(255 166 32 / 50%);
+    border-radius:50px;
+    height: 622px;
+    width: 294px;
+    box-shadow: 0 10px 50px rgb(22 40 80 / 50%);
+    ox-shadow: 0 10px 50px rgb(22 40 80 / 20%);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    border-top: 3px solid rgba(245, 240, 240, 1.9);
+    border: 2px outset rgba(255, 255, 255, 0.3);
+}
+
+.form__bodypassCE form input[type=text], .form__bodypassCE form input[type=password], .form__bodypassCE form input[type=email], .form__bodypassCE form input[type=date], .form__bodypassCE form input[type=number], .form__bodypassCE form input[name=name] {
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+    width: 60%;
+}
+
+.form__bodypassCE::before{
+    border-radius:20px;
+    transition:1s;
+}
+
+input[type=radio]{
+    display: none;
+}
+input[type=radio] + label, input[type=checkbox] + label {
+    position: relative;
+    display: inline-block;
+    padding-left: 24px;
+    margin-right: 32px;
+    cursor: pointer;
+    line-height: 16px;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
+}
+input[type=radio] + label:before, input[type=radio] + label:after, input[type=checkbox] + label:before, input[type=checkbox] + label:after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    color: #f5f5f5;
+    font-family: Times;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+
+input[type=radio] + label:before {
+    box-shadow: inset 0 0 0 1px #666565, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
+}
+input[type=radio] + label:hover {
+    color: #44BB6E;
+}
+input[type=radio] + label:hover:before {
+    animation-duration: 0.5s;
+    animation-name: change-size;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    box-shadow: inset 0 0 0 1px #44BB6E, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
+}
+
+input[type=radio]:checked + label:hover {
+    color: #333333;
+    cursor: default;
+}
+input[type=radio]:checked + label:before {
+    animation-duration: 0.2s;
+    animation-name: select-radio;
+    animation-iteration-count: 1;
+    animation-direction: Normal;
+    box-shadow: inset 0 0 0 1px #44BB6E, inset 0 0 0 3px #FFFFFF, inset 0 0 0 16px #44BB6E;
+}
+
+@keyframes change-size {
+    from {
+        box-shadow: 0 0 0 0 #44BB6E, inset 0 0 0 1px #44BB6E, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+    to {
+        box-shadow: 0 0 0 1px #44BB6E, inset 0 0 0 1px #44BB6E, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+}
+@keyframes select-radio {
+    0% {
+        box-shadow: 0 0 0 0 #91DEAC, inset 0 0 0 2px #FFFFFF, inset 0 0 0 3px #44BB6E, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+    90% {
+        box-shadow: 0 0 0 10px #E8FFF0, inset 0 0 0 0 #FFFFFF, inset 0 0 0 1px #44BB6E, inset 0 0 0 2px #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+    100% {
+        box-shadow: 0 0 0 12px #E8FFF0, inset 0 0 0 0 #FFFFFF, inset 0 0 0 1px #44BB6E, inset 0 0 0 3px #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+}
+@keyframes select-checkbox {
+    0% {
+        box-shadow: 0 0 0 0 #91DEAC, inset 0 0 0 2px #FFFFFF, inset 0 0 0 3px #44BB6E, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+    90% {
+        box-shadow: 0 0 0 10px #E8FFF0, inset 0 0 0 0 #FFFFFF, inset 0 0 0 1px #44BB6E, inset 0 0 0 0 #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
+    100% {
+        box-shadow: 0 0 0 12px #E8FFF0, inset 0 0 0 0 #FFFFFF, inset 0 0 0 1px #44BB6E, inset 0 0 0 0 #FFFFFF, inset 0 0 0 16px #44BB6E;
+    }
 }
 
 
@@ -2877,14 +3019,12 @@ div.header h4{
     z-index: 10000;
     visibility: hidden;
     opacity: 0;
-    transition: 0.7s;
     background-color: rgba(46, 54, 66, 0.4);
+
     /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
-    transition: 1.0s cubic-bezier(0.85, 0, 0.15, 1);
-
-
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
     -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(20px);
 
 
 }
@@ -2976,46 +3116,7 @@ div.header h4{
     font-family: sans-serif;
 }
 
-.close {
-    -webkit-animation: spin 4s linear infinite;
-    -moz-animation: spin 4s linear infinite;
-    animation: spin 4s linear infinite;
-    border-radius: 50%;
-}
-@-moz-keyframes spin {
-    100% {
-        -moz-transform: rotate(360deg);
-    }
-}
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-@-moz-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@-o-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-@keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
+
 
 /***************************** CREATE EVENT MAP ****************************************/
 /*.map_box_container{*/
@@ -3056,15 +3157,62 @@ div.header h4{
 /*}*/
 
 .mapboxgl-ctrl-group button {
-    width: 29px;
-    height: 129px;
-    display: block;
-    padding: 0;
+    width: 105px;
+    height: 105px;
+    display: flex;
     outline: none;
-    border: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    cursor: pointer;
-    position:reletive;
+    border: 40px;
+    background-color: rgba(244, 67, 54, 0.6) !important;
+    backdrop-filter:blur(20px);
+    border-radius:120px;
+    cursor: default;
+    position: relative;
+    /* bottom: -12px; */
+    /* left:1100px; */
+    top: 41vh;
+    /* right:200px; */
+    margin:20px;
+    transition:1s;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+.mapboxgl-ctrl-group {
+    border-radius: 4px;
+    background:transparent;
+}
+
+
+
+
+
+.mapbox-gl-draw_line{
+    background-image: url('');
+}
+
+.mapbox-gl-draw_trash{
+    background-image: url('');
+}
+
+.mapbox-gl-draw_line::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f303";
+    color:white;
+    font-size:30px;
+    position:relative;
+    left:38px;
+    top:34px;
+
+
+}
+
+.mapbox-gl-draw_trash::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f2ed";
+    color:white;
+    font-size:30px;
+    position:relative;
+    left:38px;
+    top:34px;
+}
+
+.mapboxgl-ctrl-group:not(:empty) {
+    box-shadow: 0 0 0 2px rgba(0,0,0,0);
 }
 
