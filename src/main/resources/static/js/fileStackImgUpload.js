@@ -7,14 +7,9 @@
          uploadProfileImage();
      });
 
-     $("#adminUpload").click((e) => {
-         e.preventDefault();
-
-         // get the user id from a hidden input
-         let id = $("#userId").val();
-
+     $("#adminUpload").click(() => {
          // upload image to filestack and store in db
-         adminUploadUserProfileImage(id);
+         adminUploadUserProfileImage();
      })
  });
 
@@ -89,43 +84,14 @@
  }
 
 
- function adminUploadUserProfileImage(id) {
+ function adminUploadUserProfileImage() {
      const options = {
          accept: ["image/*"],
          maxFiles: 1,
          onUploadDone: (results) => {
              console.log(results.filesUploaded[0].url);
-
              $("#profileImage").attr("src", results.filesUploaded[0].url); // display the new image on web page
-             $("#profileImageUrlAdmin").val(results.filesUploaded[0].url); // save the new image url to a hidden input
              $("#profileImgUploadedAdmin").val(results.filesUploaded[0].url);  // save the new image url to a hidden input in /profile/{id}/edit form
-
-             let profileImageObj = {
-                 id: parseInt($("#userId").val()),
-                 profileImageUrl: $("#profileImageUrlAdmin").val()
-             }
-
-             console.log(profileImageObj);
-
-             // do AJAX request to save profile image to db
-             $.ajax({
-                 url: "/profile/image-upload",
-                 type: "POST",
-                 data: JSON.stringify(profileImageObj),
-                 contentType: "application/json; charset=UTF-8",
-                 dataType: "json",
-                 timeout: 600000,
-                 success: (response) => {
-                     console.log("image uploaded successfully!");
-                     console.log(response);
-                     console.log(response.profileImageUrl);
-                     $("profileImgUploaded").val(response.profileImageUrl);
-                 },
-                 error: (error) => {
-                     console.log("Error: ", error);
-                     // alert("No image uploaded!");
-                 }
-             });
          },
          onFileUploadFailed: (response) => {
              console.log(response);
@@ -143,6 +109,5 @@
 
  // https://cdn.filestackcontent.com/B3Da08QOR1mpSwEmTp8p
 
- // Joe Johnston Route
- // https://cdn.filestackcontent.com/AsWj1z7CQN6tW4EmVeB5, https://cdn.filestackcontent.com/UJUO8903QGSgNCruXhdV, https://cdn.filestackcontent.com/2ag4o3fSQ9K9TUPF7usw, https://cdn.filestackcontent.com/urU1ed21S26ErDvSA2YZ,
+
 

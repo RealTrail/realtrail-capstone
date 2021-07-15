@@ -126,7 +126,7 @@ image:hover {
                         <a  th:href="${'/profile/' + user.id + '/edit'}">Edit this User</a>
                         </button>
                     </td>
-                    <td class="delete-user-div" th:if="${loggedInUser.isAdmin()}">
+                    <td class="delete-user-div" th:if="${loggedInUser.isAdmin() && !user.isAdmin()}">
                         <form class="admin-delete-form" th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
                             <button class="admin-delete-btn" type="submit">Delete this User</button>
                         </form>

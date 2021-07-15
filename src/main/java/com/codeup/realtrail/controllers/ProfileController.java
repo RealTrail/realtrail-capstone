@@ -116,17 +116,6 @@ public class ProfileController {
         }
     }
 
-    // set up ajax post request response
-    @RequestMapping(value = "/profile/image-upload", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User adminUploadUserProfileImage(
-            @RequestBody AdminUploadUserProfileImageRequest adminUploadUserProfileImageRequest) {
-        long id = adminUploadUserProfileImageRequest.getId();
-        String profileImageUrl = adminUploadUserProfileImageRequest.getProfileImageUrl();
-        User user = usersDao.getById(id);
-        user.setProfileImageUrl(profileImageUrl);
-        return usersDao.save(user);
-    }
-
     @GetMapping("/profile/{id}/edit")
     public String getAdminEditProfileForm(@PathVariable long id, Model model) {
         User user = usersDao.getById(id);
@@ -145,6 +134,9 @@ public class ProfileController {
         user.setUsername(userFromDB.getUsername());
         user.setEmail(userFromDB.getEmail());
         user.setPassword(userFromDB.getPassword());
+        if (user.getProfileImageUrl().isEmpty()) {
+            user.setProfileImageUrl(userFromDB.getProfileImageUrl());
+        }
         if (userFromDB.isAdmin()) {
             user.setAdmin(true);
         }
