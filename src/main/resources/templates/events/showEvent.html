@@ -4,23 +4,7 @@
     <title>Show Event</title>
 </head>
 <body>
-<!--<style>-->
-<!--    @import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");-->
-<!--    @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');-->
 
-<!--    :root {-->
-<!--        font-family: "Nunito", sans-serif;-->
-<!--        /* font-family: 'Poppins', sans-serif; */-->
-<!--    }-->
-
-<!--    * {-->
-<!--        box-sizing: border-box;-->
-<!--        font-size: 16px;-->
-<!--    }-->
-
-
-
-<!--</style>-->
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main style="margin-top: 5rem">
     <div >
@@ -30,9 +14,13 @@
             No event found. <a href="/create">Create one</a>
         </div>
     </div>
-    <table th:if="${event}" class="trail-info">
+    <table th:if="${event}" class="trail-info trail-header">
 
-        <h1 th:text="${event.name}"></h1>
+
+        <thead>
+        <tr>
+            <td><h1 th:text="${event.name}"></h1></td>
+        </tr>
         <tr>
             <td>Event coordinator:</td>
             <td th:text="${event.owner.username}"></td>
@@ -45,8 +33,10 @@
             <td>time:</td>
             <td th:text="${event.time}"></td>
         </tr>
-
-        <h4 th:text="${event.eventDetails}"></h4>
+        <tr>
+            <td>Event details:</td>
+            <td th:text="${event.eventDetails}"></td>
+        </tr>
         <tr>
             <td>Trail:</td>
             <td><a th:href="${'/trails/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></td>
@@ -59,6 +49,8 @@
             <td>Meet time:</td>
             <td th:text="${event.meetTime}"></td>
         </tr>
+        </thead>
+    </table>
         <div th:if="${event.owner.id == user.id && !event.participants.isEmpty()}">
             <div>Participants:
                 <div th:each="participant : ${event.participants}">
@@ -68,18 +60,17 @@
         </div>
 
         <br>
-        <table th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}" class="trail-comments">
-            <tbody class="trail-comment">
+        <table class="trail-comments">
+            <tbody th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}" class="trail-comment">
             <tr>
                 <td><img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image"></td>
-                <td>
+                <td class="starRating">
                     <span th:text="${comment.owner.username}"></span>
+                    <div class="stars"></div>
                     <span th:text="${comment.date}"></span>
                 </td>
             </tr>
-            <tr>
-                <p th:text="${comment.content}"></p>
-            </tr>
+            <tr><td th:text="${comment.content}"></td></tr>
             <tr>
                 <td th:if="${user.isAdmin() || user.id == comment.owner.id}">
                     <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
@@ -90,33 +81,33 @@
             </tr>
             </tbody>
         </table>
+
         <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/events/{id}/comment(id=${event.id})}" th:method="POST">
-                <textarea name="eventComment" id="" cols="30" rows="10"></textarea>
+            <form th:action="@{/events/{id}/comment(id=${event.id})}" th:method="POST" class="rating-widget">
+                <textarea name="eventComment" id="trail-content" cols="30" rows="10"></textarea>
                 <button type="submit" class="btn-submit">Submit</button>
             </form>
         </div>
 
-    </table>
-    <table class="card-list">
-    <tr th:if="${event.owner.id == user.id}" class="card">
-        <td>
-            <a th:href="${'/events/'+ event.id + '/edit'}" class="btn-submit">Edit Event</a>
+        <div th:if="${event.owner.id == user.id}">
 
-        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="POST">
-            <h2>Click the delete button to delete your event</h2>
-            <button th:type="submit" class="btn-submit">delete</button>
-        </form>
-        </td>
-    </tr>
+                <a th:href="${'/events/'+ event.id + '/edit'}" class="btn-submit">Edit Event</a>
 
-    <div th:if="${event.owner.id != user.id}" class="card">
-        <form th:action="@{|/events/${id}/join|}" method="POST">
-            <h2>Click the join button to join your event</h2>
-            <button th:type="submit" class="btn-submit">Join</button>
-        </form>
-    </div>
-    </table>
+                <form th:action="@{/events/{id}/delete(id=${event.id})}" method="POST">
+                    <h2>Click the delete button to delete your event</h2>
+                    <button th:type="submit" class="btn-submit">delete</button>
+                </form>
+
+
+
+            <div th:if="${event.owner.id != user.id}" >
+                <form th:action="@{|/events/${id}/join|}" method="POST">
+                    <h2>Click the join button to join your event</h2>
+                    <button th:type="submit" class="btn-submit">Join</button>
+                </form>
+            </div>
+        </div>
+
 </main>
 <!--<footer th:replace="fragments/footer :: footer"></footer>-->
 <script src="/js/navbar.js"></script>
