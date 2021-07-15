@@ -1999,7 +1999,7 @@ input[type=radio] + label:before {
     box-shadow: inset 0 0 0 1px #666565, inset 0 0 0 16px #FFFFFF, inset 0 0 0 16px #44BB6E;
 }
 input[type=radio] + label:hover {
-    color: #44BB6E;
+    color: #ffffff;
 }
 input[type=radio] + label:hover:before {
     animation-duration: 0.5s;
@@ -2319,7 +2319,7 @@ div.header h4{
     top: 200px;
     right: 0;
     bottom: 0;
-    left: 50%;
+    left: 39%;
     margin-left: -1500px;
     /* zoom: 0.9; */
 }
