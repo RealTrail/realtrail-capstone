@@ -4,13 +4,10 @@ import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UserInterestsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
-import com.codeup.realtrail.models.Event;
-import com.codeup.realtrail.models.Trail;
-import com.codeup.realtrail.models.UserInterest;
+import com.codeup.realtrail.models.*;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
-import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,7 +126,9 @@ public class UserController {
         System.out.println("usersDao.getById(id).getUsername() = " + usersDao.getById(id).getUsername());
         User user = usersDao.getById(id);
         List<UserInterest> interests = user.getInterests();
+        List<Event> events = user.getEvents();
 
+        // remove the user need to delete from users_interests table
         for (UserInterest interest : interests) {
             List<User> users = interest.getUsers();
             users.remove(user);
@@ -137,7 +136,16 @@ public class UserController {
             interestsDao.save(interest);
         }
 
+        // remove the user need to delete from events_participants table
+        for (Event event : events) {
+            List<User> participants = event.getParticipants();
+            participants.remove(user);
+            event.setParticipants(participants);
+            eventsDao.save(event);
+        }
+
         user.setInterests(null);
+        user.setEvents(null);
 
         usersDao.delete(usersDao.getById(id));
         return "redirect:/users";
