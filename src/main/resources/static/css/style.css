@@ -2581,7 +2581,7 @@ div.header h4{
 .trail-header > img {
     position: absolute;
     left: 4rem;
-    bottom: -25px;
+    bottom: 6px;
     width: 15rem;
     clip-path: circle(40%);
     overflow: hidden;
@@ -2605,6 +2605,11 @@ div.header h4{
 .trail-info > thead {
     padding-right: 2rem;
     flex: 1;
+}
+
+.trail-info > thead > tr {
+    padding: .5rem 0;
+    line-height: 2rem;
 }
 
 .trail-info > tbody {
@@ -2971,7 +2976,7 @@ div.header h4{
     text-align: justify;
     padding-left:  100px;
     padding-right:  100px;
-    font-size: 12px;
+    font-size: 1rem;
     font-family: sans-serif;
 }
 
