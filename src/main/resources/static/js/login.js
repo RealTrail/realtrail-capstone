@@ -20,3 +20,7 @@ var check = function() {
         document.getElementById('alertPasswordSign').innerHTML = '<span class="loginspan"><i class="fas fa-exclamation-triangle"></i>not matching</span>';
     }
 }
+
+if ($('#alertPasswordSign').text() === "Not match!") {
+    $('#alertPasswordSign').css("color", '#EE2B39')
+}

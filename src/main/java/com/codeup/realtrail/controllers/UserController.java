@@ -12,10 +12,7 @@ import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -57,7 +54,7 @@ public class UserController {
 
     // This is saving the user to the database
     @PostMapping("/signup")
-    public String saveUser(@ModelAttribute User user, Model model) {
+    public String saveUser(@ModelAttribute User user, @RequestParam(name = "confirmCreatePassword") String confirmPassword, Model model) {
         // error message for the username entry
         String message = "";
         if(validationService.usernameHasError(user.getUsername())){
@@ -77,6 +74,13 @@ public class UserController {
         if(validationService.passwordHasError(user.getPassword())){
             message = "Password should be at least 8 digits long and must contain special characters";
             model.addAttribute("passwordMessage", message);
+            return "users/signup-login";
+        }
+
+        //check if password and confirmPassword are the same
+        if (!confirmPassword.equals(user.getPassword())) {
+            message = "Not match!";
+            model.addAttribute("passwordNotMatch", message);
             return "users/signup-login";
         }
 
@@ -116,8 +120,9 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}/delete")
-    public String getAdminDeleteProfileForm(@PathVariable long id) {
-
+    public String deleteUser(@PathVariable long id) {
+        System.out.println("id = " + id);
+        System.out.println("usersDao.getById(id).getUsername() = " + usersDao.getById(id).getUsername());
         usersDao.delete(usersDao.getById(id));
         return "redirect:/users";
     }
