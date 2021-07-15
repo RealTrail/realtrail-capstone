@@ -6,6 +6,16 @@
          e.preventDefault();
          uploadProfileImage();
      });
+
+     $("#adminUpload").click((e) => {
+         e.preventDefault();
+
+         // get the user id from a hidden input
+         let id = $("#userId").val();
+
+         // upload image to filestack and store in db
+         adminUploadUserProfileImage(id);
+     })
  });
 
  const client = filestack.init(fileStackApi);
@@ -78,6 +88,52 @@
      client.picker(options).open();
  }
 
+
+ function adminUploadUserProfileImage(id) {
+     const options = {
+         accept: ["image/*"],
+         maxFiles: 1,
+         onUploadDone: (results) => {
+             console.log(results.filesUploaded[0].url);
+
+             $("#profileImage").attr("src", results.filesUploaded[0].url); // display the new image on web page
+             $("#profileImageUrlAdmin").val(results.filesUploaded[0].url); // save the new image url to a hidden input
+             $("#profileImgUploadedAdmin").val(results.filesUploaded[0].url);  // save the new image url to a hidden input in /profile/{id}/edit form
+
+             let profileImageObj = {
+                 id: parseInt($("#userId").val()),
+                 profileImageUrl: $("#profileImageUrlAdmin").val()
+             }
+
+             console.log(profileImageObj);
+
+             // do AJAX request to save profile image to db
+             $.ajax({
+                 url: "/profile/image-upload",
+                 type: "POST",
+                 data: JSON.stringify(profileImageObj),
+                 contentType: "application/json; charset=UTF-8",
+                 dataType: "json",
+                 timeout: 600000,
+                 success: (response) => {
+                     console.log("image uploaded successfully!");
+                     console.log(response);
+                     console.log(response.profileImageUrl);
+                     $("profileImgUploaded").val(response.profileImageUrl);
+                 },
+                 error: (error) => {
+                     console.log("Error: ", error);
+                     // alert("No image uploaded!");
+                 }
+             });
+         },
+         onFileUploadFailed: (response) => {
+             console.log(response);
+         }
+     }
+
+     client.picker(options).open();
+ }
 
  // https://cdn.filestackcontent.com/6NBa6pjQKGy3OEkIH0J2
 
