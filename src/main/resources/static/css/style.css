@@ -2551,6 +2551,15 @@ div.header h4{
     background: #d3dade;
 }
 
+.events-container > table > tbody.events > tr.event {
+    flex: 2;
+}
+
+.events-container > table > tbody.events > tr:nth-child(2) {
+    flex: 1;
+}
+
+
 @media (min-width: 768px) {
     .events-container > table > .events {
         flex-direction: row;
@@ -2784,8 +2793,24 @@ div.header h4{
 /* ****************************** CREATE EVENT PAGE ****************************** */
 
 .hidden {
-    display:none;
+    display: none;
 }
+
+/* ****************************** SHOW EVENT PAGE ****************************** */
+
+.joinEventMsg {
+    margin-top: 1rem;
+}
+
+.alreadyJoinMsg {
+    margin-top: 1rem;
+    color: #e57374;
+}
+
+.message {
+    font-size: 1.5rem;
+}
+
 
 /************************************* SIDE NAV ***************************************/
 

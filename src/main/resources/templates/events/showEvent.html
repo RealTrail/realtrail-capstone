@@ -8,16 +8,12 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main style="margin-top: 5rem">
     <div >
-        <div th:if="${param.joined}">Thank you for joining the event!</div>
-        <div th:if="${param.alreadyjoined}">You have already joined the event!</div>
         <div th:if="${event == null}">
             No event found. <a href="/create">Create one</a>
         </div>
     </div>
     <table th:if="${event}" class="trail-info trail-header">
-
-
-        <thead>
+        <tbody>
         <tr>
             <td><h1 th:text="${event.name}"></h1></td>
         </tr>
@@ -49,18 +45,18 @@
             <td>Meet time:</td>
             <td th:text="${event.meetTime}"></td>
         </tr>
-        </thead>
+        </tbody>
     </table>
-        <div th:if="${event.owner.id == user.id && !event.participants.isEmpty()}">
-            <div>Participants:
-                <div th:each="participant : ${event.participants}">
-                    <p th:text="${participant.username}"></p>
-                </div>
+    <div th:if="${event.owner.id == user.id && !event.participants.isEmpty()}">
+        <div>Participants:
+            <div th:each="participant : ${event.participants}">
+                <p th:text="${participant.username}"></p>
             </div>
         </div>
+    </div>
 
-        <br>
-        <table class="trail-comments">
+    <br>
+    <table class="trail-comments">
             <tbody th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}" class="trail-comment">
             <tr>
                 <td><img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image"></td>
@@ -82,31 +78,31 @@
             </tbody>
         </table>
 
-        <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/events/{id}/comment(id=${event.id})}" th:method="POST" class="rating-widget">
-                <textarea name="eventComment" id="trail-content" cols="30" rows="10"></textarea>
-                <button type="submit" class="btn-submit">Submit</button>
-            </form>
-        </div>
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/events/{id}/comment(id=${event.id})}" th:method="POST" class="rating-widget">
+            <textarea name="eventComment" id="trail-content" cols="30" rows="10"></textarea>
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+    </div>
 
-        <div th:if="${event.owner.id == user.id}">
+    <div th:if="${event.owner.id == user.id}" class="events-container">
+        <a th:href="${'/events/'+ event.id + '/edit'}" class="btn-submit">Edit Event</a>
 
-                <a th:href="${'/events/'+ event.id + '/edit'}" class="btn-submit">Edit Event</a>
+        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="POST">
+            <h2>Click the delete button to delete your event</h2>
+            <button th:type="submit" class="btn-submit">Delete Event</button>
+        </form>
+    </div>
 
-                <form th:action="@{/events/{id}/delete(id=${event.id})}" method="POST">
-                    <h2>Click the delete button to delete your event</h2>
-                    <button th:type="submit" class="btn-submit">delete</button>
-                </form>
+    <div th:if="${event.owner.id != user.id}" class="events-container">
+        <form th:action="@{|/events/${id}/join|}" method="POST">
+            <h2>Click the join button to join your event</h2>
+            <button th:type="submit" class="btn-submit">Join Event</button>
+        </form>
 
-
-
-            <div th:if="${event.owner.id != user.id}" >
-                <form th:action="@{|/events/${id}/join|}" method="POST">
-                    <h2>Click the join button to join your event</h2>
-                    <button th:type="submit" class="btn-submit">Join</button>
-                </form>
-            </div>
-        </div>
+        <div th:if="${param.joined}" class="joinEventMsg"><span class="message">Thank you for joining the event!</span></div>
+        <div th:if="${param.alreadyjoined}" class="alreadyJoinMsg"><span class="message">You have already joined the event!</span></div>
+    </div>
 
 </main>
 <!--<footer th:replace="fragments/footer :: footer"></footer>-->
