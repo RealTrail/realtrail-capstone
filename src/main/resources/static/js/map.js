@@ -187,7 +187,11 @@ $(document).ready(() => {
                     closeModalTwo();
 
                     // Add the Draw control to your map
-                    map.addControl(draw);
+                    map.addControl(draw, 'top-right');
+
+                    map.on('load', function() {
+                        // ALL YOUR APPLICATION CODE
+                    });
 
                     // add create, update, or delete actions
                     map.on('draw.create', updateRoute);
@@ -233,6 +237,14 @@ let map = new mapboxgl.Map({
     center: [-98.491142, 29.424349],
     zoom: 17
 });
+let mapEl = document.getElementById('map');
+
+// Change Dimensions
+mapEl.style.width = '100vw';
+mapEl.style.height = '100vh';
+
+// Fix the map display
+map.resize();
 
 // initialize draw
 let draw = new MapboxDraw({
@@ -242,6 +254,7 @@ let draw = new MapboxDraw({
         trash: true
     },
     styles: drawStyles()
+
 });
 
 // type in the search area to center the map to the searched location
@@ -268,7 +281,7 @@ function showMap(trailPoint) {
         minZoom: 11
     });
 }
-map.addControl(new mapboxgl.FullscreenControl());
+// map.addControl(new mapboxgl.FullscreenControl());
 
 // set up drawOptions
 function drawStyles() {

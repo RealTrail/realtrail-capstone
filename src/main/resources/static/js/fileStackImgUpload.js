@@ -6,6 +6,11 @@
          e.preventDefault();
          uploadProfileImage();
      });
+
+     $("#adminUpload").click(() => {
+         // upload image to filestack and store in db
+         adminUploadUserProfileImage();
+     })
  });
 
  const client = filestack.init(fileStackApi);
@@ -79,6 +84,23 @@
  }
 
 
+ function adminUploadUserProfileImage() {
+     const options = {
+         accept: ["image/*"],
+         maxFiles: 1,
+         onUploadDone: (results) => {
+             console.log(results.filesUploaded[0].url);
+             $("#profileImage").attr("src", results.filesUploaded[0].url); // display the new image on web page
+             $("#profileImgUploadedAdmin").val(results.filesUploaded[0].url);  // save the new image url to a hidden input in /profile/{id}/edit form
+         },
+         onFileUploadFailed: (response) => {
+             console.log(response);
+         }
+     }
+
+     client.picker(options).open();
+ }
+
  // https://cdn.filestackcontent.com/6NBa6pjQKGy3OEkIH0J2
 
  // https://cdn.filestackcontent.com/zPduwMuWROCS01EDdRV1
@@ -87,6 +109,5 @@
 
  // https://cdn.filestackcontent.com/B3Da08QOR1mpSwEmTp8p
 
- // Joe Johnston Route
- // https://cdn.filestackcontent.com/AsWj1z7CQN6tW4EmVeB5, https://cdn.filestackcontent.com/UJUO8903QGSgNCruXhdV, https://cdn.filestackcontent.com/2ag4o3fSQ9K9TUPF7usw, https://cdn.filestackcontent.com/urU1ed21S26ErDvSA2YZ,
+
 

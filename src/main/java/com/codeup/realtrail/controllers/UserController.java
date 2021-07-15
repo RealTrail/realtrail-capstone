@@ -2,9 +2,11 @@ package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
+import com.codeup.realtrail.daos.UserInterestsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.Event;
 import com.codeup.realtrail.models.Trail;
+import com.codeup.realtrail.models.UserInterest;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
@@ -12,10 +14,7 @@ import com.codeup.realtrail.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -26,15 +25,17 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     private TrailsRepository trailsDao;
     private EventsRepository eventsDao;
+    private UserInterestsRepository interestsDao;
     private ValidationService validationService;
     private EmailService emailService;
     private UserService userService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, EventsRepository eventsDao, ValidationService validationService, EmailService emailService, UserService userService) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, EventsRepository eventsDao, UserInterestsRepository interestsDao, ValidationService validationService, EmailService emailService, UserService userService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
         this.trailsDao = trailsDao;
         this.eventsDao = eventsDao;
+        this.interestsDao = interestsDao;
         this.validationService = validationService;
         this.emailService = emailService;
         this.userService = userService;
@@ -57,7 +58,7 @@ public class UserController {
 
     // This is saving the user to the database
     @PostMapping("/signup")
-    public String saveUser(@ModelAttribute User user, Model model) {
+    public String saveUser(@ModelAttribute User user, @RequestParam(name = "confirmCreatePassword") String confirmPassword, Model model) {
         // error message for the username entry
         String message = "";
         if(validationService.usernameHasError(user.getUsername())){
@@ -77,6 +78,13 @@ public class UserController {
         if(validationService.passwordHasError(user.getPassword())){
             message = "Password should be at least 8 digits long and must contain special characters";
             model.addAttribute("passwordMessage", message);
+            return "users/signup-login";
+        }
+
+        //check if password and confirmPassword are the same
+        if (!confirmPassword.equals(user.getPassword())) {
+            message = "Not match!";
+            model.addAttribute("passwordNotMatch", message);
             return "users/signup-login";
         }
 
@@ -116,7 +124,20 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}/delete")
-    public String getAdminDeleteProfileForm(@PathVariable long id) {
+    public String deleteUser(@PathVariable long id) {
+        System.out.println("id = " + id);
+        System.out.println("usersDao.getById(id).getUsername() = " + usersDao.getById(id).getUsername());
+        User user = usersDao.getById(id);
+        List<UserInterest> interests = user.getInterests();
+
+        for (UserInterest interest : interests) {
+            List<User> users = interest.getUsers();
+            users.remove(user);
+            interest.setUsers(users);
+            interestsDao.save(interest);
+        }
+
+        user.setInterests(null);
 
         usersDao.delete(usersDao.getById(id));
         return "redirect:/users";

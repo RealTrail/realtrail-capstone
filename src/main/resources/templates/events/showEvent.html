@@ -4,6 +4,59 @@
     <title>Show Event</title>
 </head>
 <body>
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
+    @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
+
+    :root {
+        font-family: "Nunito", sans-serif;
+        /* font-family: 'Poppins', sans-serif; */
+    }
+
+    * {
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    body {
+        background: url(/images/showEvents.png) no-repeat center center fixed;
+        background-size: 100% 100%;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
+    .card-list {
+        display: block;
+        margin: 1rem auto;
+        padding: 0;
+        font-size: 0;
+        text-align: center;
+        list-style: none;
+    }
+
+    .card {
+        display: inline-block;
+        width: 90%;
+        max-width: 20rem;
+        margin: 1rem;
+        font-size: 1rem;
+        text-decoration: none;
+        overflow: hidden;
+        box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+        transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+        border-radius: 10px;
+        background-color: white;
+        background-image: linear-gradient(to right, #dedede, #ebedef, #ebedef);
+    }
+
+    .card:hover {
+        transform: translateY(-0.5rem) scale(1.0125);
+        box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+    }
+
+
+</style>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main style="margin-top: 5rem">
     <div th:if="${param.joined}">Thank you for joining the event!</div>
@@ -12,7 +65,8 @@
         No event found. <a href="/create">Create one</a>
     </div>
 
-    <div th:if="${event}">
+    <ul th:if="${event}" class="card-list">
+        <li class="card">
         <h3 th:text="${event.name}"></h3>
         <p th:text="${'Event coordinator: ' + event.owner.username}"></p>
         <h4 th:text="${'date: ' + event.date}"></h4>
@@ -22,12 +76,14 @@
         <div>Meet location:<h4 th:text="${event.meetLocation}"></h4></div>
         <div>Meet time:<h4 th:text="${event.meetTime}"></h4></div>
         <div th:if="${event.owner.id == user.id && !event.participants.isEmpty()}">
+
             <div>Participants:
                 <div th:each="participant : ${event.participants}">
                     <p th:text="${participant.username}"></p>
                 </div>
             </div>
         </div>
+        </li>
         <br>
         <div th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}">
             <div>
@@ -49,8 +105,9 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-    </div>
-    <div th:if="${event.owner.id == user.id}">
+    </ul>
+    <ul class="card-list">
+    <li th:if="${event.owner.id == user.id}" class="card">
         <div>
             <a th:href="${'/events/'+ event.id + '/edit'}">Edit Event</a>
         </div>
@@ -58,14 +115,15 @@
             <h2>Click the delete button to delete your event</h2>
             <button th:type="submit">delete</button>
         </form>
-    </div>
+    </li>
 
-    <div th:if="${event.owner.id != user.id}">
+    <li th:if="${event.owner.id != user.id}" class="card">
         <form th:action="@{|/events/${id}/join|}" method="POST">
             <h2>Click the join button to join your event</h2>
             <button th:type="submit">Join</button>
         </form>
-    </div>
+    </li>
+    </ul>
 </main>
 <!--<footer th:replace="fragments/footer :: footer"></footer>-->
 <script src="/js/navbar.js"></script>

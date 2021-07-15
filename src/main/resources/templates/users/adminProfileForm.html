@@ -1,40 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" style="max-width:100%; overflow-x:hidden">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      style="max-width:100%; overflow-x:hidden">
 <head th:replace="fragments/head :: head">
     <meta name="fileStackApi" th:content="${fileStackApi}">
     <title>Create Profile</title>
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<style>
-    .form__wrapperpasspp{
-        top: 13vh;
-
-    }
-    .form__backgroundpp,.form__backgroundpp1{
-        top: 1vh;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-    }
-    footer{
-        margin-top: 125px;
-    }
-    .closing{position: absolute;top:50px;right:50px;}
-</style>
 
 <main>
-
     <div class="form__wrapperpasspp">
         <div class="form__bodypasspp">
-            <form th:action="@{/profile/{id}/edit(id=${user.id})}" th:method="POST" th:object="${user}" style="position: relative">
+            <form id="admin-edit-profile-form" th:action="@{/profile/{id}/edit(id=${user.id})}" th:method="POST" th:object="${user}">
                 <div><a href="/users" class="closing">X</a></div>
-                <h2>Public Profile</h2>
+                <h2 th:text="${user.username + ' Profile'}"></h2>
+                <div>
+                    <img class="pulse" th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
+                    <input type="hidden" id="profileImgUploadedAdmin" name="profileImageUrl" th:field="*{profileImageUrl}">
+                    <button type="button" class="btnUpload" id="adminUpload">Upload profile image</button>
+                </div>
                 <div>
                     <label for="firstName">First Name</label>
-                    <input type="hidden" id="profileImg" name="profileImageUrl" th:field="*{profileImageUrl}">
-
                     <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
                 </div>
                 <div>

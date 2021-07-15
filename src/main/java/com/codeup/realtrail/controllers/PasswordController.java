@@ -1,9 +1,9 @@
 package com.codeup.realtrail.controllers;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.User;
-import com.codeup.realtrail.services.PasswordService;
 import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PasswordController {
     private UsersRepository usersDao;
+    private PasswordEncoder passwordEncoder;
     private UserService userService;
-    private PasswordService passwordService;
     private ValidationService validationService;
 
-    public PasswordController(UsersRepository usersDao, UserService userService, PasswordService passwordService, ValidationService validationService) {
+    public PasswordController(UsersRepository usersDao, PasswordEncoder passwordEncoder, UserService userService, ValidationService validationService) {
         this.usersDao = usersDao;
+        this.passwordEncoder = passwordEncoder;
         this.userService = userService;
-        this.passwordService = passwordService;
         this.validationService = validationService;
     }
 
-        @GetMapping("/password/reset")
+    @GetMapping("/password/reset")
     public String showResetPasswordForm() {
 
         return "users/resetPassword";
@@ -38,7 +38,7 @@ public class PasswordController {
                                 Model model){
         User user = userService.getLoggedInUser();
         String message = "";
-        boolean isPasswordSame = passwordService.check(oldPassword, user.getPassword());
+        boolean isPasswordSame = passwordEncoder.matches(oldPassword, user.getPassword());
         if(!isPasswordSame){
             message = "Password doesn't match. Please retry";
             model.addAttribute("message", message);
@@ -52,7 +52,7 @@ public class PasswordController {
             model.addAttribute("passwordConfirmMessage", message);
             return "users/resetPassword";
         }else{
-            user.setPassword(passwordService.hash(newPassword));
+            user.setPassword(passwordEncoder.encode(newPassword));
             usersDao.save(user);
             return "redirect:/login";
         }
