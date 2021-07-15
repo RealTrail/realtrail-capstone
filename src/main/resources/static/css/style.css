@@ -943,16 +943,10 @@ img#profileImage{
     bottom: 0;
     left: -615px;
     width: 200px;
-
-
-
     height: 200px;
     object-fit:cover;
     /*clip-path: circle(45%);*/
     border-radius: 50%;
-
-
-    
 }
 
 .btnUpload {
@@ -978,6 +972,18 @@ img#profileImage{
     margin: auto;
     top: 25px;
     left: -308px;
+}
+
+.pulse {
+    animation: pulse-animation 2s infinite;
+}
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.75);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+    }
 }
 
 @media (max-width: 747px) {
@@ -1025,7 +1031,8 @@ img#profileImage{
 
 #createProfile{
     position: relative;
-    left: 250px;
+    left: 286px;
+    top: -22px;
 }
 
 input[type="tel" i] {
@@ -1069,15 +1076,8 @@ input[type="tel" i] {
 }
 
 .form__wrapperpasspp {
-    /* position: absolute;
-    top: 200px;
-    width: 100%;
-    height: 100vh;
-    padding: 10vh 20px; */
-    /* background: #efefef; */
     max-width: 1080px;
     margin: 0 auto;
-    position: relative;
     top:200px;
     text-align: left;
 }
@@ -1091,8 +1091,6 @@ input[type="tel" i] {
     width: 50%;
     text-align: center;
 }
-
-
 
 .form__bodypasspp {
     position: relative;
