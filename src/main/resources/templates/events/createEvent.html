@@ -9,79 +9,12 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 
-<!--    <div class=".form__wrapperpassc">-->
-<!--        <div class="form__bodypassc">-->
-<!--            <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">-->
-<!--                <h2>Event Details</h2>-->
-<!--                <div>-->
-<!--                    <label for="name">Event Name</label>-->
-<!--                    <input name="name" id="name" th:field="*{name}"placeholder="longer than 6 characters"/>-->
-
-<!--                </div>-->
-<!--                <p class="errorMessage" th:text="${message}"></p>-->
-<!--                <div>-->
-<!--                    <label for="eventDate">Date</label>-->
-<!--                    <input type="date" name="eventDate" id="eventDate" />-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label for="eventTime">Time</label>-->
-<!--                    <input type="time" name="eventTime" id="eventTime" />-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label for="meetLocation">Meet Location</label>-->
-<!--                    <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label for="eventMeetTime">Meet Time</label>-->
-<!--                    <input type="time" name="eventMeetTime" id="eventMeetTime" />-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label for="eventDetails">Event Details</label>-->
-<!--                    <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <br>-->
-<!--                    <h2>Choose your trail</h2>-->
-<!--                    <div>-->
-<!--                        <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">-->
-<!--                        <label for="trailOption1">Choose an existing trail</label>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">-->
-<!--                        <label for="trailOption2">Customize your hiking trail</label>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <select id="trailOptions" name="trailOptions" class="hidden">-->
-<!--                        <option value="">Nothing selected</option>-->
-<!--                        <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}" th:name="${trail.longitude + ' ' + trail.latitude}"></option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <div id="trailLocation" class="hidden">-->
-<!--                    <label for="searchedName"></label>-->
-<!--                    <input type="text" id="searchedName" name="mapSearch">-->
-<!--                    <input type="hidden" id="trailId" name="createdTrailId">-->
-<!--                    <input type="hidden" id="trailPoint" name="trailPoint">-->
-<!--                    <input type="hidden" id="createdCoordinates" name="createdCoordinates">-->
-<!--                    <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>-->
-<!--                </div>-->
 
 
 
-<!--                <button type="submit" id="createEvent">Submit</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
 
-<!--    <div class="form__backgroundc"></div>-->
-<!--    <div class="form__backgroundc2"></div>-->
 
 <div id="map"></div>
-
-
-
-
-
 
     <style>
         body { margin:0; padding:0; }
@@ -94,20 +27,21 @@
         <!-- Modal content -->
 <!--        <div class="modal-content2">-->
 <!--            <div class="modal-header2">-->
-        <div class="form__bodypassc">
-                <h2 class="type1">Customize Your Hiking Trail</h2>
+
+            <div class="form__bodypassCE">
+                <h2 class="ceH2">Customize Your Hiking Trail</h2>
                 <p class="errorMessage trailExist"></p>
-            </div>
-            <div class="modal-body2">
                 <form action="/trails/create" method="POST">
                     <div>
-                        <label for="trailName">Name</label>
-                        <input type="text" id="trailName" name="trailName" required>
+
+                        <input type="text" id="trailName" name="trailName" placeholder="Trail Name" required>
+                        <label for="trailName"></label>
                     </div>
                     <p class="errorMessage trailName"></p>
                     <div>
-                        <label for="trailLength">Length</label>
-                        <input type="number" id="trailLength" step="0.1" name="trailLength" required>miles
+
+                        <input type="number" id="trailLength" step="0.1" placeholder="Miles" name="trailLength" required>
+                        <label for="trailLength"></label>
                     </div>
                     <p class="errorMessage trailLength"></p>
                     <div>
@@ -147,18 +81,22 @@
                     </div>
                     <p class="errorMessage trailType"></p>
                     <div>
-                        <label for="trailDetails">Trail Details</label>
-                        <textarea name="trailDetails" id="trailDetails" rows="7" cols="30" required></textarea>
+
+                        <textarea name="trailDetails" id="trailDetails" rows="7" cols="30" placeholder="Trail Details" required></textarea>
+                        <label for="trailDetails"></label>
                     </div>
                     <p class="errorMessage trailDetails"></p>
                     <div>
                         <button type="button" id="images">Upload images</button>
                         <i id="imagesUploadHint" class="fa fa-check hidden" style="color:green"></i>
                         <input type="hidden" id="hidden" name="images" />
+                        <button type="submit" id="createTrail">Submit</button>
                     </div>
-                    <button type="submit" id="createTrail">Submit</button>
+
+
                 </form>
-            </div>
+
+                <br>
             <div class="modal-footer2">
                 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
                 <svg class="close" version="1.1"
@@ -176,15 +114,56 @@
             </div>
         </div>
         <a class="close" role="button"></a>
-
+</div>
     </div>
 
 </div>
+
+
 <style>
+
+
+    /*CREATEPAGE SPECIFIC NAV DO NOT REMOVE*/
+
+    .globalNav {
+         font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+        font-family: 'Archivo Black', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        right: 0;
+        z-index: 500;
+        height: 60px;
+        perspective: 2000px;
+        background-color: #e5e5e5;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 50px;
+        box-shadow: 0 10px 50px rgb(164 164 164 / 90%);
+        border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+        /* border-top: 3px solid rgba(245, 240, 240, 1.9); */
+        border: 1.5px outset rgba(255, 255, 255, 0.3);
+
+
+
+    }
+
+    /*CREATEPAGE SPECIFIC NAV DO NOT REMOVE*/
+
+
+
+
+
+
+
+
+
     .form__backgroundce {
 
         height: 100%;
-        width: 550px;
+        /*width: 550px;*/
         position: fixed;
         z-index: 1;
         top: 0;
@@ -213,13 +192,24 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
+
+
+
+
+
+
+
 </style>
 
 <div id="mySidenav" class="form__backgroundce">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 
-        <div class=".form__wrapperpassc">
+
+
+
+
             <div class="form__bodypassc">
                 <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
                     <h2>Event Details</h2>
@@ -273,7 +263,9 @@
                         <input type="hidden" id="trailId" name="createdTrailId">
                         <input type="hidden" id="trailPoint" name="trailPoint">
                         <input type="hidden" id="createdCoordinates" name="createdCoordinates">
+                        <br>
                         <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
+
                     </div>
 
 
@@ -281,12 +273,18 @@
                     <button type="submit" id="createEvent">Submit</button>
                 </form>
             </div>
-        </div>
+
 
         <div class="form__backgroundc"></div>
         <div class="form__backgroundc2"></div>
 
+    <div class="tooltip">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <lottie-player src="https://assets3.lottiefiles.com/datafiles/BWweJKuWuiTWcaI/data.json"  background="transparent"  speed="0.5"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
 
+    </div>
+
+</div>
 
 </div>
 
@@ -300,6 +298,30 @@
     function closeNav() {
         document.getElementById("mySidenav").style.display = "none";
     }
+
+
+
+    var rectangle = $("#Rectangle");
+    var speechBubble = $("#SpeechBubble");
+
+
+    rectangle.hover(
+        function() {
+            speechBubble.css({
+                "animation-name": "expand-bounce",
+                "animation-duration": "0.25s"
+            });
+        },
+        function() {
+            speechBubble.css({
+                "animation-name": "shrink",
+                "animation-duration": "0.1s"
+            });
+        }
+    );
+
+
+
 </script>
 
 
