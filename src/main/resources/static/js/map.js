@@ -245,6 +245,7 @@ mapEl.style.height = '100vh';
 
 // Fix the map display
 map.resize();
+window.addEventListener("resize",()=>{map.resize()})
 
 // initialize draw
 let draw = new MapboxDraw({
