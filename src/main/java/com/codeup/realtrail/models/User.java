@@ -45,6 +45,7 @@ public class User {
     @Column(columnDefinition = "boolean default false")
     private boolean isAdmin;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="users_interests",

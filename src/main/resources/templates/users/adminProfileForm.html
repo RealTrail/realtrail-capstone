@@ -7,39 +7,20 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<style>
-    /*.form__wrapperpasspp{*/
-    /*    top: 13vh;*/
-
-    /*}*/
-    /*.form__backgroundpp,.form__backgroundpp1{*/
-    /*    top: 1vh;*/
-    /*    bottom: 0;*/
-    /*    left: 0;*/
-    /*    right: 0;*/
-    /*    margin: auto;*/
-    /*}*/
-
-</style>
 
 <main>
-
     <div class="form__wrapperpasspp">
         <div class="form__bodypasspp">
-
-            <form th:action="@{/profile/image-upload}" method="POST">
-                <img class="pulse" th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
-                <input type="hidden" id="userId" th:value="${user.id}">
-                <input type="hidden" id="profileImageUrlAdmin" name="profileImageUrl">
-                <button type="submit" class="btnUpload" id="adminUpload">Upload profile image</button>
-            </form>
-
             <form id="admin-edit-profile-form" th:action="@{/profile/{id}/edit(id=${user.id})}" th:method="POST" th:object="${user}">
                 <div><a href="/users" class="closing">X</a></div>
                 <h2 th:text="${user.username + ' Profile'}"></h2>
                 <div>
-                    <label for="firstName">First Name</label>
+                    <img class="pulse" th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
                     <input type="hidden" id="profileImgUploadedAdmin" name="profileImageUrl" th:field="*{profileImageUrl}">
+                    <button type="button" class="btnUpload" id="adminUpload">Upload profile image</button>
+                </div>
+                <div>
+                    <label for="firstName">First Name</label>
                     <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
                 </div>
                 <div>
