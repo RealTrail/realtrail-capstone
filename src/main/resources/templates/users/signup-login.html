@@ -67,10 +67,10 @@
                 <div class="input-field">
                     <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>
                     <label for="confirmCreatePassword">Confirm Password</label>
-                    <p id="alertPasswordSign"></p>
+                    <p id="alertPasswordSign" th:text="${passwordNotMatch}"></p>
                 </div>
 
-                <input type="submit" class="btn btn-light" value="Create Account" name="signup">
+                <input type="submit" id="signup" class="btn btn-light" value="Create Account" name="signup">
             </form>
         </div>
 
