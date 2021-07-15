@@ -2422,7 +2422,7 @@ div.header h4{
     left: -15%;
     transform: scale(5);
     animation-delay: 1s;
-    animation-duration: 129s;
+    animation-duration: 75s;
 }
 
 .cloud2 {
@@ -2430,7 +2430,7 @@ div.header h4{
     left: -25%;
     transform: scale(3);
     animation-delay: -9.5s;
-    animation-duration: 138s;
+    animation-duration: 100s;
 }
 
 .cloud3 {
@@ -2438,23 +2438,23 @@ div.header h4{
     left: -35%;
     transform: scale(4);
     animation-delay: -4s;
-    animation-duration: 90s;
+    animation-duration: 60s;
 }
 
 .cloud4 {
-    top: 65%;
+    top: 39%;
     left: -45%;
     transform: scale(5);
-    animation-delay: -1s;
-    animation-duration: 110s;
+    animation-delay: 0s;
+    animation-duration: 80s;
 }
 
 .cloud5 {
-    top: 85%;
-    left: -55%;
+    top: 59%;
+    left: -35%;
     transform: scale(6);
     animation-delay: -7.5s;
-    animation-duration: 100s;
+    animation-duration: 40s;
 }
 
 @keyframes moveRight {
