@@ -2,9 +2,11 @@ package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
+import com.codeup.realtrail.daos.UserInterestsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.models.Event;
 import com.codeup.realtrail.models.Trail;
+import com.codeup.realtrail.models.UserInterest;
 import com.codeup.realtrail.services.EmailService;
 import com.codeup.realtrail.services.UserService;
 import com.codeup.realtrail.services.ValidationService;
@@ -23,15 +25,17 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     private TrailsRepository trailsDao;
     private EventsRepository eventsDao;
+    private UserInterestsRepository interestsDao;
     private ValidationService validationService;
     private EmailService emailService;
     private UserService userService;
 
-    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, EventsRepository eventsDao, ValidationService validationService, EmailService emailService, UserService userService) {
+    public UserController(UsersRepository usersDao, PasswordEncoder passwordEncoder, TrailsRepository trailsDao, EventsRepository eventsDao, UserInterestsRepository interestsDao, ValidationService validationService, EmailService emailService, UserService userService) {
         this.usersDao = usersDao;
         this.passwordEncoder = passwordEncoder;
         this.trailsDao = trailsDao;
         this.eventsDao = eventsDao;
+        this.interestsDao = interestsDao;
         this.validationService = validationService;
         this.emailService = emailService;
         this.userService = userService;
@@ -123,6 +127,18 @@ public class UserController {
     public String deleteUser(@PathVariable long id) {
         System.out.println("id = " + id);
         System.out.println("usersDao.getById(id).getUsername() = " + usersDao.getById(id).getUsername());
+        User user = usersDao.getById(id);
+        List<UserInterest> interests = user.getInterests();
+
+        for (UserInterest interest : interests) {
+            List<User> users = interest.getUsers();
+            users.remove(user);
+            interest.setUsers(users);
+            interestsDao.save(interest);
+        }
+
+        user.setInterests(null);
+
         usersDao.delete(usersDao.getById(id));
         return "redirect:/users";
     }

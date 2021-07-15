@@ -1,8 +1,7 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.models.*;
-import com.codeup.realtrail.daos.UserInterestRepository;
+import com.codeup.realtrail.daos.UserInterestsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
 import com.codeup.realtrail.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,14 +17,14 @@ import java.util.List;
 @Controller
 public class ProfileController {
     private UsersRepository usersDao;
-    private UserInterestRepository userInterestsDao;
+    private UserInterestsRepository userInterestsDao;
     private UserService userService;
 
     //Importing File Stack Api Key
     @Value("${filestack.api.key}")
     private String  filestackApi;
 
-    public ProfileController(UsersRepository usersDao, UserInterestRepository userInterestsDao, UserService userService) {
+    public ProfileController(UsersRepository usersDao, UserInterestsRepository userInterestsDao, UserService userService) {
         this.usersDao = usersDao;
         this.userInterestsDao = userInterestsDao;
         this.userService = userService;
