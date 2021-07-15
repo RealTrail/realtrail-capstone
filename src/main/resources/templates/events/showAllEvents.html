@@ -25,6 +25,15 @@
         font-size: 16px;
     }
 
+
+    body {
+        background: url(/images/showEvents.png) no-repeat center center fixed;
+        background-size: 100% 100%;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
     .card-list {
         display: block;
         margin: 1rem auto;
@@ -44,6 +53,9 @@
         overflow: hidden;
         box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
         transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+        border-radius: 10px;
+        background-color: white;
+        background-image: linear-gradient(to right, #dedede, #f49169, #c42a3e);
     }
 
     .card:hover {
@@ -56,6 +68,7 @@
         padding: 1em 0.5em;
         color: #515151;
         text-decoration: none;
+        text-align: left;
     }
 
     .card-description > h3 {
@@ -68,10 +81,6 @@
 
     .review{
         text-align: center;
-    }
-
-    .background-image{
-        background: url("/static/images/showEvents.png");
     }
 
 </style>
@@ -100,7 +109,7 @@
         </ul>
     </main>
 
-    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>
+<!--    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>-->
     <script src="/js/navbar.js"></script>
     <script src="/js/modal.js"></script>
     <script src="/js/login.js"></script>

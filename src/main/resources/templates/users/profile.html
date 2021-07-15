@@ -5,59 +5,85 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
+<style>
+    .profile-header {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: flex-end;
+        height: 20rem;
+        width: 100%;
+        background-color: rgba(225,225,225,1);
+        margin-top: 5rem;
+    }
 
+    .profile-username {
+        margin-left: 2rem;
+    }
+
+    .profile-header > img.profileImage {
+        margin-left: 4rem;
+        width: 15rem;
+        clip-path: circle(40%);
+        overflow: hidden;
+    }
+</style>
 <main>
     <h1><span th:text="${user.username}"></span>'s Profile</h1>
-    <fieldset>
-        <legend>
-            <h3>Personal Details</h3>
-        </legend>
-        <table>
-            <tr>
-                <th><img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image"></th>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td th:text="${user.username}"></td>
-            </tr>
-            <tr th:if="${user.firstName == null || user.lastName == null}">
-                <th>Name</th>
-                <td>No name available</td>
-            </tr>
-            <tr th:if="${user.firstName != null && user.lastName != null}">
-                <th>Name</th>
-                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td th:text="${user.email}"></td>
-            </tr>
-            <tr th:if="${user.phoneNumber == null}">
-                <th>Phone Number</th>
-                <td>No phone number available</td>
-            </tr>
-            <tr th:if="${user.phoneNumber != null}">
-                <th>Phone Number</th>
-                <td th:text="${user.phoneNumber}"></td>
-            </tr>
-            <tr th:if="${user.city == null || user.state == null}">
-                <th>City, State</th>
-                <td>No city and state available</td>
-            </tr>
-            <tr th:if="${user.city != null && user.state != null}">
-                <th>City, State</th>
-                <td th:text="${user.city + ', ' + user.state}"></td>
-            </tr>
-            <tr th:if="user.interests == null">
-                <th>Interests</th>
-                <td>No interests selected</td>
-            </tr>
-            <tr th:if="user.interests != null">
-                <th>Interests</th>
-                <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
-            </tr>
-        </table>
-    </fieldset>
+    <div class="profile-header">
+        <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
+        <div class="profile-username">
+            <div>Username</div>
+            <h1 th:text="${user.username}"></h1>
+        </div>
+    </div>
+    <table>
+        <tr th:if="${user.firstName == null || user.lastName == null}">
+            <th>Name</th>
+            <td>No name available</td>
+        </tr>
+        <tr th:if="${user.firstName != null && user.lastName != null}">
+            <th>Name</th>
+            <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td th:text="${user.email}"></td>
+        </tr>
+        <tr th:if="${user.phoneNumber == null}">
+            <th>Phone Number</th>
+            <td>No phone number available</td>
+        </tr>
+        <tr th:if="${user.phoneNumber != null}">
+            <th>Phone Number</th>
+            <td th:text="${user.phoneNumber}"></td>
+        </tr>
+        <tr th:if="${user.city == null || user.state == null}">
+            <th>City, State</th>
+            <td>No city and state available</td>
+        </tr>
+        <tr th:if="${user.city != null && user.state != null}">
+            <th>City, State</th>
+            <td th:text="${user.city + ', ' + user.state}"></td>
+        </tr>
+        <tr th:if="user.interests == null">
+            <th>Interests</th>
+            <td>No interests selected</td>
+        </tr>
+        <tr th:if="user.interests != null">
+            <th>Interests</th>
+            <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fas fa-walking"></i>
+                <i class="fas fa-running"></i>
+                <i class="fas fa-hiking"></i>
+                <i class="fas fa-biking-mountain"></i>
+                <i class="fa fad fa-biking"></i>
+            </td>
+        </tr>
+    </table>
+
     <a class="btn" th:href="@{/profile/{id}/edit(id=${user.id})}">Edit</a>
     <a href="/password/reset" class="btn">Reset Password</a>
 
@@ -96,7 +122,7 @@
     </div>
 </main>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<!--<footer th:replace="fragments/footer :: footer"></footer>-->
 <script src="/js/navbar.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/login.js"></script>

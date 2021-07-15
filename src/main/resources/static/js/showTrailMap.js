@@ -23,10 +23,10 @@ $(document).ready(() => {
                 }
                 console.log(coordinates);
 
-                $("#map").css("height", "700px");
+                $("#trail-map").css("height", "700px");
                 // show the map around the location
                 let map = new mapboxgl.Map({
-                    container: 'map',
+                    container: 'trail-map',
                     style: 'mapbox://styles/mapbox/outdoors-v11',
                     center: trailPoint,
                     zoom: 15,

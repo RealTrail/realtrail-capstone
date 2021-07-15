@@ -7,12 +7,28 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
+
+<style>
+    /*.pulse {*/
+    /*    animation: pulse-animation 2s infinite;*/
+    /*}*/
+    /*@keyframes pulse-animation {*/
+    /*    0% {*/
+    /*        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.75);*/
+    /*    }*/
+    /*    100% {*/
+    /*        box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);*/
+    /*    }*/
+    /*}*/
+    /*.closing{position: absolute;top:32px;right:32px;}*/
+</style>
+
 <main>
-    <div class=".form__wrapperpasspp">
+    <div class="form__wrapperpasspp">
         <div class="form__bodypasspp">
 
             <form action="/profile/image" method="POST">
-                <img th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
+                <img class="pulse" th:src="${user.profileImageUrl}" alt="profile-image" id="profileImage">
                 <input type="hidden" id="profileImageUrl" name="profileImageUrl">
                 <button type="submit" class="btnUpload" id="upload">Upload profile image</button>
             </form>
@@ -112,7 +128,7 @@
     </svg>
 </main>
 
-<footer th:replace="fragments/footer :: footer" class="profile-footer"></footer>
+<!--<footer th:replace="fragments/footer :: footer" class="profile-footer"></footer>-->
 
 <script type="text/javascript" src="/js/sticky.js"></script>
 <script src="/js/login.js"></script>
