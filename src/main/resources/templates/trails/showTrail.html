@@ -88,9 +88,7 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
-
 
     <form sec:authorize="isAuthenticated()" class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:method="POST">
         <input type="checkbox" class="star-input" id="1" data-value="1"/>

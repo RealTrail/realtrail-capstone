@@ -1,6 +1,5 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.PictureURLsRepository;
 import com.codeup.realtrail.daos.TrailCommentsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
@@ -41,7 +40,6 @@ public class TrailController{
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
         model.addAttribute("trailComments", trailComments);
-//        model.addAttribute("trailComment", new TrailComment());
         model.addAttribute("mapboxToken", mapboxToken);
         model.addAttribute("postUrl", "/trails/" + id + "/comment");
         if (!trail.getTrailComments().isEmpty()) {

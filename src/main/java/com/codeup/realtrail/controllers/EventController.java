@@ -33,7 +33,7 @@ public class EventController {
     private EventCommentsRepository eventCommentsDao;
 
     //Importing File Stack Api Key
-    @Value("${filestack.api.key}")
+    @Value("AP7IcbG0R7qiYt6IFgPLZz")
     private String filestackApi;
 
     // importing mapbox token
