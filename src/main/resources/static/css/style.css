@@ -1956,6 +1956,7 @@ div.header h4{
 /* ****************************** SHOW PROFILE PAGE ****************************** */
 .profileImage {
     width: 6rem;
+    height: 6rem;
     clip-path: circle(45%);
 }
 
