@@ -1964,9 +1964,11 @@ div.header h4{
     font-size: 1.2rem;
     display: flex;
     align-items: flex-end;
-    height: 20rem;
+    height: 21rem;
     width: 100%;
-    background-color: rgba(225, 225, 225, .5);
+    position: relative;
+    top: -14px;
+    background-color: rgba(41, 162, 139, 0.13);
     margin-top: 5rem;
     backdrop-filter: blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
@@ -1985,7 +1987,13 @@ div.header h4{
 }
 
 .profile-info {
-    margin: .5rem 4rem .5rem 4rem;
+    margin: -0.5rem 0 .5rem 0;
+    padding: 0 4rem;
+    width: 100%;
+    color: white;
+    background-color: rgb(2 109 99 / 90%);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 }
 
 .profile-info tr {
