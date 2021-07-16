@@ -76,61 +76,35 @@ function closeNav() {
     // document.body.style.backgroundColor = "transparent";
 }
 
-// ******************** MODAL JS *******************
-
-// Click function for show the Modal
-
-// $("#myBtn, #myBtnM").on("click", function(){
-//     $(".mask").addClass("active");
-// });
-//
-// // Function for close the Modal
-//
-// function closeModal(){
-//     $(".mask").removeClass("active");
-// }
-//
-// // Call the closeModal function on the clicks/keyboard
-//
-// $(".close, .mask").on("click", function(){
-//     closeModal();
-// });
-//
-// $(document).keyup(function(e) {
-//     if (e.keyCode === 27) {
-//         closeModal();
-//     }
-// });
-
 
 // ******************** Trail Search ***************
 
 // Filter by difficulty level
 $(document).ready(function () {
     // let trails = [];
-
-    $("#difficultyLevel").on("change", function() {
-        $(".slick-slide").each(function (i){
-            var diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
-            if ($("#difficultyLevel :selected").text() !== diffLevel){
-                $(this).addClass("hidden");
-            } else {
-                $(this).removeClass("hidden");
-            }
-        })
-    })
-
-    $("#type").on("change", function() {
-        $(".slick-slide").each(function (i){
-            var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
-            console.log(routeType);
-            if ($("#type :selected").text() !== routeType){
-                $(this).addClass("hidden");
-            } else {
-                $(this).removeClass("hidden");
-            }
-        })
-    })
+    //
+    // $("#difficultyLevel").on("change", function() {
+    //     $(".slick-slide").each(function (i){
+    //         var diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
+    //         if ($("#difficultyLevel :selected").text() !== diffLevel){
+    //             $(this).addClass("hidden");
+    //         } else {
+    //             $(this).removeClass("hidden");
+    //         }
+    //     })
+    // })
+    //
+    // $("#type").on("change", function() {
+    //     $(".slick-slide").each(function (i){
+    //         var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
+    //         console.log(routeType);
+    //         if ($("#type :selected").text() !== routeType){
+    //             $(this).addClass("hidden");
+    //         } else {
+    //             $(this).removeClass("hidden");
+    //         }
+    //     })
+    // })
 
 });
 

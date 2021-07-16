@@ -150,4 +150,9 @@ public class UserController {
         usersDao.delete(usersDao.getById(id));
         return "redirect:/users";
     }
+
+    @GetMapping("/contact")
+    public String showContactUsPage() {
+        return "contactUs";
+    }
 }
