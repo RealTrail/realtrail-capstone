@@ -1977,6 +1977,7 @@ div.header h4{
 .profile-header > img.profileImage {
     margin-left: 4rem;
     width: 15rem;
+    height: 15rem;
     clip-path: circle(40%);
     overflow: hidden;
 }
