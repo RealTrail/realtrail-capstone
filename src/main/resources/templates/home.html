@@ -109,29 +109,37 @@
                         <i class="fas fa-search search__icon" id="search"></i>
                     </div>
                 </form>
-                <div class="filter" style="margin-top:21rem; margin-left:17rem; position:absolute; z-index:1000">
-                    <label for="difficultyLevel"></label>
-                    <select id="difficultyLevel" name="difficulty_level">
-                        <option th:value="null">Filter by Difficulty-Level</option>
-                        <option th:value="Easy">Easy</option>
-                        <option th:value="Moderate">Moderate</option>
-                        <option th:value="Strenuous">Strenuous</option>
-                    </select>
+                <form action="/trails/filter" method="get" style="margin-top:21rem; margin-left:17rem; position:absolute; z-index:1000">
+                    <h3>Filter By Difficulty Level Or Route Type</h3>
+                    <div>
+                        <input type="radio" id="easy" name="difficulty" value="Easy">
+                        <label for="easy">Easy</label>
+                        <input type="radio" id="moderate" name="difficulty" value="Moderate">
+                        <label for="moderate">Moderate</label>
+                        <input type="radio" id="strenuous" name="difficulty" value="Strenuous">
+                        <label for="strenuous">Strenuous</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="loop" name="type" value="Loop">
+                        <label for="loop">Loop</label>
+                        <input type="radio" id="outAndBack" name="type" value="Out and back">
+                        <label for="outAndBack">Out and back</label>
+                        <input type="radio" id="pointToPoint" name="type" value="Point to point">
+                        <label for="pointToPoint">Point to point</label>
+                        <input type="radio" id="cycleway" name="type" value="Cycleway">
+                        <label for="cycleway">Cycleway</label>
+                    </div>
 
-                    <label for="type"></label>
-                    <select id="type" name="type">
-                        <option th:value="null">Filter by Route Type</option>
-                        <option th:value="Loop">Loop</option>
-                        <option th:value="Out_and_back">Out and back</option>
-                        <option th:value="Point_to_point">Point to point</option>
-                        <option th:value="Cycleway">Cycleway</option>
-                    </select>
-                </div>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
             <div class="boxx" onclick="openNav()"></div>
 
             <div class="slider-container" >
-                <div class="slider">
+                <div th:if="${trails == null}">
+                    <h2>No trail found. </h2>
+                </div>
+                <div th:if="${trails}" class="slider">
                     <div th:each="trail : ${trails}">
                         <a th:href="${'/trails/' + trail.id}">
                             <div class="slide-wrap">
