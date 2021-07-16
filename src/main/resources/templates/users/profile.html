@@ -63,10 +63,6 @@
         </tr>
         <tr>
             <td><a class="btn-submit" th:href="@{/profile/{id}/edit(id=${user.id})}">Edit</a></td>
-            <td>
-                <a class="btn-submit" th:if="loggedInUser.id == user.id" href="/password/reset">Reset Password</a>
-                <a class="btn-submit" th:if="loggedInUser.id != user.id" href="/password/reset-admin">Reset Password</a>
-            </td>
         </tr>
     </table>
 
