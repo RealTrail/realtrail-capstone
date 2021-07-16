@@ -112,22 +112,21 @@
                 <form action="/trails/filter" method="get" style="margin-top:21rem; margin-left:17rem; position:absolute; z-index:1000">
                     <h3>Filter By Difficulty Level Or Route Type</h3>
                     <div>
-                        <input type="radio" id="easy" name="difficulty" value="Easy">
-                        <label for="easy">Easy</label>
-                        <input type="radio" id="moderate" name="difficulty" value="Moderate">
-                        <label for="moderate">Moderate</label>
-                        <input type="radio" id="strenuous" name="difficulty" value="Strenuous">
-                        <label for="strenuous">Strenuous</label>
+                        <select name="difficulty" id="difficulty">
+                            <option value="">-- Filter by difficulty level --</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Strenuous">Strenuous</option>
+                        </select>
                     </div>
                     <div>
-                        <input type="radio" id="loop" name="type" value="Loop">
-                        <label for="loop">Loop</label>
-                        <input type="radio" id="outAndBack" name="type" value="Out and back">
-                        <label for="outAndBack">Out and back</label>
-                        <input type="radio" id="pointToPoint" name="type" value="Point to point">
-                        <label for="pointToPoint">Point to point</label>
-                        <input type="radio" id="cycleway" name="type" value="Cycleway">
-                        <label for="cycleway">Cycleway</label>
+                        <select name="type" id="type">
+                            <option value="">-- Filter by route type --</option>
+                            <option value="Loop">Loop</option>
+                            <option value="Out and back">Out and back</option>
+                            <option value="Point to point">Point to point</option>
+                            <option value="Cycleway">Cycleway</option>
+                        </select>
                     </div>
 
                     <button type="submit">Submit</button>
