@@ -16,10 +16,13 @@
         flex-direction: column;
     }
 
+    .developer-card {
+        margin-bottm: 1.2rem;
+    }
+
     .developer-image {
-        flex: 1 0 24rem;
         margin: 1rem;
-        box-shadow: 0.3rem 0.4rem 0.4rem rgba(0 0 0 .2);
+        box-shadow: 0.3rem 0.4rem 0.4rem rgba(0 0 0 / 20%);
         overflow: hidden;
         border-radius: 20px;
     }
@@ -33,6 +36,10 @@
         filter: contrast(115%) brightness(90%)saturate(110%);
     }
 
+    .developer-info {
+        margin: 1rem;
+    }
+
     @media (min-width: 992px) {
         .developer-cards {
             flex-direction: row;
@@ -42,12 +49,12 @@
 
 
 <main class="contactUs developer-cards">
-    <div>
+    <div class="developer-card">
         <div class="developer-image">
-            <img src="/images/karla.png" alt="Karla's image">
+            <img src="/images/karla.jpg" alt="Karla's image">
         </div>
         <div class="developer-info">
-            <h4>Karla Jara</h4>
+            <h4><a href="https://www.linkedin.com/in/karla-jara-full-stack-dev/">Karla Jara</a></h4>
             <p>jara.karla.43@gmail.com</p>
         </div>
     </div>
@@ -56,13 +63,13 @@
             <img src="/images/shan.png" alt="Shanshan's image">
         </div>
         <div class="developer-info">
-            <h4>Shanshan Su</h4>
+            <h4><a href="https://www.linkedin.com/in/shanshan-su-wathen/">Shanshan Su</a></h4>
             <p>shanshansu36@gmail.com</p>
         </div>
     </div>
     <div class="developer-card">
         <div class="developer-image">
-            <img src="/images/VictorGHernandez.png" alt="Victor's image">
+            <img src="/images/victor.jpg" alt="Victor's image">
         </div>
         <div class="developer-info">
             <h4>Victor G Hernandez</h4>
@@ -72,10 +79,10 @@
 
     <div class="developer-card">
         <div class="developer-image">
-            <img src="/images/manny.png" alt="Emmanuel's image">
+            <img src="/images/manny.jpg" alt="Emmanuel's image">
         </div>
         <div class="developer-info">
-            <h4>Emmanuel Stephen</h4>
+            <h4><a href="https://www.linkedin.com/in/emmanuel-stephen-702893178/">Emmanuel Stephen</a></h4>
             <p>emmanuel.r.stephen86@gmail.com</p>
         </div>
     </div>
@@ -84,7 +91,7 @@
             <img src="/images/salim.jpg" alt="Salim's image">
         </div>
         <div class="developer-info">
-            <h4>Salim Ahmedabadi</h4>
+            <h4><a href="https://www.linkedin.com/in/salim-ahmedabadi/">Salim Ahmedabadi</a></h4>
             <p>ahmedabadi.salim@gmail.com</p>
         </div>
     </div>

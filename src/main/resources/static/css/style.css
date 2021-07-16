@@ -1966,8 +1966,10 @@ div.header h4{
     align-items: flex-end;
     height: 20rem;
     width: 100%;
-    background-color: rgba(225,225,225,1);
+    background-color: rgba(225, 225, 225, .5);
     margin-top: 5rem;
+    backdrop-filter: blur(20px);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
 }
 
 .profile-username {
@@ -1977,6 +1979,7 @@ div.header h4{
 .profile-header > img.profileImage {
     margin-left: 4rem;
     width: 15rem;
+    height: 15rem;
     clip-path: circle(40%);
     overflow: hidden;
 }
