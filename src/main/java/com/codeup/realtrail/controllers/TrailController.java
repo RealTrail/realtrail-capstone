@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class TrailController{
@@ -73,19 +73,53 @@ public class TrailController{
     }
 
     @GetMapping("/search-trail")
-    public String getSearchedTrail(@RequestParam (value="keyword", required = false) String name, Model model) {
-        Trail trail = trailsDao.findByKeyword("%" + name + "%");
-        System.out.println("trail.getName() = " + trail.getName());
-        System.out.println("trail.getId() = " + trail.getId());
-        Trail searchResult = trailsDao.findById(trail.getId());
-        model.addAttribute("trails", searchResult);
-        return "home";
+    public String getSearchedTrail(@RequestParam (value="keyword", required = false) String keyword, Model model) {
+        List<Trail> trails = trailsDao.findByName(keyword);
+
+        if (trails.isEmpty()) {
+            Set<Trail> trailSet = new HashSet<>();
+            List<String> keywords = Arrays.asList(keyword.split(" "));
+            for (String string : keywords) {
+                System.out.println("string = " + string);
+                trailSet.addAll(trailsDao.findByName(string));  // combine the trails found together without duplicates
+            }
+            List<Trail> trailList = new ArrayList<>(trailSet);
+            trailList.sort(new Comparator<Trail>() {
+                @Override
+                public int compare(Trail trail1, Trail trail2) {
+                    String name1 = trail1.getName();
+                    String name2 = trail2.getName();
+                    return name1.compareToIgnoreCase(name2);
+                }
+            });
+
+            model.addAttribute("trails", trailList);
+            return "home";
+        } else {
+            model.addAttribute("trails", trails);
+            return "home";
+        }
     }
 
-    @GetMapping("/filter/difficulty-level")
-    public String filterDifficultyLevel(Model model) {
-        List<String> filterLevel = trailsDao.findByDifficultyLevel();
-        model.addAttribute("trails", filterLevel);
+    @GetMapping("/trails/filter")
+    public String filterDifficultyLevelOrType(Model model,
+            @RequestParam(name = "difficulty", required = false) String diffLevel,
+            @RequestParam(name = "type", required = false) String type) {
+        List<Trail> trails = null;
+        if (type == null) {
+            trails = trailsDao.findByDifficultyLevel(diffLevel);
+        } else if (diffLevel == null) {
+            trails = trailsDao.findByType(type);
+        } else {
+            trails = trailsDao.findByDifficultyLevelAndType(diffLevel, type);
+        }
+
+        trails.sort((trail1, trail2) -> {
+            String name1 = trail1.getName();
+            String name2 = trail2.getName();
+            return name1.compareToIgnoreCase(name2);
+        });
+        model.addAttribute("trails", trails);
         return "home";
     }
 

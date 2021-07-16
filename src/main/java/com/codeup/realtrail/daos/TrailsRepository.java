@@ -13,14 +13,18 @@ import java.util.List;
 public interface TrailsRepository extends JpaRepository<Trail, Long> {
     Trail findTrailByName(String name);
     Trail findById(long id);
-    List<Trail> findAllByDifficultyLevel(String level);
-    List<Trail> findAllByType(String routeType);
+    Trail findByNameContains(String name);
 
-    @Query("FROM Trail t WHERE t.name LIKE %:keyword%")
-    Trail findByKeyword(@Param("keyword") String keyword);
 
-    @Query("SELECT DISTINCT difficultyLevel FROM Trail")
-    List<String> findByDifficultyLevel();
+    @Query("SELECT t FROM Trail t WHERE t.name LIKE %:keyword%")
+    List<Trail> findByName(@Param("keyword") String keyword);
 
-    List<Trail> findAllByDifficultyLevelAndAndTypeAndName(String difficultyLevel, String type, String name);
+    @Query("SELECT t FROM Trail t WHERE t.difficultyLevel = ?1")
+    List<Trail> findByDifficultyLevel(String diffLevel);
+
+    @Query("SELECT t FROM Trail t WHERE t.type = ?1")
+    List<Trail> findByType(String type);
+
+    @Query("SELECT t FROM Trail t WHERE t.difficultyLevel = ?1 AND t.type = ?2")
+    List<Trail> findByDifficultyLevelAndType(String difficultyLevel, String type);
 }
