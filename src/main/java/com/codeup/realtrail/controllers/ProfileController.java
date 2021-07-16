@@ -21,8 +21,8 @@ public class ProfileController {
     private UserService userService;
 
     //Importing File Stack Api Key
-    @Value("${filestack.api.key}")
-    private String  filestackApi;
+    @Value("AP7IcbG0R7qiYt6IFgPLZz")
+    private String filestackApi;
 
     public ProfileController(UsersRepository usersDao, UserInterestsRepository userInterestsDao, UserService userService) {
         this.usersDao = usersDao;

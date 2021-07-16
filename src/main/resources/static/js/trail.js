@@ -113,9 +113,9 @@ $(document).ready(function () {
         $(".slick-slide").each(function (i){
             var diffLevel = $(this).find(".header > *:nth-child(2)").text().split(":")[1].trim();
             if ($("#difficultyLevel :selected").text() !== diffLevel){
-                $(this).css("display", "none");
+                $(this).addClass("hidden");
             } else {
-                $(this).css("display", "block");
+                $(this).removeClass("hidden");
             }
         })
     })
@@ -125,9 +125,9 @@ $(document).ready(function () {
             var routeType = $(this).find(".header > *:nth-child(4)").text().split(":")[1].trim();
             console.log(routeType);
             if ($("#type :selected").text() !== routeType){
-                $(this).css("display", "none");
+                $(this).addClass("hidden");
             } else {
-                $(this).css("display", "block");
+                $(this).removeClass("hidden");
             }
         })
     })

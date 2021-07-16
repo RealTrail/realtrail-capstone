@@ -3,8 +3,18 @@
 <head th:replace="fragments/head :: head">
     <meta name="mapboxToken" th:content="${mapboxToken}">
     <title>Show Trail</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
+<style>
+    html, body{
+        max-width: 100%;
+        overflow-x:hidden ;
+    }
+
+
+</style>
+
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
@@ -12,11 +22,22 @@
         <h1>Trail not found.</h1>
     </div>
     <div th:if="${trail != null}">
+
+        <div class="trailanimate">
+            <lottie-player class="headeranimate" src="https://assets2.lottiefiles.com/private_files/lf30_9q70uajb.json" mode="bounce" background="transparent"  speed="0.1"  style="width: 1300px; height: 1300px;"  loop  autoplay></lottie-player>
+        </div>
+
+
+
         <div class="trail-header">
             <img th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
-            <h1 th:text="${trail.name}"></h1>
-            <div th:if="${trail.rating != 0}" th:text="${'rating: ' + trail.rating}"></div>
+            <h1 id="trailtitle" th:text="${trail.name}"></h1>
+            <h2 th:if="${trail.rating != 0}" th:text="${'rating: ' + trail.rating}"></h2>
             <div th:if="${trail.rating == 0}">No rating available</div>
+
+
+
+
         </div>
         <table class="trail-info">
             <thead>
@@ -88,9 +109,7 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
-
 
     <form sec:authorize="isAuthenticated()" class="rating-widget" th:action="@{/trails/{id}/comment(id=${trail.id})}" th:method="POST">
         <input type="checkbox" class="star-input" id="1" data-value="1"/>
