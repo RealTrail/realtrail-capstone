@@ -106,7 +106,7 @@
                     <div class="container">
                         <label for="keyword"></label>
                         <input type="text" id="keyword" name="keyword" placeholder="Search Trails..." class="search__box">
-                        <i class="fas fa-search search__icon" id="search"></i>
+                        <button type="submit"><i class="fas fa-search search__icon" id="search"></i></button>
                     </div>
                 </form>
                 <form action="/trails/filter" method="get" style="margin-top:21rem; margin-left:17rem; position:absolute; z-index:1000">
@@ -135,8 +135,9 @@
             </div>
             <div class="boxx" onclick="openNav()"></div>
 
-            <div class="slider-container" >
-                <div th:if="${trails == null}">
+
+            <div class="slider-container">
+                <div th:if="${trails.isEmpty()}">
                     <h2>No trail found. </h2>
                 </div>
                 <div th:if="${trails}" class="slider">

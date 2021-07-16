@@ -1,13 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
-  <title>Contact Us</title>
+    <title>Contact Us</title>
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main>
+<style>
+    .contactUs {
+        margin: 5rem 4rem 0 4rem;
+    }
 
+    .developer-cards {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .developer-image {
+        flex: 1 0 24rem;
+        margin: 1rem;
+        box-shadow: 0.3rem 0.4rem 0.4rem rgba(0 0 0 .2);
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .developer-image > img {
+        display: block;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: transform 400ms ease-out;
+        filter: contrast(115%) brightness(90%)saturate(110%);
+    }
+
+    @media (min-width: 992px) {
+        .developer-cards {
+            flex-direction: row;
+        }
+    }
+</style>
+
+
+<main class="contactUs developer-cards">
+    <div>
+        <div class="developer-image">
+            <img src="/images/karla.png" alt="Karla's image">
+        </div>
+        <div class="developer-info">
+            <h4>Karla Jara</h4>
+            <p>jara.karla.43@gmail.com</p>
+        </div>
+    </div>
+    <div class="developer-card">
+        <div class="developer-image">
+            <img src="/images/shan.png" alt="Shanshan's image">
+        </div>
+        <div class="developer-info">
+            <h4>Shanshan Su</h4>
+            <p>shanshansu36@gmail.com</p>
+        </div>
+    </div>
+    <div class="developer-card">
+        <div class="developer-image">
+            <img src="/images/VictorGHernandez.png" alt="Victor's image">
+        </div>
+        <div class="developer-info">
+            <h4>Victor G Hernandez</h4>
+            <p>victor.g.hernandez87@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="developer-card">
+        <div class="developer-image">
+            <img src="/images/manny.png" alt="Emmanuel's image">
+        </div>
+        <div class="developer-info">
+            <h4>Emmanuel Stephen</h4>
+            <p>emmanuel.r.stephen86@gmail.com</p>
+        </div>
+    </div>
+    <div class="developer-card">
+        <div class="developer-image">
+            <img src="/images/salim.jpg" alt="Salim's image">
+        </div>
+        <div class="developer-info">
+            <h4>Salim Ahmedabadi</h4>
+            <p>ahmedabadi.salim@gmail.com</p>
+        </div>
+    </div>
 </main>
+
+<!--    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>-->
 </body>
 </html>
