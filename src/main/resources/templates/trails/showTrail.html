@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" style="max-width: 100%; overflow-x: hidden;">
 <head th:replace="fragments/head :: head">
     <meta name="mapboxToken" th:content="${mapboxToken}">
     <title>Show Trail</title>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
-<body>
-<style>
-    html, body{
-        max-width: 100%;
-        overflow-x:hidden ;
-    }
-
-
-</style>
+<body style="max-width: 100%; overflow-x: hidden;">
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
@@ -27,17 +19,11 @@
             <lottie-player class="headeranimate" src="https://assets2.lottiefiles.com/private_files/lf30_9q70uajb.json" mode="bounce" background="transparent"  speed="0.1"  style="width: 1300px; height: 1300px;"  loop  autoplay></lottie-player>
         </div>
 
-
-
         <div class="trail-header">
             <img th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
             <h1 id="trailtitle" th:text="${trail.name}"></h1>
             <h2 th:if="${trail.rating != 0}" th:text="${'rating: ' + trail.rating}"></h2>
             <div th:if="${trail.rating == 0}">No rating available</div>
-
-
-
-
         </div>
         <table class="trail-info">
             <thead>
@@ -154,7 +140,6 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
 <script src="/js/mapbox-geocoder-utils.js"></script>
-
 <script src="/js/navbar.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/login.js"></script>
