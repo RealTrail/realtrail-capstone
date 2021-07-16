@@ -4,8 +4,8 @@
     <title>Show Event</title>
 </head>
 <body>
-
 <nav th:replace="fragments/navbar :: navbar"></nav>
+
 <main style="margin-top: 5rem">
     <div >
         <div th:if="${event == null}">
@@ -57,26 +57,26 @@
 
     <br>
     <table class="trail-comments">
-            <tbody th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}" class="trail-comment">
-            <tr>
-                <td><img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image"></td>
-                <td class="starRating">
-                    <span th:text="${comment.owner.username}"></span>
-                    <div class="stars"></div>
-                    <span th:text="${comment.date}"></span>
-                </td>
-            </tr>
-            <tr><td th:text="${comment.content}"></td></tr>
-            <tr>
-                <td th:if="${user.isAdmin() || user.id == comment.owner.id}">
-                    <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
-                          method="post">
-                        <button type="submit" class="btn-submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <tbody th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}" class="trail-comment">
+        <tr>
+            <td><img class="profileImage" th:src="${comment.owner.profileImageUrl}" alt="profile-image"></td>
+            <td class="starRating">
+                <span th:text="${comment.owner.username}"></span>
+                <div class="stars"></div>
+                <span th:text="${comment.date}"></span>
+            </td>
+        </tr>
+        <tr><td th:text="${comment.content}"></td></tr>
+        <tr>
+            <td th:if="${user.isAdmin() || user.id == comment.owner.id}">
+                <form th:action="@{/events/{id}/comment/{cid}/delete(id=${event.id},cid=${comment.id})}"
+                      method="post">
+                    <button type="submit" class="btn-submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{/events/{id}/comment(id=${event.id})}" th:method="POST" class="rating-widget">

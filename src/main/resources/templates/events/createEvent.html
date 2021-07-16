@@ -7,14 +7,8 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-
-
-
-
-
-
-
-<div id="map"></div>
+<main>
+    <div id="map"></div>
 
     <style>
         body { margin:0; padding:0; }
@@ -28,271 +22,228 @@
 <!--        <div class="modal-content2">-->
 <!--            <div class="modal-header2">-->
 
-            <div class="form__bodypassCE">
-                <h2 class="ceH2">Customize Your Hiking Trail</h2>
-                <p class="errorMessage trailExist"></p>
-                <form action="/trails/create" method="POST">
+        <div class="form__bodypassCE">
+            <h2 class="ceH2">Customize Your Hiking Trail</h2>
+            <p class="errorMessage trailExist"></p>
+            <form action="/trails/create" method="POST">
+                <div>
+                    <input type="text" id="trailName" name="trailName" placeholder="Trail Name" required>
+                    <label for="trailName"></label>
+                </div>
+                <p class="errorMessage trailName"></p>
+                <div>
+                    <input type="number" id="trailLength" step="0.1" placeholder="Miles" name="trailLength" required>
+                    <label for="trailLength"></label>
+                </div>
+                <p class="errorMessage trailLength"></p>
+                <div>
+                    Difficulty Level
                     <div>
-
-                        <input type="text" id="trailName" name="trailName" placeholder="Trail Name" required>
-                        <label for="trailName"></label>
+                        <input type="radio" id="easy" name="difficultyLevel" value="Easy" required>
+                        <label for="easy">Easy</label>
                     </div>
-                    <p class="errorMessage trailName"></p>
                     <div>
-
-                        <input type="number" id="trailLength" step="0.1" placeholder="Miles" name="trailLength" required>
-                        <label for="trailLength"></label>
+                        <input type="radio" id="moderate" name="difficultyLevel" value="Moderate">
+                        <label for="moderate">Moderate</label>
                     </div>
-                    <p class="errorMessage trailLength"></p>
                     <div>
-                        Difficulty Level
-                        <div>
-                            <input type="radio" id="easy" name="difficultyLevel" value="Easy" required>
-                            <label for="easy">Easy</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="moderate" name="difficultyLevel" value="Moderate">
-                            <label for="moderate">Moderate</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="strenuous" name="difficultyLevel" value="Strenuous">
-                            <label for="strenuous">Strenuous</label>
-                        </div>
+                        <input type="radio" id="strenuous" name="difficultyLevel" value="Strenuous">
+                        <label for="strenuous">Strenuous</label>
                     </div>
-                    <p class="errorMessage difficultyLevel"></p>
+                </div>
+                <p class="errorMessage difficultyLevel"></p>
+                <div>
+                    Type
                     <div>
-                        Type
-                        <div>
-                            <input type="radio" id="loop" name="trailType" value="Loop" required>
-                            <label for="loop">Loop</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="out" name="trailType" value="Out and back">
-                            <label for="out">Out and back</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="point" name="trailType" value="Point to point">
-                            <label for="point">Point to point</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="cycleway" name="trailType" value="Cycleway">
-                            <label for="cycleway">Cycleway</label>
-                        </div>
+                        <input type="radio" id="loop" name="trailType" value="Loop" required>
+                        <label for="loop">Loop</label>
                     </div>
-                    <p class="errorMessage trailType"></p>
                     <div>
-
-                        <textarea name="trailDetails" id="trailDetails" rows="7" cols="30" placeholder="Trail Details" required></textarea>
-                        <label for="trailDetails"></label>
+                        <input type="radio" id="out" name="trailType" value="Out and back">
+                        <label for="out">Out and back</label>
                     </div>
-                    <p class="errorMessage trailDetails"></p>
                     <div>
-                        <button type="button" id="images">Upload images</button>
-                        <i id="imagesUploadHint" class="fa fa-check hidden" style="color:green"></i>
-                        <input type="hidden" id="hidden" name="images" />
-                        <button type="submit" id="createTrail">Submit</button>
+                        <input type="radio" id="point" name="trailType" value="Point to point">
+                        <label for="point">Point to point</label>
                     </div>
+                    <div>
+                        <input type="radio" id="cycleway" name="trailType" value="Cycleway">
+                        <label for="cycleway">Cycleway</label>
+                    </div>
+                </div>
+                <p class="errorMessage trailType"></p>
+                <div>
 
+                    <textarea name="trailDetails" id="trailDetails" rows="7" cols="30" placeholder="Trail Details" required></textarea>
+                    <label for="trailDetails"></label>
+                </div>
+                <p class="errorMessage trailDetails"></p>
+                <div>
+                    <button type="button" id="images">Upload images</button>
+                    <i id="imagesUploadHint" class="fa fa-check hidden" style="color:green"></i>
+                    <input type="hidden" id="hidden" name="images" />
+                    <button type="submit" id="createTrail">Submit</button>
+                </div>
+            </form>
 
-                </form>
-
-                <br>
-            <div class="modal-footer2">
-                <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
-                <svg class="close" version="1.1"
-                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                     x="0px" y="0px" width="100%" height="24.6px" viewBox="0 0 24.6 24.6" style="enable-background:new 0 0 24.6 24.6;"
-                     xml:space="preserve">
-                        <style type="text/css">
-                        .st0{fill:#FFFFFF;}
-                        </style>
-                    <defs></defs>
-                    <path class="st0" d="M24,16.9l-4.6-4.6L24,7.7c0.7-0.7,0.7-1.9,0-2.7l-4.5-4.5c-0.7-0.7-1.9-0.7-2.7,0l-4.6,4.6L7.7,0.6
-                        C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
-                        l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
-                    </svg>
-            </div>
+            <br>
+        <div class="modal-footer2">
+            <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+            <svg class="close" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                 x="0px" y="0px" width="100%" height="24.6px" viewBox="0 0 24.6 24.6" style="enable-background:new 0 0 24.6 24.6;"
+                 xml:space="preserve">
+                    <style type="text/css">.st0{fill:#FFFFFF;}</style>
+                <defs></defs>
+                <path class="st0" d="M24,16.9l-4.6-4.6L24,7.7c0.7-0.7,0.7-1.9,0-2.7l-4.5-4.5c-0.7-0.7-1.9-0.7-2.7,0l-4.6,4.6L7.7,0.6
+                    C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
+                    l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
+            </svg>
         </div>
-        <a class="close" role="button"></a>
-</div>
+    </div>
+    <a class="close" role="button"></a>
     </div>
 
-</div>
+    <style>
 
+        /*CREATEPAGE SPECIFIC NAV DO NOT REMOVE*/
 
-<style>
-
-
-    /*CREATEPAGE SPECIFIC NAV DO NOT REMOVE*/
-
-    .globalNav {
-         font-family: Camphor, Open Sans, Segoe UI, sans-serif;
-        font-family: 'Archivo Black', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        position: absolute;
-        left: 0;
-        top: 0px;
-        right: 0;
-        z-index: 500;
-        height: 60px;
-        perspective: 2000px;
-        background-color: #e5e5e5;
-        border-top-right-radius: 0px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 50px;
-        box-shadow: 0 10px 50px rgb(164 164 164 / 90%);
-        border-right: 1.5px solid rgba(245, 240, 240, 0.5);
-        /* border-top: 3px solid rgba(245, 240, 240, 1.9); */
-        border: 1.5px outset rgba(255, 255, 255, 0.3);
+        .globalNav {
+             font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+            font-family: 'Archivo Black', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            right: 0;
+            z-index: 500;
+            height: 60px;
+            perspective: 2000px;
+            background-color: #e5e5e5;
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 50px;
+            box-shadow: 0 10px 50px rgb(164 164 164 / 90%);
+            border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+            /* border-top: 3px solid rgba(245, 240, 240, 1.9); */
+            border: 1.5px outset rgba(255, 255, 255, 0.3);
 
 
 
-    }
+        }
 
-    /*CREATEPAGE SPECIFIC NAV DO NOT REMOVE*/
-
-
+        /*CREATEPAGE SPECIFIC NAV DO NOT REMOVE*/
 
 
+        .form__backgroundce {
 
+            height: 100%;
+            /*width: 550px;*/
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            padding-top: 60px;
+            background-color: transparent;
+        }
 
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
 
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
 
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+    </style>
 
-    .form__backgroundce {
+    <div id="mySidenav" class="form__backgroundce">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="form__bodypassc">
+            <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
+                <h2>Event Details</h2>
+                <div>
+                    <label for="name">Event Name</label>
+                    <input name="name" id="name" th:field="*{name}"placeholder="longer than 6 characters"/>
 
-        height: 100%;
-        /*width: 550px;*/
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        padding-top: 60px;
-        background-color: transparent;
-    }
-
-    .sidenav a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-
-    .sidenav .closebtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
-
-
-
-
-
-
-
-
-
-
-</style>
-
-<div id="mySidenav" class="form__backgroundce">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-
-
-
-
-
-            <div class="form__bodypassc">
-                <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
-                    <h2>Event Details</h2>
+                </div>
+                <p class="errorMessage" th:text="${message}"></p>
+                <div>
+                    <label for="eventDate">Date</label>
+                    <input type="date" name="eventDate" id="eventDate" />
+                </div>
+                <div>
+                    <label for="eventTime">Time</label>
+                    <input type="time" name="eventTime" id="eventTime" />
+                </div>
+                <div>
+                    <label for="meetLocation">Meet Location</label>
+                    <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
+                </div>
+                <div>
+                    <label for="eventMeetTime">Meet Time</label>
+                    <input type="time" name="eventMeetTime" id="eventMeetTime" />
+                </div>
+                <div>
+                    <label for="eventDetails">Event Details</label>
+                    <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
+                </div>
+                <div>
+                    <br>
+                    <h2>Choose your trail</h2>
                     <div>
-                        <label for="name">Event Name</label>
-                        <input name="name" id="name" th:field="*{name}"placeholder="longer than 6 characters"/>
-
-                    </div>
-                    <p class="errorMessage" th:text="${message}"></p>
-                    <div>
-                        <label for="eventDate">Date</label>
-                        <input type="date" name="eventDate" id="eventDate" />
+                        <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
+                        <label for="trailOption1">Choose an existing trail</label>
                     </div>
                     <div>
-                        <label for="eventTime">Time</label>
-                        <input type="time" name="eventTime" id="eventTime" />
+                        <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
+                        <label for="trailOption2">Customize your hiking trail</label>
                     </div>
-                    <div>
-                        <label for="meetLocation">Meet Location</label>
-                        <input type="text" name="meetLocation" id="meetLocation" th:field="*{meetLocation}" placeholder="parking lot #1"/>
-                    </div>
-                    <div>
-                        <label for="eventMeetTime">Meet Time</label>
-                        <input type="time" name="eventMeetTime" id="eventMeetTime" />
-                    </div>
-                    <div>
-                        <label for="eventDetails">Event Details</label>
-                        <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
-                    </div>
-                    <div>
-                        <br>
-                        <h2>Choose your trail</h2>
-                        <div>
-                            <input type="radio" id="trailOption1" name="trailOption" class="trailOption" value="existing trail">
-                            <label for="trailOption1">Choose an existing trail</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="trailOption2" name="trailOption" class="trailOption" value="customize trail">
-                            <label for="trailOption2">Customize your hiking trail</label>
-                        </div>
-                    </div>
-                    <div>
-                        <select id="trailOptions" name="trailOptions" class="hidden">
-                            <option value="">Nothing selected</option>
-                            <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}" th:name="${trail.longitude + ' ' + trail.latitude}"></option>
-                        </select>
-                    </div>
-                    <div id="trailLocation" class="hidden">
-                        <label for="searchedName"></label>
-                        <input type="text" id="searchedName" name="mapSearch">
-                        <input type="hidden" id="trailId" name="createdTrailId">
-                        <input type="hidden" id="trailPoint" name="trailPoint">
-                        <input type="hidden" id="createdCoordinates" name="createdCoordinates">
-                        <br>
-                        <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
+                </div>
+                <div>
+                    <select id="trailOptions" name="trailOptions" class="hidden">
+                        <option value="">Nothing selected</option>
+                        <option th:each="trail : ${trails}" th:value="${trail.id}" th:text="${trail.name}" th:name="${trail.longitude + ' ' + trail.latitude}"></option>
+                    </select>
+                </div>
+                <div id="trailLocation" class="hidden">
+                    <label for="searchedName"></label>
+                    <input type="text" id="searchedName" name="mapSearch">
+                    <input type="hidden" id="trailId" name="createdTrailId">
+                    <input type="hidden" id="trailPoint" name="trailPoint">
+                    <input type="hidden" id="createdCoordinates" name="createdCoordinates">
+                    <br>
+                    <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
+                </div>
 
-                    </div>
-
-
-
-                    <button type="submit" id="createEvent">Submit</button>
-                </form>
-            </div>
-
-
+                <button type="submit" id="createEvent">Submit</button>
+            </form>
+        </div>
         <div class="form__backgroundc"></div>
         <div class="form__backgroundc2"></div>
 
-    <div class="tooltip">
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player src="https://assets3.lottiefiles.com/datafiles/BWweJKuWuiTWcaI/data.json"  background="transparent"  speed="0.5"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
-
+        <div class="tooltip">
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player src="https://assets3.lottiefiles.com/datafiles/BWweJKuWuiTWcaI/data.json"  background="transparent"  speed="0.5"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
+        </div>
     </div>
 
-</div>
+    <!--<div id="myMap"></div>-->
 
-</div>
-
-<!--<div id="myMap"></div>-->
-
-<script>
+    <script>
     function openNav() {
         document.getElementById("mySidenav").style.display = "block";
     }
@@ -300,8 +251,6 @@
     function closeNav() {
         document.getElementById("mySidenav").style.display = "none";
     }
-
-
 
     var rectangle = $("#Rectangle");
     var speechBubble = $("#SpeechBubble");
@@ -325,7 +274,6 @@
 
 
 </script>
-
 
 </main>
 

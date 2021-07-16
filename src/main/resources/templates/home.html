@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
     <title>Home Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -20,9 +19,7 @@
         <div class="displayed-event" th:each="event: ${events}">
             <input type="hidden" th:value="${event.id}">
             <input type="hidden" th:value="${event.name}">
-            <!--&lt;!&ndash;            <input type="hidden" th:value="${event.location}">&ndash;&gt;-->
             <input type="hidden" th:value="${event.time}">
-            <!--&lt;!&ndash;            <input type="hidden" th:value="${event.meetTime}">&ndash;&gt;-->
             <input type="hidden" th:value="${event.date}">
         </div>
         <div id='calendar'></div>
@@ -155,6 +152,10 @@
         </div>
     </div>
 </main>
+
+<!--    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>-->
+
+
 <!--<script th:inline="javascript">-->
 <!--    /*<![CDATA[*/-->
 <!--    var trails = [[${trails}]];-->
