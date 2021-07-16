@@ -2028,13 +2028,41 @@ div.header h4{
 }
 
 /* ****************************** SHOW TRAIL PAGE ****************************** */
+.trail-header h1:before{
+    content: "TRAIL";
+    font-size:12px;
+    position:relative;
+    top:-60px;
+    left:37px;
+}
+
+
+
+.trailanimate {
+    position:absolute;
+    top:69px;
+    background-color:rgb(26 194 178);
+    width:100%;
+    height:320px;
+    z-index:-1;
+
+}
+
+.headeranimate {
+
+    position:relative;
+    top:60px;
+    left:150px;
+
+}
+
 
 .stars > .star {
     margin: 0;
 }
 
 .trail-header {
-    font-size: 1.2rem;
+    font-size: 1.9rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -2043,8 +2071,14 @@ div.header h4{
     width: 100%;
     position:relative;
     top: -14px;
-    background-color: rgba(225,225,225,1);
+    color:white;
+    background-color: rgb(255 255 255 / 50%)0%);
     margin-top: 5rem;
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+
+
 }
 
 .trail-header > img {
@@ -2054,35 +2088,69 @@ div.header h4{
     width: 15rem;
     clip-path: circle(40%);
     overflow: hidden;
+
+
+
 }
 
 .trail-header > h1 {
+    margin:0;
+    padding-left: 5rem;
+
+}
+
+.trail-header > h2 {
+    margin:6px;
     padding-left: 5rem;
 }
+
+
+
+
 
 .trail-header > div:nth-child(3) {
     font-size: 1.2rem;
     margin-bottom: 1rem;
+
+
 }
 
 .trail-info {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 4rem 0 4rem;
+    margin-top:-0.5rem;
+    color:white;
+
+
+
+    background-color: rgb(2 109 99 / 90%);
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+
+
+
 }
 
 .trail-info > thead {
     padding-right: 2rem;
     flex: 1;
+    margin: 2rem 4rem 2rem 4rem;
+    font-weight:600;
+
 }
 
 .trail-info > thead > tr {
     padding: .5rem 0;
     line-height: 2rem;
+
+
+
+
 }
 
 .trail-info > tbody {
-    flex: 2;
+    flex: 1;
+    margin: 2rem 4rem 2rem 4rem;
 }
 
 .trail-info > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(1) {
@@ -2246,6 +2314,7 @@ div.header h4{
         transform: scale(1);
     }
 }
+
 
 /* ****************************** SHOW EVENT PAGE ****************************** */
 
