@@ -10,7 +10,11 @@
 
 body {
     margin: 0;
+    max-width: 100%;
+    height: 100vh;
     background-color: #e5e5e5;
+    display: flex;
+    flex-direction: column;
 }
 
 :root {
@@ -30,6 +34,9 @@ p {
 /*    margin: 0;*/
 /*    padding: 0;*/
 /*}*/
+.navbar {
+    position: relative;
+}
 
 ol, ul {
     list-style: none;
@@ -55,7 +62,6 @@ a {
 }
 
 .globalNav {
-    /* font-family: Camphor, Open Sans, Segoe UI, sans-serif; */
     font-family: 'Archivo Black', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -469,27 +475,31 @@ a {
 }
 
 .globalNav .item-subscriptions .linkTitle {
-    color: #24b47e;
+    color: #e57374;
 }
 
 .globalNav .item-connect .linkTitle {
-    color: #3297d3;
+    color: #68D4F8;
 }
 
 .globalNav .item-relay .linkTitle {
-    color: #e25950;
+    color: #78bbb7;
 }
 
 .globalNav .item-atlas .linkTitle {
-    color: #e39f48;
+    color: #fcd669;
 }
 
 .globalNav .item-radar .linkTitle {
-    color: #b76ac4;
+    color: #F6A4EB;
+}
+
+.globalNav .item-join .linkTitle {
+    color: #E57374;
 }
 
 .globalNav .item-radar .new-badge {
-    background: #b76ac4;
+    background: #2b5372;
 }
 
 .globalNav .documentationGroup .linkSub {
@@ -745,22 +755,12 @@ a {
 
 
 /* ****************************** FOOTER CSS ****************************** */
-footer h1 {
-    text-align: center;
-    font-family: roboto;
-    font-weight: 400;
-    font-size: 35px;
-    color: #656565;
-}
 
 footer {
-    /*background-color: #646464;*/
-    padding: 3em 4em 2em;
-    position: absolute; /* Or fixed */
-    /*padding-bottom: 50px;*/
-    right: 0;
-    bottom: 0;
-    left: 0;
+    background-color: #646464;
+    padding: 3rem 4rem 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 footer .logo {
@@ -768,108 +768,39 @@ footer .logo {
     font-size: 28px;
     font-family: roboto;
 }
-footer .row {
-    margin: 2em 0;
-    font-family: lato;
-    color: #fff;
-    position: relative;
-    border-bottom: 1px solid #cecece;
+
+footer hr {
+    width: 100%;
 }
 
-.social-links {
-    bottom: 60px;
-    position: relative;
-    float: right;
+.top-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1rem;
 }
+
 .social-links a {
     color: #fff;
-    font-size: 20px;
     border: 1px solid;
     border-radius: 20px;
     padding: 6px;
-    -webkit-transition:all .2s ease-in;
-    transition:all .2s ease-in;
+    margin-left: .5rem;
 }
-.social-links a:not(:last-child) {
-    margin-right: 10px;
-}
-.social-links a:hover, .social-links a:focus {
-    background-color: #212121;
-}
-.social-links a i {
+
+footer .social-links > a > i {
     width: 25px;
     height: 25px;
     text-align:center;
-
+    margin: 0;
 }
+
 #copyright {
+    color: #fff;
     text-align: center;
-    color:#fff;
     font-family: lato;
+    margin-top: .5rem;
 }
-
-/* iPads to Smartphone for Common Elements ----------- */
-@media only screen and (max-width : 1024px) {
-
-    footer .footer-cat {
-        margin-left: 25px;
-    }
-
-    .footer-cat-links {
-        margin: 0 0em 0px 1.6em;
-    }
-
-    .footer-cat-links a {
-        pointer-events: none;
-    }
-
-    .footer-cat-links li {
-        line-height: 0;
-        opacity: 0;
-    }
-
-    .footer-cat-links.active > li {
-        line-height: 2;
-        opacity: 1;
-    }
-}
-/* iPads (portrait)----------- */
-@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
-    .logo{
-        display: none;
-    }
-    footer {
-        padding-right:3em;
-        padding-left:3em;
-    }
-}
-
-/* Mini Tablet ----------- */
-@media only screen and (max-width : 600px) {
-    .logo{
-        display: none;
-    }
-    .col-6 {
-        width: 100%;
-        display: block;
-    }
-    footer {
-        padding: 3em 2em 2em;
-    }
-}
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (max-width : 480px) {
-    .col-6 {
-        width: 100%;
-        display: block;
-    }
-    footer {
-        padding-right: 1em;
-        padding-left: 1em;
-    }
-}
-
-
 
 
 /********************************** PROFILE SETTINGS PAGE ***************************/
@@ -1515,8 +1446,8 @@ small {
     align-items: center
 }
 
-.fa, .fas {
-    margin-right: 15px
+.fa, .fas, .fab {
+    margin-right: 15px;
 }
 
 .loginSvg {
@@ -1964,10 +1895,15 @@ div.header h4{
     font-size: 1.2rem;
     display: flex;
     align-items: flex-end;
-    height: 20rem;
+    height: 21rem;
     width: 100%;
-    background-color: rgba(225, 225, 225, .5);
+    background-color: rgba(41, 162, 139, 0.13);
+    position: relative;
+    top: -14px;
+    background-color: rgba(21, 170, 170, 0.6);
+    color: white;
     margin-top: 5rem;
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
 }
@@ -1985,7 +1921,16 @@ div.header h4{
 }
 
 .profile-info {
-    margin: .5rem 4rem .5rem 4rem;
+    margin: -0.7rem 0 -2.5rem 0;
+    padding: 2rem 6rem 4rem;
+    width: 100%;
+    color: white;
+    background-color: #344f76;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+
 }
 
 .profile-info tr {
@@ -2032,35 +1977,25 @@ div.header h4{
 }
 
 /* ****************************** SHOW TRAIL PAGE ****************************** */
-.trail-header h1:before{
-    content: "TRAIL";
-    font-size:12px;
-    position:relative;
-    top:-60px;
-    left:37px;
-
+.trail-container {
+    margin-top: 69px;
+    position: relative;
 }
 
-
-.trailanimate {
-    position:absolute;
-    top:69px;
-    background-color:rgb(26 194 178);
-    width:100%;
-    height:320px;
-    z-index:-1;
-    overflow:hidden;
-
+.trail-animate {
+    position: absolute;
+    background-color: rgb(26 194 178);
+    width: 100%;
+    height: 320px;
+    z-index: -1;
+    overflow: hidden;
 }
 
-.headeranimate {
-
-    position:relative;
-    top:-500px;
-    left:150px;
-
+.header-animate {
+    position: relative;
+    top: -500px;
+    left: 150px;
 }
-
 
 .stars > .star {
     margin: 0;
@@ -2069,42 +2004,50 @@ div.header h4{
 .trail-header {
     font-size: 1.9rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: flex-end;
     height: 21rem;
     width: 100%;
-    position:relative;
+    position: relative;
     background-color: rgba(41, 162, 139, 0.13);
     top: -14px;
-    color:white;
+    color: white;
     margin-top: 5rem;
     -webkit-backdrop-filter:blur(20px);
     backdrop-filter:blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
-
-
-
 }
 
 .trail-header > img {
     position: absolute;
-    left: 4rem;
-    bottom: 6px;
+    left: 2rem;
+    bottom: -12px;
     width: 15rem;
     clip-path: circle(40%);
     overflow: hidden;
     filter: contrast(135%) brightness(90%)saturate(130%);
-
-
-
-
 }
 
-.trail-header > h1 {
-    margin:0;
-    padding-left: 5rem;
+.trail-header h1:before{
+    content: "TRAIL";
+    font-size: 12px;
+    position: relative;
+    top: -50px;
+    left: 37px;
+}
 
+.trail-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 2rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.trail-header > .trail-title > h1 {
+    margin: 0;
 }
 
 .trail-header > h2 {
@@ -2112,16 +2055,9 @@ div.header h4{
     padding-left: 5rem;
 }
 
-
-
-
-
 .trail-header > div:nth-child(3) {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-
-
-
 }
 
 .trail-info {
@@ -2129,19 +2065,12 @@ div.header h4{
     flex-wrap: wrap;
     margin-top:-0.5rem;
     color:white;
-
-
-
     background-color: rgb(2 109 99 / 90%);
     -webkit-backdrop-filter:blur(20px);
     backdrop-filter:blur(20px);
-
-
-
 }
 
 .trail-info > thead {
-    padding-right: 2rem;
     flex: 1;
     margin: 2rem 4rem 2rem 4rem;
     font-weight:600;
@@ -2151,10 +2080,6 @@ div.header h4{
 .trail-info > thead > tr {
     padding: .5rem 0;
     line-height: 2rem;
-
-
-
-
 }
 
 .trail-info > tbody {
@@ -2179,7 +2104,7 @@ div.header h4{
 
 .trail-images {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin: 2rem 3rem;
 
 }
@@ -2331,7 +2256,44 @@ div.header h4{
     }
 }
 
+@media (min-width: 768px) {
+    .trail-header {
+        flex-direction: row;
+    }
 
+    .trail-images {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .trail-header > .trail-title > h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 992px)  {
+    .trail-title {
+        margin: 0 4rem;
+        width: 78%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .trail-header > .trail-title > h1 {
+        font-size: 4rem;
+        padding-bottom: 0.67rem;
+    }
+
+    .trail-header > img {
+        width: 17rem;
+        left: 4rem;
+    }
+
+    .trail-header h1:before{
+        top: -60px;
+        left: 37px;
+    }
+}
 
 /* ****************************** SHOW EVENT PAGE ****************************** */
 
@@ -3096,3 +3058,53 @@ input[type=radio]:checked + label:before {
     box-shadow: 0 0 0 2px rgba(0,0,0,0);
 }
 
+
+/* ****************************** CONTACT US PAGE ****************************** */
+
+.contactUs {
+    margin: 5rem 4rem 0 4rem;
+}
+
+.developer-cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.developer-card {
+    margin-bottm: 1.2rem;
+}
+
+.developer-image {
+    margin: 1rem;
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0 0 0 / 20%);
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.developer-image > img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 400ms ease-out;
+    filter: contrast(115%) brightness(90%)saturate(110%);
+}
+
+.developer-info {
+    margin: 1rem;
+}
+
+.developer-info > h4 {
+    font-size: 1.4rem;
+}
+
+.developer-info a > i {
+    font-size: 1.4rem;
+}
+
+@media (min-width: 992px) {
+    .developer-cards {
+        flex-direction: row;
+        flex: 1;
+    }
+}
