@@ -7,7 +7,9 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
-    <h1><span th:text="${user.username}"></span>'s Profile</h1>
+    <div class="trailanimate">
+        <lottie-player class="headeranimate" src="https://assets2.lottiefiles.com/private_files/lf30_9q70uajb.json" mode="bounce" background="transparent"  speed="0.1"  style="width: 1300px; height: 1300px;"  loop  autoplay></lottie-player>
+    </div>
     <div class="profile-header">
         <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
         <div class="profile-username">
@@ -82,7 +84,7 @@
             </tr>
             <tr><td>
                 <form th:action="@{/events/{id}/delete(id=${event.id})}" th:method="POST">
-                    <button th:type="submit" class="btn">Delete</button>
+                    <button th:type="submit" class="btn-submit">Delete</button>
                 </form>
             </td></tr>
             </tbody>

@@ -103,10 +103,13 @@ public class TrailController{
     public String filterDifficultyLevelOrType(Model model,
             @RequestParam(name = "difficulty", required = false) String diffLevel,
             @RequestParam(name = "type", required = false) String type) {
+
+        System.out.println("diffLevel = " + diffLevel);
+        System.out.println("type = " + type);
         List<Trail> trails = null;
-        if (type == null) {
+        if (type.length() == 0) {
             trails = trailsDao.findByDifficultyLevel(diffLevel);
-        } else if (diffLevel == null) {
+        } else if (diffLevel.length() == 0) {
             trails = trailsDao.findByType(type);
         } else {
             trails = trailsDao.findByDifficultyLevelAndType(diffLevel, type);
