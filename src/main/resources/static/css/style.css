@@ -1968,8 +1968,9 @@ div.header h4{
     width: 100%;
     position: relative;
     top: -14px;
-    background-color: rgb(74, 184, 184);
+    background-color: rgba(21, 170, 170, 0.6);
     margin-top: 5rem;
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
 }
@@ -1987,13 +1988,16 @@ div.header h4{
 }
 
 .profile-info {
-    margin: -0.5rem 0 .5rem 0;
-    padding: 0 4rem;
+    margin: -0.7rem 0 -2.5rem 0;
+    padding: 2rem 6rem 4rem;
     width: 100%;
     color: white;
-    background-color: rgb(51, 78, 115);
+    background-color: #344f76;
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+
 }
 
 .profile-info tr {
