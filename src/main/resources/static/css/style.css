@@ -34,6 +34,9 @@ p {
 /*    margin: 0;*/
 /*    padding: 0;*/
 /*}*/
+.navbar {
+    position: relative;
+}
 
 ol, ul {
     list-style: none;
@@ -59,7 +62,6 @@ a {
 }
 
 .globalNav {
-    /* font-family: Camphor, Open Sans, Segoe UI, sans-serif; */
     font-family: 'Archivo Black', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
