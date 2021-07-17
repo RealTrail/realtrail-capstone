@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" style="max-width: 100%; overflow-x: hidden;">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="max-width: 100%; overflow: hidden;">
 <head th:replace="fragments/head :: head">
     <title>Show Profile</title>
 </head>
@@ -7,9 +7,9 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
-    <div class="trailanimate">
+    <div class="trail-animate">
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player class="headeranimate2" src="https://assets4.lottiefiles.com/packages/lf20_3GxFSt.json"  background="transparent"  speed="0.5"  style="width: 2600px; height: 2600px;"  loop  autoplay></lottie-player>
+        <lottie-player class="header-animate2" src="https://assets4.lottiefiles.com/packages/lf20_3GxFSt.json"  background="transparent"  speed="0.5"  style="width: 2600px; height: 2600px;"  loop  autoplay></lottie-player>
     </div>
     <div class="profile-header">
         <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
@@ -72,7 +72,7 @@
     </table>
 
 
-<div class="createdeventsC">
+    <div class="createdeventsC">
     <br>
     <div th:if="${createdEvents.isEmpty()}" class="events-container">
         <h2>You have not created any events. <a href="/create">Create one now</a></h2>
@@ -127,33 +127,38 @@
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
          x="0px" y="0px" width="1066px" height="193.2px" viewBox="0 0 1066 193.2" style="enable-background:new 0 0 1066 193.2;"
          xml:space="preserve">
-<style type="text/css">
-           .maroon{fill:#E5E5E5;stroke:#E5E5E5;stroke-miterlimit:10;}
-</style>
-        <defs>
-</defs>
+        <style type="text/css">
+           .maroon {
+               fill: #E5E5E5;
+               stroke: #E5E5E5;
+               stroke-miterlimit: 10;
+           }
+        </style>
+        <defs></defs>
         <path class="maroon" d="M302,192.6c33.1,0,66.2,0,99.3,0c75.8,0,151.5,0,227.3,0c83.2,0,166.4,0,249.6,0c55.4,0,110.8,0,166.3,0
            c5.7,0,11.5,0,17.2,0c-5.4-1.2-10.3-3.4-15.3-5.8c-6.3-3-12.6-5.9-19.1-8.4c-16.8-6.5-33.7-13-50.5-19.6
            c-64.8-25.2-274.9-110.2-315-127.9C611.5,8.7,556.9-3.9,501.9,1.9c-75.6,8-117.5,58.6-183.9,94.7c-91.6,49.8-208.1,98.6-318,96
            C0,192.6,302,192.6,302,192.6z"/>
-</svg>
+    </svg>
 
     <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
     <svg class="red" version="1.1"
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
          x="0px" y="0px" width="1066px" height="193.2px" viewBox="0 0 1066 193.2" style="enable-background:new 0 0 1066 193.2;"
          xml:space="preserve">
-<style type="text/css">
-           .red{fill:#852447;stroke:#852447;stroke-miterlimit:10;}
-</style>
-        <defs>
-</defs>
+        <style type="text/css">
+           .red {
+               fill: #852447;
+               stroke: #852447;
+               stroke-miterlimit: 10;
+           }
+        </style>
+        <defs></defs>
         <path class="red" d="M302,192.6c33.1,0,66.2,0,99.3,0c75.8,0,151.5,0,227.3,0c83.2,0,166.4,0,249.6,0c55.4,0,110.8,0,166.3,0
            c5.7,0,11.5,0,17.2,0c-5.4-1.2-10.3-3.4-15.3-5.8c-6.3-3-12.6-5.9-19.1-8.4c-16.8-6.5-33.7-13-50.5-19.6
            c-64.8-25.2-274.9-110.2-315-127.9C611.5,8.7,556.9-3.9,501.9,1.9c-75.6,8-117.5,58.6-183.9,94.7c-91.6,49.8-208.1,98.6-318,96
            C0,192.6,302,192.6,302,192.6z"/>
-</svg>
-
+    </svg>
 
     <style>
         #triangle-bottomright {
@@ -167,19 +172,15 @@
             z-index: -2;
             filter: blur(0.5px);
             transition: 1s;
-
         }
 
-        .maroon{
+        .maroon {
             position:fixed;
             bottom: -79px;
             right:0;
             left:500px;
             z-index: 10;
             zoom: 0;
-
-
-
         }
 
         .red{
@@ -189,18 +190,7 @@
             left:70px;
             z-index: -1;
             zoom: 2;
-
-
         }
-
-
-
-        html {
-            max-width:100%;
-            overflow:hidden;
-
-        }
-
 
         .createdeventsC {
             margin: -0.5rem 0 5rem 0;
@@ -225,11 +215,7 @@
             position: relative;
             left: 5%;
 
-
         }
-
-
-
     </style>
 
 
@@ -237,8 +223,6 @@
 <!--    <div class="form__backgroundpp1"></div>-->
     <div id="triangle-bottomright"></div>
 <!--    <div class="form__backgroundpp"></div>-->
-
-
 </main>
 
 <script src="/js/navbar.js"></script>

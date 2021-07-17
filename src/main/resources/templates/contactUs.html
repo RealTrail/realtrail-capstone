@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="max-width: 100%; overflow-x: hidden;">
 <head th:replace="fragments/head :: head">
     <title>Contact Us</title>
 </head>
-<body>
+<body style="overflow-x: hidden; display: flex; flex-direction: column">
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main class="contactUs developer-cards">
@@ -75,7 +75,7 @@
     </div>
 </main>
 
-<!--    <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>-->
+<footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>
 
 <script src="/js/navbar.js"></script>
 <script src="/js/modal.js"></script>
