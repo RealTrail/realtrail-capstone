@@ -469,27 +469,27 @@ a {
 }
 
 .globalNav .item-subscriptions .linkTitle {
-    color: #24b47e;
+    color: #e57374;
 }
 
 .globalNav .item-connect .linkTitle {
-    color: #3297d3;
+    color: #15a2a3;
 }
 
 .globalNav .item-relay .linkTitle {
-    color: #e25950;
+    color: #78bbb7;
 }
 
 .globalNav .item-atlas .linkTitle {
-    color: #e39f48;
+    color: #fcd669;
 }
 
 .globalNav .item-radar .linkTitle {
-    color: #b76ac4;
+    color: #2b5372;
 }
 
 .globalNav .item-radar .new-badge {
-    background: #b76ac4;
+    background: #2b5372;
 }
 
 .globalNav .documentationGroup .linkSub {
@@ -1966,9 +1966,7 @@ div.header h4{
     align-items: flex-end;
     height: 21rem;
     width: 100%;
-    position: relative;
-    top: -14px;
-    background-color: rgba(41, 162, 139, 0.13);
+    background-color: rgba(225, 225, 225, 1);
     margin-top: 5rem;
     backdrop-filter: blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
@@ -2042,13 +2040,11 @@ div.header h4{
 /* ****************************** SHOW TRAIL PAGE ****************************** */
 .trail-header h1:before{
     content: "TRAIL";
-    font-size:12px;
-    position:relative;
-    top:-60px;
-    left:37px;
-
+    font-size: 12px;
+    position: relative;
+    top: -50px;
+    left: 37px;
 }
-
 
 .trailanimate {
     position:absolute;
@@ -2058,17 +2054,13 @@ div.header h4{
     height:320px;
     z-index:-1;
     overflow:hidden;
-
 }
 
 .headeranimate {
-
     position:relative;
     top:-500px;
     left:150px;
-
 }
-
 
 .stars > .star {
     margin: 0;
@@ -2077,42 +2069,42 @@ div.header h4{
 .trail-header {
     font-size: 1.9rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: flex-end;
     height: 21rem;
     width: 100%;
-    position:relative;
+    position: relative;
     background-color: rgba(41, 162, 139, 0.13);
     top: -14px;
-    color:white;
+    color: white;
     margin-top: 5rem;
     -webkit-backdrop-filter:blur(20px);
     backdrop-filter:blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
-
-
-
 }
 
 .trail-header > img {
     position: absolute;
-    left: 4rem;
-    bottom: 6px;
+    left: 2rem;
+    bottom: -12px;
     width: 15rem;
     clip-path: circle(40%);
     overflow: hidden;
     filter: contrast(135%) brightness(90%)saturate(130%);
-
-
-
-
 }
 
-.trail-header > h1 {
-    margin:0;
-    padding-left: 5rem;
+.trail-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 2rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
 
+.trail-header > .trail-title > h1 {
+    margin: 0;
 }
 
 .trail-header > h2 {
@@ -2120,16 +2112,9 @@ div.header h4{
     padding-left: 5rem;
 }
 
-
-
-
-
 .trail-header > div:nth-child(3) {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-
-
-
 }
 
 .trail-info {
@@ -2137,19 +2122,12 @@ div.header h4{
     flex-wrap: wrap;
     margin-top:-0.5rem;
     color:white;
-
-
-
     background-color: rgb(2 109 99 / 90%);
     -webkit-backdrop-filter:blur(20px);
     backdrop-filter:blur(20px);
-
-
-
 }
 
 .trail-info > thead {
-    padding-right: 2rem;
     flex: 1;
     margin: 2rem 4rem 2rem 4rem;
     font-weight:600;
@@ -2159,10 +2137,6 @@ div.header h4{
 .trail-info > thead > tr {
     padding: .5rem 0;
     line-height: 2rem;
-
-
-
-
 }
 
 .trail-info > tbody {
@@ -2187,7 +2161,7 @@ div.header h4{
 
 .trail-images {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin: 2rem 3rem;
 
 }
@@ -2339,7 +2313,44 @@ div.header h4{
     }
 }
 
+@media (min-width: 768px) {
+    .trail-header {
+        flex-direction: row;
+    }
 
+    .trail-images {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .trail-header > .trail-title > h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 992px)  {
+    .trail-title {
+        margin: 0 4rem;
+        width: 78%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .trail-header > .trail-title > h1 {
+        font-size: 4rem;
+        padding-bottom: 0.67rem;
+    }
+
+    .trail-header > img {
+        width: 17rem;
+        left: 4rem;
+    }
+
+    .trail-header h1:before{
+        top: -60px;
+        left: 37px;
+    }
+}
 
 /* ****************************** SHOW EVENT PAGE ****************************** */
 

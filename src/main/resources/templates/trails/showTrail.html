@@ -21,9 +21,11 @@
 
         <div class="trail-header">
             <img th:src="${trail.trailImages[0].pictureUrl}" alt="trail image">
-            <h1 id="trailtitle" th:text="${trail.name}"></h1>
-            <h2 th:if="${trail.rating != 0}" th:text="${'rating: ' + trail.rating}"></h2>
-            <div th:if="${trail.rating == 0}">No rating available</div>
+            <div class="trail-title">
+                <h1 th:text="${trail.name}"></h1>
+                <h2 th:if="${trail.rating != 0}" th:text="${'rating: ' + trail.rating}"></h2>
+                <div th:if="${trail.rating == 0}">No rating available</div>
+            </div>
         </div>
         <table class="trail-info">
             <thead>
