@@ -473,7 +473,7 @@ a {
 }
 
 .globalNav .item-connect .linkTitle {
-    color: #15a2a3;
+    color: #68D4F8;
 }
 
 .globalNav .item-relay .linkTitle {
@@ -485,7 +485,11 @@ a {
 }
 
 .globalNav .item-radar .linkTitle {
-    color: #2b5372;
+    color: #F6A4EB;
+}
+
+.globalNav .item-join .linkTitle {
+    color: #E57374;
 }
 
 .globalNav .item-radar .new-badge {
@@ -1515,8 +1519,8 @@ small {
     align-items: center
 }
 
-.fa, .fas {
-    margin-right: 15px
+.fa, .fas, .fab {
+    margin-right: 15px;
 }
 
 .loginSvg {
@@ -3118,3 +3122,52 @@ input[type=radio]:checked + label:before {
     box-shadow: 0 0 0 2px rgba(0,0,0,0);
 }
 
+
+/* ****************************** CONTACT US PAGE ****************************** */
+
+.contactUs {
+    margin: 5rem 4rem 0 4rem;
+}
+
+.developer-cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.developer-card {
+    margin-bottm: 1.2rem;
+}
+
+.developer-image {
+    margin: 1rem;
+    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0 0 0 / 20%);
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.developer-image > img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 400ms ease-out;
+    filter: contrast(115%) brightness(90%)saturate(110%);
+}
+
+.developer-info {
+    margin: 1rem;
+}
+
+.developer-info > h4 {
+    font-size: 1.4rem;
+}
+
+.developer-info a > i {
+    font-size: 1.4rem;
+}
+
+@media (min-width: 992px) {
+    .developer-cards {
+        flex-direction: row;
+    }
+}
