@@ -3,9 +3,14 @@
 <head th:replace="fragments/head :: head">
     <title>Show All Events</title>
 </head>
-<body class="background-image">
+<body>
 <style>
 
+    .background-image {
+        background: url(/images/showEvents.png) no-repeat center center fixed;
+        margin-top: 5rem;
+        flex: 1;
+    }
     .card-list {
         display: block;
         margin: 1rem auto;
@@ -59,7 +64,7 @@
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main style="margin-top: 5rem">
+<main class="background-image">
     <div th:if="${noEventsFound}">
         <h1 class="noEvent">No events were found.</h1>
     </div>
