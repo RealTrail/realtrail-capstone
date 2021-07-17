@@ -1130,7 +1130,7 @@ input[type="tel" i] {
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     pointer-events: none;
     z-index: 1;
 }
@@ -1157,7 +1157,7 @@ input[type="tel" i] {
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     z-index: -2;
 }
 
@@ -1236,7 +1236,7 @@ input[type="tel" i] {
 .password {
     background-size: 100% 100%;
     position: absolute;
-    top: 10;
+    top: 10px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1282,7 +1282,7 @@ input[type="tel" i] {
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
 }
 
 .form__background3 {
@@ -1307,7 +1307,7 @@ input[type="tel" i] {
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     z-index: -2;
 }
 
@@ -1325,7 +1325,7 @@ input[type="tel" i] {
     transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     z-index: 2;
 }
 
@@ -1408,12 +1408,13 @@ small {
     max-width: 1080px;
     margin: 0 auto;
     position: relative;
-    top:350px;
+    top:99px;
 }
 .form__options {
     padding: 160px 0;
     display: flex;
     height: 550px;
+    font-size: 15px;
 }
 .form__options > div {
     width: 50%;
@@ -1440,7 +1441,7 @@ small {
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
 }
 .form__body {
     position: absolute;
@@ -1456,7 +1457,7 @@ small {
 }
 .form__body form {
     pointer-events: all;
-    margin: 20px 0;
+    margin: 99px 0;
     transition: opacity 0.3s;
 }
 .form__body form h2 {
@@ -1520,14 +1521,18 @@ small {
 }
 
 .loginSvg {
-    height: auto;
-    width: 100%;
+    background-size: 100% 100%;
+
+    /*height: auto;*/
+    /*width: 100%;*/
     position: absolute;
-    top: 10;
+    top: 10px;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -10;
+    z-index: -1;
+    /*z-index: -10;*/
+
     overflow:hidden;
 }
 .loginSvg path {
@@ -2384,7 +2389,7 @@ div.header h4{
     border: 2px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     -webkit-backdrop-filter: blur(50px);
 
     /*button color*/
@@ -2403,7 +2408,7 @@ div.header h4{
     transition:.3s;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
 
 }
 
@@ -2419,7 +2424,7 @@ div.header h4{
     margin-left: 50px;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
 }
 
 #main {
@@ -2427,7 +2432,7 @@ div.header h4{
     padding: 6px;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
 
 }
 
@@ -2498,7 +2503,7 @@ div.header h4{
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     text-align: center;
 }
 
@@ -2565,7 +2570,7 @@ div.header h4{
     padding-top: 122px;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
 }
 
 .fc .fc-daygrid-day.fc-day-today {
@@ -2679,7 +2684,7 @@ div.header h4{
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     text-align: center;
 }
 
@@ -2842,7 +2847,7 @@ select{
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     pointer-events: none;
     z-index: 1;
 }
@@ -2875,7 +2880,7 @@ select{
 /*    border: 1.5px outset rgba(255, 255, 255, 0.3);*/
 /*    -webkit-transform: translate3d(0, 0, 0);*/
 /*    -webkit-backface-visibility: hidden;*/
-/*    -webkit-perspective: 1000;*/
+/*    -webkit-perspective: 1000px;*/
 /*    z-index: -2;*/
 /*}*/
 
