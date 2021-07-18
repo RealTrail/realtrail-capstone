@@ -8,10 +8,19 @@
     -webkit-font-smoothing: antialiased;
 }
 
-html, body {
+body {
     margin: 0;
-    padding: 0;
+    max-width: 100%;
+    height: 100vh;
+    background-color: #e5e5e5;
+    display: flex;
+    flex-direction: column;
 }
+
+/*html, body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
 
 body {
     /*max-width: 100%;*/
@@ -24,22 +33,22 @@ body.body{
 }
 
 
-/*main{*/
-/*    position: relative;*/
-/*    transition: 1s;*/
+main{
+    position: relative;
+    transition: 1s;
+}
+
+/*main**************** ADD INLINE STYLING FOR HTML AND BODY TAGS *****************{*/
+/*    height: 100%;*/
+/*    width: 100%;*/
 /*}*/
 
-main {
-    height: 100%;
-    width: 100%;
-}
-
-.main {
-    height: 100%;
-    width: 100%;
-    margin-top: 60px;
-    /*display: table;*/
-}
+/*.main **************** ADD INLINE STYLING FOR HTML AND BODY TAGS ***************** {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    margin-top: 60px;*/
+/*    !*display: table;*!*/
+/*}*/
 
 
 :root {
@@ -1535,13 +1544,12 @@ p.errorMessage{
 .loginspan {
     width: 100%;
     display: flex;
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0 0 0;
     font-family: 'Poppins';
     font-weight: 400;
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 2px;
-    display: flex;
     align-items: center
 }
 
