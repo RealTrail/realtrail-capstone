@@ -25,57 +25,60 @@
         </div>
     </div>
 
-    <table class="profile-info">
-        <tr th:if="${user.firstName == null || user.lastName == null}">
-        <th>Name</th>
-        <td>No name available</td>
-    </tr>
-        <tr th:if="${user.firstName != null && user.lastName != null}">
-            <th>Name</th>
-            <td th:text="${user.firstName + ' ' + user.lastName}"></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td th:text="${user.email}"></td>
-        </tr>
-        <tr th:if="${user.phoneNumber == null}">
-            <th>Phone Number</th>
-            <td>No phone number available</td>
-        </tr>
-        <tr th:if="${user.phoneNumber != null}">
-            <th>Phone Number</th>
-            <td th:text="${user.phoneNumber}"></td>
-        </tr>
-        <tr th:if="${user.city == null || user.state == null}">
-            <th>City, State</th>
-            <td>No city and state available</td>
-        </tr>
-        <tr th:if="${user.city != null && user.state != null}">
-            <th>City, State</th>
-            <td th:text="${user.city + ', ' + user.state}"></td>
-        </tr>
-        <tr th:if="user.interests == null">
-            <th>Interests</th>
-            <td>No interests selected</td>
-        </tr>
-        <tr th:if="user.interests != null">
-            <th>Interests</th>
-            <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
-        </tr>
-        <tr>
-            <td>
-                <i class="fas fa-walking"></i>
-                <i class="fas fa-running"></i>
-                <i class="fas fa-hiking"></i>
-                <i class="fas fa-biking-mountain"></i>
-                <i class="fa fad fa-biking"></i>
-            </td>
-        </tr>
-        <tr>
-            <td><a class="btn-submit" href="/profile/settings">Edit</a></td>
-            <td><a class="btn-submit" href="/password/reset">Reset Password</a></td>
-        </tr>
-    </table>
+    <div class="profile-info-container">
+        <table class="profile-info">
+            <tr th:if="${user.firstName == null || user.lastName == null}">
+                <th>Name</th>
+                <td>No name available</td>
+            </tr>
+            <tr th:if="${user.firstName != null && user.lastName != null}">
+                <th>Name</th>
+                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr th:if="${user.phoneNumber == null}">
+                <th>Phone Number</th>
+                <td>No phone number available</td>
+            </tr>
+            <tr th:if="${user.phoneNumber != null}">
+                <th>Phone Number</th>
+                <td th:text="${user.phoneNumber}"></td>
+            </tr>
+            <tr th:if="${user.city == null || user.state == null}">
+                <th>City, State</th>
+                <td>No city and state available</td>
+            </tr>
+            <tr th:if="${user.city != null && user.state != null}">
+                <th>City, State</th>
+                <td th:text="${user.city + ', ' + user.state}"></td>
+            </tr>
+            <tr th:if="user.interests == null">
+                <th>Interests</th>
+                <td>No interests selected</td>
+            </tr>
+            <tr th:if="user.interests != null" class="interests">
+                <th>Interests</th>
+                <td th:each="interest : ${user.interests}" th:text="${interest.interest}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fas fa-walking"></i>
+                    <i class="fas fa-running"></i>
+                    <i class="fas fa-hiking"></i>
+                    <i class="fas fa-biking-mountain"></i>
+                    <i class="fa fad fa-biking"></i>
+                </td>
+            </tr>
+            <tr>
+                <td><a class="btn-submit" href="/profile/settings">Edit</a></td>
+                <td><a class="btn-submit" href="/password/reset">Reset Password</a></td>
+            </tr>
+        </table>
+    </div>
+
 
 
     <div class="createdeventsC">

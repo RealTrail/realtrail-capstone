@@ -1024,7 +1024,7 @@ input[type="tel" i] {
     right: 0;
     bottom: 0;
     z-index: -1;
-    overflow:hidden;
+    overflow: hidden;
 }
 .profile path {
     fill-opacity: 0;
@@ -1280,14 +1280,13 @@ input[type="tel" i] {
 
 
 /* ****************************** SIGNUP-LOGIN PAGE ****************************** */
+@import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
 
 p.errorMessage {
     width: 182px;
     color: #fde995;
 }
-
-@import url("https://fonts.googleapis.com/css?family=Nunito:300, 400, 700");
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,900&display=swap');
 
 small {
     font-size: 0.9em;
@@ -1952,19 +1951,21 @@ div.header h4{
     overflow: hidden;
 }
 
-.profile-info {
-    margin: -0.7rem 0 -2.5rem 0;
-    padding: 2rem 6rem 4rem;
+.profile-info-container {
     width: 100%;
-    color: white;
     background-color: #344f76;
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
     border: 1.5px outset rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
     box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    padding: 2rem 6rem 4rem;
+    margin: -0.7rem 0 -2.5rem 0;
+}
+
+.profile-info {
+    color: white;
+    -webkit-backdrop-filter: blur(20px);
     position: relative;
     z-index: 1;
-
 }
 
 .profile-info tr {
@@ -1974,6 +1975,11 @@ div.header h4{
 
 .profile-info th {
     text-align: start;
+    width:  12rem;
+}
+
+.profile-info .interests > td {
+    width: 9rem;
 }
 
 .events-container {
@@ -1989,11 +1995,12 @@ div.header h4{
     flex-direction: column;
     padding: .5rem 0;
     line-height: 2rem;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .events-container > table > tbody.events:nth-child(even) {
-    background: #d3dade;
+    background: rgba(105, 158, 252, .4);
+    border-radius: 20px;
 }
 
 .events-container > table > tbody.events > tr.event {
