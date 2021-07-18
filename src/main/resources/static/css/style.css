@@ -15,7 +15,6 @@ html, body {
 
 body {
     /*max-width: 100%;*/
-    height: 100vh;
     background-color: #e5e5e5;
 }
 
@@ -855,16 +854,15 @@ small {
     color: #555;
 }
 
-
 img#profileImage{
     position: absolute;
     margin: auto;
-    top: -659px;
-    right: 0px;
+    top: -572px;
+    right: 0;
     bottom: 0;
-    left: -615px;
-    width: 200px;
-    height: 200px;
+    left: -311px;
+    width: 180px;
+    height: 180px;
     object-fit:cover;
     /*clip-path: circle(45%);*/
     border-radius: 50%;
@@ -875,15 +873,14 @@ img#profileImage{
     text-decoration: none;
     color: white;
     white-space: nowrap;
-    line-height: 1em;
     background: #01d4c3;
     border: 0;
     cursor: pointer;
     transition: transform 0.2s;
     transition: all 1s ease-in-out;
     transform: scale(1.04);
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     line-height: 200px;
     border-radius: 50%; /* the magic */
     -moz-border-radius: 50%;
@@ -891,8 +888,8 @@ img#profileImage{
     opacity: 0;
     position: relative;
     margin: auto;
-    top: 25px;
-    left: -308px;
+    top: 31px;
+    left: -11.25rem;
 }
 
 .pulse {
@@ -907,18 +904,6 @@ img#profileImage{
     }
 }
 
-@media (max-width: 747px) {
-    .btnUpload {
-        position: relative;
-        margin: auto;
-        top: 25px;
-        right: 0;
-        bottom: 0;
-        left: -43px
-
-    }
-}
-
 .btnUpload:hover{
     transform: scale(2.05);
     opacity: 1;
@@ -927,16 +912,10 @@ img#profileImage{
     transform: scale(1.04);
 }
 
-
-
 .btn:hover {
     transform: scale(1.05);
 }
 .btn.btn-light {
-    /* color: #ff4757;
-    background: white;
-    border: 2px solid #ff4757; */
-
     display: inline-block;
     padding: 15px 25px;
     border-radius: 23px;
@@ -952,8 +931,8 @@ img#profileImage{
 
 #createProfile{
     position: relative;
-    left: 286px;
-    top: -22px;
+    left: 245px;
+    top: 50px;
 }
 
 input[type="tel" i] {
@@ -971,7 +950,7 @@ input[type="tel" i] {
     font-size: 1.6rem;
     font-weight: bold;
     position: absolute;
-    margin-left: 400px;
+    margin-left: 330px;
     top: 235px;
     cursor: pointer;
 }
@@ -1048,6 +1027,7 @@ input[type="tel" i] {
 .form__bodypasspp form input[type=text], .form__bodypasspp form input[type=password], .form__bodypasspp form input[type=email] {
     padding: 8px;
     border: 0;
+    width: 100%;
     border-radius: 5px;
 }
 
@@ -1132,28 +1112,76 @@ input[type="tel" i] {
     z-index: -2;
 }
 
+@media (min-width: 992px) {
+    .btnUpload {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        margin: auto;
+        top: 25px;
+        right: 0;
+        bottom: 0;
+        left: -43px;
+    }
+
+    img#profileImage{
+        top: -659px;
+        left: -615px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .closing {
+        margin-left: 400px;
+    }
+
+    #createProfile{
+        position: relative;
+        left: 286px;
+        top: -22px;
+    }
+
+}
+
 /********************************* RESET PASSWORD *******************************/
 
 /*FORM SIZE*/
 
-.form {
-    position: relative;
+/*.form {*/
+/*    position: relative;*/
+/*    width: 80vw;*/
+/*    max-width: 80%;*/
+/*    margin: 0 auto;*/
+/*    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);*/
+/*    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);*/
+/*    border-radius: 20px;*/
+/*    background-color: rgba(255, 255, 255, 0.9);*/
+/*    border-top-right-radius: 50px;*/
+/*    border: 1.5px outset rgba(255, 255, 255, 0.3);*/
+/*}*/
+.form__wrapperpass {
+    position: absolute;
+    top: 221px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 500px;
     width: 80vw;
     max-width: 80%;
-    margin: 0 auto;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    max-width: 580px;
+    background-color: rgba(46, 54, 66, 0.4);
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
     border-top-right-radius: 50px;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
     border: 1.5px outset rgba(255, 255, 255, 0.3);
-}
-.form__wrapperpass {
-    max-width: 1080px;
-    margin: 0 auto;
-    position: relative;
-    top: 200px;
-    text-align: left;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000px;
 }
 .form__options {
     padding: 160px 0;
@@ -1167,16 +1195,22 @@ input[type="tel" i] {
 
 .form__bodypass {
     position: absolute;
-    top: 0;
-    left: -20px;
-    right: -20px;
-    bottom: 0;
-    padding: 20px 0;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     transition: 0.5s;
-    display: flex;
-    justify-content: space-around;
     pointer-events: none;
     z-index: 1;
+}
+
+.prints {
+    position: relative;
+}
+
+#animation-container {
+    position: absolute;
+    top: -1rem;
+    right:1rem;
 }
 
 .form__bodypass form {
@@ -1187,7 +1221,7 @@ input[type="tel" i] {
 .form__bodypass form h2 {
     margin-top: 0;
     color: white;
-    font-size: 3em;
+    font-size: 2.5rem;
 }
 .form__bodypass form .input-field {
     margin-bottom: 10px;
@@ -1201,6 +1235,7 @@ input[type="tel" i] {
 .form__bodypass form input[type=text], .form__bodypass form input[type=password], .form__bodypass form input[type=email] {
     padding: 8px;
     border: 0;
+    width: 100%;
     border-radius: 5px;
 }
 
@@ -1232,63 +1267,41 @@ input[type="tel" i] {
 }
 
 .form__background2 {
-    position: absolute;
-    top: 274px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
-    height: 500px;
-    width: 80vw;
-    max-width: 80%;
-    max-width: 580px;
-    background-color: rgba(46, 54, 66, 0.4);
-    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
-    border-radius: 20px;
-    border-top-right-radius: 50px;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
-    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
-    border: 1.5px outset rgba(255, 255, 255, 0.3);
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000px;
+
 }
 
-.form__background3 {
-    position: absolute;
-    top: 274px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
-    height: 486px;
-    width: 80vw;
-    max-width: 80%;
-    max-width: 580px;
-    background-color: rgba(255, 255, 255, 0.9);
-    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
-    border-radius: 20px;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    border-top-right-radius: 50px;
-    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
-    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
-    border: 1.5px outset rgba(255, 255, 255, 0.3);
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    z-index: -2;
-}
+/*.form__background3 {*/
+/*    position: absolute;*/
+/*    top: 274px;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    margin: 0 auto;*/
+/*    height: 486px;*/
+/*    width: 80vw;*/
+/*    max-width: 80%;*/
+/*    max-width: 580px;*/
+/*    background-color: rgba(255, 255, 255, 0.9);*/
+/*    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);*/
+/*    border-radius: 20px;*/
+/*    -webkit-backdrop-filter: blur(5px);*/
+/*    backdrop-filter: blur(5px);*/
+/*    border-top-right-radius: 50px;*/
+/*    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);*/
+/*    border-right: 1.5px solid rgba(245, 240, 240, 0.5);*/
+/*    border: 1.5px outset rgba(255, 255, 255, 0.3);*/
+/*    -webkit-transform: translate3d(0, 0, 0);*/
+/*    -webkit-backface-visibility: hidden;*/
+/*    -webkit-perspective: 1000px;*/
+/*    z-index: -2;*/
+/*}*/
 
 .form__background4 {
     position: relative;
-    top: 194px;
-    left: 442px;
+    top: 15rem;
+    left: 30rem;
     right: 0;
     bottom: 0;
-    margin: 0 auto;
     height: 486px;
     width: 75vw;
     max-width: 80%;
@@ -1299,16 +1312,13 @@ input[type="tel" i] {
     z-index: 2;
 }
 
-@media (max-width: 700px) {
+@media (min-width: 768px) {
+    .form__wrapperpass {
+        top: 270px;
+    }
+
     .form__background4 {
-        position: absolute;
-        margin: auto;
-        top: -937px;
-        right: 0;
-        bottom: 0;
-        left: -48px;
-        width: 100px;
-        height: 100px;
+        left: 63rem;
     }
 }
 
@@ -1378,11 +1388,15 @@ p{
     border: 1.5px outset rgba(255, 255, 255, 0.3);
 }
 .form__wrapper {
+    max-width: 100%;
+    position: absolute;
+    /*top: 54%;*/
     max-width: 880px;
     margin: 30vh auto 0 auto;
     position: relative;
 /*     position: absolute;
     top: 50%;
+>>>>>>> acb8428c28280b88d0f7aea5842f7084c038cc13
     left: 50%;
     transform: translate(-50%, -50%); */
 }
@@ -1576,8 +1590,8 @@ p.errorMessage{
 }
 
 @media (min-width: 768px) {
-    .loginSvg {
-        bottom: 0;
+    .form__wrapper {
+        max-width: 880px;
     }
 }
 /* ****************************** HOME PAGE ****************************** */
@@ -2152,7 +2166,7 @@ div.header h4{
     background-color: rgba(41, 162, 139, 0.13);
     top: -14px;
     color: white;
-    margin-top: 5rem;
+    padding-top: 50px;
     -webkit-backdrop-filter:blur(20px);
     backdrop-filter:blur(20px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
@@ -2844,6 +2858,7 @@ div.header h4{
 input[type="tel" i] {
     padding: 8px;
     border: 0;
+    width: 100%;
     border-radius: 5px;
 }
 

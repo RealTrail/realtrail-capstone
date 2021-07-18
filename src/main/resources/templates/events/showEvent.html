@@ -3,10 +3,10 @@
 <head th:replace="fragments/head :: head">
     <title>Show Event</title>
 </head>
-<body class="body">
+<body style="height: 100vh;">
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main style="margin-top: 5rem; flex: 1;">
+<main style="flex: 1;">
     <div >
         <div th:if="${event == null}">
             No event found. <a href="/create">Create one</a>
