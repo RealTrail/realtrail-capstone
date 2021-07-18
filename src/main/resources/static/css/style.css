@@ -1127,14 +1127,14 @@ input[type="tel" i] {
         height: 200px;
         position: relative;
         margin: auto;
-        top: 25px;
+        top: 65px;
         right: 0;
         bottom: 0;
-        left: -43px;
+        left: -307px;
     }
 
     img#profileImage{
-        top: -659px;
+        top: -506px;
         left: -615px;
         width: 200px;
         height: 200px;
