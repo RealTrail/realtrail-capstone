@@ -15,7 +15,7 @@ html, body {
 
 body {
     /*max-width: 100%;*/
-    /*height: 100vh;*/
+    height: 100vh;
     background-color: #e5e5e5;
 }
 
@@ -63,7 +63,6 @@ a {
 
 .home-content{
     height: 200px;
-
     background-color: #00eeff;
     width: 90%;
     margin: 0 auto;
@@ -103,7 +102,7 @@ a {
     -moz-osx-font-smoothing: grayscale;
     position: absolute;
     left: 0;
-    top: 0px;
+    top: 0;
     right: 0;
     z-index: 500;
     height: 60px;
@@ -1380,8 +1379,10 @@ p{
 }
 .form__wrapper {
     max-width: 880px;
-    margin: 175px auto 0 auto;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 div .form {
     font-size: 14px;
@@ -1437,8 +1438,6 @@ div .form {
     align-items: center;
 }
 form.sign-up{
-    /*padding: 0;*/
-    /*margin: 15px 0;*/
     flex-direction: column;
     display: flex;
     line-height: unset;
@@ -1462,20 +1461,7 @@ input#signup.btn.btn-light {
     width: 175px;
     line-height: unset;
 }
-/*.form__options__signup{*/
-/*    position: relative;*/
-/*    top: 0;*/
-/*    left: -20px;*/
-/*    right: -20px;*/
-/*    bottom: 0;*/
-/*    padding: 20px 0;*/
-/*    transition: 0.5s;*/
-/*    display: block;*/
-/*    float: right;*/
-/*    justify-content: space-around;*/
-/*    pointer-events: none;*/
-/*    align-items: center;*/
-/*}*/
+
 .form__body form {
     pointer-events: all;
     /*margin: 99px 0;*/
@@ -1552,18 +1538,14 @@ p.errorMessage{
 }
 
 .loginSvg {
-
     position: absolute;
-    background-size:100% 100%;
-
+    background-size: 100% 100%;
     right: 0;
-    bottom: -501px;
-    left:0;
+    bottom: 0;
+    left: 0;
     z-index: -1;
-    /*!*z-index: -10;*!*/
-    overflow:hidden;
-
 }
+
 .loginSvg path {
     fill-opacity: 0;
     stroke: #061f10;
@@ -1580,6 +1562,11 @@ p.errorMessage{
     }
 }
 
+@media (min-width: 768px) {
+    .loginSvg {
+        bottom: 0;
+    }
+}
 /* ****************************** HOME PAGE ****************************** */
 
 .hidden {
