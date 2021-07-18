@@ -6,76 +6,90 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<div class="form__wrapper">
-    <div class="form">
-        <div class="form__options">
-            <div class="form__options__login">
-                <div class="options__body">
-                    <p>Already have an account?</p>
-                    <a href="/login" class="btn btn-light">Login!</a>
+
+    <div class="form__wrapper">
+        <div class="form">
+            <div class="form__options">
+                <div class="form__options__login">
+                    <div class="options__body">
+                        <p>Already have an account?</p>
+                        <a href="/login" class="btn btn-light">Login!</a>
+                    </div>
+                </div>
+                <div class="form__options__signup">
+                    <p>Don't have an account yet?</p>
+                    <a href="/signup" class="btn btn-light">Sign Up!</a>
+                    <small>It's free!</small>
                 </div>
             </div>
-            <div class="form__options__signup">
-                <p>Don't have an account yet?</p>
-                <a href="/signup" class="btn btn-light">Sign Up!</a>
-                <small>It's free!</small>
+
+            <div class="form__background"></div>
+
+            <div class="form__body">
+                <form th:action="@{/login}" method="POST" class="login" name="login">
+                    <h2>Login!</h2>
+                    <div class="input-field">
+                        <input type="text" id="log_username" name="username" placeholder="">
+                        <label for="log_username">Username or Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="password" name="password">
+                        <label for="password">Password</label>
+                    </div>
+
+                    <div th:if="${param.error}" style="color:red; margin-bottom:1rem">
+                        Invalid Username and Password.
+                    </div>
+                    <div th:if="${param.logout}" style="color:#7db6fc; margin-bottom:1rem">
+                        You have been logged out.
+                    </div>
+                    <!--                <input type="hidden" name="url_prior_login" th:value="${#request.getHeader('referer')}">-->
+
+                    <input type="submit" class="btn btn-light" value="Login" name="login">
+                </form>
+
+                <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}" name="myform">
+                    <h2>Sign Up!</h2>
+                    <div class="input-field">
+                        <input type="text" id="username" name="username" th:field="*{username}">
+                        <label for="username">Username</label>
+                        <p class="errorMessage" th:text="${message}"></p>
+                    </div>
+                    <div class="input-field">
+                        <input type="email" id="create_email" name="create_email" th:field="*{email}">
+                        <label for="create_email">Email Address</label>
+                        <p class="errorMessage" th:text="${emailMessage}"></p>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="createPassword" name="createPassword" th:field="*{password}">
+                        <label for="createPassword">Password</label>
+                        <p class="errorMessage" th:text="${passwordMessage}"></p>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>
+                        <label for="confirmCreatePassword">Confirm Password</label>
+                        <p id="alertPasswordSign" th:text="${passwordNotMatch}"></p>
+                    </div>
+
+                    <input type="submit" id="signup" class="btn btn-light" value="Create Account" name="signup">
+                </form>
             </div>
+
         </div>
-
-        <div class="form__background"></div>
-
-        <div class="form__body">
-            <form th:action="@{/login}" method="POST" class="login" name="login">
-                <h2>Login!</h2>
-                <div class="input-field">
-                    <input type="text" id="log_username" name="username" placeholder="">
-                    <label for="log_username">Username or Email</label>
-                </div>
-                <div class="input-field">
-                    <input type="password" id="password" name="password">
-                    <label for="password">Password</label>
-                </div>
-
-                <div th:if="${param.error}" style="color:red; margin-bottom:1rem">
-                    Invalid Username and Password.
-                </div>
-                <div th:if="${param.logout}" style="color:#7db6fc; margin-bottom:1rem">
-                    You have been logged out.
-                </div>
-<!--                <input type="hidden" name="url_prior_login" th:value="${#request.getHeader('referer')}">-->
-
-                <input type="submit" class="btn btn-light" value="Login" name="login">
-            </form>
-
-            <form th:action="@{/signup}" method="POST" class="sign-up" th:object="${user}" name="myform">
-                <h2>Sign Up!</h2>
-                <div class="input-field">
-                    <input type="text" id="username" name="username" th:field="*{username}">
-                    <label for="username">Username</label>
-                    <p class="errorMessage" th:text="${message}"></p>
-                </div>
-                <div class="input-field">
-                    <input type="email" id="create_email" name="create_email" th:field="*{email}">
-                    <label for="create_email">Email Address</label>
-                    <p class="errorMessage" th:text="${emailMessage}"></p>
-                </div>
-                <div class="input-field">
-                    <input type="password" id="createPassword" name="createPassword" th:field="*{password}">
-                    <label for="createPassword">Password</label>
-                    <p class="errorMessage" th:text="${passwordMessage}"></p>
-                </div>
-                <div class="input-field">
-                    <input type="password" id="confirmCreatePassword" name="confirmCreatePassword" onkeyup='check()'>
-                    <label for="confirmCreatePassword">Confirm Password</label>
-                    <p id="alertPasswordSign" th:text="${passwordNotMatch}"></p>
-                </div>
-
-                <input type="submit" id="signup" class="btn btn-light" value="Create Account" name="signup">
-            </form>
-        </div>
-
     </div>
-</div>
+
+
+
+<style>
+    html, body { margin:0; padding:0; overflow:hidden }
+    .loginSvg { position:fixed; top:0; left:0; height:100%; width:100% }
+
+    .form__wrapper {
+        /*display: table-cell;*/
+        /*height: 100%;*/
+        /*vertical-align: middle;*/
+    }
+</style>
 
 <svg class="loginSvg"  x="0" y="0" version="1.1" viewBox="0 0 2000 1944" xml:space="preserve">
     <defs/>
