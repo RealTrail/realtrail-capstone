@@ -1379,26 +1379,24 @@ p{
 }
 .form__wrapper {
     max-width: 880px;
-    position: absolute;
+    margin: 30vh auto 0 auto;
+    position: relative;
+/*     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 div .form {
     font-size: 14px;
 }
 .form__options {
-    /*height: 550px;*/
     padding: 160px 0;
     display: flex;
     font-size: 15px;
-    /*max-height: fit-content;*/
     flex: 1;
 }
 .form__options > div {
-    /*max-height: 100%;*/
     width: 50%;
-    /*text-align: center;*/
 }
 .form.slide .form__background {
     left: 48%;
@@ -1536,22 +1534,37 @@ p.errorMessage{
 .fa, .fas, .fab {
     margin-right: 15px;
 }
-
+.set-loginSvg-container {
+     position: relative;
+     height: 0;
+     width: 100%;
+     padding: 0;
+     padding-bottom: 100%;
+ }
 .loginSvg {
     position: absolute;
-    background-size: 100% 100%;
+/* <<<<<<< itstime */
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: auto;
+/* ======= */
+/*     background-size: 100% 100%;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: -1;
+    z-index: -1; */
+/* >>>>>>> main */
 }
 
 .loginSvg path {
     fill-opacity: 0;
     stroke: #061f10;
     stroke-width: 0.35;
-    stroke-dasharray: 3170;
-    stroke-dashoffset: 3170;
+    stroke-dasharray: 6170;
+    stroke-dashoffset: 6170;
     animation: draw 30s infinite linear;
     animation-direction: alternate;
 }
@@ -2978,7 +2991,7 @@ select{
     box-sizing: border-box;
     background-color: transparent;
     cursor: pointer;
-    position: reletive;
+    position: relative;
 }
 
 .form__bodypassCE {
@@ -3205,7 +3218,7 @@ input[type=radio]:checked + label:before {
 }
 
 .developer-card {
-    margin-bottm: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
 .developer-image {
