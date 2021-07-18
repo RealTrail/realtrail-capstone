@@ -28,7 +28,7 @@ This application leverages:
 * Full Calendar API
 
 ## Real Trail Table
-![Screenshot](planning notes/database-diagram.png)
+![Screenshot](planningNotes/databasediagram.png)
 
 ## 
 
