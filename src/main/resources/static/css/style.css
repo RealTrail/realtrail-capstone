@@ -30,8 +30,13 @@ p {
 
 .home-content{
     height: 200px;
-    width: 200px;
+
     background-color: #00eeff;
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
