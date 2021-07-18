@@ -1865,11 +1865,14 @@ div.header h4{
     top:540px;
 }
 
+
+
 .parallax__layer__3 {
     transform: translateZ(-150px) scale(2.5);
     position:absolute;
     top:590px;
 }
+
 
 .parallax__layer__4 {
     transform: translateZ(-100px) scale(2);
@@ -3277,4 +3280,33 @@ input[type=radio]:checked + label:before {
         flex-direction: row;
         flex: 1;
     }
+}
+
+
+
+/**************** LOGO **********************/
+
+.reallogo{
+    position: absolute;
+    margin: auto;
+    top: -540px;
+    right: 0;
+    bottom: 0;
+    left: 30px;
+    width: 16%;
+    height: auto;
+    z-index: 0;
+
+
+}
+
+.home-dropdown{
+    display: flex;
+    position: relative;
+    top: 799px;
+    left: 290px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
 }
