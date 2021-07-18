@@ -6,11 +6,31 @@
 <body class="body">
 <style>
 
-    .background-image {
-        background: url(/images/showEvents.png) no-repeat center center fixed;
-        margin-top: 5rem;
-        flex: 1;
+    .background-image{
+
+         padding: 8rem 4rem;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(228, 237, 255, 0.5);
+        /* box-shadow: 0 5px 15px rgb(0 0 0 / 30%); */
+        transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+        border-radius: 20px;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(50px);
+        border-top-right-radius: 50px;
+        box-shadow: 0 10px 50px rgb(22 40 80 / 30%);
+        border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+        /* border-top: 3px solid rgba(245, 240, 240, 1.9); */
+        border: 1.5px outset rgba(255, 255, 255, 0.3);
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        z-index: 1;
+        position: relative;
+        top:10px;
+        overflow: hidden;
     }
+
     .card-list {
         display: block;
         margin: 1rem auto;
@@ -28,11 +48,17 @@
         font-size: 1rem;
         text-decoration: none;
         overflow: hidden;
-        box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
-        transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         border-radius: 10px;
         background-color: white;
         background-image: linear-gradient(to right, #dedede, #ebedef, #ebedef);
+    }
+
+    #triangle-bottomright {
+        width: 100vw;
+        height: 100vh;
+        border-bottom: 100px solid #ff286e;
+        border-left: 100px solid transparent;
     }
 
     .card:hover {
@@ -60,11 +86,19 @@
         text-align: center;
     }
 
+    body, html{
+        max-width: 100%;
+        overflow: hidden;
+
+    }
+
+
+
 </style>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main class="background-image">
+<body class="background-image">
     <div th:if="${noEventsFound}">
         <h1 class="noEvent">No events were found.</h1>
     </div>
@@ -84,7 +118,8 @@
                 </a>
         </li>
     </ul>
-</main>
+    <div id="triangle-bottomright"></div>
+</body>
 
 <footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>
 <script src="/js/navbar.js"></script>

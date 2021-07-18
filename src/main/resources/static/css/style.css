@@ -24,6 +24,7 @@ body.body{
     flex-direction: column;
 }
 
+
 /*main{*/
 /*    position: relative;*/
 /*    transition: 1s;*/
@@ -40,6 +41,7 @@ main {
     margin-top: 60px;
     /*display: table;*/
 }
+
 
 :root {
     font-family: "Nunito", sans-serif;
@@ -58,6 +60,18 @@ ol, ul {
 a {
     text-decoration: none;
 }
+
+.home-content{
+    height: 200px;
+
+    background-color: #00eeff;
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 /* ****************************** NAVBAR CSS ****************************** */
 
@@ -83,17 +97,28 @@ a {
 }
 
 .globalNav {
+    font-family: Camphor, Open Sans, Segoe UI, sans-serif;
     font-family: 'Archivo Black', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 0px;
     right: 0;
     z-index: 500;
-    height: 50px;
+    height: 60px;
     perspective: 2000px;
     background-color: #e5e5e5;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    box-shadow: 0 10px 50px rgb(164 164 164 / 90%);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    /* border-top: 3px solid rgba(245, 240, 240, 1.9); */
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+
+
+
 }
 
 .globalNav ul {
