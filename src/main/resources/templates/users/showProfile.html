@@ -7,14 +7,20 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <main>
-    <div class="trail-animate">
+<!--    <div class="trail-animate">-->
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <lottie-player class="header-animate2" src="https://assets4.lottiefiles.com/packages/lf20_3GxFSt.json"  background="transparent"  speed="0.5"  style="width: 2600px; height: 2600px;"  loop  autoplay></lottie-player>
+<!--        <lottie-player class="header-animate2" src="https://assets4.lottiefiles.com/packages/lf20_3GxFSt.json"  background="transparent"  speed="0.5"  style="width: 1300px; height: 1300px;"  loop  autoplay></lottie-player>-->
+<!--    </div>-->
+    <div class="trail-animatePro">
+<!--        <lottie-player class="header-animatePro" src="https://assets2.lottiefiles.com/private_files/lf30_9q70uajb.json" mode="bounce" background="transparent"  speed="0.5"  style="width: 1300px; height: 1300px;"  loop  autoplay></lottie-player>-->
+
+                <lottie-player class="header-animatePro" src="https://assets4.lottiefiles.com/packages/lf20_3GxFSt.json"  background="transparent"  speed="0.5"  style="width: 2300px; height: 2300px;"  loop  autoplay></lottie-player>
+
     </div>
     <div class="profile-header">
         <img th:src="${user.profileImageUrl}" class="profileImage" alt="profile-image">
         <div class="profile-username">
-            <div>Username</div>
+            <div>Profile</div>
             <h1 th:text="${user.username}"></h1>
         </div>
     </div>
@@ -179,7 +185,7 @@
             bottom: -79px;
             right:0;
             left:500px;
-            z-index: 10;
+            z-index: 0;
             zoom: 0;
         }
 
@@ -191,6 +197,8 @@
             z-index: -1;
             zoom: 2;
         }
+
+
 
         .createdeventsC {
             margin: -0.5rem 0 5rem 0;
