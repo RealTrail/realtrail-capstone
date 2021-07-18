@@ -855,16 +855,15 @@ small {
     color: #555;
 }
 
-
 img#profileImage{
     position: absolute;
     margin: auto;
-    top: -659px;
-    right: 0px;
+    top: -572px;
+    right: 0;
     bottom: 0;
-    left: -615px;
-    width: 200px;
-    height: 200px;
+    left: -311px;
+    width: 180px;
+    height: 180px;
     object-fit:cover;
     /*clip-path: circle(45%);*/
     border-radius: 50%;
@@ -875,15 +874,14 @@ img#profileImage{
     text-decoration: none;
     color: white;
     white-space: nowrap;
-    line-height: 1em;
     background: #01d4c3;
     border: 0;
     cursor: pointer;
     transition: transform 0.2s;
     transition: all 1s ease-in-out;
     transform: scale(1.04);
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     line-height: 200px;
     border-radius: 50%; /* the magic */
     -moz-border-radius: 50%;
@@ -891,8 +889,8 @@ img#profileImage{
     opacity: 0;
     position: relative;
     margin: auto;
-    top: 25px;
-    left: -308px;
+    top: 31px;
+    left: -11.25rem;
 }
 
 .pulse {
@@ -907,18 +905,6 @@ img#profileImage{
     }
 }
 
-@media (max-width: 747px) {
-    .btnUpload {
-        position: relative;
-        margin: auto;
-        top: 25px;
-        right: 0;
-        bottom: 0;
-        left: -43px
-
-    }
-}
-
 .btnUpload:hover{
     transform: scale(2.05);
     opacity: 1;
@@ -927,16 +913,10 @@ img#profileImage{
     transform: scale(1.04);
 }
 
-
-
 .btn:hover {
     transform: scale(1.05);
 }
 .btn.btn-light {
-    /* color: #ff4757;
-    background: white;
-    border: 2px solid #ff4757; */
-
     display: inline-block;
     padding: 15px 25px;
     border-radius: 23px;
@@ -952,8 +932,8 @@ img#profileImage{
 
 #createProfile{
     position: relative;
-    left: 286px;
-    top: -22px;
+    left: 245px;
+    top: 50px;
 }
 
 input[type="tel" i] {
@@ -971,7 +951,7 @@ input[type="tel" i] {
     font-size: 1.6rem;
     font-weight: bold;
     position: absolute;
-    margin-left: 400px;
+    margin-left: 330px;
     top: 235px;
     cursor: pointer;
 }
@@ -1048,6 +1028,7 @@ input[type="tel" i] {
 .form__bodypasspp form input[type=text], .form__bodypasspp form input[type=password], .form__bodypasspp form input[type=email] {
     padding: 8px;
     border: 0;
+    width: 100%;
     border-radius: 5px;
 }
 
@@ -1132,6 +1113,37 @@ input[type="tel" i] {
     z-index: -2;
 }
 
+@media (min-width: 992px) {
+    .btnUpload {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        margin: auto;
+        top: 25px;
+        right: 0;
+        bottom: 0;
+        left: -43px;
+    }
+
+    img#profileImage{
+        top: -659px;
+        left: -615px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .closing {
+        margin-left: 400px;
+    }
+
+    #createProfile{
+        position: relative;
+        left: 286px;
+        top: -22px;
+    }
+
+}
+
 /********************************* RESET PASSWORD *******************************/
 
 /*FORM SIZE*/
@@ -1150,7 +1162,7 @@ input[type="tel" i] {
 /*}*/
 .form__wrapperpass {
     position: absolute;
-    top: 274px;
+    top: 221px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1302,6 +1314,10 @@ input[type="tel" i] {
 }
 
 @media (min-width: 768px) {
+    .form__wrapperpass {
+        top: 270px;
+    }
+
     .form__background4 {
         left: 63rem;
     }
@@ -2826,6 +2842,7 @@ div.header h4{
 input[type="tel" i] {
     padding: 8px;
     border: 0;
+    width: 100%;
     border-radius: 5px;
 }
 
