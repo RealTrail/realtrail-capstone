@@ -135,12 +135,19 @@ public class EventController {
             }
             event.setTrail(trail);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
             Date newDate = formatter.parse(eventDate);
             LocalDate localDate = newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a z");
+            LocalTime eventTimeParsed = LocalTime.parse(eventTime);
+            LocalTime eventMeetTimeParsed = LocalTime.parse(eventMeetTime);
+            String eventTimeMeetShow = timeFormat.format(eventMeetTimeParsed);
+            String eventTimeShow = timeFormat.format(eventTimeParsed);
 
-            event.setTime(LocalTime.parse(eventTime));
-            event.setMeetTime(LocalTime.parse(eventMeetTime));
+
+
+            event.setTime(eventTimeParsed);
+            event.setMeetTime(eventMeetTimeParsed);
 
             event.setDate(localDate);
             System.out.println(newDate);

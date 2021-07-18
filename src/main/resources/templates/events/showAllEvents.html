@@ -3,11 +3,10 @@
 <head th:replace="fragments/head :: head">
     <title>Show All Events</title>
 </head>
-<body class="body">
+<body class="body" style="max-width: 100%; overflow-x: hidden; height: 100vh">
 <style>
 
     .background-image{
-
          padding: 8rem 4rem;
         width: 100vw;
         height: 100vh;
@@ -28,7 +27,7 @@
         z-index: 1;
         position: relative;
         top:10px;
-        overflow: hidden;
+        overflow: scroll;
     }
 
     .card-list {
