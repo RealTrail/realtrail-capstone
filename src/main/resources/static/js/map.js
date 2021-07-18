@@ -57,7 +57,7 @@ $(document).ready(() => {
                                         'line-cap': 'round'
                                     },
                                     'paint': {
-                                        'line-color': '#048d3b',
+                                        'line-color': '#e04c3e',
                                         'line-width': 4
                                     }
                                 });
@@ -298,7 +298,7 @@ function drawStyles() {
                 "line-join": "round"
             },
             "paint": {
-                "line-color": "#3b9ddd",
+                "line-color": "#deabab",
                 "line-dasharray": [0.2, 2],
                 "line-width": 4,
                 "line-opacity": 0.7
@@ -321,7 +321,7 @@ function drawStyles() {
             "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
             "paint": {
                 "circle-radius": 6,
-                "circle-color": "#3b9ddd",
+                "circle-color": "#e5827c",
             }
         },
     ]
@@ -382,7 +382,7 @@ function addRoute (coordinates) {
                 "line-cap": "round"
             },
             "paint": {
-                "line-color": "#048d3b",
+                "line-color": "#e04c3e",
                 "line-width": 4,
                 "line-opacity": 0.8
             }

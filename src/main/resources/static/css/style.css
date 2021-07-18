@@ -17,6 +17,11 @@ body {
     flex-direction: column;
 }
 
+main{
+    position:relative;
+    transition:1s;
+}
+
 :root {
     font-family: "Nunito", sans-serif;
 }
@@ -1900,12 +1905,39 @@ div.header h4{
     background-color: rgba(41, 162, 139, 0.13);
     position: relative;
     top: -14px;
-    background-color: rgba(21, 170, 170, 0.6);
+    /*background-color: rgba(21, 170, 170, 0.6);*/
     color: white;
     margin-top: 5rem;
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
     border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+}
+
+
+
+.profile-header h1{
+    font-size: 4rem;
+    margin:0;
+
+
+}
+
+.trail-animatePro {
+    position: absolute;
+    background-color: rgb(21 170 170 / 78%);
+    position: absolute;
+    width: 100%;
+    height: 331px;
+    z-index: -1;
+    top: 70px;
+    overflow: hidden;
+
+}
+
+.header-animatePro {
+    position: relative;
+    top: -990px;
+    left: 140px;
 }
 
 .profile-username {
@@ -1914,8 +1946,8 @@ div.header h4{
 
 .profile-header > img.profileImage {
     margin-left: 4rem;
-    width: 15rem;
-    height: 15rem;
+    width: 20rem;
+    height: 20rem;
     clip-path: circle(40%);
     overflow: hidden;
 }
@@ -1930,6 +1962,8 @@ div.header h4{
     backdrop-filter: blur(20px);
     border: 1.5px outset rgba(255, 255, 255, 0.3);
     box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    position: relative;
+    z-index: 1;
 
 }
 
@@ -1986,7 +2020,7 @@ div.header h4{
     position: absolute;
     background-color: rgb(26 194 178);
     width: 100%;
-    height: 320px;
+    height: 322px;
     z-index: -1;
     overflow: hidden;
 }
@@ -2178,7 +2212,7 @@ div.header h4{
     text-decoration: none;
     color: white;
     white-space: nowrap;
-    background: #ff4757;
+    background: #ed5965;
     border: 0;
     cursor: pointer;
 }
