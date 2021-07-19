@@ -53,7 +53,6 @@ image:hover {
     margin-right: 1rem;
 }
 
-
 .all-users-details > tbody:nth-child(odd){
     background-color: #f49068;
     border-radius: 24px;
@@ -65,11 +64,6 @@ image:hover {
 }
 .all-users-view{
     margin-top: 24px;
-    /*padding: 15px 0 0 0;*/
-    /*height: 81%;*/
-    /*width: 100%;*/
-    /*background-color: orangered;*/
-    /*z-index: 2;*/
 }
 .username-label, .username-span{
     margin: 0 .5rem 0 0;
@@ -83,26 +77,9 @@ image:hover {
     margin: 0 .5rem 0 .5rem;
 }
 
-
-/*.all-users-details{*/
-/*    !*padding-top: 15px;*!*/
-/*    height: 60%;*/
-/*    width: 100%;*/
-/*    border-radius: 24px;*/
-/*    !*background-color: orangered;*!*/
-/*}*/
-/*.details-card{*/
-/*    height: 9em;*/
-/*    !*padding: 3px;*!*/
-/*    margin: 0 6px 0 3px;*/
-/*    !*background-color: orangered;*!*/
-/*    border-bottom: 3px solid #203232;*/
-/*    border-radius: 24px;*/
-/*    border-top: 3px solid #203232;*/
-/*}*/
-/*.profileImage{*/
-/*    margin-left: 15px;*/
-/*}*/
+.admin-edit-span > .btn-success > a {
+    color: white;
+}
 
 </style>
 <main>
@@ -120,14 +97,14 @@ image:hover {
                     <td class="email-span" th:text="${user.email}"></td>
                 </tr>
                 <tr class="edit-user-div">
-                    <td class="admin-edit-span"th:if="${loggedInUser.isAdmin()}">
-                        <button class="admin-edit-btn">
+                    <td class="admin-edit-span" th:if="${loggedInUser.isAdmin()}">
+                        <button class="btn-success">
                         <a  th:href="${'/profile/' + user.id + '/edit'}">Edit this User</a>
                         </button>
                     </td>
                     <td class="delete-user-div" th:if="${loggedInUser.isAdmin() && !user.isAdmin()}">
                         <form class="admin-delete-form" th:action="@{/users/{id}/delete(id=${user.id})}" method="post">
-                            <button class="admin-delete-btn" type="submit">Delete this User</button>
+                            <button class="btn-success" type="submit">Delete this User</button>
                         </form>
                     </td>
                 </tr>
