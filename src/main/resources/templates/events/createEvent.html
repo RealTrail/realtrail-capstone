@@ -14,9 +14,6 @@
     <div class="modal2" role="alert">
 
         <!-- Modal content -->
-<!--        <div class="modal-content2">-->
-<!--            <div class="modal-header2">-->
-
         <div class="form__bodypassCE">
             <h2 class="ceH2">Customize Your Hiking Trail</h2>
             <p class="errorMessage trailExist"></p>
@@ -68,16 +65,15 @@
                 </div>
                 <p class="errorMessage trailType"></p>
                 <div>
-
                     <textarea name="trailDetails" id="trailDetails" rows="7" cols="30" placeholder="Trail Details" required></textarea>
                     <label for="trailDetails"></label>
                 </div>
                 <p class="errorMessage trailDetails"></p>
                 <div>
-                    <button type="button" id="images">Upload images</button>
+                    <button type="button" id="images" class="btn-success">Upload images</button>
                     <i id="imagesUploadHint" class="fa fa-check hidden" style="color:green"></i>
                     <input type="hidden" id="hidden" name="images" />
-                    <button type="submit" id="createTrail">Submit</button>
+                    <button type="submit" id="createTrail" class="btn-success">Submit</button>
                 </div>
             </form>
 
@@ -100,12 +96,7 @@
     </div>
 
     <style>
-
-
-
-
         .form__backgroundce {
-
             height: 100%;
             width: 435px;
             position: fixed;
@@ -115,8 +106,6 @@
             overflow: hidden;
             padding-top: 60px;
             background-color: transparent;
-
-
         }
 
         .form__backgroundce:hover{
@@ -172,8 +161,8 @@
                     <input type="time" name="eventMeetTime" id="eventMeetTime" />
                 </div>
                 <div>
-                    <label for="eventDetails">Event Details</label>
-                    <textarea name="eventDetails" id="eventDetails" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
+                    <label for="event-details">Event Details</label>
+                    <textarea name="eventDetails" id="event-details" rows="5" cols="50" th:field="*{eventDetails}"></textarea>
                 </div>
                 <div>
                     <br>
@@ -203,7 +192,7 @@
                     <button type="button" id="mapSearch"><i class="fa fa-search"></i></button>
                 </div>
 
-                <button type="submit" id="createEvent">Submit</button>
+                <button type="submit" id="createEvent" class="btn-success">Submit</button>
             </form>
         </div>
         <div class="form__backgroundc"></div>

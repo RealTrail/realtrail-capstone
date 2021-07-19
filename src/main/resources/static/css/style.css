@@ -1147,27 +1147,71 @@ input[type="tel" i] {
     #createProfile{
         position: relative;
         left: 286px;
-        top: -22px;
+        top: 22px;
     }
 
 }
+/********************************* ADMIN EDIT USER PROFILE CSS *******************************/
+#admin-edit-profile-form {
+    margin-top:  165px;
+}
 
-/********************************* RESET PASSWORD *******************************/
+#admin-edit-profile-form h2 {
+    position: absolute;
+    top: 20rem;
+    left: 10rem;
+}
+
+#admin-edit-profile-form label {
+    font-size: 1.2rem;
+}
+
+#admin-edit-profile-form .closing {
+    margin-left: 330px;
+}
+
+#admin-edit-profile-form #editProfile {
+    margin-left: 12rem;
+}
+
+#adminUpload {
+    position: relative;
+    top: -5.45rem;
+    left: -7.6rem;
+}
+
+@media (min-width: 992px) {
+    #admin-edit-profile-form {
+        margin-top:  128px;
+        margin-left: 3rem;
+    }
+
+    #admin-edit-profile-form h2 {
+        top: 18rem;
+        left: 28.5rem;
+    }
+
+    #admin-edit-profile-form .closing {
+        margin-left: 383px;
+    }
+
+    #admin-edit-profile-form #profileImage {
+        top: -593px;
+        left: -610px;
+    }
+    #admin-edit-profile-form #editProfile {
+        margin-left: 13rem;
+    }
+
+    #adminUpload {
+        top: -4.95rem;
+        left: -20.1rem;
+    }
+}
+
+/********************************* RESET PASSWORD PAGE CSS *******************************/
 
 /*FORM SIZE*/
-
-/*.form {*/
-/*    position: relative;*/
-/*    width: 80vw;*/
-/*    max-width: 80%;*/
-/*    margin: 0 auto;*/
-/*    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);*/
-/*    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);*/
-/*    border-radius: 20px;*/
-/*    background-color: rgba(255, 255, 255, 0.9);*/
-/*    border-top-right-radius: 50px;*/
-/*    border: 1.5px outset rgba(255, 255, 255, 0.3);*/
-/*}*/
 .form__wrapperpass {
     position: absolute;
     top: 221px;
@@ -1556,29 +1600,18 @@ p.errorMessage{
 .fa, .fas, .fab {
     margin-right: 15px;
 }
-.set-loginSvg-container {
-     position: relative;
-     height: 0;
-     width: 100%;
-     padding: 0;
-     padding-bottom: 100%;
- }
+
 .loginSvg {
     position: absolute;
-/* <<<<<<< itstime */
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     z-index: -1;
     overflow: auto;
-/* ======= */
 /*     background-size: 100% 100%;
     right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1; */
-/* >>>>>>> main */
+    bottom: 0; */
 }
 
 .loginSvg path {
@@ -1600,6 +1633,12 @@ p.errorMessage{
 @media (min-width: 768px) {
     .form__wrapper {
         max-width: 880px;
+    }
+}
+
+@media (min-width: 992px) {
+    httml  {
+        overflow: hidden;
     }
 }
 /* ****************************** HOME PAGE ****************************** */
@@ -2670,6 +2709,75 @@ div.header h4{
     }
 }
 
+/* ****************************** ALL EVENTS PAGE CSS ****************************** */
+
+.event-cards-container {
+    position: absolute;
+    z-index: 10;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    padding: 0;
+    font-size: 0;
+    text-align: center;
+}
+
+.card {
+    display: inline-block;
+    width: 22rem;
+    margin: 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius: 10px;
+    background-color: white;
+    background-image: linear-gradient(to right, #dedede, #ebedef, #ebedef);
+}
+
+.card:hover {
+    transform: translateY(-0.5rem) scale(1.0125);
+    box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+}
+
+.card table {
+    width: 100%;
+    padding: 0 5rem;
+    text-align: left;
+}
+
+.card-description {
+    padding: 1em 0.5em;
+    color: #515151;
+}
+
+.card-description > h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5em;
+    text-align: center;
+}
+
+.card-list .card p {
+    margin: .8rem 0;
+}
+
+@media (min-width: 992px) {
+    .card-list {
+        flex-direction: row;
+    }
+
+    .event-cards-container {
+        top: 50%;
+    }
+}
+
+
 /************************************* SIDE NAV ***************************************/
 
 .sidenav {
@@ -2976,7 +3084,7 @@ div.header h4{
     transform: translateY(0);
 }
 
-
+/* ****************************** CREATE EVENT PAGE ****************************** */
 
 /* Modal Content */
 .modal-content2 {
@@ -3006,10 +3114,29 @@ div.header h4{
     text-align: center;
 }
 
+.ceH2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.form__bodypassCE > form > div {
+    padding: .4rem 0;
+}
+.form__bodypassCE textarea {
+    width: 100%;
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+    height: 40px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
 .modal-footer2 {
     color: white;
     width: 100%;
-    height: 100px;
+    margin-top: 2rem;
     border-radius: 10px;
 }
 
@@ -3034,7 +3161,7 @@ div.header h4{
     font-family: sans-serif;
 }
 
-/* ****************************** CREATE EVENT PAGE ****************************** */
+
 
 .tooltip{
     position: absolute;
@@ -3081,12 +3208,10 @@ textarea {
     padding: 8px;
     border: 0;
     border-radius: 5px;
-    height: 40px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
-
 textarea:hover{
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
@@ -3095,6 +3220,18 @@ select{
     padding: 8px;
     border: 0;
     border-radius: 5px;
+}
+
+.btn-success {
+    background: rgb(244, 76, 54);
+    color: white;
+    border-radius: 20px;
+    padding: 7px 12px;
+    border: 0;
+}
+
+#createEvent {
+    margin: 2rem 0 0 11rem;
 }
 
 .form__bodypassc {
@@ -3117,7 +3254,8 @@ select{
 
 .form__bodypassc form {
     pointer-events: all;
-    margin: 20px 0;
+    width: 100%;
+    margin: 20px 20px 20px 30px;
     transition: opacity 0.3s;
 }
 .form__bodypassc form h2 {
@@ -3125,6 +3263,11 @@ select{
     color: white;
     font-size: 2em;
 }
+
+.form__bodypassc form h2:nth-child(2) {
+    font-size: 1.2rem;
+}
+
 .form__bodypassc form .input-field {
     margin-bottom: 10px;
 }
@@ -3132,6 +3275,7 @@ select{
     display: block;
     color: white;
     line-height: 2em;
+    font-size: 1.2rem;
 }
 .form__bodypassc form input[type=text], .form__bodypassc form input[type=password], .form__bodypassc form input[type=email], .form__bodypassc form input[type=date], .form__bodypassc form input[type=time], .form__bodypassc form input[name=name] {
     padding: 8px;
@@ -3241,7 +3385,7 @@ select{
     padding: 8px;
     border: 0;
     border-radius: 5px;
-    width: 60%;
+    width: 100%;
 }
 
 .form__bodypassCE::before{
