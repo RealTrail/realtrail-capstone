@@ -7,6 +7,7 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 
+
 <main style="height: 100%">
 
     <!-- ------------- SIDE NAV ------------- -->
@@ -93,11 +94,11 @@
         <div class="parallax__layer parallax__layer__3">
             <img src="/images/five1.png" height="455" width="3840"/>
         </div>
-        <img class="reallogo" src="/images/reallogo.png">
 
         <div class="parallax__layer parallax__layer__4">
             <img src="/images/three1.png" height="455" width="3840"/>
         </div>
+        <img class="reallogo" src="/images/reallogo.png">
         <div class="parallax__layer parallax__layer__5">
             <img src="/images/two1.png" height="455" width="3840"/>
         </div>
@@ -137,13 +138,15 @@
                     </div>
 
                     <button type="submit">Submit</button>
+
                 </form>
+
             </div>
+
             <div class="boxx" onclick="openNav()"></div>
 
+
             <div class="slider-container">
-
-
 
                 <div th:if="${trails.isEmpty()}">
                     <h2>No trail found. </h2>
@@ -173,6 +176,10 @@
         </div>
     </div>
 </main>
+
+
+
+
 
 
 
