@@ -2771,7 +2771,7 @@ div.header h4{
 @media (min-width: 992px) {
     .event-cards-container {
         top: 68%;
-        width: 100%;
+        width: 88%;
         height: 100%;
         margin: 6rem 10rem 0 10rem;
     }
