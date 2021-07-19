@@ -1613,7 +1613,7 @@ p.errorMessage{
     width: 90%;
     margin: 0 auto;
     position: absolute;
-    top: 100%;
+    top: 110%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 10px;
@@ -1895,8 +1895,8 @@ div.header h4{
 
 .cloud {
     position: absolute;
-    width: 30px;
-    height: 5px;
+    width: 50px;
+    height: 20px;
     border-radius: 50px;
     background-color: white;
     left: 0%;
@@ -3480,18 +3480,16 @@ input[type=radio]:checked + label:before {
 
 /**************** LOGO **********************/
 
-.reallogo{
+.reallogo {
     position: absolute;
     margin: auto;
-    top: -232px;
+    top: 210px;
     right: 0;
     bottom: 0;
-    left: 30px;
+    left: -31px;
     width: 18%;
     height: auto;
     z-index: 0;
-
-
 }
 
 @media (max-width: 840px) {
@@ -3508,9 +3506,19 @@ input[type=radio]:checked + label:before {
     transform: translate(-50%, -50%)!important;
     margin: 0 auto !important;
     display:flex;
+}
+
+select{
+    background-color:#19aaaa;
+    border-radius:3px !important;
+    padding-right:10px;
+    color:whitesmoke;
+    width:100%;
+
 
 
 }
+
 
 
 
