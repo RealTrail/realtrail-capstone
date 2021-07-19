@@ -1,50 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="max-width: 100%; overflow: hidden;">
 <head th:replace="fragments/head :: head">
     <title>Show All Events</title>
 </head>
-<body class="body background-image">
+<body style="max-width: 100%; overflow: hidden;">
 <!--style="max-width: 100%; overflow-x: hidden; height: 100vh"-->
 <style>
 
-    .background-image{
-        padding: 8rem 4rem;
-        width: 100vw;
-        height: 100vh;
-        background-image: url("/images/mountainview.png");
-        background-color: rgba(228, 237, 255, 0.5);
-        /* box-shadow: 0 5px 15px rgb(0 0 0 / 30%); */
-        transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
-        border-radius: 20px;
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(50px);
-        border-top-right-radius: 50px;
-        box-shadow: 0 10px 50px rgb(22 40 80 / 30%);
-        border-right: 1.5px solid rgba(245, 240, 240, 0.5);
-        /* border-top: 3px solid rgba(245, 240, 240, 1.9); */
-        border: 1.5px outset rgba(255, 255, 255, 0.3);
-        -webkit-transform: translate3d(0, 0, 0);
-        -webkit-backface-visibility: hidden;
-        -webkit-perspective: 1000;
-        z-index: 1;
-        position: relative;
-        top:10px;
-        overflow: scroll;
+    .event-cards-container {
+        position: absolute;
+        z-index: 10;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .card-list {
-        display: block;
+        display: flex;
+        flex-direction: column;
         margin: 1rem auto;
         padding: 0;
         font-size: 0;
         text-align: center;
-        list-style: none;
     }
 
     .card {
         display: inline-block;
-        width: 90%;
-        max-width: 20rem;
+        width: 22rem;
         margin: 1rem;
         font-size: 1rem;
         text-decoration: none;
@@ -55,74 +37,131 @@
         background-image: linear-gradient(to right, #dedede, #ebedef, #ebedef);
     }
 
-    #triangle-bottomright {
-        width: 100vw;
-        height: 100vh;
-        border-bottom: 100px solid #ff286e;
-        border-left: 100px solid transparent;
-    }
-
     .card:hover {
         transform: translateY(-0.5rem) scale(1.0125);
         box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
     }
 
-    .card-description {
-        display: block;
-        padding: 1em 0.5em;
-        color: #515151;
-        text-decoration: none;
+    .card table {
+        width: 100%;
+        padding: 0 5rem;
         text-align: left;
     }
 
+    .card-description {
+        padding: 1em 0.5em;
+        color: #515151;
+    }
+
     .card-description > h3 {
+        font-size: 1.8rem;
         margin: 0 0 0.5em;
-    }
-
-    .card-description > p {
-        margin: 0;
-    }
-
-    .review {
         text-align: center;
     }
 
-    body, html{
-        max-width: 100%;
-        overflow: hidden;
-
+    .card-list .card p {
+        margin: .8rem 0;
     }
 
+
+
+    @media (min-width: 992px) {
+        .card-list {
+            flex-direction: row;
+        }
+
+        .event-cards-container {
+            top: 50%;
+        }
+    }
 
 
 </style>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<!--<body class="background-image">-->
-    <div th:if="${noEventsFound}">
-        <h1 class="noEvent">No events were found.</h1>
+<div id="parallax" style="flex: 1;">
+    <div class="sky"></div>
+<!--    <div class="parallax__layer parallax__layer__0">-->
+<!--        <img src="/images/nine.png" height="455" width="3840"/>-->
+<!--    </div>-->
+    <div class="parallax__layer parallax__layer__1">
+        <img src="/images/eight1.png" height="455" width="3840"/>
+    </div>
+    <div class="parallax__layer parallax__layer__2">
+        <img src="/images/seven1.png" height="455" width="3840"/>
+    </div>
+    <div class="parallax__layer parallax__layer__3">
+        <img src="/images/five1.png" height="455" width="3840"/>
+    </div>
+    <div class="parallax__layer parallax__layer__4">
+        <img src="/images/three1.png" height="455" width="3840"/>
     </div>
 
-    <h2 class="review">Review the list for trail events happening near you!</h2>
-    <ul class="card-list">
+    <div class="parallax__layer parallax__layer__5">
+        <img src="/images/two1.png" height="455" width="3840"/>
+    </div>
+    <div class="parallax__layer parallax__layer__6">
+        <img src="/images/one1.png" height="455" width="3840"/>
+    </div>
+    <div class="parallax__cover"></div>
+    <main class="event-cards-container">
+        <!--<body class="background-image">-->
+        <div th:if="${noEventsFound}">
+            <h1 class="noEvent">No events were found.</h1>
+        </div>
+
+        <h2 style="font-size: 2.5rem; margin-top: 0;">Review the list for trail events happening near you!</h2>
+        <ul class="card-list">
             <li th:each="event : ${events}" class="card">
                 <a th:href="${'/events/' + event.id}" class="card-description">
                     <h3 th:text="${event.name}"></h3>
-                    <p>by: <span th:text="${event.owner.username}"></span></p>
-                    <p th:text="${'Date: ' + event.date}"></p>
-                    <p th:text="${'Time: ' + event.time}"></p>
-                    <p>
-                        Trail: <a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a>
-                    </p>
-                    <hr>
                 </a>
-        </li>
-    </ul>
-    <div id="triangle-bottomright"></div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>By</th>
+                            <td th:text="${event.owner.username}"></td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td th:text="${'Date: ' + event.date}"></td>
+                        </tr>
+                        <tr>
+                            <th>Time</th>
+                            <td th:text="${'Time: ' + event.time}"></td>
+                        </tr>
+                        <tr>
+                            <th>Trail</th>
+                            <td><a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <hr>
+            </li>
+        </ul>
+    </main>
+
+</div>
+
+
+<!--<footer id="footer">-->
+<!--    <div class="top-footer">-->
+<!--        <div class="logo">Real Trail</div>-->
+<!--        <div class="social-links">-->
+<!--            <a href=""><i class="fab fa-facebook-f"></i></a>-->
+<!--            <a href=""><i class="fab fa-twitter"></i></a>-->
+<!--            <a href=""><i class="fab fa-pinterest"></i></a>-->
+<!--            <a href=""><i class="fab fa-instagram"></i></a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <hr>-->
+<!--    <div id="copyright">-->
+<!--        &copy; All Rights Reserved 2021-->
+<!--    </div>-->
+<!--</footer>-->
 </body>
 
-<footer th:replace="fragments/footer :: footer" class="showEvent-footer"></footer>
 <script src="/js/navbar.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/login.js"></script>
