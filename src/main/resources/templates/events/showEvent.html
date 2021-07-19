@@ -6,47 +6,55 @@
 <body style="height: 100vh;">
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
-<main style="flex: 1;">
-    <div >
-        <div th:if="${event == null}">
-            No event found. <a href="/create">Create one</a>
-        </div>
+<main>
+    <div class="event-animate">
+        <lottie-player class="header-animate" src="https://assets2.lottiefiles.com/private_files/lf30_9q70uajb.json" mode="bounce" background="transparent"  speed="0.1"  style="width: 1300px; height: 1300px;"  loop  autoplay></lottie-player>
     </div>
-    <table th:if="${event}" class="trail-info trail-header">
-        <tbody>
-        <tr>
-            <td><h1 th:text="${event.name}"></h1></td>
-        </tr>
-        <tr>
-            <td>Event coordinator:</td>
-            <td th:text="${event.owner.username}"></td>
-        </tr>
-        <tr>
-            <td>date:</td>
-            <td th:text="${event.date}"></td>
-        </tr>
-        <tr>
-            <td>time:</td>
-            <td th:text="${event.time}"></td>
-        </tr>
-        <tr>
-            <td>Event details:</td>
-            <td th:text="${event.eventDetails}"></td>
-        </tr>
-        <tr>
-            <td>Trail:</td>
-            <td><a th:href="${'/trails/' + event.trail.id}"><h4 th:text="${event.trail.name}"></h4></a></td>
-        </tr>
-        <tr>
-            <td>Meet location:</td>
-            <td th:text="${event.meetLocation}"></td>
-        </tr>
-        <tr>
-            <td>Meet time:</td>
-            <td th:text="${event.meetTime}"></td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div th:if="${event == null}" class="profile-header">
+        No event found. <a href="/create">Create one</a>
+    </div>
+
+    <div class="profile-header">
+        <img src="/images/scafell-pike-descent.jpg" class="profileImage" alt="hiking event image">
+        <h1 th:text="${event.name}" style="margin-left: 2rem"></h1>
+    </div>
+
+    <div class="event-info-container">
+        <table th:if="${event}" class="event-info">
+            <tbody>
+            <tr>
+                <td>Event coordinator</td>
+                <td th:text="${event.owner.username}"></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td th:text="${event.date}"></td>
+            </tr>
+            <tr>
+                <td>Time</td>
+                <td th:text="${event.time}"></td>
+            </tr>
+            <tr>
+                <td>Details</td>
+                <td th:text="${event.eventDetails}"></td>
+            </tr>
+            <tr>
+                <td>Trail</td>
+                <td><a th:href="${'/trails/' + event.trail.id}"><span th:text="${event.trail.name}" style="font-size: 1.5rem;"></span></a></td>
+            </tr>
+            <tr>
+                <td>Meet location</td>
+                <td th:text="${event.meetLocation}"></td>
+            </tr>
+            <tr>
+                <td>Meet time</td>
+                <td th:text="${event.meetTime}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div th:if="${event.owner.id == user.id && !event.participants.isEmpty()}">
         <div>Participants:
             <div th:each="participant : ${event.participants}">
@@ -56,6 +64,7 @@
     </div>
 
     <br>
+    <h2 style="margin: 1rem 4rem; padding-top: 2rem; font-size: 2rem;">Comments</h2>
     <table class="trail-comments">
         <tbody th:if="${!event.eventComments.isEmpty()}" th:each="comment : ${event.eventComments}" class="trail-comment">
         <tr>
@@ -104,9 +113,49 @@
         <div th:if="${param.alreadyjoined}" class="alreadyJoinMsg"><span class="message">You have already joined the event!</span></div>
     </div>
 
-</main>
+    <div>
+        <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+        <svg class="maroon" version="1.1"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+             x="0px" y="0px" width="1066px" height="193.2px" viewBox="0 0 1066 193.2" style="enable-background:new 0 0 1066 193.2;"
+             xml:space="preserve">
+        <style type="text/css">
+           .maroon {
+               fill: #E5E5E5;
+               stroke: #E5E5E5;
+               stroke-miterlimit: 10;
+           }
+        </style>
+            <defs></defs>
+            <path class="maroon" d="M302,192.6c33.1,0,66.2,0,99.3,0c75.8,0,151.5,0,227.3,0c83.2,0,166.4,0,249.6,0c55.4,0,110.8,0,166.3,0
+           c5.7,0,11.5,0,17.2,0c-5.4-1.2-10.3-3.4-15.3-5.8c-6.3-3-12.6-5.9-19.1-8.4c-16.8-6.5-33.7-13-50.5-19.6
+           c-64.8-25.2-274.9-110.2-315-127.9C611.5,8.7,556.9-3.9,501.9,1.9c-75.6,8-117.5,58.6-183.9,94.7c-91.6,49.8-208.1,98.6-318,96
+           C0,192.6,302,192.6,302,192.6z"/>
+    </svg>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+        <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+        <svg class="red" version="1.1"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+             x="0px" y="0px" width="1066px" height="193.2px" viewBox="0 0 1066 193.2" style="enable-background:new 0 0 1066 193.2;"
+             xml:space="preserve">
+        <style type="text/css">
+           .red {
+               fill: #852447;
+               stroke: #852447;
+               stroke-miterlimit: 10;
+           }
+        </style>
+            <defs></defs>
+            <path class="red" d="M302,192.6c33.1,0,66.2,0,99.3,0c75.8,0,151.5,0,227.3,0c83.2,0,166.4,0,249.6,0c55.4,0,110.8,0,166.3,0
+           c5.7,0,11.5,0,17.2,0c-5.4-1.2-10.3-3.4-15.3-5.8c-6.3-3-12.6-5.9-19.1-8.4c-16.8-6.5-33.7-13-50.5-19.6
+           c-64.8-25.2-274.9-110.2-315-127.9C611.5,8.7,556.9-3.9,501.9,1.9c-75.6,8-117.5,58.6-183.9,94.7c-91.6,49.8-208.1,98.6-318,96
+           C0,192.6,302,192.6,302,192.6z"/>
+    </svg>
+
+        <div id="triangle-bottomright"></div>
+    </div>
+
+</main>
 
 <script src="/js/navbar.js"></script>
 <script src="/js/modal.js"></script>
