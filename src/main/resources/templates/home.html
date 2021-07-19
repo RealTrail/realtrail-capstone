@@ -35,10 +35,7 @@
 
     <!-- ------------- SIDE NAV ------------- -->
 
-    <div class="clock">
-
-
-    </div>
+    <div class="clock"></div>
 
 
     <script>
@@ -104,6 +101,7 @@
         <div class="parallax__layer parallax__layer__5">
             <img src="/images/two1.png" height="455" width="3840"/>
         </div>
+        <div class="clock"></div>
         <div class="parallax__layer parallax__layer__6">
             <img src="/images/one1.png" height="455" width="3840"/>
         </div>
@@ -143,8 +141,10 @@
             </div>
             <div class="boxx" onclick="openNav()"></div>
 
-
             <div class="slider-container">
+
+
+
                 <div th:if="${trails.isEmpty()}">
                     <h2>No trail found. </h2>
                 </div>

@@ -1741,13 +1741,13 @@ div.header h4{
 }
 
 .container {
-    width: 60%;
+    width: 50%;
     background-color: #e5e5e5;;
     position: absolute;
     top: 93%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 4rem;
+    border-radius: 1rem;
 }
 
 .search__box {
@@ -1978,14 +1978,14 @@ div.header h4{
 
 /************************* CLOCK *****************************/
 .clock {
-    position: absolute;
-    top:25%;
+    position: relative;
+    top:5%;
     left: 5%;
-    z-index: 0;
+    z-index: -1;
     font-size: 64px;
     font-family: 'roboto', sans-serif;
     font-weight: 100;
-    color: #ffffff;
+    color: #102d3e;
     transition:3s ease-in-out;
     text-shadow: 2px 2px 5px rgba(150, 150, 150, 0.5);
 }
@@ -3501,12 +3501,18 @@ input[type=radio]:checked + label:before {
 }
 
 .home-dropdown{
-    display: flex;
-    position: relative;
-    top: 799px;
-    left: 290px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: stretch;
+
+    position: absolute !important;
+    top: 98%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%)!important;
+    margin: 0 auto !important;
+    display:flex;
+
+
 }
+
+
+
+
+
