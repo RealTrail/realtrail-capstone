@@ -8,6 +8,10 @@
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <main>
+    <div class="icon-box">
+    <a href="javascript:void(0)" style="position: absolute" class="closebtn" onclick="closeNav()">CLOSE</a>
+    <a href="javascript:void(0)" style="position: absolute" class="showbtn" onclick="openNav()">OPEN</a>
+    </div>
     <div id="map"></div>
 
     <div class="mask2" role="dialog"></div>
@@ -78,21 +82,21 @@
             </form>
 
             <br>
-        <div class="modal-footer2">
-            <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
-            <svg class="close" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                 x="0px" y="0px" width="100%" height="24.6px" viewBox="0 0 24.6 24.6" style="enable-background:new 0 0 24.6 24.6;"
-                 xml:space="preserve">
+            <div class="modal-footer2">
+                <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In  -->
+                <svg class="close" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                     x="0px" y="0px" width="100%" height="24.6px" viewBox="0 0 24.6 24.6" style="enable-background:new 0 0 24.6 24.6;"
+                     xml:space="preserve">
                     <style type="text/css">.st0{fill:#FFFFFF;}</style>
-                <defs></defs>
-                <path class="st0" d="M24,16.9l-4.6-4.6L24,7.7c0.7-0.7,0.7-1.9,0-2.7l-4.5-4.5c-0.7-0.7-1.9-0.7-2.7,0l-4.6,4.6L7.7,0.6
+                    <defs></defs>
+                    <path class="st0" d="M24,16.9l-4.6-4.6L24,7.7c0.7-0.7,0.7-1.9,0-2.7l-4.5-4.5c-0.7-0.7-1.9-0.7-2.7,0l-4.6,4.6L7.7,0.6
                     C6.9-0.2,5.7-0.2,5,0.6L0.6,5c-0.7,0.7-0.7,1.9,0,2.7l4.6,4.6l-4.6,4.6c-0.7,0.7-0.7,1.9,0,2.7L5,24c0.7,0.7,1.9,0.7,2.7,0l4.6-4.6
                     l4.6,4.6c0.7,0.7,1.9,0.7,2.7,0l4.5-4.5C24.8,18.8,24.8,17.6,24,16.9z"/>
             </svg>
+            </div>
         </div>
-    </div>
-    <a class="close" role="button"></a>
+        <a class="close" role="button"></a>
     </div>
 
     <style>
@@ -131,10 +135,87 @@
             font-size: 36px;
             margin-left: 50px;
         }
+
+        .closebtn{
+            position:absolute;
+            top:90%;
+            left:50%;
+            height:70px;
+            width:70px;
+            background-color:#f34c36;
+            z-index:1000;
+            border-radius:100px;
+            transition:1s;
+
+
+
+        }
+
+        .showbtn{
+            position:absolute;
+            top:90%;
+            left:60%;
+            height:70px;
+            width:70px;
+            background-color:#f34c36;
+            z-index:1000;
+            border-radius:100px;
+            transition:1s;
+
+
+        }
+
+        .showbtn:hover{
+            transform:scale(1.05);
+        }
+
+
+        .closebtn:hover{
+            transform:scale(1.05);
+        }
+
+
+        a.closebtn{
+            color:white;
+            font-size:15px;
+            position:relative;
+            display:flex;
+
+        }
+
+        a.showbtn{
+            color:white;
+            font-size:15px;
+            display:flex;
+        }
+
+        a.closebtn {
+            color: white;
+            font-size: 15px;
+            position:relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            font-family:sans-serif;
+        }
+
+        a.showbtn {
+            color: white;
+            font-size: 15px;
+            position:relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+
+
+
+
     </style>
 
     <div id="mySidenav" class="form__backgroundce">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
         <div class="form__bodypassc">
             <form th:action="@{/create}" th:method="POST" th:object="${event}" name="event">
                 <h2>Event Details</h2>
@@ -207,36 +288,16 @@
     <!--<div id="myMap"></div>-->
 
     <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.display = "block";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.display = "none";
-    }
-
-    var rectangle = $("#Rectangle");
-    var speechBubble = $("#SpeechBubble");
-
-
-    rectangle.hover(
-        function() {
-            speechBubble.css({
-                "animation-name": "expand-bounce",
-                "animation-duration": "0.25s"
-            });
-        },
-        function() {
-            speechBubble.css({
-                "animation-name": "shrink",
-                "animation-duration": "0.1s"
-            });
+        function openNav() {
+            document.getElementById("mySidenav").style.display = "block";
         }
-    );
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.display = "none";
+        }
 
 
-
-</script>
+    </script>
 
 </main>
 
