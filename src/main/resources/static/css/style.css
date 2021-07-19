@@ -33,10 +33,10 @@ body.body{
 }
 
 
-main{
-    position: relative;
-    transition: 1s;
-}
+/*main{*/
+/*    position: relative;*/
+/*    transition: 1s;*/
+/*}*/
 
 /*main**************** ADD INLINE STYLING FOR HTML AND BODY TAGS *****************{*/
 /*    height: 100%;*/
@@ -2587,6 +2587,88 @@ div.header h4{
     color: #ecb485;
 }
 
+
+/* ****************************** EDIT EVENT PAGE ****************************** */
+.form__wrapperpass__edit {
+    max-width: 1080px;
+    position: absolute;
+    text-align: left;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90vh;
+    width: 80vw;
+    max-width: 580px;
+    background-color: rgba(46, 54, 66, 0.4);
+    transition: 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border-top-right-radius: 50px;
+    box-shadow: 0 10px 50px rgba(22, 40, 80, 0.2);
+    border-right: 1.5px solid rgba(245, 240, 240, 0.5);
+    border: 1.5px outset rgba(255, 255, 255, 0.3);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    pointer-events: none;
+}
+
+#event-form-title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+#eventDetails {
+    width: 100%;
+}
+
+.form__bodypass__edit {
+    padding: 5px 0;
+    transition: 0.5s;
+    width: 60%;
+    margin: 0 auto;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form__bodypass__edit form {
+    pointer-events: all;
+    margin: 20px 0;
+    transition: opacity 0.3s;
+}
+.form__bodypass__edit form h2 {
+    margin-top: 0;
+    color: white;
+    font-size: 3em;
+}
+.form__bodypass__edit form .input-field {
+    margin-bottom: 10px;
+
+
+}
+.form__bodypass__edit form label {
+    display: block;
+    color: white;
+    line-height: 2em;
+}
+
+.form__bodypass__edit form input[type=text], .form__bodypass__edit form input[type=password], .form__bodypass__edit form input[type=email], .form__bodypass__edit form input[type=date], .form__bodypass__edit form input[type=time], .form__bodypass__edit form input[name=name] {
+    padding: 8px;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+@media (min-width: 992px) {
+    .form__wrapperpass__edit {
+        top: 57%;
+        height: 80vh;
+    }
+}
 
 /************************************* SIDE NAV ***************************************/
 
