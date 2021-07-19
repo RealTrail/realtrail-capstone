@@ -2714,7 +2714,7 @@ div.header h4{
 .event-cards-container {
     position: absolute;
     z-index: 10;
-    top: 80%;
+    top: 258%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -2767,14 +2767,22 @@ div.header h4{
     margin: .8rem 0;
 }
 
+
 @media (min-width: 992px) {
-    .card-list {
-        flex-direction: row;
+    .event-cards-container {
+        top: 68%;
+        width: 100%;
+        height: 100%;
+        margin: 6rem 10rem 0 10rem;
     }
 
-    .event-cards-container {
-        top: 50%;
+    .card-list {
+        width: 90%;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
+
+
 }
 
 
