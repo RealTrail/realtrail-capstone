@@ -3161,8 +3161,6 @@ div.header h4{
     font-family: sans-serif;
 }
 
-
-
 .tooltip{
     position: absolute;
     left: -2vw;
@@ -3477,6 +3475,32 @@ input[type=radio]:checked + label:before {
     }
 }
 
+.icon-box > a.closebtn {
+    position: absolute;
+    top: 60rem;
+    right: 2rem;
+    margin-left: auto;
+}
+
+.icon-box > a.showbtn {
+    position: absolute;
+    top: 66rem;
+    right: 2rem;
+    margin-left: auto;
+}
+
+@media (min-width: 992px) {
+    .icon-box > a.closebtn {
+        top: 60rem;
+        right: 11rem;
+        margin-left: auto;
+    }
+    .icon-box > a.showbtn {
+        top: 60rem;
+        right: 4rem;
+        margin-left: auto;
+    }
+}
 
 /* ****************************** CREATE EVENT MAP ****************************** */
 /*.map_box_container{*/
