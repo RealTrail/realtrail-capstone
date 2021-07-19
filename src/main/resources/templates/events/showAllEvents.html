@@ -7,6 +7,12 @@
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
+<style>
+    #parallax{
+        filter:hue-rotate(180deg);
+    }
+</style>
+
 <div id="parallax" style="flex: 1;">
     <div class="sky"></div>
 <!--    <div class="parallax__layer parallax__layer__0">-->
@@ -28,10 +34,10 @@
     <div class="parallax__layer parallax__layer__5">
         <img src="/images/two1.png" height="455" width="3840"/>
     </div>
-    <div class="parallax__layer parallax__layer__6">
+    <div class="parallax__layer parallax__layer__6"style="filter: hue-rotate(180deg)">
         <img src="/images/one1.png" height="455" width="3840"/>
     </div>
-    <div class="parallax__cover"></div>
+    <div class="parallax__cover"style="filter: hue-rotate(180deg)"></div>
     <main class="event-cards-container">
         <!--<body class="background-image">-->
         <div th:if="${noEventsFound}">
