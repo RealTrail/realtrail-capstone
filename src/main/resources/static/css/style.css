@@ -1706,7 +1706,7 @@ div.header{
     display:inline-flex;
     flex-direction: column;
     align-items: baseline;
-    height: 140px;
+    height: 12rem;
     width: 100%;
     border-radius: 15px;
     border-top-right-radius: 0px;
@@ -1855,6 +1855,7 @@ div.header h4{
      bottom: 0;
      margin: 0 auto;
      scrollbar-width: none;
+
  }
 
 #parallax::-webkit-scrollbar {
@@ -1883,7 +1884,7 @@ div.header h4{
     top: 99%;
     left: 50%;
     right: 0;
-    height:13000px;
+    height:100vh;
     width: 3000px;
     z-index: 2;
     margin-left: -1500px;
@@ -1941,6 +1942,7 @@ div.header h4{
     left: 0%;
     top: 0%;
     animation: moveRight linear infinite;
+    z-index: -1;
 }
 .cloud::after {
     content: "";
