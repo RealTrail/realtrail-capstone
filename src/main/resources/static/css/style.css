@@ -3686,12 +3686,12 @@ input[type=radio]:checked + label:before {
     display:flex;
 }
 
-select{
-    background-color:#19aaaa;
-    border-radius:3px !important;
-    padding-right:10px;
-    color:whitesmoke;
-    width:100%;
+select#trailOptions {
+    background-color: #19aaaa;
+    border-radius: 3px !important;
+    padding-right: 10px;
+    color: whitesmoke;
+    width: 60%;
 
 
 
