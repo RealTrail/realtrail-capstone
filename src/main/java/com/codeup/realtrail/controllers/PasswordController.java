@@ -26,8 +26,8 @@ public class PasswordController {
     }
 
     @GetMapping("/password/reset")
-    public String showResetPasswordForm() {
-
+    public String showResetPasswordForm(Model model) {
+        model.addAttribute("title", "Reset Password");
         return "users/resetPassword";
     }
 

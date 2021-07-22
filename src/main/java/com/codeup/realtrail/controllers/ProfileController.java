@@ -44,6 +44,7 @@ public class ProfileController {
                 user = userService.getLoggedInUser();
             }
 
+            model.addAttribute("title", "Profile Settings");
             // pass the user to create profile form to show prepopulated data in the form
             model.addAttribute("user", user);
             model.addAttribute("interests", userInterestsDao.findAll());
@@ -106,6 +107,7 @@ public class ProfileController {
             User user = userService.getLoggedInUser();
             List<Event> createdEvents = user.getCreatedEvents();
             List<Event> events = user.getEvents();
+            model.addAttribute("title", "Profile");
             model.addAttribute("user", user);
             model.addAttribute("createdEvents", createdEvents);
             model.addAttribute("events", events);
@@ -118,6 +120,8 @@ public class ProfileController {
     @GetMapping("/profile/{id}/edit")
     public String getAdminEditProfileForm(@PathVariable long id, Model model) {
         User user = usersDao.getById(id);
+
+        model.addAttribute("title", "Admin Edit User's Profile");
         // pass the user to create profile form to show prepopulated data in the form
         model.addAttribute("user", user);
         model.addAttribute("interests", userInterestsDao.findAll());
@@ -151,6 +155,7 @@ public class ProfileController {
             User searchedUser = usersDao.getById(id);
             List<Event> createdEvents = searchedUser.getCreatedEvents();
             List<Event> events = searchedUser.getEvents();
+            model.addAttribute("title", "Admin View User's Profile");
             model.addAttribute("user", searchedUser);
             model.addAttribute("loggedInUser", loggedInUser);
             model.addAttribute("createdEvents", createdEvents);

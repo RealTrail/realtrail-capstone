@@ -17,6 +17,7 @@ public class AuthenticationController {
 //        request.getSession().setAttribute("url_prior_login", referrer);
 //
 //        System.out.println("request.getSession().getAttribute(\"url_prior_login\") = " + request.getSession().getAttribute("url_prior_login"));
+        model.addAttribute("title", "Login");
         model.addAttribute("user", new User());
         return "users/signup-login";
     }

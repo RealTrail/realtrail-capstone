@@ -42,6 +42,8 @@ public class UserController {
     public String showHomePage(Model model) {
         List<Trail> trailList =  trailsDao.findAll();
         List<Event> events = eventsDao.findAll();
+
+        model.addAttribute("title", "RealTrail Home");
         model.addAttribute("trails", trailList);
         model.addAttribute("events", events);
         return "home";
@@ -49,6 +51,7 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
+        model.addAttribute("title", "Signup");
         model.addAttribute("user", new User());
         return "users/signup-login";
     }
@@ -109,6 +112,8 @@ public class UserController {
             User user = userService.getLoggedInUser();
             if (user.isAdmin()) {
                 List<User> users = usersDao.findAll();
+
+                model.addAttribute("title", "View All Users");
                 model.addAttribute("users", users);
                 model.addAttribute("loggedInUser", user);
                 return "users/allUsers";
@@ -152,7 +157,8 @@ public class UserController {
     }
 
     @GetMapping("/contact")
-    public String showContactUsPage() {
+    public String showContactUsPage(Model model) {
+        model.addAttribute("title", "Contact Us");
         return "contactUs";
     }
 }

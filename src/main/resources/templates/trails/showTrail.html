@@ -2,8 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" style="max-width: 100%; overflow-x: hidden;">
 <head th:replace="fragments/head :: head">
     <meta name="mapboxToken" th:content="${mapboxToken}">
-    <title>Show Trail</title>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body style="max-width: 100%; overflow-x: hidden;">
 
@@ -138,6 +136,8 @@
     const mapboxToken = [[${mapboxToken}]];
     console.log(mapboxToken);
 </script>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <!-- Mapbox JS -->
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
 <!-- Mapbox Geocoder Util Methods -->
