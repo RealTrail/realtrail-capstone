@@ -53,6 +53,7 @@ public class EventController {
     @GetMapping("/events")
     public String eventsPage(Model model) {
         List<Event> eventsList = eventsDao.findAll();
+        model.addAttribute("title", "All Events");
         model.addAttribute("noEventsFound", eventsList.size() == 0);
         model.addAttribute("events", eventsList);
         return "events/showAllEvents";
@@ -63,6 +64,7 @@ public class EventController {
     public String individualEventPage(@PathVariable Long id, Model model) {
         User user = userService.getLoggedInUser();
         Event event = eventsDao.getById(id);
+        model.addAttribute("title", "Event Details");
         model.addAttribute("event", event);
         model.addAttribute("user", user);
         model.addAttribute("eventComment",new EventComment());
@@ -151,6 +153,7 @@ public class EventController {
             User user = userService.getLoggedInUser();
             Event event = eventsDao.getById(id);
             if (event.getOwner().getId() == user.getId()) {
+                model.addAttribute("title", "Edit Event");
                 model.addAttribute("event", event);
                 return "events/editEvent";
             } else {

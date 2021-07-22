@@ -37,6 +37,7 @@ public class TrailController{
     public String individualTrailPage(@PathVariable Long id, Model model, Principal principal){
         Trail trail = trailsDao.getById(id);
         List<TrailComment> trailComments = trailCommentsDao.getAllByTrailId(id);
+        model.addAttribute("title", "Trail Details");
         model.addAttribute("trailId", id);
         model.addAttribute("trail", trail);
         model.addAttribute("trailComments", trailComments);
