@@ -51,7 +51,7 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public String eventsPage(Model model) {
+    public String showEventsPage(Model model) {
         List<Event> eventsList = eventsDao.findAll();
         model.addAttribute("title", "All Events");
         model.addAttribute("noEventsFound", eventsList.size() == 0);
