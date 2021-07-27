@@ -1,7 +1,9 @@
 package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.RealtrailApplication;
+import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.Trail;
 import com.codeup.realtrail.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +42,9 @@ public class UsersIntegrationTests {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    TrailsRepository trailsDao;
 
     @Before
     public void setup() throws Exception {
@@ -92,8 +97,31 @@ public class UsersIntegrationTests {
                 .param("email", "user123@codeup.com")
                 .param("password", "codeup")
                 .param("confirmCreatePassword", "codeup"))
-            .andExpect(status().is2xxSuccessful());
+            .andExpect(status().isOk());
     }
 
+    @Test
+    public void testShowAllUsers() throws Exception {
+
+        User existingUser = usersDao.findAll().get(0);
+
+        // make a get request to /users and verifies that we get some of the static text of the users/allUsers.html template and at least the username from the first user is present in the template.
+        this.mvc.perform(get("/users"))
+                .andExpect(status().isOk())
+                // Test the static content of the page
+                .andExpect(content().string(containsString("All Users")))
+                // Test the dynamic content of the page
+                .andExpect(content().string(containsString(existingUser.getUsername())));
+    }
+
+    @Test
+    public void testShowHomePage() throws Exception {
+        Trail existingTrail = trailsDao.findAll().get(0);
+
+        this.mvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("RealTrail")))
+                .andExpect(content().string(containsString(existingTrail.getName())));
+    }
 
 }
