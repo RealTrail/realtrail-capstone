@@ -1,5 +1,6 @@
 package com.codeup.realtrail.controllers;
 
+import com.codeup.realtrail.LoginSuccessHandler;
 import com.codeup.realtrail.RealtrailApplication;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
@@ -30,8 +31,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RealtrailApplication.class)
 @AutoConfigureMockMvc
-public class UsersIntegrationTests {
-    private User testUser;
+public class AdminRolesUsersIntegrationTests {
+
+    private User testAdmin;
     private HttpSession httpSession;
 
     @Autowired
@@ -48,35 +50,26 @@ public class UsersIntegrationTests {
 
     @Before
     public void setup() throws Exception {
-        testUser = usersDao.findByUsername("testUser");
-        User testAdmin = usersDao.findByUsername("testAdmin");
-
-        // Creates the test user if not exists
-        if(testUser == null) {
-            User newUser = new User();
-            newUser.setUsername("testUser");
-            newUser.setPassword(passwordEncoder.encode("pass"));
-            newUser.setEmail("testUser@codeup.com");
-            testUser = usersDao.save(newUser);
-        }
+        testAdmin = usersDao.findByUsername("testAdmin");
 
         // create the test admin if not exists
         if (testAdmin == null) {
-            User newUser = new User("testAdmin", "testAdmin@realtrail.quest", "codeup");
+            User newUser = new User("testAdmin", "testAdmin@realtrail.quest", passwordEncoder.encode("pass"));
             newUser.setAdmin(true);
-            testAdmin = newUser;
+            testAdmin = usersDao.save(newUser);
         }
 
-        // Throws a Post request to /login and expect a redirection to the Ads index page after being logged in
         httpSession = this.mvc.perform(post("/login").with(csrf())
-                .param("username", "testUser")
+                .param("username", "testAdmin")
                 .param("password", "pass"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
-                .andExpect(redirectedUrl("/"))
+                .andExpect(redirectedUrl("/profile/settings"))
                 .andReturn()
                 .getRequest()
                 .getSession();
+
     }
+
 
     @Test
     public void isTwo(){
@@ -96,42 +89,12 @@ public class UsersIntegrationTests {
     }
 
     @Test
-    public void testSaveUser() throws Exception {
-        // make a post request to /signup and expect a redirection to /login
-        this.mvc.perform(
-                post("/signup").with(csrf())
-                .session((MockHttpSession) httpSession)
-                .param("username", "user123")
-                .param("email", "user123@codeup.com")
-                .param("password", "codeup")
-                .param("confirmCreatePassword", "codeup"))
-            .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testShowAllUsers() throws Exception {
-        testUser.setAdmin(true);
-        User existingUser = usersDao.findAll().get(0);
-
-        // make a get request to /users and expect a redirection to all users page
-        this.mvc.perform(get("/users"))
-                .andExpect(status().is3xxRedirection())
-                // Test the static content of the page
-                .andExpect(content().string(containsString("All Users")))
-                // Test the dynamic content of the page
-                .andExpect(content().string(containsString(existingUser.getUsername())));
-    }
-
-    @Test
-    public void testShowHomePage_AsUser() throws Exception {
+    public void testShowHomePage_AsAdmin() throws Exception {
         Trail existingTrail = trailsDao.findAll().get(0);
 
-        this.mvc.perform(get("/").with(user("testUser")))
+        this.mvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("RealTrail")))
                 .andExpect(content().string(containsString(existingTrail.getName())));
     }
-
-
-
 }
