@@ -52,17 +52,17 @@ public class UsersIntegrationTests {
             newUser.setPassword(passwordEncoder.encode("pass"));
             newUser.setEmail("testUser@codeup.com");
             testUser = usersDao.save(newUser);
-
-            // Throws a Post request to /login and expect a redirection to the Ads index page after being logged in
-            httpSession = this.mvc.perform(post("/login").with(csrf())
-                    .param("username", "testUser")
-                    .param("password", "pass"))
-                    .andExpect(status().is(HttpStatus.FOUND.value()))
-                    .andExpect(redirectedUrl("/profile/settings"))
-                    .andReturn()
-                    .getRequest()
-                    .getSession();
         }
+
+        // Throws a Post request to /login and expect a redirection to the Ads index page after being logged in
+        httpSession = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testUser")
+                .param("password", "pass"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/"))
+                .andReturn()
+                .getRequest()
+                .getSession();
     }
 
     @Test
@@ -81,5 +81,19 @@ public class UsersIntegrationTests {
         // It makes sure the returned session is not null
         assertNotNull(httpSession);
     }
+
+    @Test
+    public void testSaveUser() throws Exception {
+        // make a post request to /signup and expect a redirection to /login
+        this.mvc.perform(
+                post("/signup").with(csrf())
+                .session((MockHttpSession) httpSession)
+                .param("username", "user123")
+                .param("email", "user123@codeup.com")
+                .param("password", "codeup")
+                .param("confirmCreatePassword", "codeup"))
+            .andExpect(status().is2xxSuccessful());
+    }
+
 
 }
