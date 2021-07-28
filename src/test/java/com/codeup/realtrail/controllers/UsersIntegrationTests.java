@@ -109,20 +109,6 @@ public class UsersIntegrationTests {
     }
 
     @Test
-    public void testShowAllUsers() throws Exception {
-        testUser.setAdmin(true);
-        User existingUser = usersDao.findAll().get(0);
-
-        // make a get request to /users and expect a redirection to all users page
-        this.mvc.perform(get("/users"))
-                .andExpect(status().is3xxRedirection())
-                // Test the static content of the page
-                .andExpect(content().string(containsString("All Users")))
-                // Test the dynamic content of the page
-                .andExpect(content().string(containsString(existingUser.getUsername())));
-    }
-
-    @Test
     public void testShowHomePage_AsUser() throws Exception {
         Trail existingTrail = trailsDao.findAll().get(0);
 
@@ -132,6 +118,13 @@ public class UsersIntegrationTests {
                 .andExpect(content().string(containsString(existingTrail.getName())));
     }
 
+    @Test
+    public void testShowContactUsPage() throws  Exception {
+
+        this.mvc.perform(get("/contact"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Karla Jara")));
+    }
 
 
 }
