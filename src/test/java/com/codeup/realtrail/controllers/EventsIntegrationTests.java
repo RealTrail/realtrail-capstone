@@ -1,6 +1,5 @@
 package com.codeup.realtrail.controllers;
 
-
 import com.codeup.realtrail.RealtrailApplication;
 import com.codeup.realtrail.daos.*;
 import com.codeup.realtrail.models.Event;
@@ -76,6 +75,8 @@ public class EventsIntegrationTests {
                 .andReturn()
                 .getRequest()
                 .getSession();
+
+        System.out.println("httpSession = " + httpSession);
     }
 
 
@@ -95,7 +96,7 @@ public class EventsIntegrationTests {
     public void testShowEventsPage() throws Exception {
         Event existingEvent = eventsDao.findAll().get(0);
 
-        // Makes a Get request to /events and verifies that we get some of the static text of the events/showAllEvents.html template and at least the title from the first Event is present in the template.
+        // Makes a Get request to /events and verifies that we get some of the static text of the events/showAllEvents.html template and at least the name from the first Event is present in the template.
         this.mvc.perform(get("/events"))
                 .andExpect(status().isOk())
                 // Test the static content of the page
@@ -103,15 +104,22 @@ public class EventsIntegrationTests {
                 // Test the dynamic content of the page
                 .andExpect(content().string(containsString(existingEvent.getName())));
     }
-//    @Test
-//    public void testCreateEvent() throws Exception {
-//
-//        // Makes a Post request to /create and expect a redirection to the Event
-//        this.mvc.perform(
-//                post("/create").with(csrf())
-//                .session((MockHttpSession) httpSession)
-//                .param("event", )
-//                .param("")
-//        )
-//    }
+
+    @Test
+    public void testCreateEvent_existingTrail() throws Exception {
+
+        // Makes a Post request to /create and expect a redirection to the Event
+        this.mvc.perform(
+                post("/create").with(csrf())
+                .session((MockHttpSession) httpSession)
+                .param("name", "testUser's event")
+                .param("eventDate", "2021-08-21")
+                .param("eventTime", "10:00")
+                .param("meetLocation", "Entrance")
+                .param("eventMeetTime", "09:45")
+                .param("eventDetails", "Let's go hiking together!")
+                .param("trailOption", "existing trail")
+                .param("trailOptions", "1"))
+            .andExpect(status().is3xxRedirection());
+    }
 }

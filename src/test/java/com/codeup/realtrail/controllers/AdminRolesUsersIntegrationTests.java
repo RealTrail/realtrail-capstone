@@ -1,6 +1,5 @@
 package com.codeup.realtrail.controllers;
 
-import com.codeup.realtrail.LoginSuccessHandler;
 import com.codeup.realtrail.RealtrailApplication;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
@@ -67,9 +66,7 @@ public class AdminRolesUsersIntegrationTests {
                 .andReturn()
                 .getRequest()
                 .getSession();
-
     }
-
 
     @Test
     public void isTwo(){
@@ -96,5 +93,18 @@ public class AdminRolesUsersIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("RealTrail")))
                 .andExpect(content().string(containsString(existingTrail.getName())));
+    }
+
+    @Test
+    public void testShowAllUsers() throws Exception {
+        User existingUser = usersDao.findAll().get(0);
+
+        // make a get request to /users and expect a redirection to all users page
+        this.mvc.perform(get("/users"))
+                .andExpect(status().is3xxRedirection())
+                // Test the static content of the page
+                .andExpect(content().string(containsString("All Users")))
+                // Test the dynamic content of the page
+                .andExpect(content().string(containsString(existingUser.getUsername())));
     }
 }
