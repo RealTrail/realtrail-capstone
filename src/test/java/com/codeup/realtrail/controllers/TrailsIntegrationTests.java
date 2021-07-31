@@ -90,6 +90,15 @@ public class TrailsIntegrationTests {
     }
 
     @Test
+    public void testIndividualTrailPage() throws Exception {
+        Trail trail = trailsDao.findById(1);
+        this.mvc.perform(get("/trails/1"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(containsString("Difficulty Level")))
+                .andExpect(content().string(containsString(trail.getName())));
+    }
+
+    @Test
     public void testIfCreateTrailWorks() throws Exception {
         // Makes a Post request to /trails/create and expect a redirection to the Event
         this.mvc.perform(
@@ -105,12 +114,21 @@ public class TrailsIntegrationTests {
     }
 
     @Test
-    public void testIndividualTrailPage() throws Exception {
-        Trail trail = trailsDao.findById(1);
-        this.mvc.perform(get("/trails/1"))
+    public void testGetSearchedTrail_noTrailFound() throws Exception {
+        String keyword = "hello";
+        this.mvc.perform(get("/search-trail?keyword=" + keyword))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string(containsString("TRAIL")))
-                .andExpect(content().string(containsString(trail.getName())));
+                .andExpect(content().string(containsString("Submit")))
+                .andExpect(content().string(containsString("No trail found.")));
     }
 
+    @Test
+    public void testGetSearchedTrail_trailsExist() throws Exception {
+        String keyword = "trail";
+        Trail searchedTrail = trailsDao.findByName(keyword).get(0);
+        this.mvc.perform(get("/search-trail?keyword=trail"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(containsString("Submit")))
+                .andExpect(content().string(containsString(searchedTrail.getName())));
+    }
 }
