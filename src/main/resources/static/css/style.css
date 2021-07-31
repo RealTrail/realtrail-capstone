@@ -17,38 +17,11 @@ body {
     flex-direction: column;
 }
 
-/*html, body {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
-
-body {
-    /*max-width: 100%;*/
-    background-color: #e5e5e5;
-}
 
 body.body{
     display: flex;
     flex-direction: column;
 }
-
-
-/*main{*/
-/*    position: relative;*/
-/*    transition: 1s;*/
-/*}*/
-
-/*main**************** ADD INLINE STYLING FOR HTML AND BODY TAGS *****************{*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*}*/
-
-/*.main **************** ADD INLINE STYLING FOR HTML AND BODY TAGS ***************** {*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    margin-top: 60px;*/
-/*    !*display: table;*!*/
-/*}*/
 
 
 :root {

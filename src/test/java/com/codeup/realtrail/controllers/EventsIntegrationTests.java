@@ -75,10 +75,7 @@ public class EventsIntegrationTests {
                 .andReturn()
                 .getRequest()
                 .getSession();
-
-        System.out.println("httpSession = " + httpSession);
     }
-
 
     @Test
     public void contextLoads() {
@@ -107,7 +104,6 @@ public class EventsIntegrationTests {
 
     @Test
     public void testCreateEvent_existingTrail() throws Exception {
-
         // Makes a Post request to /create and expect a redirection to the Event
         this.mvc.perform(
                 post("/create").with(csrf())
@@ -121,5 +117,23 @@ public class EventsIntegrationTests {
                 .param("trailOption", "existing trail")
                 .param("trailOptions", "1"))
             .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void testCreateEvent_customizeTrail() throws Exception {
+        this.mvc.perform(
+                post("/create").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("name", "testUser's event")
+                        .param("eventDate", "2021-08-21")
+                        .param("eventTime", "10:00")
+                        .param("meetLocation", "Entrance")
+                        .param("eventMeetTime", "09:45")
+                        .param("eventDetails", "Let's go hiking together!")
+                        .param("trailOption", "customize trail")
+                        .param("createdTrailId", "29")
+                        .param("trailPoint", "-98.40787943048224,29.352720932080558")
+                        .param("createdCoordinates", "-98.40969155750705,29.35787004055689;-98.40986832216294,29.356928536589166;-98.40762930318897,29.35759614939164;-98.40474214714357,29.35240919640988;-98.40298780826778,29.352399504449764;-98.4043796743005,29.349083424755563;-98.40809131705562,29.349865274406554;-98.4107822580531,29.353828351045507;-98.41109156161595,29.357279067728015;-98.40982341700813,29.35692860964778"))
+                .andExpect(status().is3xxRedirection());
     }
 }
