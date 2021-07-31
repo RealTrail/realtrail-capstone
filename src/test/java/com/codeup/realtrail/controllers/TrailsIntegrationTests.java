@@ -5,6 +5,7 @@ import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.MapPointsRepository;
 import com.codeup.realtrail.daos.TrailsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.models.Trail;
 import com.codeup.realtrail.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,11 +21,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
 
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes  = RealtrailApplication.class)
@@ -100,6 +102,15 @@ public class TrailsIntegrationTests {
                 .param("trailDetails", "Republic Golf Course Trail.")
                 .param("images", "https://www.texasgolftrails.com/wp-content/uploads/2017/06/Republic-1.jpg"))
             .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void testIndividualTrailPage() throws Exception {
+        Trail trail = trailsDao.findById(1);
+        this.mvc.perform(get("/trails/1"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(containsString("TRAIL")))
+                .andExpect(content().string(containsString(trail.getName())));
     }
 
 }
