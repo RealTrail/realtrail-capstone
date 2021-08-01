@@ -127,7 +127,40 @@ public class TrailsIntegrationTests {
         String keyword = "trail";
         Trail searchedTrail = trailsDao.findByName(keyword).get(0);
         this.mvc.perform(get("/search-trail?keyword=trail"))
-                .andExpect(status().is2xxSuccessful())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Submit")))
+                .andExpect(content().string(containsString(searchedTrail.getName())));
+    }
+
+    @Test
+    public void testFilterDifficultyLevelOrType_difficultyLevel() throws Exception {
+        String difficultyLevel = "Moderate";
+
+        Trail searchedTrail = trailsDao.findByDifficultyLevel(difficultyLevel).get(0);
+        this.mvc.perform(get("/trails/filter?difficulty=" + difficultyLevel + "&type="))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Submit")))
+                .andExpect(content().string(containsString(searchedTrail.getName())));
+    }
+
+    @Test
+    public void testFilterDifficultyLevelOrType_type() throws Exception {
+        String type = "Point to point";
+        Trail searchedTrail = trailsDao.findByType(type).get(0);
+        System.out.println("searchedTrail.getName() = " + searchedTrail.getName());
+        this.mvc.perform(get("/trails/filter?difficulty=&type=" + type))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Submit")))
+                .andExpect(content().string(containsString(searchedTrail.getName())));
+    }
+
+    @Test
+    public void testFilterDifficultyLevelOrType_difficultyLevelAndType() throws Exception {
+        String difficultyLevel = "Easy";
+        String type = "Out and back";
+        Trail searchedTrail = trailsDao.findByDifficultyLevelAndType(difficultyLevel, type).get(0);
+        this.mvc.perform(get("/trails/filter?difficulty=" + difficultyLevel + "&type=" + type))
+                .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Submit")))
                 .andExpect(content().string(containsString(searchedTrail.getName())));
     }
