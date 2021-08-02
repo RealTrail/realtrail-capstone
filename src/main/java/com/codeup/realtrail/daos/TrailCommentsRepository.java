@@ -8,4 +8,5 @@ import java.util.List;
 public interface TrailCommentsRepository extends JpaRepository<TrailComment, Long> {
 
     List<TrailComment> getAllByTrailId(Long id);
+    TrailComment getTrailCommentByContent(String content);
 }
