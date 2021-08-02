@@ -175,6 +175,24 @@ public class TrailsIntegrationTests {
                 .param("rating", String.valueOf(5))
                 .param("content", "This is a great trail!"))
                 .andExpect(status().is3xxRedirection());
+    }
 
+    @Test
+    public void testDeleteTrailComment() throws Exception {
+        // create a comment to be deleted
+        this.mvc.perform(post("/trails/1/comment").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("rating", String.valueOf(4))
+                        .param("content", "This is a good trail! I had fun."))
+                .andExpect(status().is3xxRedirection());
+
+        // get the recent comment that matches the content
+        TrailComment trailComment = trailCommentsDao.getTrailCommentByContent("This is a good trail! I had fun.");
+
+        // make a post request to /trails/1/comment/{id}/delete and expect a redirection back to the same trail page
+        this.mvc.perform(post("/trails/1/comment/"+ trailComment.getId() + "/delete").with(csrf())
+                .session((MockHttpSession) httpSession)
+                .param("id", String.valueOf(trailComment.getId())))
+                .andExpect(status().is3xxRedirection());
     }
 }
