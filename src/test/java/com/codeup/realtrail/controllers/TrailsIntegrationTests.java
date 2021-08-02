@@ -1,11 +1,9 @@
 package com.codeup.realtrail.controllers;
 
 import com.codeup.realtrail.RealtrailApplication;
-import com.codeup.realtrail.daos.EventsRepository;
-import com.codeup.realtrail.daos.MapPointsRepository;
-import com.codeup.realtrail.daos.TrailsRepository;
-import com.codeup.realtrail.daos.UsersRepository;
+import com.codeup.realtrail.daos.*;
 import com.codeup.realtrail.models.Trail;
+import com.codeup.realtrail.models.TrailComment;
 import com.codeup.realtrail.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
+
+import java.time.LocalDateTime;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
@@ -49,6 +49,9 @@ public class TrailsIntegrationTests {
 
     @Autowired
     MapPointsRepository mapPointsDao;
+
+    @Autowired
+    TrailCommentsRepository trailCommentsDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -163,5 +166,15 @@ public class TrailsIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Submit")))
                 .andExpect(content().string(containsString(searchedTrail.getName())));
+    }
+
+    @Test
+    public void testSaveTrailComment() throws Exception {
+        this.mvc.perform(post("/trails/1/comment").with(csrf())
+                .session((MockHttpSession) httpSession)
+                .param("rating", String.valueOf(5))
+                .param("content", "This is a great trail!"))
+                .andExpect(status().is3xxRedirection());
+
     }
 }
