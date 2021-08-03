@@ -139,6 +139,7 @@ public class EventsIntegrationTests {
 
     @Test
     public void testShowEditEvent() throws Exception {
+
         Event event = eventsDao.getByOwner(testUser).get(0);
         this.mvc.perform(get("/events/" + event.getId() + "/edit"))
                 .andExpect(status().is3xxRedirection())
@@ -147,11 +148,22 @@ public class EventsIntegrationTests {
     }
 
     @Test
-    public void testUpdateEvent() {
+    public void testUpdateEvent() throws Exception {
         // get the first event testUser has created
         Event event = eventsDao.getByOwner(testUser).get(0);
 
         // make a post request to /events/{id}/edit and expect a redirection to the same individual event page
+        this.mvc.perform(
+                post("/events/" + event.getId() + "/edit").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("name", "edited name")
+                        .param("eventDetails", "edited details"))
+                .andExpect(status().is3xxRedirection());
 
+        // make a get request to /events/{id} and expect a redirection to the same individual event page with edited info
+        this.mvc.perform(get("/events/" + event.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("edited name")))
+                .andExpect(content().string(containsString("edited details")));
     }
 }
