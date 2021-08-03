@@ -105,10 +105,10 @@ public class TrailsIntegrationTests {
     public void testIfCreateTrailWorks() throws Exception {
         // Makes a Post request to /trails/create and expect a redirection to the Event
         this.mvc.perform(
-                post("/create").with(csrf())
+                post("/trails/create").with(csrf())
                 .session((MockHttpSession) httpSession)
                 .param("trailName", "Republic Golf Course Trail - loop")
-                .param("trailLength", "2.2")
+                .param("trailLength", String.valueOf(2.2))
                 .param("difficultyLevel", "Easy")
                 .param("trailType", "Loop")
                 .param("trailDetails", "Republic Golf Course Trail.")

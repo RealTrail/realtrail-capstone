@@ -136,4 +136,34 @@ public class EventsIntegrationTests {
                         .param("createdCoordinates", "-98.40969155750705,29.35787004055689;-98.40986832216294,29.356928536589166;-98.40762930318897,29.35759614939164;-98.40474214714357,29.35240919640988;-98.40298780826778,29.352399504449764;-98.4043796743005,29.349083424755563;-98.40809131705562,29.349865274406554;-98.4107822580531,29.353828351045507;-98.41109156161595,29.357279067728015;-98.40982341700813,29.35692860964778"))
                 .andExpect(status().is3xxRedirection());
     }
+
+    @Test
+    public void testShowEditEvent() throws Exception {
+
+        Event event = eventsDao.getByOwner(testUser).get(0);
+        this.mvc.perform(get("/events/" + event.getId() + "/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(content().string(containsString("Event coordinator")))
+                .andExpect(content().string(containsString(event.getName())));
+    }
+
+    @Test
+    public void testUpdateEvent() throws Exception {
+        // get the first event testUser has created
+        Event event = eventsDao.getByOwner(testUser).get(0);
+
+        // make a post request to /events/{id}/edit and expect a redirection to the same individual event page
+        this.mvc.perform(
+                post("/events/" + event.getId() + "/edit").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("name", "edited name")
+                        .param("eventDetails", "edited details"))
+                .andExpect(status().is3xxRedirection());
+
+        // make a get request to /events/{id} and expect a redirection to the same individual event page with edited info
+        this.mvc.perform(get("/events/" + event.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("edited name")))
+                .andExpect(content().string(containsString("edited details")));
+    }
 }
