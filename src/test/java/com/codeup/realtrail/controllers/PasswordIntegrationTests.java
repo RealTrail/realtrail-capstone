@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -68,5 +69,17 @@ public class PasswordIntegrationTests {
         this.mvc.perform(get("/password/reset"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Password Reset")));
+    }
+
+    @Test
+    public void testResetPassword_wrongPasswordFormat() throws Exception {
+        this.mvc.perform(
+                post("/password/reset").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("oldPassword", "pass")
+                        .param("newPassword", "newPassword")
+                        .param("confirmPassword", "newPassword"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Password should be at least 8 digits long and must contain special characters")));
     }
 }
