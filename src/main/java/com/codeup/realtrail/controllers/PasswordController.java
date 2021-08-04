@@ -40,7 +40,7 @@ public class PasswordController {
         String message = "";
         boolean isPasswordSame = passwordEncoder.matches(oldPassword, user.getPassword());
         if(!isPasswordSame){
-            message = "Password doesn't match. Please retry";
+            message = "Password doesn't match. Please try again.";
             model.addAttribute("message", message);
             return "users/resetPassword";
         }else if(validationService.passwordHasError(newPassword) || validationService.passwordHasError(newPassword)){
@@ -48,7 +48,7 @@ public class PasswordController {
             model.addAttribute("passwordErrorMessage", message);
             return "users/resetPassword";
         }else if(!newPassword.equals(confirmPassword)){
-            message = "Not match";
+            message = "Not match! Please enter new password.";
             model.addAttribute("passwordConfirmMessage", message);
             return "users/resetPassword";
         }else{
