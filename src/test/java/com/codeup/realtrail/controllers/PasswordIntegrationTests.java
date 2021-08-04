@@ -106,4 +106,15 @@ public class PasswordIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Not match! Please enter new password.")));
     }
+
+    @Test
+    public void testResetPassword_success() throws Exception {
+        this.mvc.perform(
+                post("/password/reset").with(csrf())
+                        .session((MockHttpSession) httpSession)
+                        .param("oldPassword", "pass")
+                        .param("newPassword", "!newPassword")
+                        .param("confirmPassword", "!newPassword"))
+                .andExpect(status().is3xxRedirection());
+    }
 }
