@@ -72,6 +72,18 @@ public class PasswordIntegrationTests {
     }
 
     @Test
+    public void testResetPassword_oldPasswordNotMatch() throws Exception {
+        this.mvc.perform(
+                        post("/password/reset").with(csrf())
+                                .session((MockHttpSession) httpSession)
+                                .param("oldPassword", "old")
+                                .param("newPassword", "newPassword")
+                                .param("confirmPassword", "newPassword"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Password doesn&#39;t match. Please try again.")));
+    }
+
+    @Test
     public void testResetPassword_wrongPasswordFormat() throws Exception {
         this.mvc.perform(
                 post("/password/reset").with(csrf())
@@ -82,4 +94,6 @@ public class PasswordIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Password should be at least 8 digits long and must contain special characters")));
     }
+
+
 }
