@@ -95,5 +95,15 @@ public class PasswordIntegrationTests {
                 .andExpect(content().string(containsString("Password should be at least 8 digits long and must contain special characters")));
     }
 
-
+    @Test
+    public void testResetPassword_confirmPasswordNotMatch() throws Exception {
+        this.mvc.perform(
+                        post("/password/reset").with(csrf())
+                                .session((MockHttpSession) httpSession)
+                                .param("oldPassword", "pass")
+                                .param("newPassword", "!newPassword")
+                                .param("confirmPassword", "confirm"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Not match! Please enter new password.")));
+    }
 }
