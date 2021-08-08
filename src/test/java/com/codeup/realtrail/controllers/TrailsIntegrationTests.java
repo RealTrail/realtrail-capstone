@@ -58,23 +58,23 @@ public class TrailsIntegrationTests {
 
     @Before
     public void setup() throws Exception {
-        testUser = usersDao.findByUsername("testUser");
+        testUser = usersDao.findByUsername("testTrailsUser");
 
         // Create the test user if not exists
         if (testUser == null) {
             User newUser = new User();
-            newUser.setUsername("testUser");
+            newUser.setUsername("testTrailsUser");
             newUser.setPassword(passwordEncoder.encode("pass"));
-            newUser.setEmail("testUser@codeup.com");
+            newUser.setEmail("testTrailsUser@codeup.com");
             testUser = usersDao.save(newUser);
         }
 
         // Throws a Post request to /login and expect a redirection to the home page after being logged in
         httpSession = this.mvc.perform(post("/login").with(csrf())
-                .param("username", "testUser")
+                .param("username", "testTrailsUser")
                 .param("password", "pass"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
-                .andExpect(redirectedUrl("/"))
+                .andExpect(redirectedUrl("/profile/settings"))
                 .andReturn()
                 .getRequest()
                 .getSession();
@@ -113,7 +113,7 @@ public class TrailsIntegrationTests {
                 .param("trailType", "Loop")
                 .param("trailDetails", "Republic Golf Course Trail.")
                 .param("images", "https://www.texasgolftrails.com/wp-content/uploads/2017/06/Republic-1.jpg"))
-            .andExpect(status().is3xxRedirection());
+            .andExpect(status().is2xxSuccessful());
     }
 
     @Test
