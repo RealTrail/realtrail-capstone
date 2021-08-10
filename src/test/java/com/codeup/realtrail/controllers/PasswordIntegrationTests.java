@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = RealtrailApplication.class)
 @AutoConfigureMockMvc
 public class PasswordIntegrationTests {
-    private User testUser;
+    private User testPasswordUser;
     private HttpSession httpSession;
 
     @Autowired
@@ -41,23 +41,23 @@ public class PasswordIntegrationTests {
 
     @Before
     public void setup() throws Exception {
-        testUser = usersDao.findByUsername("testUser");
+        testPasswordUser = usersDao.findByUsername("testPasswordUser");
 
         // Create the test user if not exists
-        if (testUser == null) {
+        if (testPasswordUser == null) {
             User newUser = new User();
-            newUser.setUsername("testUser");
+            newUser.setUsername("testPasswordUser");
             newUser.setPassword(passwordEncoder.encode("pass"));
-            newUser.setEmail("testUser@codeup.com");
-            testUser = usersDao.save(newUser);
+            newUser.setEmail("testPasswordUser@codeup.com");
+            testPasswordUser = usersDao.save(newUser);
         }
 
         // Throws a Post request to /login and expect a redirection to the home page after being logged in
         httpSession = this.mvc.perform(post("/login").with(csrf())
-                        .param("username", "testUser")
+                        .param("username", "testPasswordUser")
                         .param("password", "pass"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
-                .andExpect(redirectedUrl("/"))
+                .andExpect(redirectedUrl("/profile/settings"))
                 .andReturn()
                 .getRequest()
                 .getSession();
