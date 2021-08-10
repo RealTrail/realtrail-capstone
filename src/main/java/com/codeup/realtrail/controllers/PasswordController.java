@@ -43,15 +43,19 @@ public class PasswordController {
             message = "Password doesn't match. Please try again.";
             model.addAttribute("message", message);
             return "users/resetPassword";
-        }else if(validationService.passwordHasError(newPassword) || validationService.passwordHasError(newPassword)){
+        } else if (validationService.passwordHasError(newPassword) || validationService.passwordHasError(newPassword)){
             message = "Password should be at least 8 digits long and must contain special characters";
             model.addAttribute("passwordErrorMessage", message);
             return "users/resetPassword";
-        }else if(!newPassword.equals(confirmPassword)){
+        } else if (!newPassword.equals(confirmPassword)){
             message = "Not match! Please enter new password.";
             model.addAttribute("passwordConfirmMessage", message);
             return "users/resetPassword";
-        }else{
+        } else if (oldPassword.equals(newPassword)) {
+            message = "Same password, please enter a new password.";
+            model.addAttribute("samePasswordMessage", message);
+            return "users/resetPassword";
+        } else {
             user.setPassword(passwordEncoder.encode(newPassword));
             usersDao.save(user);
             return "redirect:/login";
