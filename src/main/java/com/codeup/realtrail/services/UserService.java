@@ -1,8 +1,6 @@
 package com.codeup.realtrail.services;
 
-import com.codeup.realtrail.daos.EventsRepository;
 import com.codeup.realtrail.daos.UsersRepository;
-import com.codeup.realtrail.models.Event;
 import com.codeup.realtrail.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
