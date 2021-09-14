@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 @SpringBootTest(classes  = RealtrailApplication.class)
 @AutoConfigureMockMvc
 public class TrailsIntegrationTests {
-    private User testUser;
+    private User testTrailsUser;
     private HttpSession httpSession;
 
     @Autowired
@@ -58,15 +58,15 @@ public class TrailsIntegrationTests {
 
     @Before
     public void setup() throws Exception {
-        testUser = usersDao.findByUsername("testTrailsUser");
+        testTrailsUser = usersDao.findByUsername("testTrailsUser");
 
         // Create the test user if not exists
-        if (testUser == null) {
+        if (testTrailsUser == null) {
             User newUser = new User();
             newUser.setUsername("testTrailsUser");
             newUser.setPassword(passwordEncoder.encode("pass"));
             newUser.setEmail("testTrailsUser@codeup.com");
-            testUser = usersDao.save(newUser);
+            testTrailsUser = usersDao.save(newUser);
         }
 
         // Throws a Post request to /login and expect a redirection to the home page after being logged in

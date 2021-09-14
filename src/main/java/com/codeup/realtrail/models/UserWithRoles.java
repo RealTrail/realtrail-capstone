@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserWithRoles extends User implements UserDetails {
-private User user;
+    private User user;
     public UserWithRoles(User user) {
         super(user);    // Call the copy constructor defined in User
         this.user = user;

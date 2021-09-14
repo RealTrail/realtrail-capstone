@@ -47,7 +47,7 @@ public class PasswordIntegrationTests {
         if (testPasswordUser == null) {
             User newUser = new User();
             newUser.setUsername("testPasswordUser");
-            newUser.setPassword(passwordEncoder.encode("pass"));
+            newUser.setPassword(passwordEncoder.encode("!newPassword"));
             newUser.setEmail("testPasswordUser@codeup.com");
             testPasswordUser = usersDao.save(newUser);
         }
@@ -55,7 +55,7 @@ public class PasswordIntegrationTests {
         // Throws a Post request to /login and expect a redirection to the home page after being logged in
         httpSession = this.mvc.perform(post("/login").with(csrf())
                         .param("username", "testPasswordUser")
-                        .param("password", "pass"))
+                        .param("password", "!newPassword"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
                 .andExpect(redirectedUrl("/profile/settings"))
                 .andReturn()
@@ -99,7 +99,7 @@ public class PasswordIntegrationTests {
         this.mvc.perform(
                 post("/password/reset").with(csrf())
                         .session((MockHttpSession) httpSession)
-                        .param("oldPassword", "pass")
+                        .param("oldPassword", "!newPassword")
                         .param("newPassword", "newPassword")
                         .param("confirmPassword", "newPassword"))
                 .andExpect(status().isOk())
@@ -111,11 +111,23 @@ public class PasswordIntegrationTests {
         this.mvc.perform(
                         post("/password/reset").with(csrf())
                                 .session((MockHttpSession) httpSession)
-                                .param("oldPassword", "pass")
-                                .param("newPassword", "!newPassword")
+                                .param("oldPassword", "!newPassword")
+                                .param("newPassword", "!!password")
                                 .param("confirmPassword", "confirm"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Not match! Please enter new password.")));
+    }
+
+    @Test
+    public void testResetPassword_sameWithOldPassword() throws Exception {
+        this.mvc.perform(
+                        post("/password/reset").with(csrf())
+                                .session((MockHttpSession) httpSession)
+                                .param("oldPassword", "!newPassword")
+                                .param("newPassword", "!newPassword")
+                                .param("confirmPassword", "!newPassword"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Same password, please enter a new password.")));
     }
 
     @Test
@@ -123,9 +135,9 @@ public class PasswordIntegrationTests {
         this.mvc.perform(
                 post("/password/reset").with(csrf())
                         .session((MockHttpSession) httpSession)
-                        .param("oldPassword", "pass")
-                        .param("newPassword", "!newPassword")
-                        .param("confirmPassword", "!newPassword"))
+                        .param("oldPassword", "!newPassword")
+                        .param("newPassword", "!!password")
+                        .param("confirmPassword", "!!password"))
                 .andExpect(status().is3xxRedirection());
     }
 }
